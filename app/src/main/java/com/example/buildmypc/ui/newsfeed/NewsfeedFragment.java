@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
-import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
@@ -23,8 +22,7 @@ public class NewsfeedFragment extends Fragment {
 		final TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-		// TODO --------- parsing newsfeeds ----------
-		//
+		// TODO parsing newsfeeds
 
 
 		// ending return
