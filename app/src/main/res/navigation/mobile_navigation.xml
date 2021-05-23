@@ -16,7 +16,7 @@
 		tools:layout="@layout/fragment_gallery" />
 	<fragment
 		android:id="@+id/nav_slideshow"
-		android:name="com.example.buildmypc.ui.slideshow.SlideshowFragment"
-		android:label="@string/menu_slideshow"
-		tools:layout="@layout/fragment_slideshow" />
+		android:name="com.example.buildmypc.ui.newsfeed.NewsfeedFragment"
+		android:label="@string/menu_newsfeed"
+		tools:layout="@layout/fragment_newsfeed" />
 </navigation>

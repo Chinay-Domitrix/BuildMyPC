@@ -1,12 +1,12 @@
-package com.example.buildmypc.ui.slideshow;
+package com.example.buildmypc.ui.newsfeed;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class NewsfeedViewModel extends ViewModel {
 	private final MutableLiveData<String> mText;
-	public SlideshowViewModel() {
+	public NewsfeedViewModel() {
 		mText = new MutableLiveData<>();
 		mText.setValue("This is slideshow fragment");
 	}
