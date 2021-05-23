@@ -13,7 +13,7 @@
 			android:title="@string/menu_gallery" />
 		<item
 			android:id="@+id/nav_newsfeed"
-			android:icon="@drawable/ic_menu_slideshow"
+			android:icon="@drawable/ic_menu_rss_feed"
 			android:title="@string/menu_newsfeed" />
 	</group>
 </menu>
