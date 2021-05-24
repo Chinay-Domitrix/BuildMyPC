@@ -2,18 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:weightSum="3">
+	android:weightSum="5">
 
 	<LinearLayout
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_weight="2"
+		android:layout_weight="4"
 		android:orientation="vertical">
 
 		<TextView
 			android:id="@+id/list_newsfeed_title"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/cantarell_bold_italic"
+			android:paddingTop="10dp"
+			android:paddingBottom="5dp"
+			android:paddingStart="10dp"
+			android:paddingEnd="5dp"
+			android:textColor="@android:color/primary_text_material_light"
+			android:textSize="20sp" />
 
 		<TextView
 			android:id="@+id/list_newsfeed_description"
@@ -26,5 +33,6 @@
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
 		android:layout_gravity="center_vertical"
-		android:layout_weight="1" />
+		android:layout_weight="1"
+		android:contentDescription="@string/newsfeed_article_image" />
 </LinearLayout>
