@@ -9,4 +9,5 @@
 	<string name="menu_home">Home</string>
 	<string name="menu_gallery">Gallery</string>
 	<string name="menu_newsfeed">Newsfeed</string>
+	<string name="newsfeed_article_image">Newsfeed Article Image</string>
 </resources>
