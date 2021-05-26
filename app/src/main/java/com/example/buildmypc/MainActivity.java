@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationView;
 
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
@@ -35,14 +33,11 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(binding.getRoot());
 		setSupportActionBar(binding.appBarMain.toolbar);
 		binding.appBarMain.fab.setOnClickListener(view -> make(view, "Replace with your own action", LENGTH_LONG).setAction("Action", null).show());
-		DrawerLayout drawer = binding.drawerLayout;
-		NavigationView navigationView = binding.navView;
-		// Passing each menu ID as a set of Ids because each
-		// menu should be considered as top-level destinations.
-		mAppBarConfiguration = new Builder(nav_home, nav_gallery, nav_slideshow).setOpenableLayout(drawer).build();
+		// Passing each menu ID as a set of IDs because each menu should be considered as top-level destinations.
+		mAppBarConfiguration = new Builder(nav_home, nav_gallery, nav_slideshow).setOpenableLayout(binding.drawerLayout).build();
 		NavController navController = findNavController(this, nav_host_fragment_content_main);
 		setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-		setupWithNavController(navigationView, navController);
+		setupWithNavController(binding.navView, navController);
 	}
 
 	@Override
@@ -54,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onSupportNavigateUp() {
-		NavController navController = findNavController(this, nav_host_fragment_content_main);
-		return navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+		return navigateUp(findNavController(this, nav_host_fragment_content_main), mAppBarConfiguration) || super.onSupportNavigateUp();
 	}
 
 
