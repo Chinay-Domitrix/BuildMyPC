@@ -7,12 +7,12 @@
 	<path android:pathData="M0,0h32v32h-32z">
 		<aapt:attr name="android:fillColor">
 			<gradient
-				android:centerX="0"
-				android:centerY=".5"
-				android:gradientRadius=".5"
+				android:centerX="16"
+				android:centerY="16"
+				android:gradientRadius="16"
 				android:type="radial">
 				<item
-					android:color="#960"
+					android:color="#c63"
 					android:offset="0" />
 				<item
 					android:color="#f60"
