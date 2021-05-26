@@ -4,7 +4,7 @@
 	<string name="navigation_drawer_close">Close navigation drawer</string>
 	<string name="nav_header_title">BuildMyPC</string>
 	<string name="nav_header_subtitle">The premier PC building app</string>
-	<string name="nav_header_desc">Navigation header</string>
+	<string name="nav_header_desc">BuildMyPC Logo</string>
 	<string name="action_settings">Settings</string>
 	<string name="menu_home">Home</string>
 	<string name="menu_gallery">Gallery</string>
