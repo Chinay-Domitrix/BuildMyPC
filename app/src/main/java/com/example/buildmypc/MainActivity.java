@@ -51,6 +51,4 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onSupportNavigateUp() {
 		return navigateUp(findNavController(this, nav_host_fragment_content_main), mAppBarConfiguration) || super.onSupportNavigateUp();
 	}
-
-
 }
