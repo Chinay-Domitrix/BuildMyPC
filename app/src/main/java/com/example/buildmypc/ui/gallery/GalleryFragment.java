@@ -12,12 +12,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentGalleryBinding;
 
+import static com.example.buildmypc.databinding.FragmentGalleryBinding.*;
+
 public class GalleryFragment extends Fragment {
 	private FragmentGalleryBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
-		binding = FragmentGalleryBinding.inflate(inflater, container, false);
+		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		final TextView textView = binding.textGallery;
 		galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
