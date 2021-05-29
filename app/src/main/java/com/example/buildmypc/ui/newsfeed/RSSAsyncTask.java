@@ -9,4 +9,9 @@ public class RSSAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	protected JSONObject doInBackground(String... strings) {
 		return null;
 	}
+
+	@Override
+	protected void onPostExecute(JSONObject jsonObject) {
+		super.onPostExecute(jsonObject);
+	}
 }
