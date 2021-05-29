@@ -28,7 +28,6 @@ import java.net.URL;
 
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
-
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
 
