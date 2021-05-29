@@ -24,8 +24,6 @@ public class NewsfeedFragment extends Fragment {
 		final TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		// TODO parsing newsfeeds
-		// source https://github.com/prof18/RSS-Parser
-		new RSSParser(root.getContext()).execute("");
 		// ending return
 		return root;
 	}
