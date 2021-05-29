@@ -2,9 +2,11 @@ package com.example.buildmypc.ui.newsfeed;
 
 import android.os.AsyncTask;
 
-public class RSSAsyncTask extends AsyncTask {
+import org.json.JSONObject;
+
+public class RSSAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	@Override
-	protected Object doInBackground(Object[] objects) {
+	protected JSONObject doInBackground(String... strings) {
 		return null;
 	}
 }
