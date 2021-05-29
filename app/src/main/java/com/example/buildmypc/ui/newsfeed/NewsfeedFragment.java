@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
-	ArrayAdapter<Article> articleArrayAdapter = new ArrayAdapter<Article>();
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);
