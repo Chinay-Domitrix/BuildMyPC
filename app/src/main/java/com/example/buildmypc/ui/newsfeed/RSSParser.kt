@@ -4,15 +4,13 @@ import android.content.Context
 import com.prof.rssparser.Channel
 import com.prof.rssparser.OnTaskCompleted
 import com.prof.rssparser.Parser
-import java.nio.charset.Charset
+import com.prof.rssparser.Parser.Builder
+import java.nio.charset.Charset.forName
 
 class RSSParser(context: Context) {
 	init {
-		parser = Parser.Builder()
-			.context(context)
-			.charset(Charset.forName("ISO-8859-7"))
-			.cacheExpirationMillis(24L * 60L * 60L * 100L)
-			.build()
+		parser = Builder().context(context).charset(forName("ISO-8859-7"))
+			.cacheExpirationMillis(24L * 60L * 60L * 100L).build()
 		parser.onFinish(object : OnTaskCompleted {
 			//what to do when the parsing finishes
 			override fun onTaskCompleted(channel: Channel) {
