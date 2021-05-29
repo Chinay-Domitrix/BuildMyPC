@@ -4,15 +4,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ArticleXMLParser {
-	private String data;
-	private String publisher;
+	private final String data;
+	private final String publisher;
 
-	private String itemDivisor;
-	private String nameInd; // name indicator
-	private String descInd;
-	private String dateInd;
-	private String urlInd;
-	private String imageInd;
+	private final String itemDivisor;
+	private final String nameInd; // name indicator
+	private final String descInd;
+	private final String dateInd;
+	private final String urlInd;
+	private final String imageInd;
 
 	public ArticleXMLParser(String data, String publisher, String itemDivisor, String nameInd, String descInd, String dateInd, String urlInd, String imageInd) {
 		this.data = data;
