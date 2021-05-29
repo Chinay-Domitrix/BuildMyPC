@@ -41,7 +41,7 @@ public class NewsfeedFragment extends Fragment {
 			}
 			//what to do in case of error
 			@Override
-			public void onError(Exception e) {
+			public void onError(@NotNull Exception e) {
 				// Handle the exception
 			}
 		});
