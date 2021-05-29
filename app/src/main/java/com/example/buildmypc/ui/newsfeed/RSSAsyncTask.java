@@ -22,7 +22,7 @@ public class RSSAsyncTask extends AsyncTask<String, Void, Article> {
 		Xml xmlObject = null;
 		JSONObject webpageObj = null;
 		try {
-			URL url = new URL(urlStrs[0])
+			URL url = new URL(urlStrs[0]);
 			connection = url.openConnection();
 			InputStream stream = connection.getInputStream();
 			String line;
