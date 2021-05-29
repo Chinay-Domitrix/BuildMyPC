@@ -9,14 +9,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.net.URLConnection;
 
-import okhttp3.OkHttpClient;
-
-public class RSSAsyncTask extends AsyncTask<String, Void, JSONObject> {
+public class RSSAsyncTask extends AsyncTask<String, Void, Article> {
 	@Override
 	protected Article doInBackground(String... urlStrs) {
 		// building the string
@@ -31,24 +27,18 @@ public class RSSAsyncTask extends AsyncTask<String, Void, JSONObject> {
 			InputStream stream = connection.getInputStream();
 			String line;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-			while((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
 				builder.append(line);
 			}
 
-
-		} catch (Exception e){
+		} catch (Exception e) {
 			Log.d("GAMING", "Stacking! + " + e.toString());
 		}
-
-
-
-
-
 		return null;
 	}
 
 	@Override
-	protected void onPostExecute(JSONObject jsonObject) {
-		super.onPostExecute(jsonObject);
+	protected void onPostExecute(Article article) {
+		super.onPostExecute(article);
 	}
 }
