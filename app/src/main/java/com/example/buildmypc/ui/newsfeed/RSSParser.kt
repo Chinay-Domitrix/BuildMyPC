@@ -10,16 +10,16 @@ import java.nio.charset.Charset.forName
 class RSSParser(context: Context) {
 	init {
 		parser = Builder().context(context).charset(forName("ISO-8859-7"))
-			.cacheExpirationMillis(24L * 60L * 60L * 100L).build()
+			.cacheExpirationMillis(8640000).build()
 		parser.onFinish(object : OnTaskCompleted {
-			//what to do when the parsing finishes
+//			what to do when the parsing finishes
 			override fun onTaskCompleted(channel: Channel) {
-				// Use the channel info
+//				Use the channel info
 			}
 
-			//what to do in case of error
+//			what to do in case of error
 			override fun onError(e: Exception) {
-				// Handle the exception
+//				Handle the exception
 			}
 		})
 	}
@@ -28,5 +28,15 @@ class RSSParser(context: Context) {
 		lateinit var parser: Parser
 	}
 
-	fun execute(url: String): Unit = parser.execute(url)
+	fun execute(url: String): Unit {
+		viewModelScope.launch {
+			try {
+				val channel = parser.getChannel(url)
+				// Do something with your data
+			} catch (e: Exception) {
+				e.printStackTrace()
+				// Handle the exception
+			}
+		}
+	}
 }
