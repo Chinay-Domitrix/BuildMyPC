@@ -17,7 +17,6 @@ public class RSSAsyncTask extends AsyncTask<String, Void, Article> {
 	protected Article doInBackground(String... urlStrs) {
 		// building the string
 		URLConnection connection;
-
 		StringBuilder builder = new StringBuilder();
 		Xml xmlObject = null;
 		JSONObject webpageObj = null;
