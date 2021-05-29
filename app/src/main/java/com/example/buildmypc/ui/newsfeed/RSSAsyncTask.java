@@ -46,4 +46,9 @@ public class RSSAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
 		return null;
 	}
+
+	@Override
+	protected void onPostExecute(JSONObject jsonObject) {
+		super.onPostExecute(jsonObject);
+	}
 }
