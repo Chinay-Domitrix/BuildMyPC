@@ -31,6 +31,7 @@ public class NewsfeedFragment extends Fragment {
 		final TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		// TODO parsing newsfeeds
+		// source https://github.com/prof18/RSS-Parser
 		Parser parser = new Parser.Builder().charset(Charset.forName("ISO-8859-7")).build();
 		parser.onFinish(new OnTaskCompleted() {
 			//what to do when the parsing is done
