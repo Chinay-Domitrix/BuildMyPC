@@ -11,13 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
-import com.prof.rssparser.Channel;
-import com.prof.rssparser.OnTaskCompleted;
-import com.prof.rssparser.Parser;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.nio.charset.Charset;
 
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
@@ -32,20 +25,7 @@ public class NewsfeedFragment extends Fragment {
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		// TODO parsing newsfeeds
 		// source https://github.com/prof18/RSS-Parser
-		Parser parser = new Parser.Builder().charset(Charset.forName("ISO-8859-7")).build();
-		parser.onFinish(new OnTaskCompleted() {
-			//what to do when the parsing is done
-			@Override
-			public void onTaskCompleted(@NotNull Channel channel) {
-				// Use the channel info
-			}
-			//what to do in case of error
-			@Override
-			public void onError(@NotNull Exception e) {
-				// Handle the exception
-			}
-		});
-		parser.execute("");
+		new RSSParser(root.getContext()).execute("");
 		// ending return
 		return root;
 	}
