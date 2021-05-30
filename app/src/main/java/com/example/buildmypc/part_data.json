@@ -198,7 +198,8 @@
 			"water-cooled": true,
 			"water-cooler-size-mm": 240,
 			"fanless": false
-		},{
+		},
+		{
 			"manufacturer": "NZXT",
 			"model": "Kraken Z73",
 			"fan-rpm": "500 - 1800",
@@ -227,7 +228,18 @@
 
 	],
 	"memory": [
-
+		{
+			"manufacturer": "Corsair",
+			"model": "Vengeance LPX 16 GB",
+			"form-factor": "288-pin DIMM",
+			"modules": {
+				"quantity": 2,
+				"size-gb": 8
+			},
+			"price-per-gb-usd": 6.437,
+			"speed-mhz": 3200,
+			"ecc": false
+		}
 	],
 	"storage": [
 
