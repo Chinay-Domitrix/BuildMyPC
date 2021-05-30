@@ -229,7 +229,10 @@
 	],
 	"memory": [
 		{
+			"cas-latency": 16,
+			"ddr-gen": 4,
 			"ecc": false,
+			"first-word-latency-ns": 10,
 			"form-factor": "288-pin DIMM",
 			"heat-spreader": true,
 			"manufacturer": "Corsair",
@@ -241,6 +244,78 @@
 			"price-per-gb-usd": 6.437,
 			"speed-mhz": 3200,
 			"timing": "16-18-18-36",
+			"voltage": 1.35
+		},
+		{
+			"cas-latency": 16,
+			"ddr-gen": 4,
+			"ecc": false,
+			"first-word-latency-ns": 10,
+			"form-factor": "288-pin DIMM",
+			"heat-spreader": true,
+			"manufacturer": "Corsair",
+			"model": "Vengeance RGB Pro 16 GB",
+			"modules": {
+				"quantity": 2,
+				"size-gb": 8
+			},
+			"price-per-gb-usd": 6.562,
+			"speed-mhz": 3200,
+			"timing": "16-18-18-36",
+			"voltage": 1.35
+		},
+		{
+			"cas-latency": 16,
+			"ddr-gen": 4,
+			"ecc": false,
+			"first-word-latency-ns": 10,
+			"form-factor": "288-pin DIMM",
+			"heat-spreader": true,
+			"manufacturer": "Crucial",
+			"model": "Ballistix 16 GB",
+			"modules": {
+				"quantity": 2,
+				"size-gb": 8
+			},
+			"price-per-gb-usd": 5.374,
+			"speed-mhz": 3200,
+			"timing": null,
+			"voltage": 1.35
+		},
+		{
+			"cas-latency": 16,
+			"ddr-gen": 4,
+			"ecc": false,
+			"first-word-latency-ns": 10,
+			"form-factor": "288-pin DIMM",
+			"heat-spreader": true,
+			"manufacturer": "Corsair",
+			"model": "Vengeance RGB Pro 32 GB",
+			"modules": {
+				"quantity": 2,
+				"size-gb": 16
+			},
+			"price-per-gb-usd": 7.093,
+			"speed-mhz": 3200,
+			"timing": "16-18-18-36",
+			"voltage": 1.35
+		},
+		{
+			"cas-latency": 18,
+			"ddr-gen": 4,
+			"ecc": false,
+			"first-word-latency-ns": 10,
+			"form-factor": "288-pin DIMM",
+			"heat-spreader": true,
+			"manufacturer": "G.Skill",
+			"model": "Vengeance RGB Pro 32 GB",
+			"modules": {
+				"quantity": 2,
+				"size-gb": 8
+			},
+			"price-per-gb-usd": 6.874,
+			"speed-mhz": 3600,
+			"timing": "18-22-22-42",
 			"voltage": 1.35
 		}
 	],
