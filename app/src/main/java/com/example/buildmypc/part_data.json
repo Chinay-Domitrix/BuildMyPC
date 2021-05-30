@@ -1,32 +1,142 @@
 {
-	"cpu": {
+	"cpu": [
+		{
+			"manufacturer": "AMD",
+			"model": "Ryzen 5 3600",
+			"core-count": 6,
+			"core-clock-ghz": 3.6,
+			"boost-clock-ghz": 4.2,
+			"tdp-w": 65,
+			"series": "AMD Ryzen 5",
+			"microarchitecture": "Zen 2",
+			"core-family": "Matisse",
+			"socket": "AM4",
+			"integrated-gpu": null,
+			"max-memory-support-gb": 128,
+			"ecc": false,
+			"cooler": true,
+			"smt": true
+		},
+		{
+			"manufacturer": "AMD",
+			"model": "Ryzen 7 3700X",
+			"core-count": 8,
+			"core-clock-ghz": 3.6,
+			"boost-clock-ghz": 4.4,
+			"tdp-w": 65,
+			"series": "AMD Ryzen 7",
+			"microarchitecture": "Zen 2",
+			"core-family": "Matisse",
+			"socket": "AM4",
+			"integrated-gpu": null,
+			"max-memory-support-gb": 128,
+			"ecc": false,
+			"cooler": true,
+			"smt": true
+		},
+		{
+			"manufacturer": "AMD",
+			"model": "Ryzen 5 5600X",
+			"core-count": 6,
+			"core-clock-ghz": 3.7,
+			"boost-clock-ghz": 4.6,
+			"tdp-w": 65,
+			"series": "AMD Ryzen 5",
+			"microarchitecture": "Zen 3",
+			"core-family": "Vermeer",
+			"socket": "AM4",
+			"integrated-gpu": null,
+			"max-memory-support-gb": 128,
+			"ecc": false,
+			"cooler": true,
+			"smt": true
+		},
+		{
+			"manufacturer": "AMD",
+			"model": "Ryzen 7 5800X",
+			"core-count": 8,
+			"core-clock-ghz": 3.8,
+			"boost-clock-ghz": 4.7,
+			"tdp-w": 105,
+			"series": "AMD Ryzen 5",
+			"microarchitecture": "Zen 2",
+			"core-family": "Vermeer",
+			"socket": "AM4",
+			"integrated-gpu": null,
+			"max-memory-support-gb": 128,
+			"ecc": false,
+			"cooler": true,
+			"smt": true
+		},
+		{
+			"manufacturer": "Intel",
+			"model": "Core i7-10700K",
+			"core-count": 8,
+			"core-clock-ghz": 3.8,
+			"boost-clock-ghz": 5.1,
+			"tdp-w": 125,
+			"series": "Intel Core i7",
+			"microarchitecture": "Comet Lake",
+			"core-family": "Comet Lake",
+			"socket": "LGA1200",
+			"integrated-gpu": "Intel UHD Graphics 630",
+			"max-memory-support-gb": 128,
+			"ecc": false,
+			"cooler": true,
+			"smt": true
+		}
+	],
+	"cooler": [
+		{
+			"manufacturer": "Cooler Master",
+			"model": "Hyper 212 EVO",
+			"rpm": "600 - 2000",
+			"noise-level": "9 - 36",
+			"height-mm":159,
+			"socket-support": [
+				"AM2",
+				"AM2+",
+				"AM3",
+				"AM3+",
+				"AM4",
+				"FM1",
+				"FM2",
+				"FM2+",
+				"LGA1150",
+				"LGA1151",
+				"LGA1155",
+				"LGA1156",
+				"LGA1200",
+				"LGA1366",
+				"LGA2011",
+				"LGA2011-3",
+				"LGA2066",
+				"LGA775"
+			]
+		}
+	],
+	"motherboard": [
 
-	},
-	"cooler": {
+	],
+	"memory": [
 
-	},
-	"motherboard": {
+	],
+	"storage": [
 
-	},
-	"memory": {
+	],
+	"gpu": [
 
-	},
-	"storage": {
+	],
+	"case": [
 
-	},
-	"gpu": {
+	],
+	"psu": [
 
-	},
-	"case": {
+	],
+	"os": [
 
-	},
-	"psu": {
+	],
+	"monitor": [
 
-	},
-	"os": {
-
-	},
-	"monitor": {
-
-	}
+	]
 }
