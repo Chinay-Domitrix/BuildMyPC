@@ -17,7 +17,7 @@ import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 import static com.example.buildmypc.R.id.nav_gallery;
 import static com.example.buildmypc.R.id.nav_home;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
-import static com.example.buildmypc.R.id.nav_slideshow;
+import static com.example.buildmypc.R.id.nav_newsfeed;
 import static com.example.buildmypc.R.menu.main;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 		setSupportActionBar(binding.appBarMain.toolbar);
 		binding.appBarMain.fab.setOnClickListener(view -> make(view, "Replace with your own action", LENGTH_LONG).setAction("Action", null).show());
 		// Passing each menu ID as a set of IDs because each menu should be considered as top-level destinations.
-		mAppBarConfiguration = new Builder(nav_home, nav_gallery, nav_slideshow).setOpenableLayout(binding.drawerLayout).build();
+		mAppBarConfiguration = new Builder(nav_home, nav_gallery, nav_newsfeed).setOpenableLayout(binding.drawerLayout).build();
 		NavController navController = findNavController(this, nav_host_fragment_content_main);
 		setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 		setupWithNavController(binding.navView, navController);
