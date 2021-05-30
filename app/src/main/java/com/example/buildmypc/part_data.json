@@ -1,98 +1,99 @@
 {
 	"cpu": [
 		{
-			"manufacturer": "AMD",
-			"model": "Ryzen 5 3600",
-			"core-count": 6,
-			"core-clock-ghz": 3.6,
 			"boost-clock-ghz": 4.2,
-			"tdp-w": 65,
-			"series": "AMD Ryzen 5",
-			"microarchitecture": "Zen 2",
-			"core-family": "Matisse",
-			"socket": "AM4",
-			"integrated-gpu": null,
-			"max-memory-support-gb": 128,
-			"ecc": false,
 			"cooler": true,
-			"smt": true
-		},
-		{
-			"manufacturer": "AMD",
-			"model": "Ryzen 7 3700X",
-			"core-count": 8,
 			"core-clock-ghz": 3.6,
-			"boost-clock-ghz": 4.4,
-			"tdp-w": 65,
-			"series": "AMD Ryzen 7",
-			"microarchitecture": "Zen 2",
-			"core-family": "Matisse",
-			"socket": "AM4",
-			"integrated-gpu": null,
-			"max-memory-support-gb": 128,
-			"ecc": false,
-			"cooler": true,
-			"smt": true
-		},
-		{
-			"manufacturer": "AMD",
-			"model": "Ryzen 5 5600X",
 			"core-count": 6,
-			"core-clock-ghz": 3.7,
-			"boost-clock-ghz": 4.6,
-			"tdp-w": 65,
-			"series": "AMD Ryzen 5",
-			"microarchitecture": "Zen 3",
-			"core-family": "Vermeer",
-			"socket": "AM4",
-			"integrated-gpu": null,
-			"max-memory-support-gb": 128,
+			"core-family": "Matisse",
 			"ecc": false,
-			"cooler": true,
-			"smt": true
-		},
-		{
+			"integrated-gpu": null,
 			"manufacturer": "AMD",
-			"model": "Ryzen 7 5800X",
-			"core-count": 8,
-			"core-clock-ghz": 3.8,
-			"boost-clock-ghz": 4.7,
-			"tdp-w": 105,
-			"series": "AMD Ryzen 5",
-			"microarchitecture": "Zen 2",
-			"core-family": "Vermeer",
-			"socket": "AM4",
-			"integrated-gpu": null,
 			"max-memory-support-gb": 128,
-			"ecc": false,
-			"cooler": true,
-			"smt": true
+			"microarchitecture": "Zen 2",
+			"model": "Ryzen 5 3600",
+			"series": "AMD Ryzen 5",
+			"smt": true,
+			"socket": "AM4",
+			"tdp-w": 65
 		},
 		{
-			"manufacturer": "Intel",
-			"model": "Core i7-10700K",
-			"core-count": 8,
-			"core-clock-ghz": 3.8,
-			"boost-clock-ghz": 5.1,
-			"tdp-w": 125,
-			"series": "Intel Core i7",
-			"microarchitecture": "Comet Lake",
-			"core-family": "Comet Lake",
-			"socket": "LGA1200",
-			"integrated-gpu": "Intel UHD Graphics 630",
-			"max-memory-support-gb": 128,
-			"ecc": false,
+			"boost-clock-ghz": 4.4,
 			"cooler": true,
-			"smt": true
+			"core-clock-ghz": 3.6,
+			"core-count": 8,
+			"core-family": "Matisse",
+			"ecc": false,
+			"integrated-gpu": null,
+			"manufacturer": "AMD",
+			"max-memory-support-gb": 128,
+			"microarchitecture": "Zen 2",
+			"model": "Ryzen 7 3700X",
+			"series": "AMD Ryzen 7",
+			"smt": true,
+			"socket": "AM4",
+			"tdp-w": 65
+		},
+		{
+			"boost-clock-ghz": 4.6,
+			"cooler": true,
+			"core-clock-ghz": 3.7,
+			"core-count": 6,
+			"core-family": "Vermeer",
+			"ecc": false,
+			"integrated-gpu": null,
+			"manufacturer": "AMD",
+			"max-memory-support-gb": 128,
+			"microarchitecture": "Zen 3",
+			"model": "Ryzen 5 5600X",
+			"series": "AMD Ryzen 5",
+			"smt": true,
+			"socket": "AM4",
+			"tdp-w": 65
+		},
+		{
+			"boost-clock-ghz": 4.7,
+			"cooler": true,
+			"core-clock-ghz": 3.8,
+			"core-count": 8,
+			"core-family": "Vermeer",
+			"ecc": false,
+			"integrated-gpu": null,
+			"manufacturer": "AMD",
+			"max-memory-support-gb": 128,
+			"microarchitecture": "Zen 2",
+			"model": "Ryzen 7 5800X",
+			"series": "AMD Ryzen 5",
+			"smt": true,
+			"socket": "AM4",
+			"tdp-w": 105
+		},
+		{
+			"boost-clock-ghz": 5.1,
+			"cooler": true,
+			"core-clock-ghz": 3.8,
+			"core-count": 8,
+			"core-family": "Comet Lake",
+			"ecc": false,
+			"integrated-gpu": "Intel UHD Graphics 630",
+			"manufacturer": "Intel",
+			"max-memory-support-gb": 128,
+			"microarchitecture": "Comet Lake",
+			"model": "Core i7-10700K",
+			"series": "Intel Core i7",
+			"smt": true,
+			"socket": "LGA1200",
+			"tdp-w": 125
 		}
 	],
 	"cooler": [
 		{
+			"fan-height-mm": 159,
+			"fan-rpm": "600 - 2000",
+			"fanless": false,
 			"manufacturer": "Cooler Master",
 			"model": "Hyper 212 EVO",
-			"fan-rpm": "600 - 2000",
 			"noise-level-db": "9 - 36",
-			"fan-height-mm": 159,
 			"socket-support": [
 				"AM2",
 				"AM2+",
@@ -114,15 +115,15 @@
 				"LGA775"
 			],
 			"water-cooled": false,
-			"water-cooler-size-mm": null,
-			"fanless": false
+			"water-cooler-size-mm": null
 		},
 		{
+			"fan-height-mm": 159,
+			"fan-rpm": "650 - 2000",
+			"fanless": false,
 			"manufacturer": "Cooler Master",
 			"model": "Hyper 212 RGB Black Edition",
-			"fan-rpm": "650 - 2000",
 			"noise-level-db": "8 - 30",
-			"fan-height-mm": 159,
 			"socket-support": [
 				"AM2",
 				"AM2+",
@@ -143,15 +144,15 @@
 				"LGA2066"
 			],
 			"water-cooled": false,
-			"water-cooler-size-mm": null,
-			"fanless": false
+			"water-cooler-size-mm": null
 		},
 		{
+			"fan-height-mm": null,
+			"fan-rpm": "650 - 1800",
+			"fanless": false,
 			"manufacturer": "Cooler Master",
 			"model": "MASTERLIQUID ML240L RGB V2",
-			"fan-rpm": "650 - 1800",
 			"noise-level-db": "6 - 27",
-			"fan-height-mm": null,
 			"socket-support": [
 				"AM2",
 				"AM2+",
@@ -172,15 +173,15 @@
 				"LGA2066"
 			],
 			"water-cooled": true,
-			"water-cooler-size-mm": 240,
-			"fanless": false
+			"water-cooler-size-mm": 240
 		},
 		{
+			"fan-height-mm": null,
+			"fan-rpm": "500 - 2000",
+			"fanless": false,
 			"manufacturer": "NZXT",
 			"model": "Kraken X53",
-			"fan-rpm": "500 - 2000",
 			"noise-level-db": "21 - 36",
-			"fan-height-mm": null,
 			"socket-support": [
 				"AM4",
 				"LGA1150",
@@ -196,15 +197,15 @@
 				"sTRX4"
 			],
 			"water-cooled": true,
-			"water-cooler-size-mm": 240,
-			"fanless": false
+			"water-cooler-size-mm": 240
 		},
 		{
+			"fan-height-mm": null,
+			"fan-rpm": "500 - 1800",
+			"fanless": false,
 			"manufacturer": "NZXT",
 			"model": "Kraken Z73",
-			"fan-rpm": "500 - 1800",
 			"noise-level-db": "21 - 36",
-			"fan-height-mm": null,
 			"socket-support": [
 				"AM4",
 				"LGA1150",
@@ -220,8 +221,7 @@
 				"sTRX4"
 			],
 			"water-cooled": true,
-			"water-cooler-size-mm": 240,
-			"fanless": false
+			"water-cooler-size-mm": 240
 		}
 	],
 	"motherboard": [
@@ -229,16 +229,19 @@
 	],
 	"memory": [
 		{
+			"ecc": false,
+			"form-factor": "288-pin DIMM",
+			"heat-spreader": true,
 			"manufacturer": "Corsair",
 			"model": "Vengeance LPX 16 GB",
-			"form-factor": "288-pin DIMM",
 			"modules": {
 				"quantity": 2,
 				"size-gb": 8
 			},
 			"price-per-gb-usd": 6.437,
 			"speed-mhz": 3200,
-			"ecc": false
+			"timing": "16-18-18-36",
+			"voltage": 1.35
 		}
 	],
 	"storage": [
