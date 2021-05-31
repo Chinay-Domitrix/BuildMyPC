@@ -320,7 +320,81 @@
 		}
 	],
 	"storage": [
-
+		{
+			"cache-mb": 256,
+			"capacity": {
+				"size": 2,
+				"unit": "TB"
+			},
+			"form-factor": 3.5,
+			"interface": "SATA 6 Gb/s",
+			"manufacturer": "Seagate",
+			"model": "Barracuda Compute 2 TB",
+			"nvme": false,
+			"price-per-gb-usd": 0.028,
+			"rpm": 7200,
+			"type": "HDD"
+		},
+		{
+			"cache-mb": 1024,
+			"capacity": {
+				"size": 1,
+				"unit": "TB"
+			},
+			"form-factor": 2.5,
+			"interface": "SATA 6 Gb/s",
+			"manufacturer": "Samsung",
+			"model": "860 Evo 1 TB",
+			"nvme": false,
+			"price-per-gb-usd": 0.110,
+			"rpm": null,
+			"type": "SSD"
+		},
+		{
+			"cache-mb": null,
+			"capacity": {
+				"size": 1,
+				"unit": "TB"
+			},
+			"form-factor": "M.2-2280",
+			"interface": "M.2",
+			"manufacturer": "Western Digital",
+			"model": "Blue SN550 1 TB",
+			"nvme": true,
+			"price-per-gb-usd": 0.110,
+			"rpm": null,
+			"type": "SSD"
+		},
+		{
+			"cache-mb": 512,
+			"capacity": {
+				"size": 500,
+				"unit": "GB"
+			},
+			"form-factor": "M.2-2280",
+			"interface": "M.2",
+			"manufacturer": "Samsung",
+			"model": "970 Evo 500 GB",
+			"nvme": true,
+			"price-per-gb-usd": 0.240,
+			"rpm": null,
+			"type": "HDD"
+		},
+		{
+			"cache-mb": 1024,
+			"capacity": {
+				"size": 1,
+				"unit": "TB"
+			},
+			"form-factor": "M.2-2280",
+			"interface": "M.2",
+			"manufacturer": "Samsung",
+			"model": "980 Pro 1 TB",
+			"nvme": true,
+			"price-per-gb-usd": 0.210,
+			"rpm": null,
+			"type": "SSD"
+		}
 	],
 	"gpu": [
 
@@ -332,7 +406,56 @@
 
 	],
 	"os": [
-
+		{
+			"bit-mode": 64,
+			"manufacturer": "Microsoft",
+			"max-memory-support-gb": 128,
+			"type": "Windows",
+			"version": {
+				"edition": "Windows 10 Home",
+				"oem-retail": "oem"
+			}
+		},
+		{
+			"bit-mode": 64,
+			"manufacturer": "Microsoft",
+			"max-memory-support-gb": 2048,
+			"type": "Windows",
+			"version": {
+				"edition": "Windows 10 Pro",
+				"oem-retail": "oem"
+			}
+		},
+		{
+			"bit-mode": "dual",
+			"manufacturer": "Microsoft",
+			"max-memory-support-gb": 2048,
+			"type": "Windows",
+			"version": {
+				"edition": "Windows 10 Pro",
+				"oem-retail": "retail"
+			}
+		},
+		{
+			"bit-mode": "dual",
+			"manufacturer": "Microsoft",
+			"max-memory-support-gb": 192,
+			"type": "Windows",
+			"version": {
+				"edition": "Windows 7 Professional",
+				"oem-retail": "retail"
+			}
+		},
+		{
+			"bit-mode": "dual",
+			"manufacturer": "Microsoft",
+			"max-memory-support-gb": 2048,
+			"type": "Windows",
+			"version": {
+				"edition": "Windows 10 Pro",
+				"oem-retail": "retail"
+			}
+		}
 	],
 	"monitor": [
 
