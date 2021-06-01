@@ -720,7 +720,49 @@
 			"internal-drive-bays": {
 				"2.5": 2,
 				"3.5": 2
-			}
+			},
+			"volume": [
+				"41.345 L",
+				"1.46 ft³"
+			]
+		},
+		{
+			"manufacturer": "NZXT",
+			"model": "H510",
+			"type": "ATX Mid Tower",
+			"color": "Black",
+			"psu": null,
+			"side-panel": "Tempered Glass",
+			"psu-shroud": true,
+			"front-panel-usb": [
+				"USB 3.2 Gen 2 Type-C",
+				"USB 3.2 Gen 1 Type-A"
+			],
+			"mb-form-factor": [
+				"ATX",
+				"Micro ATX",
+				"Mini ITX"
+			],
+			"expansion-slots": {
+				"full-height": 7,
+				"half-height": 0
+			},
+			"max-gpu-length": [
+				"381 mm / 15\" With Drive Cages",
+				"381 mm / 15\" Without Drive Cages"
+			],
+			"dimensions": [
+				"428 mm x 210 mm x 460 mm",
+				"16.85\" x 8.268\" x 18.11\""
+			],
+			"internal-drive-bays": {
+				"2.5": 2,
+				"3.5": 2
+			},
+			"volume": [
+				"41.345 L",
+				"1.46 ft³"
+			]
 		}
 	],
 	"psu": [
