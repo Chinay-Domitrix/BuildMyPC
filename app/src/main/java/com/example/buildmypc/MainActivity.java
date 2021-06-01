@@ -9,6 +9,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
+
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
@@ -25,6 +33,7 @@ import static com.google.android.material.snackbar.Snackbar.make;
 
 public class MainActivity extends AppCompatActivity {
 	private AppBarConfiguration mAppBarConfiguration;
+	public AtomicReference<JSONObject> parts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
 		NavController navController = findNavController(this, nav_host_fragment_content_main);
 		setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 		setupWithNavController(binding.navView, navController);
+		try {
+			StringBuilder jsonRaw = new StringBuilder();
+			Scanner scanner = new Scanner(new File("part_data.json"));
+			while (scanner.hasNextLine()) jsonRaw.append(scanner.nextLine().trim());
+			parts.set(new JSONObject(jsonRaw.toString()));
+		} catch (FileNotFoundException | JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
