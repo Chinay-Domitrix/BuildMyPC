@@ -226,13 +226,14 @@
 	],
 	"motherboard": [
 		{
-			"manufacturer": "MSI",
-			"model": "B450 TOMAHAWK MAX",
-			"socket": "AM4",
-			"form-factor": "ATX",
 			"chipset": "AMD B450",
+			"ecc": false,
+			"form-factor": "ATX",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key"
+			],
+			"manufacturer": "MSI",
 			"max-memory-gb": 64,
-			"memory-type": "DDR4",
 			"memory-slots": 4,
 			"memory-speeds": [
 				"DDR4-1866",
@@ -250,23 +251,24 @@
 				"DDR4-4000",
 				"DDR4-4133"
 			],
-			"sli-crossfire": "CrossFire Capable",
-			"pci-slots": {
-				"e-x16": 2,
-				"e-x8": 0,
-				"e-x4": 0,
-				"e-x1": 3,
-				"standard": 0
-			},
-			"m.2-slots": [
-				"2242/2260/2280/22110 M-key"
-			],
+			"memory-type": "DDR4",
+			"model": "B450 TOMAHAWK MAX",
 			"msata-slots": 0,
 			"onboard-ethernet": [
 				"1 x 1 Gbit/s"
 			],
-			"sata-6gbps": 6,
 			"onboard-video": "CPU-Dependent",
+			"pci-slots": {
+				"e-x1": 3,
+				"e-x16": 2,
+				"e-x4": 0,
+				"e-x8": 0,
+				"standard": 0
+			},
+			"raid": false,
+			"sata-6gbps": 6,
+			"sli-crossfire": "CrossFire Capable",
+			"socket": "AM4",
 			"usb-headers": {
 				"2.0": 2,
 				"3.2": {
@@ -275,18 +277,18 @@
 					"gen-2x2": 0
 				}
 			},
-			"ecc": false,
-			"wireless": null,
-			"raid": false
+			"wireless": null
 		},
 		{
-			"manufacturer": "Asus",
-			"model": "TUF GAMING X570-PLUS (WI-FI)",
-			"socket": "AM4",
-			"form-factor": "ATX",
 			"chipset": "AMD X570",
+			"ecc": false,
+			"form-factor": "ATX",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280/22110 M-key"
+			],
+			"manufacturer": "Asus",
 			"max-memory-gb": 128,
-			"memory-type": "DDR4",
 			"memory-slots": 4,
 			"memory-speeds": [
 				"DDR4-2133",
@@ -305,24 +307,24 @@
 				"DDR4-4266",
 				"DDR4-4400"
 			],
-			"sli-crossfire": "CrossFire Capable",
-			"pci-slots": {
-				"e-x16": 2,
-				"e-x8": 0,
-				"e-x4": 0,
-				"e-x1": 2,
-				"standard": 0
-			},
-			"m.2-slots": [
-				"2242/2260/2280/22110 M-key",
-				"2242/2260/2280/22110 M-key"
-			],
+			"memory-type": "DDR4",
+			"model": "TUF GAMING X570-PLUS (WI-FI)",
 			"msata-slots": 0,
 			"onboard-ethernet": [
 				"1 x 1 Gbit/s"
 			],
-			"sata-6gbps": 8,
 			"onboard-video": "CPU-Dependent",
+			"pci-slots": {
+				"e-x1": 2,
+				"e-x16": 2,
+				"e-x4": 0,
+				"e-x8": 0,
+				"standard": 0
+			},
+			"raid": true,
+			"sata-6gbps": 8,
+			"sli-crossfire": "CrossFire Capable",
+			"socket": "AM4",
 			"usb-headers": {
 				"2.0": 2,
 				"3.2": {
@@ -331,18 +333,18 @@
 					"gen-2x2": 0
 				}
 			},
-			"ecc": false,
-			"wireless": "Wi-Fi 5",
-			"raid": true
+			"wireless": "Wi-Fi 5"
 		},
 		{
-			"manufacturer": "Asus",
-			"model": "STRIX B550-F GAMING (WI-FI)",
-			"socket": "AM4",
-			"form-factor": "ATX",
 			"chipset": "AMD B550",
+			"ecc": false,
+			"form-factor": "ATX",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280/22110 M-key"
+			],
+			"manufacturer": "Asus",
 			"max-memory-gb": 128,
-			"memory-type": "DDR4",
 			"memory-slots": 4,
 			"memory-speeds": [
 				"DDR4-2133",
@@ -358,24 +360,24 @@
 				"DDR4-4133",
 				"DDR4-4400"
 			],
-			"sli-crossfire": "CrossFire Capable",
-			"pci-slots": {
-				"e-x16": 2,
-				"e-x8": 0,
-				"e-x4": 0,
-				"e-x1": 3,
-				"standard": 0
-			},
-			"m.2-slots": [
-				"2242/2260/2280/22110 M-key",
-				"2242/2260/2280/22110 M-key"
-			],
+			"memory-type": "DDR4",
+			"model": "STRIX B550-F GAMING (WI-FI)",
 			"msata-slots": 0,
 			"onboard-ethernet": [
 				"1 x 2.5 Gbit/s"
 			],
-			"sata-6gbps": 6,
 			"onboard-video": "CPU-Dependent",
+			"pci-slots": {
+				"e-x1": 3,
+				"e-x16": 2,
+				"e-x4": 0,
+				"e-x8": 0,
+				"standard": 0
+			},
+			"raid": true,
+			"sata-6gbps": 6,
+			"sli-crossfire": "CrossFire Capable",
+			"socket": "AM4",
 			"usb-headers": {
 				"2.0": 2,
 				"3.2": {
@@ -384,18 +386,19 @@
 					"gen-2x2": 0
 				}
 			},
-			"ecc": false,
-			"wireless": "Wi-Fi 6",
-			"raid": true
+			"wireless": "Wi-Fi 6"
 		},
 		{
-			"manufacturer": "MSI",
-			"model": "Z490-A PRO",
-			"socket": "LGA1200",
-			"form-factor": "ATX",
 			"chipset": "Intel Z490",
+			"ecc": false,
+			"form-factor": "ATX",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280 M-key",
+				"2230 E-key"
+			],
+			"manufacturer": "MSI",
 			"max-memory-gb": 128,
-			"memory-type": "DDR4",
 			"memory-slots": 4,
 			"memory-speeds": [
 				"DDR4-2133",
@@ -421,25 +424,24 @@
 				"DDR4-4600",
 				"DDR4-4800"
 			],
-			"sli-crossfire": "CrossFire Capable",
-			"pci-slots": {
-				"e-x16": 2,
-				"e-x8": 0,
-				"e-x4": 0,
-				"e-x1": 3,
-				"standard": 0
-			},
-			"m.2-slots": [
-				"2242/2260/2280/22110 M-key",
-				"2242/2260/2280 M-key",
-				"2230 E-key"
-			],
+			"memory-type": "DDR4",
+			"model": "Z490-A PRO",
 			"msata-slots": 0,
 			"onboard-ethernet": [
 				"1 x 2.5 Gbit/s"
 			],
-			"sata-6gbps": 6,
 			"onboard-video": "CPU-Dependent",
+			"pci-slots": {
+				"e-x1": 3,
+				"e-x16": 2,
+				"e-x4": 0,
+				"e-x8": 0,
+				"standard": 0
+			},
+			"raid": true,
+			"sata-6gbps": 6,
+			"sli-crossfire": "CrossFire Capable",
+			"socket": "LGA1200",
 			"usb-headers": {
 				"2.0": 2,
 				"3.2": {
@@ -448,18 +450,18 @@
 					"gen-2x2": 0
 				}
 			},
-			"ecc": false,
-			"wireless": null,
-			"raid": true
+			"wireless": null
 		},
 		{
-			"manufacturer": "MSI",
-			"model": "MAG B550 TOMAHAWK",
-			"socket": "AM4",
-			"form-factor": "ATX",
 			"chipset": "AMD B550",
+			"ecc": false,
+			"form-factor": "ATX",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280 M-key"
+			],
+			"manufacturer": "MSI",
 			"max-memory-gb": 128,
-			"memory-type": "DDR4",
 			"memory-slots": 4,
 			"memory-speeds": [
 				"DDR4-1866",
@@ -483,25 +485,25 @@
 				"DDR4-4800",
 				"DDR4-4866"
 			],
-			"sli-crossfire": "CrossFire Capable",
-			"pci-slots": {
-				"e-x16": 2,
-				"e-x8": 0,
-				"e-x4": 0,
-				"e-x1": 2,
-				"standard": 0
-			},
-			"m.2-slots": [
-				"2242/2260/2280/22110 M-key",
-				"2242/2260/2280 M-key"
-			],
+			"memory-type": "DDR4",
+			"model": "MAG B550 TOMAHAWK",
 			"msata-slots": 0,
 			"onboard-ethernet": [
 				"1 x 1 Gbit/s",
 				"1 x 2.5 Gbit/s"
 			],
-			"sata-6gbps": 6,
 			"onboard-video": "CPU-Dependent",
+			"pci-slots": {
+				"e-x1": 2,
+				"e-x16": 2,
+				"e-x4": 0,
+				"e-x8": 0,
+				"standard": 0
+			},
+			"raid": true,
+			"sata-6gbps": 6,
+			"sli-crossfire": "CrossFire Capable",
+			"socket": "AM4",
 			"usb-headers": {
 				"2.0": 2,
 				"3.2": {
@@ -510,9 +512,7 @@
 					"gen-2x2": 0
 				}
 			},
-			"ecc": false,
-			"wireless": null,
-			"raid": true
+			"wireless": null
 		}
 	],
 	"memory": [
