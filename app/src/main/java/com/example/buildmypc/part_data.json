@@ -258,9 +258,13 @@
 				"e-x1": 3,
 				"standard": 0
 			},
-			"m.2-slots": "2242/2260/2280/22110 M-key",
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key"
+			],
 			"msata-slots": 0,
-			"onboard-ethernet": "1 x 1 Gbit/s",
+			"onboard-ethernet": [
+				"1 x 1 Gbit/s"
+			],
 			"sata-6gbps": 6,
 			"onboard-video": "CPU-Dependent",
 			"usb-headers": {
@@ -274,6 +278,241 @@
 			"ecc": false,
 			"wireless": null,
 			"raid": false
+		},
+		{
+			"manufacturer": "Asus",
+			"model": "TUF GAMING X570-PLUS (WI-FI)",
+			"socket": "AM4",
+			"form-factor": "ATX",
+			"chipset": "AMD X570",
+			"max-memory-gb": 128,
+			"memory-type": "DDR4",
+			"memory-slots": 4,
+			"memory-speeds": [
+				"DDR4-2133",
+				"DDR4-2400",
+				"DDR4-2666",
+				"DDR4-2800",
+				"DDR4-3000",
+				"DDR4-3200",
+				"DDR4-3300",
+				"DDR4-3400",
+				"DDR4-3466",
+				"DDR4-3600",
+				"DDR4-3866",
+				"DDR4-4000",
+				"DDR4-4133",
+				"DDR4-4266",
+				"DDR4-4400"
+			],
+			"sli-crossfire": "CrossFire Capable",
+			"pci-slots": {
+				"e-x16": 2,
+				"e-x8": 0,
+				"e-x4": 0,
+				"e-x1": 2,
+				"standard": 0
+			},
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280/22110 M-key"
+			],
+			"msata-slots": 0,
+			"onboard-ethernet": [
+				"1 x 1 Gbit/s"
+			],
+			"sata-6gbps": 8,
+			"onboard-video": "CPU-Dependent",
+			"usb-headers": {
+				"2.0": 2,
+				"3.2": {
+					"gen-1": 1,
+					"gen-2": 0,
+					"gen-2x2": 0
+				}
+			},
+			"ecc": false,
+			"wireless": "Wi-Fi 5",
+			"raid": true
+		},
+		{
+			"manufacturer": "Asus",
+			"model": "STRIX B550-F GAMING (WI-FI)",
+			"socket": "AM4",
+			"form-factor": "ATX",
+			"chipset": "AMD B550",
+			"max-memory-gb": 128,
+			"memory-type": "DDR4",
+			"memory-slots": 4,
+			"memory-speeds": [
+				"DDR4-2133",
+				"DDR4-2400",
+				"DDR4-2666",
+				"DDR4-2800",
+				"DDR4-3000",
+				"DDR4-3200",
+				"DDR4-3466",
+				"DDR4-3600",
+				"DDR4-3866",
+				"DDR4-4000",
+				"DDR4-4133",
+				"DDR4-4400"
+			],
+			"sli-crossfire": "CrossFire Capable",
+			"pci-slots": {
+				"e-x16": 2,
+				"e-x8": 0,
+				"e-x4": 0,
+				"e-x1": 3,
+				"standard": 0
+			},
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280/22110 M-key"
+			],
+			"msata-slots": 0,
+			"onboard-ethernet": [
+				"1 x 2.5 Gbit/s"
+			],
+			"sata-6gbps": 6,
+			"onboard-video": "CPU-Dependent",
+			"usb-headers": {
+				"2.0": 2,
+				"3.2": {
+					"gen-1": 1,
+					"gen-2": 0,
+					"gen-2x2": 0
+				}
+			},
+			"ecc": false,
+			"wireless": "Wi-Fi 6",
+			"raid": true
+		},
+		{
+			"manufacturer": "MSI",
+			"model": "Z490-A PRO",
+			"socket": "LGA1200",
+			"form-factor": "ATX",
+			"chipset": "Intel Z490",
+			"max-memory-gb": 128,
+			"memory-type": "DDR4",
+			"memory-slots": 4,
+			"memory-speeds": [
+				"DDR4-2133",
+				"DDR4-2400",
+				"DDR4-2666",
+				"DDR4-2933",
+				"DDR4-3000",
+				"DDR4-3200",
+				"DDR4-3300",
+				"DDR4-3333",
+				"DDR4-3400",
+				"DDR4-3466",
+				"DDR4-3600",
+				"DDR4-3733",
+				"DDR4-3866",
+				"DDR4-4000",
+				"DDR4-4133",
+				"DDR4-4200",
+				"DDR4-4266",
+				"DDR4-4300",
+				"DDR4-4400",
+				"DDR4-4533",
+				"DDR4-4600",
+				"DDR4-4800"
+			],
+			"sli-crossfire": "CrossFire Capable",
+			"pci-slots": {
+				"e-x16": 2,
+				"e-x8": 0,
+				"e-x4": 0,
+				"e-x1": 3,
+				"standard": 0
+			},
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280 M-key",
+				"2230 E-key"
+			],
+			"msata-slots": 0,
+			"onboard-ethernet": [
+				"1 x 2.5 Gbit/s"
+			],
+			"sata-6gbps": 6,
+			"onboard-video": "CPU-Dependent",
+			"usb-headers": {
+				"2.0": 2,
+				"3.2": {
+					"gen-1": 2,
+					"gen-2": 1,
+					"gen-2x2": 0
+				}
+			},
+			"ecc": false,
+			"wireless": null,
+			"raid": true
+		},
+		{
+			"manufacturer": "MSI",
+			"model": "MAG B550 TOMAHAWK",
+			"socket": "AM4",
+			"form-factor": "ATX",
+			"chipset": "AMD B550",
+			"max-memory-gb": 128,
+			"memory-type": "DDR4",
+			"memory-slots": 4,
+			"memory-speeds": [
+				"DDR4-1866",
+				"DDR4-2133",
+				"DDR4-2400",
+				"DDR4-2666",
+				"DDR4-2800",
+				"DDR4-2933",
+				"DDR4-3000",
+				"DDR4-3200",
+				"DDR4-3466",
+				"DDR4-3600",
+				"DDR4-3733",
+				"DDR4-3866",
+				"DDR4-4000",
+				"DDR4-4133",
+				"DDR4-4266",
+				"DDR4-4400",
+				"DDR4-4533",
+				"DDR4-4600",
+				"DDR4-4800",
+				"DDR4-4866"
+			],
+			"sli-crossfire": "CrossFire Capable",
+			"pci-slots": {
+				"e-x16": 2,
+				"e-x8": 0,
+				"e-x4": 0,
+				"e-x1": 2,
+				"standard": 0
+			},
+			"m.2-slots": [
+				"2242/2260/2280/22110 M-key",
+				"2242/2260/2280 M-key"
+			],
+			"msata-slots": 0,
+			"onboard-ethernet": [
+				"1 x 1 Gbit/s",
+				"1 x 2.5 Gbit/s"
+			],
+			"sata-6gbps": 6,
+			"onboard-video": "CPU-Dependent",
+			"usb-headers": {
+				"2.0": 2,
+				"3.2": {
+					"gen-1": 1,
+					"gen-2": 1,
+					"gen-2x2": 0
+				}
+			},
+			"ecc": false,
+			"wireless": null,
+			"raid": true
 		}
 	],
 	"memory": [
