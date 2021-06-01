@@ -225,7 +225,56 @@
 		}
 	],
 	"motherboard": [
-
+		{
+			"manufacturer": "MSI",
+			"model": "B450 TOMAHAWK MAX",
+			"socket": "AM4",
+			"form-factor": "ATX",
+			"chipset": "AMD B450",
+			"max-memory-gb": 64,
+			"memory-type": "DDR4",
+			"memory-slots": 4,
+			"memory-speeds": [
+				"DDR4-1866",
+				"DDR4-2133",
+				"DDR4-2400",
+				"DDR4-2666",
+				"DDR4-2800",
+				"DDR4-2933",
+				"DDR4-3000",
+				"DDR4-3200",
+				"DDR4-3466",
+				"DDR4-3600",
+				"DDR4-3733",
+				"DDR4-3866",
+				"DDR4-4000",
+				"DDR4-4133"
+			],
+			"sli-crossfire": "CrossFire Capable",
+			"pci-slots": {
+				"e-x16": 2,
+				"e-x8": 0,
+				"e-x4": 0,
+				"e-x1": 3,
+				"standard": 0
+			},
+			"m.2-slots": "2242/2260/2280/22110 M-key",
+			"msata-slots": 0,
+			"onboard-ethernet": "1 x 1 Gbit/s",
+			"sata-6gbps": 6,
+			"onboard-video": "CPU-Dependent",
+			"usb-headers": {
+				"2.0": 2,
+				"3.2": {
+					"gen-1": 1,
+					"gen-2": 0,
+					"gen-2x2": 0
+				}
+			},
+			"ecc": false,
+			"wireless": null,
+			"raid": false
+		}
 	],
 	"memory": [
 		{
@@ -403,7 +452,86 @@
 
 	],
 	"psu": [
-
+		{
+			"connectors": {
+				"eps": 2,
+				"molex-4-pin": 4,
+				"pcie-6+2-pin": 6,
+				"sata": 10
+			},
+			"efficiency-rating": "80+ Gold",
+			"fanless": false,
+			"form-factor": "ATX",
+			"length-mm": 160,
+			"manufacturer": "Corsair",
+			"model": "RM750 (2019)",
+			"modular": "Full",
+			"wattage": 750
+		},
+		{
+			"connectors": {
+				"eps": 1,
+				"molex-4-pin": 3,
+				"pcie-6+2-pin": 2,
+				"sata": 6
+			},
+			"efficiency-rating": "80+ Bronze",
+			"fanless": false,
+			"form-factor": "ATX",
+			"length-mm": 140,
+			"manufacturer": "EVGA",
+			"model": "600 BQ",
+			"modular": "Semi",
+			"wattage": 600
+		},
+		{
+			"connectors": {
+				"eps": 2,
+				"molex-4-pin": 4,
+				"pcie-6+2-pin": 6,
+				"sata": 12
+			},
+			"efficiency-rating": "80+ Gold",
+			"fanless": false,
+			"form-factor": "ATX",
+			"length-mm": 160,
+			"manufacturer": "Corsair",
+			"model": "RM850 (2019)",
+			"modular": "Full",
+			"wattage": 850
+		},
+		{
+			"connectors": {
+				"eps": 1,
+				"molex-4-pin": 4,
+				"pcie-6+2-pin": 6,
+				"sata": 9
+			},
+			"efficiency-rating": "80+ Gold",
+			"fanless": false,
+			"form-factor": "ATX",
+			"length-mm": 150,
+			"manufacturer": "EVGA",
+			"model": "SuperNOVA 650 GA",
+			"modular": "Full",
+			"wattage": 650
+		},
+		{
+			"connectors": {
+				"eps": 1,
+				"molex-4-pin": 4,
+				"pcie-6+2-pin": 2,
+				"sata": 6
+			},
+			"efficiency-rating": "80+ Bronze",
+			"fanless": false,
+			"form-factor": "ATX",
+			"length-mm": 140,
+			"manufacturer": "Corsair",
+			"model": "CX650M",
+			"modular": "Semi",
+			"wattage": 650
+		}
 	],
 	"os": [
 		{
