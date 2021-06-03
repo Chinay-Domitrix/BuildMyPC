@@ -1,31 +1,25 @@
 package com.example.buildmypc.ui.newsfeed;
- // TODO test this out
-import android.os.AsyncTask;
-import android.util.Log;
-import android.util.Xml;
-import android.widget.Toast;
 
-import com.example.buildmypc.MainActivity;
+import android.os.AsyncTask;
+import android.util.Xml;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.ParseException;
 import java.util.ArrayList;
 
-public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
+import static android.util.Log.d;
+import static com.example.buildmypc.ui.newsfeed.NewsfeedFragment.finalArticleList;
 
+public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 	@Override
 	protected ArrayList<Article> doInBackground(String... strings) {
 		assert strings != null && strings.length > 0;
-
-		ArrayList<Article> usableArticleList = new ArrayList<Article>();
-
+		ArrayList<Article> usableArticleList = new ArrayList<>();
 		URL url;
 		String publisher = strings[1];
 		// building a string by downloading off of le interwebz (c&p from WeatherApp)
@@ -40,35 +34,21 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 			InputStream stream = connection.getInputStream();
 			String line;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				builder.append(line); // the total file, once this runs, is converted into a string and is accessible via "builder.toString();"
-			}
 		} catch (Exception e) {
-			Log.d("GAMING", "Stacking! + " + e.toString());
+			d("GAMING", "Stacking! + " + e.toString());
 		}
-
 		// parsing the XML result into something workable
 		switch (publisher.toUpperCase()) {
 			case "TECHMEME":
-					xmlParser = new ArticleXMLParser(
-							builder.toString(),
-							"Techmeme",
-							"item",
-							"title",
-							"description",
-							"pubDate",
-							"link",
-							"N/A"
-					);
+				xmlParser = new ArticleXMLParser(builder.toString(), "Techmeme", "item", "title", "description", "pubDate", "link", "N/A");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
-					for(Article article : xmlParser.parseData()){
-						usableArticleList.add(article);
-					}
+					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
-					Log.d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.toString());
 				}
 				break;
-
 //			case "TECHCRUNCH":
 //				xmlParser = new ArticleXMLParser(
 //						builder.toString(),
@@ -88,7 +68,6 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //					Log.d("CHIRAGERROR", e.toString());
 //				}
 //				break;
-
 //			case "MIT_TECHNOLOGY":
 //				xmlParser = new ArticleXMLParser(
 //						builder.toString(),
@@ -108,103 +87,50 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //					Log.d("CHIRAGERROR", e.toString());
 //				}
 //				break;
-
 			case "THE VERGE":
-				xmlParser = new ArticleXMLParser(
-						builder.toString(),
-						"The Vergecast",
-						"entry",
-						"title",
-						"content",
-						"published",
-						"id",
-						"N/A"
-				);
+				xmlParser = new ArticleXMLParser(builder.toString(), "The Vergecast", "entry", "title", "content", "published", "id", "N/A");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
-					for(Article article : xmlParser.parseData()){
-						usableArticleList.add(article);
-					}
+					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
-					Log.d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.toString());
 				}
 				break;
-
 			case "WIRED":
-				xmlParser = new ArticleXMLParser(
-					builder.toString(),
-					"WIRED",
-					"item",
-					"title",
-					"description",
-					"pubDate",
-					"link",
-					"media:thumbnail"
-			);
+				xmlParser = new ArticleXMLParser(builder.toString(), "WIRED", "item", "title", "description", "pubDate", "link", "media:thumbnail");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
-					for(Article article : xmlParser.parseData()){
-						usableArticleList.add(article);
-					}
+					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
-					Log.d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.toString());
 				}
 				break;
-
 			case "NYTIMES":
-				xmlParser = new ArticleXMLParser(
-						builder.toString(),
-						"NYT Technology",
-						"item",
-						"title",
-						"description",
-						"pubDate",
-						"link",
-						"media:content"
-				);
+				xmlParser = new ArticleXMLParser(builder.toString(), "NYT Technology", "item", "title", "description", "pubDate", "link", "media:content");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
-					for(Article article : xmlParser.parseData()){
-						usableArticleList.add(article);
-					}
+					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
-					Log.d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.toString());
 				}
 				break;
-
 //			case "ARS_TECHNICHA":
 //				break;
-
 			case "ENGADGET":
-				xmlParser = new ArticleXMLParser(
-						builder.toString(),
-						"Engadget",
-						"item",
-						"title",
-						"description",
-						"pubDate",
-						"link",
-						"media:content"
-				);
+				xmlParser = new ArticleXMLParser(builder.toString(), "Engadget", "item", "title", "description", "pubDate", "link", "media:content");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
-					for(Article article : xmlParser.parseData()){
-						usableArticleList.add(article);
-					}
+					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
-					Log.d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.toString());
 				}
 				break;
-
 			default:
 				break;
 		}
-
 		return usableArticleList;
 	}
 
 	@Override
 	protected void onPostExecute(ArrayList<Article> articles) {
 		super.onPostExecute(articles);
-
-		Log.d("SUCCESSTEXT", "yay");
+		finalArticleList.get().addAll(articles);
+		d("SUCCESSTEXT", "yay");
 	}
 }
-
-
