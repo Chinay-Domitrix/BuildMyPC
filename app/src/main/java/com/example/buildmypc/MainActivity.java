@@ -33,7 +33,7 @@ import static com.google.android.material.snackbar.Snackbar.make;
 
 public class MainActivity extends AppCompatActivity {
 	private AppBarConfiguration mAppBarConfiguration;
-	public static AtomicReference<JSONObject> parts;
+	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
