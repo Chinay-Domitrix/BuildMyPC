@@ -94,16 +94,7 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //				}
 //				break;
 			case "THE_VERGE":
-				xmlParser = new ArticleXMLParser(
-						builder.toString(),
-						"The Vergecast",
-						"entry",
-						"title",
-						"content",
-						"published",
-						"id",
-						"N/A"
-				);
+				xmlParser = new ArticleXMLParser(builder.toString(), "The Vergecast", "entry", "title", "content", "published", "id", "N/A");
 				try { // try-catch handles both the URLMalformedException and the Parse-based-Exception
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (Exception e) {
