@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
+import java.util.ArrayList;
+
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
@@ -22,7 +24,9 @@ public class NewsfeedFragment extends Fragment {
 		View root = binding.getRoot();
 		final TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
 		// TODO parsing newsfeeds
+		RSSAsyncTask.
 
 		// ending return
 		return root;

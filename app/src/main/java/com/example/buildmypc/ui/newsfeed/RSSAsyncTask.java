@@ -1,5 +1,5 @@
 package com.example.buildmypc.ui.newsfeed;
-
+ // TODO test this out
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -16,6 +16,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
+
+	private String urls;
+
+	public RSSAsyncTask(){
+
+	}
+
 	@Override
 	protected ArrayList<Article> doInBackground(String... strings) {
 		assert strings != null && strings.length > 0;
