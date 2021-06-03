@@ -23,7 +23,7 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 
 	@Override
 	protected ArrayList<Article> doInBackground(String... strings) {
-		assert strings != null && strings.length > 0;
+		assert (strings != null) && (strings.length > 0);
 		ArrayList<Article> usableArticleList = new ArrayList<>();
 		URL url;
 		String publisher = strings[1];
