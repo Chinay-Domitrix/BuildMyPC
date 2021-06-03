@@ -698,7 +698,7 @@
 			"frame-sync": "G-Sync",
 			"length-mm": 242,
 			"tdp-w": 220,
-			"video-ports": {
+			"ports": {
 				"dvi": 0,
 				"hdmi": 1,
 				"mini-hdmi": 0,
@@ -706,7 +706,8 @@
 				"mini-dp": 0
 			},
 			"expansion-slot-width": 2,
-			"cooling": "2 Fans"
+			"cooling": "2 Fans",
+			"external-power": "1 PCIe 12-pin"
 		},
 		{
 			"manufacturer": "EVGA",
@@ -721,7 +722,7 @@
 			"frame-sync": "G-Sync",
 			"length-mm": 201.8,
 			"tdp-w": 170,
-			"video-ports": {
+			"ports": {
 				"dvi": 0,
 				"hdmi": 1,
 				"mini-hdmi": 0,
@@ -729,7 +730,56 @@
 				"mini-dp": 0
 			},
 			"expansion-slot-width": 2,
-			"cooling": "2 Fans"
+			"cooling": "2 Fans",
+			"external-power": "1 PCIe 8-pin"
+		},
+		{
+			"manufacturer": "NVIDIA",
+			"model": "GeForce RTX 3080 Founders Edition",
+			"chipset": "GeForce RTX 3080",
+			"memory-gb": 10,
+			"memory-type": "GDDR6",
+			"core-clock-mhz": 1440,
+			"boost-clock-mhz": 1710,
+			"effective-memory-clock-mhz": 19000,
+			"interface": "PCIe x16",
+			"frame-sync": "G-Sync",
+			"length-mm": 285,
+			"tdp-w": 320,
+			"ports": {
+				"dvi": 0,
+				"hdmi": 1,
+				"mini-hdmi": 0,
+				"dp": 3,
+				"mini-dp": 0
+			},
+			"expansion-slot-width": 2,
+			"cooling": "2 Fans",
+			"external-power": "1 PCIe 12-pin"
+		},
+		{
+			"manufacturer": "Asus",
+			"model": "TUF-RTX3070-O8G-GAMING",
+			"chipset": "GeForce RTX 3070",
+			"memory-gb": 8,
+			"memory-type": "GDDR6",
+			"core-clock-mhz": 1500,
+			"boost-clock-mhz": 1845,
+			"effective-memory-clock-mhz": 14000,
+			"interface": "PCIe x16",
+			"frame-sync": "G-Sync",
+			"length-mm": 285,
+			"tdp-w": 320,
+			"ports": {
+				"dvi": 0,
+				"hdmi": 1,
+				"mini-hdmi": 0,
+				"dp": 3,
+				"mini-dp": 0
+			},
+			"expansion-slot-width": 2,
+			"cooling": "2 Fans",
+			"external-power": "1 PCIe 12-pin"
 		}
 	],
 	"case": [
