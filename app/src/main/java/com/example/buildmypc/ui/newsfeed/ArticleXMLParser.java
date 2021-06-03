@@ -1,6 +1,5 @@
 package com.example.buildmypc.ui.newsfeed;
 
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 public class ArticleXMLParser {
 	private final String data;
 	private final String publisher;
-
 	private final String itemDivisor;
 	private final String nameInd; // name indicator
 	private final String descInd;
@@ -29,47 +27,40 @@ public class ArticleXMLParser {
 	}
 
 	public ArrayList<Article> parseData() throws ParseException, MalformedURLException {
-		ArrayList<Article> articles = new ArrayList<Article>();
+		ArrayList<Article> articles = new ArrayList<>();
 		Article currentArticle = new Article();
 		int signifierLen;
 		String remainder;
 		String[] dataArr = data.split("r'[\\r\\n]+'");
 		int dataIndex = 0;
 //		boolean contLoop = true;
-		while(dataIndex < dataArr.length){
+		while (dataIndex < dataArr.length) {
 			String line = dataArr[dataIndex];
-			if(line.contains("<" + itemDivisor + ">")){ // indicator that divides up different elements
-				articles.add(new Article());
-			}
-			else if(line.contains("<" + nameInd)){ // name indicator code
+			if (line.contains("<" + itemDivisor + ">"))
+				articles.add(new Article()); // indicator that divides up different elements
+			else if (line.contains("<" + nameInd)) { // name indicator code
 				currentArticle = articles.get(articles.size() - 1);
 				signifierLen = ("<" + nameInd + ">").length();
 				remainder = line.substring(signifierLen, line.length() - signifierLen - 1);
 				currentArticle.setHeading(remainder);
-			}
-			else if(line.contains("<" + descInd)){ //TODO determine whether this is able to even be shown
+			} else if (line.contains("<" + descInd)) { //TODO determine whether this is able to even be shown
 				signifierLen = ("<" + descInd + ">").length();
 				remainder = line.substring(signifierLen, line.length() - signifierLen - 1);
 				currentArticle.setDesc(remainder);
-			}
-			else if(line.contains("<" + dateInd)){ // date indicator code
+			} else if (line.contains("<" + dateInd)) { // date indicator code
 				signifierLen = ("<" + dateInd + ">").length();
 				remainder = line.substring(signifierLen, line.length() - signifierLen - 1);
 				currentArticle.setDate(remainder); // this line can throw a ParseException iff a SimpleDateFormatter
-			}
-			else if(line.contains("<" + urlInd)){ // url indicator
+			} else if (line.contains("<" + urlInd)) { // url indicator
 				signifierLen = ("<" + urlInd + ">").length();
 				remainder = line.substring(signifierLen, line.length() - signifierLen - 1);
 				currentArticle.setOriginURL(new URL(remainder));
 			}
-
 			dataIndex++;
 		}
 		return articles;
 	}
 }
-
-
 //switch(publisher.toUpperCase()){
 //		case "TECHMEME":
 //		break;
