@@ -1,4 +1,5 @@
 package com.example.buildmypc.ui.newsfeed;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
+	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<Article>());
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
@@ -32,13 +35,12 @@ public class NewsfeedFragment extends Fragment {
 			public void onClick(View v) {
 				button.setClickable(false);
 				button.setEnabled(false);
-				ArrayList<Article> finalArticleList = new ArrayList<Article>();
 				RSSAsyncTask backgroundTask = new RSSAsyncTask();
-				finalArticleList.addAll(backgroundTask.execute("https://www.techmeme.com/feed.xml", "Techmeme"));
-				finalArticleList.addAll(backgroundTask.execute("https://www.theverge.com/rss/index.xml", "The Verge"));
-				finalArticleList.addAll(backgroundTask.execute("https://www.wired.com/feed", "WIRED"));
-				finalArticleList.addAll(backgroundTask.execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes"));
-				finalArticleList.addAll(backgroundTask.execute("https://www.engadget.com/rss.xml", "Engadget"));
+				backgroundTask.execute("https://www.techmeme.com/feed.xml", "Techmeme");
+				backgroundTask.execute("https://www.theverge.com/rss/index.xml", "The Verge");
+				backgroundTask.execute("https://www.wired.com/feed", "WIRED");
+				backgroundTask.execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes");
+				backgroundTask.execute("https://www.engadget.com/rss.xml", "Engadget");
 			}
 		});
 
