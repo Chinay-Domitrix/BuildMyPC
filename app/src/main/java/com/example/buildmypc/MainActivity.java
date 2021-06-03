@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		setupWithNavController(binding.navView, navController);
 		try {
 			StringBuilder jsonRaw = new StringBuilder();
-			Scanner scanner = new Scanner(new File("part_data.json"));
+			Scanner scanner = new Scanner(new File("com/example/buildmypc/part_data.json"));
 			while (scanner.hasNextLine()) jsonRaw.append(scanner.nextLine().trim());
 			parts.set(new JSONObject(jsonRaw.toString()));
 		} catch (FileNotFoundException | JSONException e) {
