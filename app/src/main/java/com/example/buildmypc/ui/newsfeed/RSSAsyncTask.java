@@ -3,6 +3,9 @@ package com.example.buildmypc.ui.newsfeed;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
+import android.widget.Toast;
+
+import com.example.buildmypc.MainActivity;
 
 import org.json.JSONObject;
 
@@ -16,12 +19,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
-
-	private String urls;
-
-	public RSSAsyncTask(){
-
-	}
 
 	@Override
 	protected ArrayList<Article> doInBackground(String... strings) {
@@ -112,7 +109,7 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //				}
 //				break;
 
-			case "THE_VERGE":
+			case "THE VERGE":
 				xmlParser = new ArticleXMLParser(
 						builder.toString(),
 						"The Vergecast",
@@ -199,12 +196,14 @@ public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				break;
 		}
 
-		return null;
+		return usableArticleList;
 	}
 
 	@Override
 	protected void onPostExecute(ArrayList<Article> articles) {
 		super.onPostExecute(articles);
+
+		Log.d("SUCCESSTEXT", "yay");
 	}
 }
 
