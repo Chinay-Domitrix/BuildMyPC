@@ -15,10 +15,10 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/cantarell_bold_italic"
-			android:paddingTop="10dp"
-			android:paddingBottom="5dp"
 			android:paddingStart="10dp"
+			android:paddingTop="10dp"
 			android:paddingEnd="5dp"
+			android:paddingBottom="5dp"
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
 			android:textSize="20sp" />
 
@@ -32,9 +32,9 @@
 		android:id="@+id/list_newsfeed_image"
 		android:layout_width="100dp"
 		android:layout_height="100dp"
+		android:layout_gravity="center_vertical"
 		android:layout_marginHorizontal="8dp"
 		android:layout_marginVertical="8dp"
-		android:layout_gravity="center_vertical"
 		android:contentDescription="@string/newsfeed_article_image"
 		tools:srcCompat="@tools:sample/avatars" />
 </LinearLayout>
