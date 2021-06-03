@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static android.util.Log.d;
 
-public class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
+class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 	private String urls;
 
 	public RSSAsyncTask() {
