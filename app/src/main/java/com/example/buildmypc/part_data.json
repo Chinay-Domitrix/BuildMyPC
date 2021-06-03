@@ -685,83 +685,239 @@
 		}
 	],
 	"gpu": [
-
+		{
+			"manufacturer": "NVIDIA",
+			"model": "GeForce RTX 3070 Founders Edition",
+			"chipset": "GeForce RTX 3070",
+			"memory-gb": 8,
+			"memory-type": "GDDR6",
+			"core-clock-mhz": 1500,
+			"boost-clock-mhz": 1730,
+			"effective-memory-clock-mhz": 16000,
+			"interface": "PCIe x16",
+			"frame-sync": "G-Sync",
+			"length-mm": 242,
+			"tdp-w": 220,
+			"video-ports": {
+				"dvi": 0,
+				"hdmi": 1,
+				"mini-hdmi": 0,
+				"dp": 3,
+				"mini-dp": 0
+			},
+			"expansion-slot-width": 2,
+			"cooling": "2 Fans"
+		},
+		{
+			"manufacturer": "EVGA",
+			"model": "GeForce RTX 3060 XC",
+			"chipset": "GeForce RTX 3060",
+			"memory-gb": 12,
+			"memory-type": "GDDR6",
+			"core-clock-mhz": 1320,
+			"boost-clock-mhz": 1882,
+			"effective-memory-clock-mhz": 15000,
+			"interface": "PCIe x16",
+			"frame-sync": "G-Sync",
+			"length-mm": 201.8,
+			"tdp-w": 170,
+			"video-ports": {
+				"dvi": 0,
+				"hdmi": 1,
+				"mini-hdmi": 0,
+				"dp": 3,
+				"mini-dp": 0
+			},
+			"expansion-slot-width": 2,
+			"cooling": "2 Fans"
+		}
 	],
 	"case": [
 		{
-			"manufacturer": "NZXT",
-			"model": "H510",
-			"type": "ATX Mid Tower",
 			"color": "White",
-			"psu": null,
-			"side-panel": "Tempered Glass",
-			"psu-shroud": true,
+			"dimensions": [
+				"428 mm x 210 mm x 460 mm",
+				"16.85\" x 8.268\" x 18.11\""
+			],
+			"expansion-slots": {
+				"full-height": 7,
+				"half-height": 0
+			},
 			"front-panel-usb": [
 				"USB 3.2 Gen 2 Type-C",
 				"USB 3.2 Gen 1 Type-A"
+			],
+			"internal-drive-bays": {
+				"2.5": 2,
+				"3.5": 2
+			},
+			"manufacturer": "NZXT",
+			"max-gpu-length": [
+				"381 mm / 15\" With Drive Cages",
+				"381 mm / 15\" Without Drive Cages"
 			],
 			"mb-form-factor": [
 				"ATX",
 				"Micro ATX",
 				"Mini ITX"
 			],
-			"expansion-slots": {
-				"full-height": 7,
-				"half-height": 0
-			},
-			"max-gpu-length": [
-				"381 mm / 15\" With Drive Cages",
-				"381 mm / 15\" Without Drive Cages"
-			],
-			"dimensions": [
-				"428 mm x 210 mm x 460 mm",
-				"16.85\" x 8.268\" x 18.11\""
-			],
-			"internal-drive-bays": {
-				"2.5": 2,
-				"3.5": 2
-			},
+			"model": "H510",
+			"psu": null,
+			"psu-shroud": true,
+			"side-panel": "Tempered Glass",
+			"type": "ATX Mid Tower",
 			"volume": [
 				"41.345 L",
 				"1.46 ft³"
 			]
 		},
 		{
-			"manufacturer": "NZXT",
-			"model": "H510",
-			"type": "ATX Mid Tower",
 			"color": "Black",
-			"psu": null,
-			"side-panel": "Tempered Glass",
-			"psu-shroud": true,
+			"dimensions": [
+				"428 mm x 210 mm x 460 mm",
+				"16.85\" x 8.268\" x 18.11\""
+			],
+			"expansion-slots": {
+				"full-height": 7,
+				"half-height": 0
+			},
 			"front-panel-usb": [
 				"USB 3.2 Gen 2 Type-C",
 				"USB 3.2 Gen 1 Type-A"
+			],
+			"internal-drive-bays": {
+				"2.5": 2,
+				"3.5": 2
+			},
+			"manufacturer": "NZXT",
+			"max-gpu-length": [
+				"381 mm / 15\" With Drive Cages",
+				"381 mm / 15\" Without Drive Cages"
 			],
 			"mb-form-factor": [
 				"ATX",
 				"Micro ATX",
 				"Mini ITX"
 			],
+			"model": "H510",
+			"psu": null,
+			"psu-shroud": true,
+			"side-panel": "Tempered Glass",
+			"type": "ATX Mid Tower",
+			"volume": [
+				"41.345 L",
+				"1.46 ft³"
+			]
+		},
+		{
+			"color": "Black",
+			"dimensions": [
+				"453 mm x 230 mm x 466 mm",
+				"17.835\" x 9.055\" x 18.346\""
+			],
 			"expansion-slots": {
 				"full-height": 7,
 				"half-height": 0
 			},
-			"max-gpu-length": [
-				"381 mm / 15\" With Drive Cages",
-				"381 mm / 15\" Without Drive Cages"
-			],
-			"dimensions": [
-				"428 mm x 210 mm x 460 mm",
-				"16.85\" x 8.268\" x 18.11\""
+			"front-panel-usb": [
+				"USB 3.2 Gen 2 Type-C",
+				"USB 3.2 Gen 1 Type-A"
 			],
 			"internal-drive-bays": {
 				"2.5": 2,
 				"3.5": 2
 			},
+			"manufacturer": "Corsair",
+			"max-gpu-length": [
+				"360 mm / 14.173\""
+			],
+			"mb-form-factor": [
+				"ATX",
+				"Micro ATX",
+				"Mini ITX"
+			],
+			"model": "4000D Airflow",
+			"psu": null,
+			"psu-shroud": true,
+			"side-panel": "Tinted Tempered Glass",
+			"type": "ATX Mid Tower",
 			"volume": [
-				"41.345 L",
-				"1.46 ft³"
+				"48.553 L",
+				"1.715 ft³"
+			]
+		},
+		{
+			"color": "Black",
+			"dimensions": [
+				"457 mm x 216 mm x 455 mm",
+				"17.992\" x 8.504\" x 17.913\""
+			],
+			"expansion-slots": {
+				"full-height": 7,
+				"half-height": 0
+			},
+			"front-panel-usb": [
+				"USB 3.2 Gen 1 Type-A"
+			],
+			"internal-drive-bays": {
+				"2.5": 4,
+				"3.5": 2
+			},
+			"manufacturer": "Corsair",
+			"max-gpu-length": [
+				"370 mm / 14.567\""
+			],
+			"mb-form-factor": [
+				"ATX",
+				"Micro ATX",
+				"Mini ITX"
+			],
+			"model": "275R Airflow",
+			"psu": null,
+			"psu-shroud": true,
+			"side-panel": "Tempered Glass",
+			"type": "ATX Mid Tower",
+			"volume": [
+				"44.914 L",
+				"1.586 ft³"
+			]
+		},
+		{
+			"color": "Black",
+			"dimensions": [
+				"445 mm x 272 mm x 446 mm",
+				"17.52\" x 10.709\" x 17.559\""
+			],
+			"expansion-slots": {
+				"full-height": 8,
+				"half-height": 0
+			},
+			"front-panel-usb": [
+				"USB 3.2 Gen 2 Type-C",
+				"USB 3.2 Gen 1 Type-A"
+			],
+			"internal-drive-bays": {
+				"2.5": 4,
+				"3.5": 2
+			},
+			"manufacturer": "Lian Li",
+			"max-gpu-length": [
+				"420 mm / 16.535\""
+			],
+			"mb-form-factor": [
+				"ATX",
+				"EATX",
+				"Micro ATX",
+				"Mini ITX"
+			],
+			"model": "PC-O11DX",
+			"psu": null,
+			"psu-shroud": true,
+			"side-panel": "Tempered Glass",
+			"type": "ATX Full Tower",
+			"volume": [
+				"53.984 L",
+				"1.906 ft³"
 			]
 		}
 	],
