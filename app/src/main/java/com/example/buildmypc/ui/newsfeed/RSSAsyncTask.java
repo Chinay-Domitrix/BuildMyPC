@@ -34,11 +34,8 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 		ArticleXMLParser xmlParser;
 		JSONObject webpageObj = null;
 		try {
-			url = new URL(strings[0]);
-			connection = url.openConnection();
-			InputStream stream = connection.getInputStream();
 			String line;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(strings[0]).openConnection().getInputStream()));
 			while ((line = reader.readLine()) != null)
 				builder.append(line); // the total file, once this runs, is converted into a string and is accessible via "builder.toString();"
 		} catch (Exception e) {
