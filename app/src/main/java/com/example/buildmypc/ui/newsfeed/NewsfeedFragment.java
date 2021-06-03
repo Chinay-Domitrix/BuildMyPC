@@ -20,7 +20,7 @@ import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
-	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<Article>());
+	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
