@@ -686,101 +686,126 @@
 	],
 	"gpu": [
 		{
-			"manufacturer": "NVIDIA",
-			"model": "GeForce RTX 3070 Founders Edition",
+			"boost-clock-mhz": 1730,
 			"chipset": "GeForce RTX 3070",
+			"cooling": "2 Fans",
+			"core-clock-mhz": 1500,
+			"effective-memory-clock-mhz": 16000,
+			"expansion-slot-width": 2,
+			"external-power": "1 PCIe 12-pin",
+			"frame-sync": "G-Sync",
+			"interface": "PCIe x16",
+			"length-mm": 242,
+			"manufacturer": "NVIDIA",
 			"memory-gb": 8,
 			"memory-type": "GDDR6",
-			"core-clock-mhz": 1500,
-			"boost-clock-mhz": 1730,
-			"effective-memory-clock-mhz": 16000,
-			"interface": "PCIe x16",
-			"frame-sync": "G-Sync",
-			"length-mm": 242,
+			"model": "GeForce RTX 3070 Founders Edition",
 			"tdp-w": 220,
-			"ports": {
+			"video-ports": {
+				"dp": 3,
 				"dvi": 0,
 				"hdmi": 1,
-				"mini-hdmi": 0,
-				"dp": 3,
-				"mini-dp": 0
-			},
-			"expansion-slot-width": 2,
-			"cooling": "2 Fans",
-			"external-power": "1 PCIe 12-pin"
+				"mini-dp": 0,
+				"mini-hdmi": 0
+			}
 		},
 		{
-			"manufacturer": "EVGA",
-			"model": "GeForce RTX 3060 XC",
+			"boost-clock-mhz": 1882,
 			"chipset": "GeForce RTX 3060",
+			"cooling": "2 Fans",
+			"core-clock-mhz": 1320,
+			"effective-memory-clock-mhz": 15000,
+			"expansion-slot-width": 2,
+			"external-power": "1 PCIe 8-pin",
+			"frame-sync": "G-Sync",
+			"interface": "PCIe x16",
+			"length-mm": 201.8,
+			"manufacturer": "EVGA",
 			"memory-gb": 12,
 			"memory-type": "GDDR6",
-			"core-clock-mhz": 1320,
-			"boost-clock-mhz": 1882,
-			"effective-memory-clock-mhz": 15000,
-			"interface": "PCIe x16",
-			"frame-sync": "G-Sync",
-			"length-mm": 201.8,
+			"model": "GeForce RTX 3060 XC",
 			"tdp-w": 170,
-			"ports": {
+			"video-ports": {
+				"dp": 3,
 				"dvi": 0,
 				"hdmi": 1,
-				"mini-hdmi": 0,
-				"dp": 3,
-				"mini-dp": 0
-			},
-			"expansion-slot-width": 2,
-			"cooling": "2 Fans",
-			"external-power": "1 PCIe 8-pin"
+				"mini-dp": 0,
+				"mini-hdmi": 0
+			}
 		},
 		{
-			"manufacturer": "NVIDIA",
-			"model": "GeForce RTX 3080 Founders Edition",
+			"boost-clock-mhz": 1710,
 			"chipset": "GeForce RTX 3080",
+			"cooling": "2 Fans",
+			"core-clock-mhz": 1440,
+			"effective-memory-clock-mhz": 19000,
+			"expansion-slot-width": 2,
+			"external-power": "1 PCIe 12-pin",
+			"frame-sync": "G-Sync",
+			"interface": "PCIe x16",
+			"length-mm": 285,
+			"manufacturer": "NVIDIA",
 			"memory-gb": 10,
 			"memory-type": "GDDR6",
-			"core-clock-mhz": 1440,
-			"boost-clock-mhz": 1710,
-			"effective-memory-clock-mhz": 19000,
-			"interface": "PCIe x16",
-			"frame-sync": "G-Sync",
-			"length-mm": 285,
+			"model": "GeForce RTX 3080 Founders Edition",
 			"tdp-w": 320,
-			"ports": {
+			"video-ports": {
+				"dp": 3,
 				"dvi": 0,
 				"hdmi": 1,
-				"mini-hdmi": 0,
-				"dp": 3,
-				"mini-dp": 0
-			},
-			"expansion-slot-width": 2,
-			"cooling": "2 Fans",
-			"external-power": "1 PCIe 12-pin"
+				"mini-dp": 0,
+				"mini-hdmi": 0
+			}
 		},
 		{
-			"manufacturer": "Asus",
-			"model": "TUF-RTX3070-O8G-GAMING",
+			"boost-clock-mhz": 1845,
 			"chipset": "GeForce RTX 3070",
+			"cooling": "3 Fans",
+			"core-clock-mhz": 1500,
+			"effective-memory-clock-mhz": 14000,
+			"expansion-slot-width": 2,
+			"external-power": "2 PCIe 8-pin",
+			"frame-sync": "G-Sync",
+			"interface": "PCIe x16",
+			"length-mm": 299.9,
+			"manufacturer": "Asus",
 			"memory-gb": 8,
 			"memory-type": "GDDR6",
-			"core-clock-mhz": 1500,
-			"boost-clock-mhz": 1845,
-			"effective-memory-clock-mhz": 14000,
-			"interface": "PCIe x16",
-			"frame-sync": "G-Sync",
-			"length-mm": 285,
-			"tdp-w": 320,
-			"ports": {
-				"dvi": 0,
-				"hdmi": 1,
-				"mini-hdmi": 0,
+			"model": "TUF-RTX3070-O8G-GAMING",
+			"tdp-w": 220,
+			"video-ports": {
 				"dp": 3,
-				"mini-dp": 0
-			},
+				"dvi": 0,
+				"hdmi": 2,
+				"mini-dp": 0,
+				"mini-hdmi": 0
+			}
+		},
+		{
+			"boost-clock-mhz": 1392,
+			"chipset": "GeForce RTX 1050 Ti",
+			"cooling": "3 Fans",
+			"core-clock-mhz": 1290,
+			"effective-memory-clock-mhz": 7008,
 			"expansion-slot-width": 2,
-			"cooling": "2 Fans",
-			"external-power": "1 PCIe 12-pin"
+			"external-power": "2 PCIe 8-pin",
+			"frame-sync": "G-Sync",
+			"interface": "PCIe x16",
+			"length-mm": 192,
+			"manufacturer": "Asus",
+			"memory-gb": 4,
+			"memory-type": "GDDR5",
+			"model": "PH-GTX1050TI-4G",
+			"tdp-w": 75,
+			"video-ports": {
+				"dp": 1,
+				"dvi": 1,
+				"hdmi": 1,
+				"mini-dp": 0,
+				"mini-hdmi": 0
+			}
 		}
+
 	],
 	"case": [
 		{
