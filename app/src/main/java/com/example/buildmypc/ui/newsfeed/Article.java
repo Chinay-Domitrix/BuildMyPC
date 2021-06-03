@@ -86,5 +86,4 @@ public class Article {
 	public void setFormat(SimpleDateFormat format) {
 		this.format = format;
 	}
-
 }
