@@ -29,33 +29,11 @@ public class NewsfeedFragment extends Fragment {
 		TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		Button button = binding.newsfeedFragButton;
-
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				button.setClickable(false);
-				button.setEnabled(false);
-				RSSAsyncTask backgroundTask = new RSSAsyncTask();
-				backgroundTask.execute("https://www.techmeme.com/feed.xml", "Techmeme");
-				backgroundTask.execute("https://www.theverge.com/rss/index.xml", "The Verge");
-				backgroundTask.execute("https://www.wired.com/feed", "WIRED");
-				backgroundTask.execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes");
-				backgroundTask.execute("https://www.engadget.com/rss.xml", "Engadget");
-			}
+		button.setOnClickListener(v -> {
+			button.setClickable(false);
+			button.setEnabled(false);
+			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme").execute("https://www.theverge.com/rss/index.xml", "The Verge").execute("https://www.wired.com/feed", "WIRED").execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes").execute("https://www.engadget.com/rss.xml", "Engadget");
 		});
-
-//		// TODO ---------- parsing newsfeeds
-//
-//		ArrayList<Article> finalArticleList = new ArrayList<Article>();
-//		RSSAsyncTask backgroundTask = new RSSAsyncTask();
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.techmeme.com/feed.xml", "Techmeme"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.theverge.com/rss/index.xml", "The Verge"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.wired.com/feed", "WIRED"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.engadget.com/rss.xml", "Engadget"));
-
-
-		// ending return
 		return root;
 	}
 
