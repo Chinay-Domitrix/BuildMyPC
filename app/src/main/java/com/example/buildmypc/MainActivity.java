@@ -42,16 +42,13 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(binding.getRoot());
 		setSupportActionBar(binding.appBarMain.toolbar);
 		binding.appBarMain.fab.setOnClickListener(view -> make(view, "Replace with your own action", LENGTH_LONG).setAction("Action", null).show());
-		// Passing each menu ID as a set of IDs because each menu should be considered as top-level destinations.
+//		Passing each menu ID as a set of IDs because each menu should be considered as top-level destinations.
 		mAppBarConfiguration = new Builder(nav_home, nav_gallery, nav_newsfeed).setOpenableLayout(binding.drawerLayout).build();
 		NavController navController = findNavController(this, nav_host_fragment_content_main);
 		setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 		setupWithNavController(binding.navView, navController);
 		try {
-			StringBuilder jsonRaw = new StringBuilder();
-			Scanner scanner = new Scanner(new File("com/example/buildmypc/part_data.json"));
-			while (scanner.hasNextLine()) jsonRaw.append(scanner.nextLine().trim());
-			parts.set(new JSONObject(jsonRaw.toString()));
+			parts.set(new JSONObject(new Scanner(new File("com/example/buildmypc/part_data.json")).nextLine().trim()));
 		} catch (FileNotFoundException | JSONException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+//		Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(main, menu);
 		return true;
 	}
