@@ -14,8 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
@@ -35,12 +37,22 @@ public class NewsfeedFragment extends Fragment {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		((Activity) (root.getContext())).requestPermissions(new String[]{Manifest.permission.INTERNET}, 0);
+		RecyclerView recyclerView = binding.newsfeedRecyclerView;
 		Button button = binding.newsfeedFragButton;
 		button.setOnClickListener(v -> {
 			button.setClickable(false);
 			button.setEnabled(false);
-			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme").execute("https://www.theverge.com/rss/index.xml", "The Verge").execute("https://www.wired.com/feed", "WIRED").execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes").execute("https://www.engadget.com/rss.xml", "Engadget");
+			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme");
+			new RSSAsyncTask().execute("https://www.theverge.com/rss/index.xml", "The Verge");
+			new RSSAsyncTask().execute("https://www.wired.com/feed", "WIRED");
+			new RSSAsyncTask().execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", "NYTimes");
+			new RSSAsyncTask().execute("https://www.engadget.com/rss.xml", "Engadget");
 		});
+
+		RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), finalArticleList.get());
+		recyclerView.setAdapter(adapter);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 		return root;
 	}
 
@@ -62,18 +74,22 @@ public class NewsfeedFragment extends Fragment {
 		@NonNull
 		@Override
 		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-			return null;
+			// inflate xml here
+			View view = LayoutInflater.from(parentContext).inflate(R.layout.layout_newsfeed_list, parent, false);
+			RecyclerViewHolder holder = new RecyclerViewHolder(view);
+			return holder;
 		}
 
 		@Override
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method were info is set for EACH individual layout element for each list entry
 			Article currentEntry = articleViewList.get(position);
+//			holder.image.setDra
 		}
 
 		@Override
 		public int getItemCount() {
-			return 0;
+			return articleViewList.size();
 		}
 
 		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
