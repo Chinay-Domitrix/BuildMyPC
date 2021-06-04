@@ -35,22 +35,12 @@ public class NewsfeedFragment extends Fragment {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		((Activity) (root.getContext())).requestPermissions(new String[]{Manifest.permission.INTERNET}, 0);
-//		TextView textView = binding.textSlideshow;
-//		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		Button button = binding.newsfeedFragButton;
 		button.setOnClickListener(v -> {
 			button.setClickable(false);
 			button.setEnabled(false);
 			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme").execute("https://www.theverge.com/rss/index.xml", "The Verge").execute("https://www.wired.com/feed", "WIRED").execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes").execute("https://www.engadget.com/rss.xml", "Engadget");
 		});
-//		ArrayList<Article> finalArticleList = new ArrayList<Article>();
-//		RSSAsyncTask backgroundTask = new RSSAsyncTask();
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.techmeme.com/feed.xml", "Techmeme"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.theverge.com/rss/index.xml", "The Verge"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.wired.com/feed", "WIRED"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes"));
-//		finalArticleList.addAll(backgroundTask.doInBackground("https://www.engadget.com/rss.xml", "Engadget"));
-		// ending return
 		return root;
 	}
 
