@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static android.util.Log.d;
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 		setupWithNavController(binding.navView, navController);
 		try {
 			parts.set(new JSONObject(getString(parts_list)));
-			d("OOG", "works");
-			d("oog", parts.get().toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
