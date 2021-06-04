@@ -1131,6 +1131,159 @@
 		}
 	],
 	"monitor": [
-
+		{
+			"aspect-ratio": "16:9",
+			"brightness-cd-per-sq-m": 1000,
+			"curved-screen": false,
+			"frame-sync": [
+				"G-Sync Ultimate"
+			],
+			"hdr-tier": "HDR 1000",
+			"inbuilt-speakers": true,
+			"interface": [
+				{
+					"name": "HDMI",
+					"quantity": 4
+				},
+				{
+					"name": "DisplayPort",
+					"quantity": 1
+				}
+			],
+			"manufacturer": "Asus",
+			"model": "ROG Swift PG65UQ",
+			"panel-type": "VA",
+			"refresh-rate-hz": 144,
+			"resolution": "3840 x 2160",
+			"response-time-ms": 4,
+			"screen-size-in": 64.5,
+			"viewing-angle": "178° H x 178° V",
+			"widescreen": true
+		},
+		{
+			"aspect-ratio": "16:9",
+			"brightness-cd-per-sq-m": 250,
+			"curved-screen": false,
+			"frame-sync": [
+				"FreeSync"
+			],
+			"hdr-tier": null,
+			"inbuilt-speakers": false,
+			"interface": [
+				{
+					"name": "HDMI",
+					"quantity": 2
+				},
+				{
+					"name": "DisplayPort",
+					"quantity": 1
+				}
+			],
+			"manufacturer": "MSI",
+			"model": "Optix G241",
+			"panel-type": "IPS",
+			"refresh-rate-hz": 144,
+			"resolution": "1920 x 1080",
+			"response-time-ms": 1,
+			"screen-size-in": 23.8,
+			"viewing-angle": "178° H x 178° V",
+			"widescreen": true
+		},
+		{
+			"aspect-ratio": "16:9",
+			"brightness-cd-per-sq-m": 250,
+			"curved-screen": true,
+			"frame-sync": [
+				"FreeSync"
+			],
+			"hdr-tier": null,
+			"inbuilt-speakers": false,
+			"interface": [
+				{
+					"name": "HDMI",
+					"quantity": 2
+				},
+				{
+					"name": "VGA",
+					"quantity": 1
+				},
+				{
+					"name": "DisplayPort",
+					"quantity": 1
+				}
+			],
+			"manufacturer": "AOC",
+			"model": "C241G",
+			"panel-type": "VA",
+			"refresh-rate-hz": 144,
+			"resolution": "1920 x 1080",
+			"response-time-ms": 1,
+			"screen-size-in": 24,
+			"viewing-angle": "178° H x 178° V",
+			"widescreen": true
+		},
+		{
+			"aspect-ratio": "16:9",
+			"brightness-cd-per-sq-m": 400,
+			"curved-screen": false,
+			"frame-sync": [
+				"G-Sync"
+			],
+			"hdr-tier": null,
+			"inbuilt-speakers": false,
+			"interface": [
+				{
+					"name": "HDMI",
+					"quantity": 1
+				},
+				{
+					"name": "DisplayPort",
+					"quantity": 1
+				}
+			],
+			"manufacturer": "Asus",
+			"model": "ROG Swift PG259QN",
+			"panel-type": "IPS",
+			"refresh-rate-hz": 360,
+			"resolution": "1920 x 1080",
+			"response-time-ms": 1,
+			"screen-size-in": 24.5,
+			"viewing-angle": "178° H x 178° V",
+			"widescreen": true
+		},
+		{
+			"aspect-ratio": "16:9",
+			"brightness-cd-per-sq-m": 350,
+			"curved-screen": false,
+			"frame-sync": [
+				"FreeSync",
+				"G-Sync Compatible"
+			],
+			"hdr-tier": null,
+			"inbuilt-speakers": true,
+			"interface": [
+				{
+					"name": "HDMI",
+					"quantity": 1
+				},
+				{
+					"name": "DVI-D Dual-Link",
+					"quantity": 1
+				},
+				{
+					"name": "DisplayPort",
+					"quantity": 1
+				}
+			],
+			"manufacturer": "Asus",
+			"model": "VG248QG",
+			"panel-type": "TN",
+			"refresh-rate-hz": 165,
+			"resolution": "1920 x 1080",
+			"response-time-ms": 0.5,
+			"screen-size-in": 24,
+			"viewing-angle": "170° H x 160° V",
+			"widescreen": true
+		}
 	]
 }
