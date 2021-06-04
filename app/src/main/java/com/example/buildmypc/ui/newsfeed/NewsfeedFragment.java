@@ -28,7 +28,7 @@ import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
 	private FragmentNewsfeedBinding binding;
-	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<Article>());
+	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
@@ -38,20 +38,11 @@ public class NewsfeedFragment extends Fragment {
 //		TextView textView = binding.textSlideshow;
 //		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		Button button = binding.newsfeedFragButton;
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				button.setClickable(false);
-				button.setEnabled(false);
-				RSSAsyncTask backgroundTask = new RSSAsyncTask();
-				backgroundTask.execute("https://www.techmeme.com/feed.xml", "Techmeme");
-				backgroundTask.execute("https://www.theverge.com/rss/index.xml", "The Verge");
-				backgroundTask.execute("https://www.wired.com/feed", "WIRED");
-				backgroundTask.execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes");
-				backgroundTask.execute("https://www.engadget.com/rss.xml", "Engadget");
-			}
+		button.setOnClickListener(v -> {
+			button.setClickable(false);
+			button.setEnabled(false);
+			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme").execute("https://www.theverge.com/rss/index.xml", "The Verge").execute("https://www.wired.com/feed", "WIRED").execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes").execute("https://www.engadget.com/rss.xml", "Engadget");
 		});
-
 //		ArrayList<Article> finalArticleList = new ArrayList<Article>();
 //		RSSAsyncTask backgroundTask = new RSSAsyncTask();
 //		finalArticleList.addAll(backgroundTask.doInBackground("https://www.techmeme.com/feed.xml", "Techmeme"));
@@ -59,8 +50,6 @@ public class NewsfeedFragment extends Fragment {
 //		finalArticleList.addAll(backgroundTask.doInBackground("https://www.wired.com/feed", "WIRED"));
 //		finalArticleList.addAll(backgroundTask.doInBackground("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml\n", "NYTimes"));
 //		finalArticleList.addAll(backgroundTask.doInBackground("https://www.engadget.com/rss.xml", "Engadget"));
-
-
 		// ending return
 		return root;
 	}
@@ -72,17 +61,15 @@ public class NewsfeedFragment extends Fragment {
 	}
 
 	public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
-
 		Context parentContext;
 		ArrayList<Article> articleViewList;
 
-		public RecyclerViewAdapter(Context c, ArrayList<Article> arr){
+		public RecyclerViewAdapter(Context c, ArrayList<Article> arr) {
 			parentContext = c;
 			articleViewList = arr;
 		}
 
 		@NonNull
-		@NotNull
 		@Override
 		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			return null;
@@ -100,22 +87,19 @@ public class NewsfeedFragment extends Fragment {
 		}
 
 		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-
 			ImageView image;
 			TextView title;
 			TextView desc;
 			TextView dateAndPublisher;
 
-			public RecyclerViewHolder(@NonNull View itemView){
+			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
-
 				// this is where the findViewById stuff goes for each element, and only the findViewByID
 				image = itemView.findViewById(R.id.newslist_imageView);
 				title = itemView.findViewById(R.id.newslist_titleTextView);
 				desc = itemView.findViewById(R.id.newslist_descTextView);
 				dateAndPublisher = itemView.findViewById(R.id.newslist_publisherTextView);
 			}
-
 		}
 	}
 }
