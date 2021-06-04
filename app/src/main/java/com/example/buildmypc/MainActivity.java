@@ -8,13 +8,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static android.util.Log.d;
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
@@ -33,6 +33,7 @@ import static com.google.android.material.snackbar.Snackbar.make;
 public class MainActivity extends AppCompatActivity {
 	private AppBarConfiguration mAppBarConfiguration;
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
+	static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(FirebaseDatabase.getInstance());
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
