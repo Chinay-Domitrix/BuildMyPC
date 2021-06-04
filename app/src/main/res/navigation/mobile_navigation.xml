@@ -6,12 +6,12 @@
 	app:startDestination="@+id/nav_home">
 	<fragment
 		android:id="@+id/nav_home"
-		android:name="com.example.buildmypc.ui.home.HomeFragment"
+		android:name="com.example.buildmypc.ui.build.BuildFragment"
 		android:label="@string/menu_home"
 		tools:layout="@layout/fragment_home" />
 	<fragment
 		android:id="@+id/nav_gallery"
-		android:name="com.example.buildmypc.ui.gallery.GalleryFragment"
+		android:name="com.example.buildmypc.ui.parts.PartsFragment"
 		android:label="@string/menu_gallery"
 		tools:layout="@layout/fragment_gallery" />
 	<fragment

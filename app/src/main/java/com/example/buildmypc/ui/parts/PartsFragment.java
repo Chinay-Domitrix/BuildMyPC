@@ -1,4 +1,4 @@
-package com.example.buildmypc.ui.home;
+package com.example.buildmypc.ui.parts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,19 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.buildmypc.databinding.FragmentHomeBinding;
+import com.example.buildmypc.databinding.FragmentGalleryBinding;
 
-import static com.example.buildmypc.databinding.FragmentHomeBinding.*;
+import static com.example.buildmypc.databinding.FragmentGalleryBinding.*;
 
-public class HomeFragment extends Fragment {
-	private FragmentHomeBinding binding;
+public class PartsFragment extends Fragment {
+	private FragmentGalleryBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+		PartsViewModel partsViewModel = new ViewModelProvider(this).get(PartsViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		final TextView textView = binding.textHome;
-		homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+		final TextView textView = binding.textGallery;
+		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
 

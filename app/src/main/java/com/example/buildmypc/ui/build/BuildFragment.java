@@ -1,4 +1,4 @@
-package com.example.buildmypc.ui.gallery;
+package com.example.buildmypc.ui.build;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,19 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.buildmypc.databinding.FragmentGalleryBinding;
+import com.example.buildmypc.databinding.FragmentHomeBinding;
 
-import static com.example.buildmypc.databinding.FragmentGalleryBinding.*;
+import static com.example.buildmypc.databinding.FragmentHomeBinding.*;
 
-public class GalleryFragment extends Fragment {
-	private FragmentGalleryBinding binding;
+public class BuildFragment extends Fragment {
+	private FragmentHomeBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
+		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		final TextView textView = binding.textGallery;
-		galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+		final TextView textView = binding.textHome;
+		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
 

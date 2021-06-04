@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "153723359360",
+    "project_id": "buildmypc-ac8c3",
+    "storage_bucket": "buildmypc-ac8c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153723359360:android:ab6266d136a7c09b8f5665",
+        "android_client_info": {
+          "package_name": "com.example.buildmypc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153723359360-fq6kkp887fn0a101vbt5amlui7cacn33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWvSSeSkgwCogaNBb8GMa-9xHJGfSytSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153723359360-fq6kkp887fn0a101vbt5amlui7cacn33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
