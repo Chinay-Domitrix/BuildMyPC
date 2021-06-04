@@ -1,5 +1,7 @@
 package com.example.buildmypc.ui.newsfeed;
 
+import android.Manifest;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class NewsfeedFragment extends Fragment {
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
+		((Activity) (root.getContext())).requestPermissions(new String[]{Manifest.permission.INTERNET}, 0);
 		TextView textView = binding.textSlideshow;
 		newsfeedViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		Button button = binding.newsfeedFragButton;
