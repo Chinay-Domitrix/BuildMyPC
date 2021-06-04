@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static android.util.Log.d;
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
@@ -29,11 +30,12 @@ import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
+import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class MainActivity extends AppCompatActivity {
 	private AppBarConfiguration mAppBarConfiguration;
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
-	static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(FirebaseDatabase.getInstance());
+	static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 	}
 
 	@Override
