@@ -1,6 +1,6 @@
 package com.example.buildmypc.ui;
 
-public class Storage extends InternalPart {
+public class StorageComp extends InternalPart {
 
 	private int cacheSizeMb; // in mb
 	private int capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
@@ -10,7 +10,7 @@ public class Storage extends InternalPart {
 	private int rpm; // only applies for HDDs
 	private String type; // either HDD or SSD
 
-	public Storage(String model, String manufacturer, Boolean hasEcc) {
+	public StorageComp(String model, String manufacturer, Boolean hasEcc) {
 		super(model, manufacturer, hasEcc);
 	}
 

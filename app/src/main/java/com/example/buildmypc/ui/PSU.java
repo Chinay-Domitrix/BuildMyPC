@@ -2,7 +2,7 @@ package com.example.buildmypc.ui;
 
 import java.util.ArrayList;
 
-public class PCU extends InternalPart { // stands for "Portable Communication Unit"
+public class PSU extends InternalPart { // stands for "Portable Communication Unit"
 
 	private ArrayList<Connector> connectorList;
 	private String efficiencyRating;
@@ -12,7 +12,7 @@ public class PCU extends InternalPart { // stands for "Portable Communication Un
 	private String modular;
 	private int wattage;
 
-	public PCU(String model, String manufacturer, Boolean hasEcc) {
+	public PSU(String model, String manufacturer, Boolean hasEcc) {
 		super(model, manufacturer, hasEcc);
 	}
 
