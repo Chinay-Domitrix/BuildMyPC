@@ -1,31 +1,25 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static com.example.buildmypc.databinding.FragmentHomeBinding.*;
+import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
 public class BuildFragment extends Fragment {
 	private FragmentHomeBinding binding;
@@ -70,7 +64,7 @@ public class BuildFragment extends Fragment {
 		private LayoutInflater inflater;
 		private ArrayList<?> list;
 
-		public GridAdapter(Context c, ArrayList<> l){
+		public GridAdapter(Context c, ArrayList<?> l){
 			context = c;
 			list = l;
 		}
