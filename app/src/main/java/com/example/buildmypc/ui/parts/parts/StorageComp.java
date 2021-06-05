@@ -46,11 +46,11 @@ public class StorageComp extends InternalPart {
 		this.sataInterface = sataInterface;
 	}
 
-	public double getNvme() {
+	public boolean getNvme() {
 		return nvme;
 	}
 
-	public void setNvme(double nvme) {
+	public void setNvme(boolean nvme) {
 		this.nvme = nvme;
 	}
 
