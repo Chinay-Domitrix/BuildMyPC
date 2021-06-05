@@ -78,7 +78,7 @@ public class BuildFragment extends Fragment {
 
 		@Override
 		public Object getItem(int position) {
-			return null;
+			return list.get(position);
 		}
 
 		@Override
@@ -101,7 +101,7 @@ public class BuildFragment extends Fragment {
 			imageView.setImageDrawable(currentBuild.getLogo());
 			titleTextView.setText(currentBuild.getName());
 
-			return null;
+			return convertView;
 		}
 	}
 
