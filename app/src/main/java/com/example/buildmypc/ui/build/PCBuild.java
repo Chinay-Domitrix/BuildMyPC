@@ -1,6 +1,13 @@
 package com.example.buildmypc.ui.build;
 
-import com.example.buildmypc.ui.*; // every part type
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
+import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.StorageComp;
 
 import java.util.ArrayList;
 
@@ -13,7 +20,7 @@ public class PCBuild {
 	private Monitor monitor;
 	private Motherboard motherboard;
 	private OS os;
-	private PSU PSU;
+	private com.example.buildmypc.ui.parts.parts.PSU PSU;
 	private StorageComp storageComp;
 	private ArrayList<Part> extraParts; // for all of your extra part needs (this won't be explicitly checked against, will possibly be a dropdown menu)
 
