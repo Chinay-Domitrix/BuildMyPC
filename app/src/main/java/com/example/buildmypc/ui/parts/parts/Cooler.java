@@ -15,6 +15,12 @@ public final class Cooler {
 	public Cooler(String model, String manufacturer){
 		this.model = model;
 		this.manufacturer = manufacturer;
+		this.rpm = null;
+		this.noiseLevel = null;
+		this.height = -1;
+		this.socketSupport = null;
+		this.waterCooled = false;
+		this.fanless = false;
 	}
 
 	public Cooler(String model, String manufacturer, String rpm, String noiseLevel, int height, String[] socketSupport, boolean waterCooled, boolean fanless) {
