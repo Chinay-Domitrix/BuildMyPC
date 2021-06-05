@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class PCBuild {
 
+	private String name;
 	private Drawable logo;
 
 	private Cooler cooler;
@@ -33,7 +34,8 @@ public class PCBuild {
 	public PCBuild() {
 	}
 
-	public PCBuild(Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, StorageComp storageComp, ArrayList<Part> extraParts) {
+	public PCBuild(String name, Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, StorageComp storageComp, ArrayList<Part> extraParts) {
+		this.name = name;
 		this.logo = logo;
 		this.cooler = cooler;
 		this.cpu = cpu;
@@ -133,5 +135,13 @@ public class PCBuild {
 
 	public void setLogo(Drawable logo) {
 		this.logo = logo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

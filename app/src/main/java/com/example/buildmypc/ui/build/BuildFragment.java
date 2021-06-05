@@ -94,6 +94,9 @@ public class BuildFragment extends Fragment {
 			ImageView imageView = convertView.findViewById(R.id.gridView_imageView);
 			TextView titleTextView = convertView.findViewById(R.id.gridView_textView);
 
+			imageView.setImageDrawable(currentBuild.getLogo());
+			titleTextView.setText(currentBuild.getName());
+
 			return null;
 		}
 	}
@@ -107,6 +110,7 @@ public class BuildFragment extends Fragment {
 
 		public Prebuilds() {
 			builds.add(new PCBuild(
+					"Build 1",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
@@ -120,6 +124,7 @@ public class BuildFragment extends Fragment {
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
+					"Build 2",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
@@ -133,6 +138,7 @@ public class BuildFragment extends Fragment {
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
+					"Build 3",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
@@ -146,6 +152,7 @@ public class BuildFragment extends Fragment {
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
+					"Build 4",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
@@ -159,6 +166,7 @@ public class BuildFragment extends Fragment {
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
+					"Build 5",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
@@ -172,6 +180,7 @@ public class BuildFragment extends Fragment {
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
+					"Build 6",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
