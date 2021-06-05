@@ -30,4 +30,22 @@ public class Part {
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Part part = (Part) o;
+
+		if (!getModel().equals(part.getModel())) return false;
+		return getManufacturer().equals(part.getManufacturer());
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getModel().hashCode();
+		result = 31 * result + getManufacturer().hashCode();
+		return result;
+	}
 }

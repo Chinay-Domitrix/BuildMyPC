@@ -80,6 +80,7 @@ public final class Cooler {
 		if (!getModel().equals(cooler.getModel())) return false;
 		if (getRpm() != null ? !getRpm().equals(cooler.getRpm()) : cooler.getRpm() != null)
 			return false;
+		assert getNoiseLevel() != null;
 		if (!getNoiseLevel().equals(cooler.getNoiseLevel())) return false;
 		// Probably incorrect - comparing Object[] arrays with Arrays.equals
 		return Arrays.equals(getSocketSupport(), cooler.getSocketSupport());
