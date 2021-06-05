@@ -1,5 +1,7 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import java.util.Objects;
+
 import static java.lang.Double.compare;
 import static java.lang.Double.doubleToLongBits;
 import static java.util.Arrays.asList;
@@ -133,9 +135,10 @@ public final class CPU {
 				(isSmt() != cpu.isSmt()) ||
 				!getManufacturer().equals(cpu.getManufacturer()) ||
 				!getModel().equals(cpu.getModel()) ||
-				!getSeries().equals(cpu.getSeries()) ||
-				!getMicroarchitecture().equals(cpu.getMicroarchitecture()) ||
-				!getCoreFamily().equals(cpu.getCoreFamily())) return false;
+				!Objects.equals(getSeries(), cpu.getSeries()) ||
+				!Objects.equals(getMicroarchitecture(), cpu.getMicroarchitecture()) ||
+				!Objects.equals(getCoreFamily(), cpu.getCoreFamily())) return false;
+		assert getSocket() != null;
 		return getSocket().equals(cpu.getSocket());
 	}
 
