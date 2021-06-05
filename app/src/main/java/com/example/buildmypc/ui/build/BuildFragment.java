@@ -39,23 +39,11 @@ public class BuildFragment extends Fragment {
 		View root = binding.getRoot();
 //		final TextView textView = binding.textHome;
 		GridView gridView = binding.buildfragGridView;
-
 //		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		// building myBuilds
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
-
 		GridAdapter adapter = new GridAdapter(getActivity(), displayedBuilds);
-
-		gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getContext(), "activated " + String.valueOf(position), Toast.LENGTH_SHORT).show();
-			}
-		});
-
-
-
-
+		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + String.valueOf(position), Toast.LENGTH_SHORT).show());
 		return root;
 	}
 
@@ -70,7 +58,7 @@ public class BuildFragment extends Fragment {
 		private LayoutInflater inflater;
 		private ArrayList<Part> list;
 
-		public GridAdapter(Context c, ArrayList<?> l) {
+		public GridAdapter(Context c, ArrayList<Part> l) {
 			context = c;
 			list = l;
 		}
