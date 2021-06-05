@@ -8,7 +8,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
+import com.example.buildmypc.ui.CPU;
+import com.example.buildmypc.ui.Cooler;
+import com.example.buildmypc.ui.GPU;
+import com.example.buildmypc.ui.Memory;
+import com.example.buildmypc.ui.Monitor;
+import com.example.buildmypc.ui.Motherboard;
+import com.example.buildmypc.ui.OS;
+import com.example.buildmypc.ui.PSU;
 import com.example.buildmypc.ui.Part;
+import com.example.buildmypc.ui.StorageComp;
+import com.example.buildmypc.ui.build.PCBuild;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
@@ -39,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 
+//	public ArrayList<PCBuild> preBuilds;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 
 		// the code to parse the JSON parts file into usable stuff
+
 
 	}
 

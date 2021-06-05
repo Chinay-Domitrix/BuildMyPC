@@ -13,7 +13,7 @@ public class Memory extends InternalPart {
 	private String timing;
 	private double voltage;
 
-	public Memory(String model, String manufacturer, boolean hasEcc) {
+	public Memory(String model, String manufacturer, Boolean hasEcc) {
 		super(model, manufacturer, hasEcc);
 	}
 

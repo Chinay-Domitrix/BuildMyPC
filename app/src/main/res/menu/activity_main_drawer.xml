@@ -3,10 +3,12 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:showIn="navigation_view">
 	<group android:checkableBehavior="single">
+		<!--"Home" is the root name of what is the Build fragment-->
 		<item
 			android:id="@+id/nav_home"
 			android:icon="@drawable/ic_menu_camera"
 			android:title="@string/menu_home" />
+		<!--"Gallery" is the root name of what is the Parts fragment-->
 		<item
 			android:id="@+id/nav_gallery"
 			android:icon="@drawable/ic_menu_gallery"
