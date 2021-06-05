@@ -2,7 +2,7 @@ package com.example.buildmypc.ui.parts.parts;
 
 import java.util.Arrays;
 
-public class Cooler {
+public final class Cooler {
 	private final String manufacturer;
 	private final String model;
 	private final String rpm;
