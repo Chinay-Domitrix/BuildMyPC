@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
 public class BuildFragment extends Fragment {
-	private FragmentHomeBinding binding;
 	ArrayList<PCBuild> displayedBuilds;
+	private FragmentHomeBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
@@ -34,7 +34,7 @@ public class BuildFragment extends Fragment {
 		// building myBuilds
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
 		GridAdapter adapter = new GridAdapter(getActivity(), displayedBuilds);
-		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + String.valueOf(position), Toast.LENGTH_SHORT).show());
+		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + position, Toast.LENGTH_SHORT).show());
 		return root;
 	}
 
@@ -45,9 +45,9 @@ public class BuildFragment extends Fragment {
 	}
 
 	private static class GridAdapter extends BaseAdapter {
-		private Context context;
+		private final Context context;
 		private LayoutInflater inflater;
-		private ArrayList<PCBuild> list;
+		private final ArrayList<PCBuild> list;
 
 		public GridAdapter(Context c, ArrayList<PCBuild> l) {
 			context = c;

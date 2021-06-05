@@ -12,7 +12,7 @@ public final class Cooler {
 	private final boolean waterCooled;
 	private final boolean fanless;
 
-	public Cooler(String model, String manufacturer){
+	public Cooler(String model, String manufacturer) {
 		this.model = model;
 		this.manufacturer = manufacturer;
 		this.rpm = null;

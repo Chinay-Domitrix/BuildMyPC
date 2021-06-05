@@ -42,6 +42,7 @@ public class PartsFragment extends Fragment {
 		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

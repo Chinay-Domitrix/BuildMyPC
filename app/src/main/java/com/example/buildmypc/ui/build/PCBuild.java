@@ -2,7 +2,16 @@ package com.example.buildmypc.ui.build;
 
 import android.graphics.drawable.Drawable;
 
-import com.example.buildmypc.ui.parts.parts.*;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
+import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.StorageComp;
 
 import java.util.ArrayList;
 
@@ -21,7 +30,8 @@ public class PCBuild {
 	private StorageComp storageComp;
 	private ArrayList<Part> extraParts; // for all of your extra part needs (this won't be explicitly checked against, will possibly be a dropdown menu)
 
-	public PCBuild(){}
+	public PCBuild() {
+	}
 
 	public PCBuild(Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, StorageComp storageComp, ArrayList<Part> extraParts) {
 		this.logo = logo;

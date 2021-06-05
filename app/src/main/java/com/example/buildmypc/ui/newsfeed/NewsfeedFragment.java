@@ -3,7 +3,6 @@ package com.example.buildmypc.ui.newsfeed;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
@@ -34,8 +32,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 
 public class NewsfeedFragment extends Fragment {
-	private FragmentNewsfeedBinding binding;
 	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
+	private FragmentNewsfeedBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// jank testing of finalArticleList actually being used in the RecyclerView
