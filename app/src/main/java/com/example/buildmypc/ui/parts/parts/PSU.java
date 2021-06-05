@@ -72,7 +72,7 @@ public class PSU extends InternalPart { // stands for "Portable Communication Un
 		this.wattage = wattage;
 	}
 
-	public class Connector{
+	public class Connector {
 
 		private String name;
 		private int count;
@@ -86,6 +86,7 @@ public class PSU extends InternalPart { // stands for "Portable Communication Un
 		public String getName() {
 			return name;
 		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -93,6 +94,7 @@ public class PSU extends InternalPart { // stands for "Portable Communication Un
 		public int getCount() {
 			return count;
 		}
+
 		public void setCount(int count) {
 			this.count = count;
 		}

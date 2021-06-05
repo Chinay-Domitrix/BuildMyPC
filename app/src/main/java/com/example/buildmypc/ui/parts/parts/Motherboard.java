@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Motherboard extends InternalPart {
 
 	private String chipset;
-//	private boolean hasEcc; // has error correction coding (all chips should tbh)
+	//	private boolean hasEcc; // has error correction coding (all chips should tbh)
 	private String formFactor;
 	private ArrayList<String> m2slots; // no clue what this is
 	private int maxMemSupport;
@@ -155,10 +155,10 @@ public class Motherboard extends InternalPart {
 	}
 
 	public class pciSlot {
-		private String name;
-		private int count;
+		private final String name;
+		private final int count;
 
-		public pciSlot(String name, int count){
+		public pciSlot(String name, int count) {
 			this.name = name;
 			this.count = count;
 		}

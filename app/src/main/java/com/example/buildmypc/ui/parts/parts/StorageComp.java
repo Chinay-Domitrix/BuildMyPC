@@ -2,9 +2,9 @@ package com.example.buildmypc.ui.parts.parts;
 
 public class StorageComp extends InternalPart {
 
+	double formFactor;
 	private int cacheSizeMb; // in mb
 	private int capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
-	double formFactor;
 	private String sataInterface; // which SATA does this part connect to
 	private double nvme; // NMVe, or non-volatile memory express
 	private int rpm; // only applies for HDDs

@@ -135,7 +135,7 @@ public class Monitor extends ExternalPart {
 		isWidescreen = widescreen;
 	}
 
-	public class MonitorInterface{
+	public class MonitorInterface {
 		private String name;
 		private String count;
 
