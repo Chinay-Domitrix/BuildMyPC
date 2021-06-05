@@ -1,29 +1,21 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
-import com.example.buildmypc.ui.parts.parts.Part;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
@@ -56,9 +48,9 @@ public class BuildFragment extends Fragment {
 	private static class GridAdapter extends BaseAdapter {
 		private Context context;
 		private LayoutInflater inflater;
-		private ArrayList<Part> list;
+		private ArrayList<PCBuild> list;
 
-		public GridAdapter(Context c, ArrayList<Part> l) {
+		public GridAdapter(Context c, ArrayList<PCBuild> l) {
 			context = c;
 			list = l;
 		}
@@ -80,13 +72,12 @@ public class BuildFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			if(inflater == null){
+			if (inflater == null) {
 				inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			}
-			if(convertView == null){
+			if (convertView == null) {
 				convertView = inflater.inflate(R.layout.row_item, null);
 			}
-
 			// do stuff here
 			return null;
 		}
