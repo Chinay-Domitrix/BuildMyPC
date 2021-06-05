@@ -72,11 +72,9 @@ public class PSU extends InternalPart { // stands for "Portable Communication Un
 		this.wattage = wattage;
 	}
 
-	public class Connector {
-
+	public static class Connector {
 		private String name;
 		private int count;
-
 
 		public Connector(String name, int count) {
 			this.name = name;
