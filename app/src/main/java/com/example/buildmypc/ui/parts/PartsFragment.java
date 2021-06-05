@@ -11,8 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentGalleryBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import static com.example.buildmypc.databinding.FragmentGalleryBinding.*;
+import static com.example.buildmypc.MainActivity.database;
+import static com.example.buildmypc.databinding.FragmentGalleryBinding.inflate;
 
 public class PartsFragment extends Fragment {
 	private FragmentGalleryBinding binding;
@@ -22,10 +25,23 @@ public class PartsFragment extends Fragment {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		final TextView textView = binding.textGallery;
+		FirebaseDatabase firebaseDatabase = database.get();
+		DatabaseReference cpu = firebaseDatabase.getReference("cpu"),
+				cooler = firebaseDatabase.getReference("cooler"),
+				motherboard = firebaseDatabase.getReference("motherboard"),
+				memory = firebaseDatabase.getReference("memory"),
+				storage = firebaseDatabase.getReference("storage"),
+				gpu = firebaseDatabase.getReference("gpu"),
+				pcCase = firebaseDatabase.getReference("case"),
+				psu = firebaseDatabase.getReference("psu"),
+				os = firebaseDatabase.getReference("os"),
+				monitor = firebaseDatabase.getReference("monitor");
+		new Thread() {
+
+		}.start();
 		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
-
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
