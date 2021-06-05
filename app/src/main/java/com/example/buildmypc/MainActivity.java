@@ -47,7 +47,7 @@ import static com.google.firebase.database.FirebaseDatabase.getInstance;
 public class MainActivity extends AppCompatActivity {
 	private AppBarConfiguration mAppBarConfiguration;
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
-	static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
+	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 
 //	public ArrayList<PCBuild> preBuilds;
 
