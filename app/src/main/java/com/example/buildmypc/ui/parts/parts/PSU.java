@@ -12,8 +12,8 @@ public class PSU extends InternalPart { // stands for "Portable Communication Un
 	private String modular;
 	private int wattage;
 
-	public PSU(String model, String manufacturer, Boolean hasEcc) {
-		super(model, manufacturer, hasEcc);
+	public PSU(String model, String manufacturer) {
+		super(model, manufacturer);
 	}
 
 	public ArrayList<Connector> getConnectorList() {

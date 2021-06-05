@@ -2,18 +2,18 @@ package com.example.buildmypc.ui.parts.parts;
 
 public class InternalPart extends Part {
 
-	private boolean hasEcc;
+//	private boolean hasEcc;
 
-	public InternalPart(String model, String manufacturer, Boolean hasEcc) {
+	public InternalPart(String model, String manufacturer) {
 		super(model, manufacturer);
-		this.hasEcc = hasEcc;
+//		this.hasEcc = hasEcc;
 	}
 
-	public boolean isHasEcc() {
-		return hasEcc;
-	}
-
-	public void setHasEcc(boolean hasEcc) {
-		this.hasEcc = hasEcc;
-	}
+//	public boolean isHasEcc() {
+//		return hasEcc;
+//	}
+//
+//	public void setHasEcc(boolean hasEcc) {
+//		this.hasEcc = hasEcc;
+//	}
 }

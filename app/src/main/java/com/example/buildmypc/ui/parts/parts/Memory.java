@@ -2,6 +2,7 @@ package com.example.buildmypc.ui.parts.parts;
 
 public class Memory extends InternalPart {
 
+	private double hasECC;
 	private int latencyCAS; // backwards to respect carrot case
 	private int ddrGen; // pretty much always 4
 	private int firstWordLatency; // in nanoseconds
@@ -13,8 +14,16 @@ public class Memory extends InternalPart {
 	private String timing;
 	private double voltage;
 
-	public Memory(String model, String manufacturer, Boolean hasEcc) {
-		super(model, manufacturer, hasEcc);
+	public Memory(String model, String manufacturer) {
+		super(model, manufacturer);
+	}
+
+	public double getHasECC() {
+		return hasECC;
+	}
+
+	public void setHasECC(double hasECC) {
+		this.hasECC = hasECC;
 	}
 
 	public int getLatencyCAS() {
@@ -96,4 +105,6 @@ public class Memory extends InternalPart {
 	public void setVoltage(double voltage) {
 		this.voltage = voltage;
 	}
+
+
 }
