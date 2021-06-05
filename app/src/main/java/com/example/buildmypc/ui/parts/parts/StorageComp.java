@@ -3,10 +3,10 @@ package com.example.buildmypc.ui.parts.parts;
 public class StorageComp extends InternalPart {
 
 	double formFactor;
-	private int cacheSizeMb; // in mb
+	private int cacheSizeMB; // in mb
 	private int capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
 	private String sataInterface; // which SATA does this part connect to
-	private double nvme; // NMVe, or non-volatile memory express
+	private boolean nvme; // NMVe, or non-volatile memory express
 	private int rpm; // only applies for HDDs
 	private String type; // either HDD or SSD
 
@@ -14,12 +14,12 @@ public class StorageComp extends InternalPart {
 		super(model, manufacturer, hasEcc);
 	}
 
-	public int getCacheSizeMb() {
-		return cacheSizeMb;
+	public int getCacheSizeMB() {
+		return cacheSizeMB;
 	}
 
-	public void setCacheSizeMb(int cacheSizeMb) {
-		this.cacheSizeMb = cacheSizeMb;
+	public void setCacheSizeMB(int cacheSizeMB) {
+		this.cacheSizeMB = cacheSizeMB;
 	}
 
 	public int getCapacity() {
