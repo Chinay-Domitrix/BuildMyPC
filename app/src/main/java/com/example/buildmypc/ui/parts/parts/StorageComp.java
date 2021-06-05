@@ -10,8 +10,8 @@ public class StorageComp extends InternalPart {
 	private int rpm; // only applies for HDDs
 	private String type; // either HDD or SSD
 
-	public StorageComp(String model, String manufacturer, Boolean hasEcc) {
-		super(model, manufacturer, hasEcc);
+	public StorageComp(String model, String manufacturer) {
+		super(model, manufacturer);
 	}
 
 	public int getCacheSizeMB() {

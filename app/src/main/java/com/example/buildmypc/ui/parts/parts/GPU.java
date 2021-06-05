@@ -19,8 +19,8 @@ public class GPU extends InternalPart { // the only important part for 12 year o
 	private int tdpW; // thermal design power wattage (how much of a beating the computer is usually able to take, measured in watts)
 	private ArrayList<String> videoPorts; // I don't wanna make a custom object for this if I need to implement parcelable eventually
 
-	public GPU(String model, String manufacturer, Boolean hasEcc) {
-		super(model, manufacturer, hasEcc);
+	public GPU(String model, String manufacturer) {
+		super(model, manufacturer);
 	}
 
 	public int getBoostClockSpeed() {
@@ -134,4 +134,5 @@ public class GPU extends InternalPart { // the only important part for 12 year o
 	public void setVideoPorts(ArrayList<String> videoPorts) {
 		this.videoPorts = videoPorts;
 	}
+
 }

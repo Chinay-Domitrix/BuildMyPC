@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Motherboard extends InternalPart {
 
+	private boolean ecc;
 	private String chipset;
 	//	private boolean hasEcc; // has error correction coding (all chips should tbh)
 	private String formFactor;
@@ -22,8 +23,16 @@ public class Motherboard extends InternalPart {
 	private int gen2USBcount; // I don't feel like making a new USB object to only be used once
 	private boolean isWireless;
 
-	public Motherboard(String model, String manufacturer, boolean hasEcc) {
-		super(model, manufacturer, hasEcc);
+	public Motherboard(String model, String manufacturer) {
+		super(model, manufacturer);
+	}
+
+	public boolean isEcc() {
+		return ecc;
+	}
+
+	public void setEcc(boolean ecc) {
+		this.ecc = ecc;
 	}
 
 	public String getChipset() {

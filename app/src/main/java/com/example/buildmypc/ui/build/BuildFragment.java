@@ -29,6 +29,7 @@ import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.StorageComp;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
@@ -44,7 +45,10 @@ public class BuildFragment extends Fragment {
 //		final TextView textView = binding.textHome;
 		GridView gridView = binding.buildfragGridView;
 //		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
 		// building myBuilds
+		displayedBuilds = new ArrayList<PCBuild>();
+//		Prebuilds prebuilds = new Prebuilds();
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
 		GridAdapter adapter = new GridAdapter(getActivity(), displayedBuilds);
 		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + position, Toast.LENGTH_SHORT).show());
@@ -74,7 +78,7 @@ public class BuildFragment extends Fragment {
 
 		@Override
 		public Object getItem(int position) {
-			return null;
+			return list.get(position);
 		}
 
 		@Override
@@ -97,7 +101,7 @@ public class BuildFragment extends Fragment {
 			imageView.setImageDrawable(currentBuild.getLogo());
 			titleTextView.setText(currentBuild.getName());
 
-			return null;
+			return convertView;
 		}
 	}
 
@@ -109,18 +113,19 @@ public class BuildFragment extends Fragment {
 		}
 
 		public Prebuilds() {
+			builds = new ArrayList<PCBuild>();
 			builds.add(new PCBuild(
 					"Build 1",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -128,13 +133,13 @@ public class BuildFragment extends Fragment {
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -142,13 +147,13 @@ public class BuildFragment extends Fragment {
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -156,13 +161,13 @@ public class BuildFragment extends Fragment {
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -170,13 +175,13 @@ public class BuildFragment extends Fragment {
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -184,13 +189,13 @@ public class BuildFragment extends Fragment {
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
-					new Memory("Vengeance LPX 16 GB", "Corsair", null),
+					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+					new Memory("Vengeance LPX 16 GB", "Corsair"),
 					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI", false),
+					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair", null),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate", null),
+					new PSU("RM750 (2019)", "Corsair"),
+					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 		}
