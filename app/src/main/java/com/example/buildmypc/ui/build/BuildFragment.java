@@ -68,7 +68,7 @@ public class BuildFragment extends Fragment {
 
 		private Context context;
 		private LayoutInflater inflater;
-		private ArrayList<> list;
+		private ArrayList<?> list;
 
 		public GridAdapter(Context c, ArrayList<> l){
 			context = c;
