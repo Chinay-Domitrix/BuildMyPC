@@ -21,9 +21,22 @@ public final class CPU {
 	private final boolean cooler;
 	private final boolean smt;
 
-	public CPU(String model, String manufacturer){
-		this.model = model;
+	public CPU(String manufacturer, String model) {
 		this.manufacturer = manufacturer;
+		this.model = model;
+		this.coreCount = -1;
+		this.coreClock = -1;
+		this.boostClock = -1;
+		this.tdp = -1;
+		this.series = null;
+		this.microarchitecture = null;
+		this.coreFamily = null;
+		this.socket = null;
+		this.iGPU = false;
+		this.maxMemory = -1;
+		this.ecc = false;
+		this.cooler = false;
+		this.smt = false;
 	}
 
 	public CPU(String manufacturer, String model, int coreCount, double coreClock, double boostClock, int tdp, String series, String microarchitecture, String coreFamily, String socket, boolean iGPU, int maxMemory, boolean ecc, boolean cooler, boolean smt) {
