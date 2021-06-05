@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -32,23 +31,11 @@ public class BuildFragment extends Fragment {
 		View root = binding.getRoot();
 //		final TextView textView = binding.textHome;
 		GridView gridView = binding.buildfragGridView;
-
 //		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		// building myBuilds
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
-
 		GridAdapter adapter = new GridAdapter(getActivity(), displayedBuilds);
-
-		gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getContext(), "activated " + String.valueOf(position), Toast.LENGTH_SHORT).show();
-			}
-		});
-
-
-
-
+		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + position, Toast.LENGTH_SHORT).show());
 		return root;
 	}
 
@@ -58,13 +45,12 @@ public class BuildFragment extends Fragment {
 		binding = null;
 	}
 
-	private class GridAdapter extends BaseAdapter {
-
+	private static class GridAdapter extends BaseAdapter {
 		private Context context;
 		private LayoutInflater inflater;
 		private ArrayList<?> list;
 
-		public GridAdapter(Context c, ArrayList<?> l){
+		public GridAdapter(Context c, ArrayList<?> l) {
 			context = c;
 			list = l;
 		}
@@ -86,12 +72,9 @@ public class BuildFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			if(inflater == null){
+			if (inflater == null)
 				inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			}
-			if(convertView == null){
-				convertView = inflater.inflate(R.layout.row_item, null);
-			}
+			if (convertView == null) convertView = inflater.inflate(R.layout.row_item, null);
 			return null;
 		}
 	}
