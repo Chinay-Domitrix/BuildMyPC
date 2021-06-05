@@ -1,15 +1,15 @@
 package com.example.buildmypc.ui.build;
 
-import com.example.buildmypc.ui.CPU;
-import com.example.buildmypc.ui.Cooler;
-import com.example.buildmypc.ui.GPU;
-import com.example.buildmypc.ui.Memory;
-import com.example.buildmypc.ui.Monitor;
-import com.example.buildmypc.ui.Motherboard;
-import com.example.buildmypc.ui.OS;
-import com.example.buildmypc.ui.PSU;
-import com.example.buildmypc.ui.Part;
-import com.example.buildmypc.ui.StorageComp;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
+import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.StorageComp;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Cooler;
 
 import java.util.ArrayList;
 

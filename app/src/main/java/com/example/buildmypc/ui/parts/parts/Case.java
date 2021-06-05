@@ -1,6 +1,4 @@
-package com.example.buildmypc.ui;
-
-import com.example.buildmypc.ui.ExternalPart;
+package com.example.buildmypc.ui.parts.parts;
 
 import java.util.ArrayList;
 

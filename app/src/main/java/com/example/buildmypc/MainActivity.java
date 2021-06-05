@@ -8,17 +8,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
-import com.example.buildmypc.ui.CPU;
-import com.example.buildmypc.ui.Cooler;
-import com.example.buildmypc.ui.GPU;
-import com.example.buildmypc.ui.Memory;
-import com.example.buildmypc.ui.Monitor;
-import com.example.buildmypc.ui.Motherboard;
-import com.example.buildmypc.ui.OS;
-import com.example.buildmypc.ui.PSU;
-import com.example.buildmypc.ui.Part;
-import com.example.buildmypc.ui.StorageComp;
-import com.example.buildmypc.ui.build.PCBuild;
+import com.example.buildmypc.ui.parts.parts.Part;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;

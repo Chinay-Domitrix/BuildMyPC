@@ -1,4 +1,4 @@
-package com.example.buildmypc.ui;
+package com.example.buildmypc.ui.parts.parts;
 
 // the start of the part hierarchy
 public class Part {
