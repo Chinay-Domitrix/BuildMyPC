@@ -836,7 +836,6 @@
 				"Mini ITX"
 			],
 			"model": "H510",
-			"psu": null,
 			"psu-shroud": true,
 			"side-panel": "Tempered Glass",
 			"type": "ATX Mid Tower",
@@ -874,7 +873,6 @@
 				"Mini ITX"
 			],
 			"model": "H510",
-			"psu": null,
 			"psu-shroud": true,
 			"side-panel": "Tempered Glass",
 			"type": "ATX Mid Tower",
@@ -911,7 +909,6 @@
 				"Mini ITX"
 			],
 			"model": "4000D Airflow",
-			"psu": null,
 			"psu-shroud": true,
 			"side-panel": "Tinted Tempered Glass",
 			"type": "ATX Mid Tower",
@@ -947,7 +944,6 @@
 				"Mini ITX"
 			],
 			"model": "275R Airflow",
-			"psu": null,
 			"psu-shroud": true,
 			"side-panel": "Tempered Glass",
 			"type": "ATX Mid Tower",
@@ -985,7 +981,6 @@
 				"Mini ITX"
 			],
 			"model": "PC-O11DX",
-			"psu": null,
 			"psu-shroud": true,
 			"side-panel": "Tempered Glass",
 			"type": "ATX Full Tower",
@@ -1125,6 +1120,16 @@
 			"type": "Windows",
 			"version": {
 				"edition": "Windows 10 Pro",
+				"oem-retail": "retail"
+			}
+		},
+		{
+			"bit-mode": "dual",
+			"manufacturer": "Canonical",
+			"max-memory-support-gb": 64,
+			"type": "Linux",
+			"version": {
+				"edition": "Ubuntu 21.04",
 				"oem-retail": "retail"
 			}
 		}

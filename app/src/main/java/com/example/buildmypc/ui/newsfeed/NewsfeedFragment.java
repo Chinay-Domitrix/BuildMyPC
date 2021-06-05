@@ -3,6 +3,7 @@ package com.example.buildmypc.ui.newsfeed;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,11 @@ import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
@@ -33,6 +38,23 @@ public class NewsfeedFragment extends Fragment {
 	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// jank testing of finalArticleList actually being used in the RecyclerView
+		ArrayList<Article> temp = finalArticleList.get();
+		try {
+			temp.add(new Article(
+					"The U.S. added 559,000 jobs in May",
+					"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
+					new URL("https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"),
+					"NYTimes",
+					getResources().getDrawable(R.drawable.nytimes),
+					new Date(),
+					new SimpleDateFormat("YYYY-MM-DD")
+			));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		finalArticleList.set(temp);
+
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
@@ -84,7 +106,10 @@ public class NewsfeedFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method were info is set for EACH individual layout element for each list entry
 			Article currentEntry = articleViewList.get(position);
-//			holder.image.setDra
+			holder.image.setImageDrawable(currentEntry.getImage());
+			holder.title.setText(currentEntry.getHeading());
+			holder.desc.setText(currentEntry.getDesc());
+			holder.dateAndPublisher.setText(currentEntry.getPublisher() + " at " + currentEntry.getDate().toString());
 		}
 
 		@Override

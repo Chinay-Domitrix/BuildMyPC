@@ -8,11 +8,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
+import com.example.buildmypc.ui.Part;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.util.Log.d;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 			e.printStackTrace();
 		}
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
+
+		// the code to parse the JSON parts file into usable stuff
+
 	}
 
 	@Override
@@ -67,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onSupportNavigateUp() {
 		return navigateUp(findNavController(this, nav_host_fragment_content_main), mAppBarConfiguration) || super.onSupportNavigateUp();
+	}
+
+	public ArrayList<Part> parsePartsJSON(JSONObject jsonObject){
+		// funny
+		return null;
 	}
 }
