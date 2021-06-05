@@ -29,6 +29,7 @@ import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.StorageComp;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
@@ -44,7 +45,10 @@ public class BuildFragment extends Fragment {
 //		final TextView textView = binding.textHome;
 		GridView gridView = binding.buildfragGridView;
 //		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
 		// building myBuilds
+		displayedBuilds = new ArrayList<PCBuild>();
+//		Prebuilds prebuilds = new Prebuilds();
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
 		GridAdapter adapter = new GridAdapter(getActivity(), displayedBuilds);
 		gridView.setOnItemClickListener((parent, view, position, id) -> Toast.makeText(getContext(), "activated " + position, Toast.LENGTH_SHORT).show());
@@ -109,6 +113,7 @@ public class BuildFragment extends Fragment {
 		}
 
 		public Prebuilds() {
+			builds = new ArrayList<PCBuild>();
 			builds.add(new PCBuild(
 					"Build 1",
 					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
