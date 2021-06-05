@@ -22,7 +22,6 @@ import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
 public class BuildFragment extends Fragment {
 	private FragmentHomeBinding binding;
-
 	ArrayList<PCBuild> displayedBuilds;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,12 +71,9 @@ public class BuildFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			if (inflater == null) {
+			if (inflater == null)
 				inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			}
-			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.row_item, null);
-			}
+			if (convertView == null) convertView = inflater.inflate(R.layout.row_item, null);
 			// do stuff here
 			return null;
 		}
