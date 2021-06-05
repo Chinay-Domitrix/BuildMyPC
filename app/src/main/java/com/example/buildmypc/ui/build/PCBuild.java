@@ -1,17 +1,14 @@
 package com.example.buildmypc.ui.build;
 
-import com.example.buildmypc.ui.parts.parts.GPU;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Monitor;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.OS;
-import com.example.buildmypc.ui.parts.parts.PSU;
-import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.StorageComp;
+import android.graphics.drawable.Drawable;
+
+import com.example.buildmypc.ui.parts.parts.*;
 
 import java.util.ArrayList;
 
 public class PCBuild {
+
+	private Drawable logo;
 
 	private Cooler cooler;
 	private CPU cpu;
@@ -20,13 +17,14 @@ public class PCBuild {
 	private Monitor monitor;
 	private Motherboard motherboard;
 	private OS os;
-	private com.example.buildmypc.ui.parts.parts.PSU PSU;
+	private PSU psu;
 	private StorageComp storageComp;
 	private ArrayList<Part> extraParts; // for all of your extra part needs (this won't be explicitly checked against, will possibly be a dropdown menu)
 
 	public PCBuild(){}
 
-	public PCBuild(Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU PSU, StorageComp storageComp, ArrayList<Part> extraParts) {
+	public PCBuild(Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, StorageComp storageComp, ArrayList<Part> extraParts) {
+		this.logo = logo;
 		this.cooler = cooler;
 		this.cpu = cpu;
 		this.gpu = gpu;
@@ -34,7 +32,7 @@ public class PCBuild {
 		this.monitor = monitor;
 		this.motherboard = motherboard;
 		this.os = os;
-		this.PSU = PSU;
+		this.psu = psu;
 		this.storageComp = storageComp;
 		this.extraParts = extraParts;
 	}
@@ -95,12 +93,12 @@ public class PCBuild {
 		this.os = os;
 	}
 
-	public PSU getPcu() {
-		return PSU;
+	public PSU getPsu() {
+		return psu;
 	}
 
-	public void setPcu(PSU PSU) {
-		this.PSU = PSU;
+	public void setPsu(PSU psu) {
+		this.psu = psu;
 	}
 
 	public StorageComp getStorageComp() {
@@ -117,5 +115,13 @@ public class PCBuild {
 
 	public void setExtraParts(ArrayList<Part> extraParts) {
 		this.extraParts = extraParts;
+	}
+
+	public Drawable getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Drawable logo) {
+		this.logo = logo;
 	}
 }

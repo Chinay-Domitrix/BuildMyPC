@@ -22,8 +22,9 @@ public class Prebuilds {
 
 	public Prebuilds(){
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),
@@ -34,8 +35,9 @@ public class Prebuilds {
 				new ArrayList<Part>()
 		));
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),
@@ -46,8 +48,9 @@ public class Prebuilds {
 				new ArrayList<Part>()
 		));
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),
@@ -58,8 +61,9 @@ public class Prebuilds {
 				new ArrayList<Part>()
 		));
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),
@@ -70,8 +74,9 @@ public class Prebuilds {
 				new ArrayList<Part>()
 		));
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),
@@ -82,8 +87,9 @@ public class Prebuilds {
 				new ArrayList<Part>()
 		));
 		builds.add(new PCBuild(
+				null,
 				new Cooler("Hyper 212 EVO", "Cooler Master"),
-				new CPU("Ryzen 5 3600", "AMD", false),
+				new CPU("Ryzen 5 3600", "AMD"),
 				new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA", false),
 				new Memory("Vengeance LPX 16 GB", "Corsair", null),
 				new Monitor("ROG Swift PG65UQ", "Asus"),

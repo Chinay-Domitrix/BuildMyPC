@@ -21,6 +21,11 @@ public final class CPU {
 	private final boolean cooler;
 	private final boolean smt;
 
+	public CPU(String model, String manufacturer){
+		this.model = model;
+		this.manufacturer = manufacturer;
+	}
+
 	public CPU(String manufacturer, String model, int coreCount, double coreClock, double boostClock, int tdp, String series, String microarchitecture, String coreFamily, String socket, boolean iGPU, int maxMemory, boolean ecc, boolean cooler, boolean smt) {
 		this.manufacturer = manufacturer;
 		this.model = model;
