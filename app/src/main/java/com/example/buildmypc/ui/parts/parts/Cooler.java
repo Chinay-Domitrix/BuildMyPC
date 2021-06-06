@@ -1,20 +1,27 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class Cooler {
-	private final String manufacturer;
-	private final String model;
+public final class Cooler extends Part implements Parcelable {
+//	private final String manufacturer;
+//	private final String model;
 	private final String rpm;
 	private final String noiseLevel;
 	private final int height;
-	private final String[] socketSupport;
+	private final ArrayList<String> socketSupport;
 	private final boolean waterCooled;
 	private final boolean fanless;
 
 	public Cooler(String model, String manufacturer) {
-		this.model = model;
-		this.manufacturer = manufacturer;
+		super(model, manufacturer);
 		this.rpm = null;
 		this.noiseLevel = null;
 		this.height = -1;
@@ -23,9 +30,8 @@ public final class Cooler {
 		this.fanless = false;
 	}
 
-	public Cooler(String model, String manufacturer, String rpm, String noiseLevel, int height, String[] socketSupport, boolean waterCooled, boolean fanless) {
-		this.manufacturer = manufacturer;
-		this.model = model;
+	public Cooler(String model, String manufacturer, String rpm, String noiseLevel, int height, ArrayList<String> socketSupport, boolean waterCooled, boolean fanless) {
+		super(model, manufacturer);
 		this.rpm = rpm;
 		this.noiseLevel = noiseLevel;
 		this.height = height;
@@ -34,13 +40,13 @@ public final class Cooler {
 		this.fanless = fanless;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public String getModel() {
-		return model;
-	}
+//	public String getManufacturer() {
+//		return manufacturer;
+//	}
+//
+//	public String getModel() {
+//		return model;
+//	}
 
 	public String getRpm() {
 		return rpm;
@@ -54,7 +60,7 @@ public final class Cooler {
 		return height;
 	}
 
-	public String[] getSocketSupport() {
+	public ArrayList<String> getSocketSupport() {
 		return socketSupport;
 	}
 
@@ -85,7 +91,7 @@ public final class Cooler {
 		if (getNoiseLevel() != null ? !getNoiseLevel().equals(cooler.getNoiseLevel()) : cooler.getNoiseLevel() != null)
 			return false;
 		// Probably incorrect - comparing Object[] arrays with Arrays.equals
-		return Arrays.equals(getSocketSupport(), cooler.getSocketSupport());
+		return getSocketSupport().equals(cooler.getSocketSupport());
 	}
 
 	@Override
@@ -95,9 +101,35 @@ public final class Cooler {
 		result = 31 * result + (getRpm() != null ? getRpm().hashCode() : 0);
 		result = 31 * result + (getNoiseLevel() != null ? getNoiseLevel().hashCode() : 0);
 		result = 31 * result + getHeight();
-		result = 31 * result + Arrays.hashCode(getSocketSupport());
+		result = 31 * result + getSocketSupport().hashCode();
 		result = 31 * result + (isWaterCooled() ? 1 : 0);
 		result = 31 * result + (isFanless() ? 1 : 0);
 		return result;
 	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Cooler(Parcel in) {
+		super(in.readString(), in.readString());
+		rpm = in.readString();
+		noiseLevel = in.readString();
+		height = in.readInt();
+		socketSupport = new ArrayList<>();
+		in.readStringList(socketSupport);
+		waterCooled = in.readBoolean();
+		fanless = in.readBoolean();
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(rpm);
+		dest.writeString(noiseLevel);
+		dest.writeInt(height);
+		dest.writeStringList(socketSupport);
+		dest.writeBoolean(waterCooled);
+		dest.writeBoolean(fanless);
+	}
+
+
 }

@@ -2,7 +2,7 @@ package com.example.buildmypc.ui.parts.parts;
 
 import java.util.ArrayList;
 
-public class GPU extends InternalPart { // the only important part for 12 year old me buying a gaming PC
+public class GPU extends Part { // the only important part for 12 year old me buying a gaming PC
 
 	private int boostClockSpeed; // in mhz
 	private String chipset;

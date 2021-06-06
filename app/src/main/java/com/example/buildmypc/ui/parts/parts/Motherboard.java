@@ -2,7 +2,7 @@ package com.example.buildmypc.ui.parts.parts;
 
 import java.util.ArrayList;
 
-public class Motherboard extends InternalPart {
+public class Motherboard extends Part {
 
 	private boolean ecc;
 	private String chipset;

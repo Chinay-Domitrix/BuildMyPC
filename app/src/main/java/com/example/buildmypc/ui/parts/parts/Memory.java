@@ -1,6 +1,6 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class Memory extends InternalPart {
+public class Memory extends Part {
 
 	private double hasECC;
 	private int latencyCAS; // backwards to respect carrot case

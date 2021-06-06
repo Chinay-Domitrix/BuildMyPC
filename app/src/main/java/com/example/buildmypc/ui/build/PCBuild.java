@@ -1,8 +1,11 @@
 package com.example.buildmypc.ui.build;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
@@ -51,8 +54,18 @@ public class PCBuild implements Parcelable {
 		this.extraParts = extraParts;
 	}
 
-	protected PCBuild(Parcel in) {
-		name = in.readString();
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public PCBuild(Parcel in) {
+		cooler = in.readParcelable(cooler.getClass().getClassLoader());
+		cpu = in.readParcelable(cpu.getClass().getClassLoader());
+		gpu = in.readParcelable(gpu.getClass().getClassLoader());
+		memory = in.readParcelable(memory.getClass().getClassLoader());
+		monitor = in.readParcelable(monitor.getClass().getClassLoader());
+		motherboard = in.readParcelable(motherboard.getClass().getClassLoader());
+		os = in.readParcelable(os.getClass().getClassLoader());
+		psu = in.readParcelable(psu.getClass().getClassLoader());
+		storage = in.readParcelable(storage.getClass().getClassLoader());
+		extraParts = in.readParcelableList(extraParts, extraParts.getClass().getClassLoader());
 	}
 
 	public String getName() {
@@ -207,9 +220,19 @@ public class PCBuild implements Parcelable {
 		return 0;
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(name);
+		dest.writeParcelable(cooler, flags);
+		dest.writeParcelable(cpu, flags);
+		dest.writeParcelable(gpu, flags);
+		dest.writeParcelable(memory, flags);
+		dest.writeParcelable(monitor, flags);
+		dest.writeParcelable(motherboard, flags);
+		dest.writeParcelable(os, flags);
+		dest.writeParcelable(psu, flags);
+		dest.writeParcelable(storage, flags);
+		dest.writeParcelableList(extraParts, flags);
 	}
 
 	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
@@ -223,4 +246,6 @@ public class PCBuild implements Parcelable {
 			return new PCBuild[size];
 		}
 	};
+
+
 }

@@ -3,7 +3,7 @@ package com.example.buildmypc.ui.parts.parts;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Monitor extends ExternalPart {
+public class Monitor extends Part {
 
 	private String aspectRatio;
 	private String brightness; // in candla per square meter

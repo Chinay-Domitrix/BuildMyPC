@@ -1,9 +1,12 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Case extends ExternalPart {
+public class Case extends Part implements Parcelable {
 
 	private String color;
 	private int[] dimensionsMm; // 1-d int arraylist with 3 entries,
@@ -22,6 +25,57 @@ public class Case extends ExternalPart {
 	public Case(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
+
+	protected Case(Parcel in) {
+		super(in.readString(), in.readString());
+		color = in.readString();
+		dimensionsMm = in.createIntArray();
+		fullExpansionSlotCount = in.readInt();
+		halfExpansionSlotCount = in.readInt();
+		supportedFrontUSBs = in.createStringArrayList();
+		internalDrive2_5Count = in.readInt();
+		internalDrive3_5Count = in.readInt();
+		maxGPULength = in.createStringArrayList();
+		mbFormFactor = in.createStringArrayList();
+		sidePanel = in.readString();
+		type = in.readString();
+		volume = in.readDouble();
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(super.getModel());
+		dest.writeString(super.getManufacturer());
+		dest.writeString(color);
+		dest.writeIntArray(dimensionsMm);
+		dest.writeInt(fullExpansionSlotCount);
+		dest.writeInt(halfExpansionSlotCount);
+		dest.writeStringList(supportedFrontUSBs);
+		dest.writeInt(internalDrive2_5Count);
+		dest.writeInt(internalDrive3_5Count);
+		dest.writeStringList(maxGPULength);
+		dest.writeStringList(mbFormFactor);
+		dest.writeString(sidePanel);
+		dest.writeString(type);
+		dest.writeDouble(volume);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	public static final Creator<Case> CREATOR = new Creator<Case>() {
+		@Override
+		public Case createFromParcel(Parcel in) {
+			return new Case(in);
+		}
+
+		@Override
+		public Case[] newArray(int size) {
+			return new Case[size];
+		}
+	};
 
 	public String getColor() {
 		return color;

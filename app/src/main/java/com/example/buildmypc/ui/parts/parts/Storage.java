@@ -1,6 +1,6 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class Storage extends InternalPart {
+public class Storage extends Part {
 
 	double formFactor;
 	private int cacheSizeMB; // in mb

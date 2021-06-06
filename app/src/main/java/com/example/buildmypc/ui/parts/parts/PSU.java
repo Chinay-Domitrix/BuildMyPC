@@ -2,7 +2,7 @@ package com.example.buildmypc.ui.parts.parts;
 
 import java.util.ArrayList;
 
-public class PSU extends InternalPart { // stands for "Portable Communication Unit"
+public class PSU extends Part { // stands for "Portable Communication Unit"
 
 	private ArrayList<Connector> connectorList;
 	private String efficiencyRating;
