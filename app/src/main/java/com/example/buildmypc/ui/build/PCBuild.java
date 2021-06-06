@@ -49,6 +49,22 @@ public class PCBuild {
 		this.extraParts = extraParts;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Drawable getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Drawable logo) {
+		this.logo = logo;
+	}
+
 	public Cooler getCooler() {
 		return cooler;
 	}
@@ -113,11 +129,11 @@ public class PCBuild {
 		this.psu = psu;
 	}
 
-	public Storage getStorageComp() {
+	public Storage getStorage() {
 		return storage;
 	}
 
-	public void setStorageComp(Storage storage) {
+	public void setStorage(Storage storage) {
 		this.storage = storage;
 	}
 
@@ -129,19 +145,52 @@ public class PCBuild {
 		this.extraParts = extraParts;
 	}
 
-	public Drawable getLogo() {
-		return logo;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		PCBuild pcBuild = (PCBuild) o;
+
+		if (getName() != null ? !getName().equals(pcBuild.getName()) : pcBuild.getName() != null)
+			return false;
+		if (getLogo() != null ? !getLogo().equals(pcBuild.getLogo()) : pcBuild.getLogo() != null)
+			return false;
+		if (getCooler() != null ? !getCooler().equals(pcBuild.getCooler()) : pcBuild.getCooler() != null)
+			return false;
+		if (getCpu() != null ? !getCpu().equals(pcBuild.getCpu()) : pcBuild.getCpu() != null)
+			return false;
+		if (getGpu() != null ? !getGpu().equals(pcBuild.getGpu()) : pcBuild.getGpu() != null)
+			return false;
+		if (getMemory() != null ? !getMemory().equals(pcBuild.getMemory()) : pcBuild.getMemory() != null)
+			return false;
+		if (getMonitor() != null ? !getMonitor().equals(pcBuild.getMonitor()) : pcBuild.getMonitor() != null)
+			return false;
+		if (getMotherboard() != null ? !getMotherboard().equals(pcBuild.getMotherboard()) : pcBuild.getMotherboard() != null)
+			return false;
+		if (getOs() != null ? !getOs().equals(pcBuild.getOs()) : pcBuild.getOs() != null)
+			return false;
+		if (getPsu() != null ? !getPsu().equals(pcBuild.getPsu()) : pcBuild.getPsu() != null)
+			return false;
+		if (getStorage() != null ? !getStorage().equals(pcBuild.getStorage()) : pcBuild.getStorage() != null)
+			return false;
+		return getExtraParts() != null ? getExtraParts().equals(pcBuild.getExtraParts()) : pcBuild.getExtraParts() == null;
 	}
 
-	public void setLogo(Drawable logo) {
-		this.logo = logo;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public int hashCode() {
+		int result = getName() != null ? getName().hashCode() : 0;
+		result = 31 * result + (getLogo() != null ? getLogo().hashCode() : 0);
+		result = 31 * result + (getCooler() != null ? getCooler().hashCode() : 0);
+		result = 31 * result + (getCpu() != null ? getCpu().hashCode() : 0);
+		result = 31 * result + (getGpu() != null ? getGpu().hashCode() : 0);
+		result = 31 * result + (getMemory() != null ? getMemory().hashCode() : 0);
+		result = 31 * result + (getMonitor() != null ? getMonitor().hashCode() : 0);
+		result = 31 * result + (getMotherboard() != null ? getMotherboard().hashCode() : 0);
+		result = 31 * result + (getOs() != null ? getOs().hashCode() : 0);
+		result = 31 * result + (getPsu() != null ? getPsu().hashCode() : 0);
+		result = 31 * result + (getStorage() != null ? getStorage().hashCode() : 0);
+		result = 31 * result + (getExtraParts() != null ? getExtraParts().hashCode() : 0);
+		return result;
 	}
 }
