@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import static android.os.Build.VERSION_CODES.Q;
@@ -101,8 +103,8 @@ public final class Cooler extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Q)
-	public Cooler(Parcel in) {
+	@RequiresApi(Q)
+	public Cooler(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		rpm = in.readString();
 		noiseLevel = in.readString();
@@ -113,7 +115,7 @@ public final class Cooler extends Part implements Parcelable {
 		fanless = in.readBoolean();
 	}
 
-	@RequiresApi(api = Q)
+	@RequiresApi(Q)
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
@@ -124,6 +126,4 @@ public final class Cooler extends Part implements Parcelable {
 		dest.writeBoolean(waterCooled);
 		dest.writeBoolean(fanless);
 	}
-
-
 }
