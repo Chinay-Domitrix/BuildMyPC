@@ -1,6 +1,6 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class StorageComp extends InternalPart {
+public class Storage extends InternalPart {
 
 	double formFactor;
 	private int cacheSizeMB; // in mb
@@ -10,7 +10,7 @@ public class StorageComp extends InternalPart {
 	private int rpm; // only applies for HDDs
 	private String type; // either HDD or SSD
 
-	public StorageComp(String model, String manufacturer) {
+	public Storage(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
 
