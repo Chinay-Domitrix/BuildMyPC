@@ -1,11 +1,5 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import java.util.Objects;
-
-import static java.lang.Double.compare;
-import static java.lang.Double.doubleToLongBits;
-import static java.util.Arrays.asList;
-
 public final class CPU {
 	private final String manufacturer;
 	private final String model;
@@ -122,41 +116,53 @@ public final class CPU {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if ((o == null) || (getClass() != o.getClass())) return false;
+		if (o == null || getClass() != o.getClass()) return false;
+
 		CPU cpu = (CPU) o;
-		if ((getCoreCount() != cpu.getCoreCount()) ||
-				(compare(cpu.getCoreClock(), getCoreClock()) != 0) ||
-				(compare(cpu.getBoostClock(), getBoostClock()) != 0) ||
-				(getTdp() != cpu.getTdp()) ||
-				(isiGPU() != cpu.isiGPU()) ||
-				(getMaxMemory() != cpu.getMaxMemory()) ||
-				(isEcc() != cpu.isEcc()) ||
-				(isCooler() != cpu.isCooler()) ||
-				(isSmt() != cpu.isSmt()) ||
-				!getManufacturer().equals(cpu.getManufacturer()) ||
-				!getModel().equals(cpu.getModel()) ||
-				!Objects.equals(getSeries(), cpu.getSeries()) ||
-				!Objects.equals(getMicroarchitecture(), cpu.getMicroarchitecture()) ||
-				!Objects.equals(getCoreFamily(), cpu.getCoreFamily())) return false;
-		assert getSocket() != null;
-		return getSocket().equals(cpu.getSocket());
+
+		if (getCoreCount() != cpu.getCoreCount()) return false;
+		if (Double.compare(cpu.getCoreClock(), getCoreClock()) != 0) return false;
+		if (Double.compare(cpu.getBoostClock(), getBoostClock()) != 0) return false;
+		if (getTdp() != cpu.getTdp()) return false;
+		if (isiGPU() != cpu.isiGPU()) return false;
+		if (getMaxMemory() != cpu.getMaxMemory()) return false;
+		if (isEcc() != cpu.isEcc()) return false;
+		if (isCooler() != cpu.isCooler()) return false;
+		if (isSmt() != cpu.isSmt()) return false;
+		if (getManufacturer() != null ? !getManufacturer().equals(cpu.getManufacturer()) : cpu.getManufacturer() != null)
+			return false;
+		if (getModel() != null ? !getModel().equals(cpu.getModel()) : cpu.getModel() != null)
+			return false;
+		if (getSeries() != null ? !getSeries().equals(cpu.getSeries()) : cpu.getSeries() != null)
+			return false;
+		if (getMicroarchitecture() != null ? !getMicroarchitecture().equals(cpu.getMicroarchitecture()) : cpu.getMicroarchitecture() != null)
+			return false;
+		if (getCoreFamily() != null ? !getCoreFamily().equals(cpu.getCoreFamily()) : cpu.getCoreFamily() != null)
+			return false;
+		return getSocket() != null ? getSocket().equals(cpu.getSocket()) : cpu.getSocket() == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result;
 		long temp;
-		result = getManufacturer().hashCode();
-		for (int i : new int[]{getModel().hashCode(), getCoreCount()}) result = (31 * result) + i;
-		temp = doubleToLongBits(getCoreClock());
-		result = (31 * result) + (int) (temp ^ (temp >>> 32));
-		temp = doubleToLongBits(getBoostClock());
-		result = (31 * result) + (int) (temp ^ (temp >>> 32));
-		result = (31 * result) + getTdp();
-		for (String s : asList(getSeries(), getMicroarchitecture(), getCoreFamily(), getSocket()))
-			result = (31 * result) + s.hashCode();
-		for (int i : new int[]{isiGPU() ? 1 : 0, getMaxMemory(), isEcc() ? 1 : 0, isCooler() ? 1 : 0, isSmt() ? 1 : 0})
-			result = (31 * result) + i;
+		result = getManufacturer() != null ? getManufacturer().hashCode() : 0;
+		result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
+		result = 31 * result + getCoreCount();
+		temp = Double.doubleToLongBits(getCoreClock());
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(getBoostClock());
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + getTdp();
+		result = 31 * result + (getSeries() != null ? getSeries().hashCode() : 0);
+		result = 31 * result + (getMicroarchitecture() != null ? getMicroarchitecture().hashCode() : 0);
+		result = 31 * result + (getCoreFamily() != null ? getCoreFamily().hashCode() : 0);
+		result = 31 * result + (getSocket() != null ? getSocket().hashCode() : 0);
+		result = 31 * result + (isiGPU() ? 1 : 0);
+		result = 31 * result + getMaxMemory();
+		result = 31 * result + (isEcc() ? 1 : 0);
+		result = 31 * result + (isCooler() ? 1 : 0);
+		result = 31 * result + (isSmt() ? 1 : 0);
 		return result;
 	}
 }

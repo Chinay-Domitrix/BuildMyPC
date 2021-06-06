@@ -38,14 +38,15 @@ public class Part {
 
 		Part part = (Part) o;
 
-		if (!getModel().equals(part.getModel())) return false;
-		return getManufacturer().equals(part.getManufacturer());
+		if (getModel() != null ? !getModel().equals(part.getModel()) : part.getModel() != null)
+			return false;
+		return getManufacturer() != null ? getManufacturer().equals(part.getManufacturer()) : part.getManufacturer() == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getModel().hashCode();
-		result = 31 * result + getManufacturer().hashCode();
+		int result = getModel() != null ? getModel().hashCode() : 0;
+		result = 31 * result + (getManufacturer() != null ? getManufacturer().hashCode() : 0);
 		return result;
 	}
 }

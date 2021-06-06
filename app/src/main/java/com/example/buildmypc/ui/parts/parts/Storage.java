@@ -69,4 +69,37 @@ public class Storage extends InternalPart {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Storage storage = (Storage) o;
+
+		if (Double.compare(storage.getFormFactor(), getFormFactor()) != 0) return false;
+		if (getCacheSizeMB() != storage.getCacheSizeMB()) return false;
+		if (getCapacity() != storage.getCapacity()) return false;
+		if (getNvme() != storage.getNvme()) return false;
+		if (getRpm() != storage.getRpm()) return false;
+		if (getSataInterface() != null ? !getSataInterface().equals(storage.getSataInterface()) : storage.getSataInterface() != null)
+			return false;
+		return getType() != null ? getType().equals(storage.getType()) : storage.getType() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		long temp;
+		temp = Double.doubleToLongBits(getFormFactor());
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + getCacheSizeMB();
+		result = 31 * result + getCapacity();
+		result = 31 * result + (getSataInterface() != null ? getSataInterface().hashCode() : 0);
+		result = 31 * result + (getNvme() ? 1 : 0);
+		result = 31 * result + getRpm();
+		result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+		return result;
+	}
 }

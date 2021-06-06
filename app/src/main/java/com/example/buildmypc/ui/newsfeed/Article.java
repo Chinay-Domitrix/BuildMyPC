@@ -86,4 +86,38 @@ public class Article {
 	public void setFormat(SimpleDateFormat format) {
 		this.format = format;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Article article = (Article) o;
+
+		if (getHeading() != null ? !getHeading().equals(article.getHeading()) : article.getHeading() != null)
+			return false;
+		if (getDesc() != null ? !getDesc().equals(article.getDesc()) : article.getDesc() != null)
+			return false;
+		if (getOriginURL() != null ? !getOriginURL().equals(article.getOriginURL()) : article.getOriginURL() != null)
+			return false;
+		if (getPublisher() != null ? !getPublisher().equals(article.getPublisher()) : article.getPublisher() != null)
+			return false;
+		if (getImage() != null ? !getImage().equals(article.getImage()) : article.getImage() != null)
+			return false;
+		if (getDate() != null ? !getDate().equals(article.getDate()) : article.getDate() != null)
+			return false;
+		return getFormat() != null ? getFormat().equals(article.getFormat()) : article.getFormat() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getHeading() != null ? getHeading().hashCode() : 0;
+		result = 31 * result + (getDesc() != null ? getDesc().hashCode() : 0);
+		result = 31 * result + (getOriginURL() != null ? getOriginURL().hashCode() : 0);
+		result = 31 * result + (getPublisher() != null ? getPublisher().hashCode() : 0);
+		result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
+		result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+		result = 31 * result + (getFormat() != null ? getFormat().hashCode() : 0);
+		return result;
+	}
 }

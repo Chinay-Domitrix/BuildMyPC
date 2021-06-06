@@ -16,7 +16,7 @@ public class Motherboard extends InternalPart {
 	private int mSATA_slotCount; // love SSDs
 	private ArrayList<String> incEthernetSupp;
 	private String incVideo; // no idea what this is
-	private ArrayList<pciSlot> pciSlotList; // had to create a subobject for this
+	private ArrayList<PCISlot> PCISlotList; // had to create a subobject for this
 	private boolean hasRAID; // has "Redundant Array of Inexpensive Disks"
 	private int sata6gbpsCount; // no clue
 	private int gen1USBCount;
@@ -115,12 +115,12 @@ public class Motherboard extends InternalPart {
 		this.incVideo = incVideo;
 	}
 
-	public ArrayList<pciSlot> getPciSlotList() {
-		return pciSlotList;
+	public ArrayList<PCISlot> getPciSlotList() {
+		return PCISlotList;
 	}
 
-	public void setPciSlotList(ArrayList<pciSlot> pciSlotList) {
-		this.pciSlotList = pciSlotList;
+	public void setPciSlotList(ArrayList<PCISlot> PCISlotList) {
+		this.PCISlotList = PCISlotList;
 	}
 
 	public boolean isHasRAID() {
@@ -163,11 +163,11 @@ public class Motherboard extends InternalPart {
 		isWireless = wireless;
 	}
 
-	public class pciSlot {
+	public class PCISlot {
 		private final String name;
 		private final int count;
 
-		public pciSlot(String name, int count) {
+		public PCISlot(String name, int count) {
 			this.name = name;
 			this.count = count;
 		}
@@ -179,5 +179,62 @@ public class Motherboard extends InternalPart {
 		public int getCount() {
 			return count;
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Motherboard that = (Motherboard) o;
+
+		if (isEcc() != that.isEcc()) return false;
+		if (getMaxMemSupport() != that.getMaxMemSupport()) return false;
+		if (getMemSlots() != that.getMemSlots()) return false;
+		if (getmSATA_slotCount() != that.getmSATA_slotCount()) return false;
+		if (isHasRAID() != that.isHasRAID()) return false;
+		if (getSata6gbpsCount() != that.getSata6gbpsCount()) return false;
+		if (getGen1USBCount() != that.getGen1USBCount()) return false;
+		if (getGen2USBcount() != that.getGen2USBcount()) return false;
+		if (isWireless() != that.isWireless()) return false;
+		if (getChipset() != null ? !getChipset().equals(that.getChipset()) : that.getChipset() != null)
+			return false;
+		if (getFormFactor() != null ? !getFormFactor().equals(that.getFormFactor()) : that.getFormFactor() != null)
+			return false;
+		if (getM2slots() != null ? !getM2slots().equals(that.getM2slots()) : that.getM2slots() != null)
+			return false;
+		if (getCompatibleMem() != null ? !getCompatibleMem().equals(that.getCompatibleMem()) : that.getCompatibleMem() != null)
+			return false;
+		if (getMemType() != null ? !getMemType().equals(that.getMemType()) : that.getMemType() != null)
+			return false;
+		if (getIncEthernetSupp() != null ? !getIncEthernetSupp().equals(that.getIncEthernetSupp()) : that.getIncEthernetSupp() != null)
+			return false;
+		if (getIncVideo() != null ? !getIncVideo().equals(that.getIncVideo()) : that.getIncVideo() != null)
+			return false;
+		return PCISlotList != null ? PCISlotList.equals(that.PCISlotList) : that.PCISlotList == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (isEcc() ? 1 : 0);
+		result = 31 * result + (getChipset() != null ? getChipset().hashCode() : 0);
+		result = 31 * result + (getFormFactor() != null ? getFormFactor().hashCode() : 0);
+		result = 31 * result + (getM2slots() != null ? getM2slots().hashCode() : 0);
+		result = 31 * result + getMaxMemSupport();
+		result = 31 * result + getMemSlots();
+		result = 31 * result + (getCompatibleMem() != null ? getCompatibleMem().hashCode() : 0);
+		result = 31 * result + (getMemType() != null ? getMemType().hashCode() : 0);
+		result = 31 * result + getmSATA_slotCount();
+		result = 31 * result + (getIncEthernetSupp() != null ? getIncEthernetSupp().hashCode() : 0);
+		result = 31 * result + (getIncVideo() != null ? getIncVideo().hashCode() : 0);
+		result = 31 * result + (PCISlotList != null ? PCISlotList.hashCode() : 0);
+		result = 31 * result + (isHasRAID() ? 1 : 0);
+		result = 31 * result + getSata6gbpsCount();
+		result = 31 * result + getGen1USBCount();
+		result = 31 * result + getGen2USBcount();
+		result = 31 * result + (isWireless() ? 1 : 0);
+		return result;
 	}
 }

@@ -76,22 +76,24 @@ public final class Cooler {
 		if (getHeight() != cooler.getHeight()) return false;
 		if (isWaterCooled() != cooler.isWaterCooled()) return false;
 		if (isFanless() != cooler.isFanless()) return false;
-		if (!getManufacturer().equals(cooler.getManufacturer())) return false;
-		if (!getModel().equals(cooler.getModel())) return false;
+		if (getManufacturer() != null ? !getManufacturer().equals(cooler.getManufacturer()) : cooler.getManufacturer() != null)
+			return false;
+		if (getModel() != null ? !getModel().equals(cooler.getModel()) : cooler.getModel() != null)
+			return false;
 		if (getRpm() != null ? !getRpm().equals(cooler.getRpm()) : cooler.getRpm() != null)
 			return false;
-		assert getNoiseLevel() != null;
-		if (!getNoiseLevel().equals(cooler.getNoiseLevel())) return false;
+		if (getNoiseLevel() != null ? !getNoiseLevel().equals(cooler.getNoiseLevel()) : cooler.getNoiseLevel() != null)
+			return false;
 		// Probably incorrect - comparing Object[] arrays with Arrays.equals
 		return Arrays.equals(getSocketSupport(), cooler.getSocketSupport());
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getManufacturer().hashCode();
-		result = 31 * result + getModel().hashCode();
+		int result = getManufacturer() != null ? getManufacturer().hashCode() : 0;
+		result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
 		result = 31 * result + (getRpm() != null ? getRpm().hashCode() : 0);
-		result = 31 * result + getNoiseLevel().hashCode();
+		result = 31 * result + (getNoiseLevel() != null ? getNoiseLevel().hashCode() : 0);
 		result = 31 * result + getHeight();
 		result = 31 * result + Arrays.hashCode(getSocketSupport());
 		result = 31 * result + (isWaterCooled() ? 1 : 0);

@@ -135,4 +135,53 @@ public class GPU extends InternalPart { // the only important part for 12 year o
 		this.videoPorts = videoPorts;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		GPU gpu = (GPU) o;
+
+		if (getBoostClockSpeed() != gpu.getBoostClockSpeed()) return false;
+		if (getCoreClockSpeed() != gpu.getCoreClockSpeed()) return false;
+		if (getEffectiveMemClockSpeed() != gpu.getEffectiveMemClockSpeed()) return false;
+		if (getExpansionSlotWidth() != gpu.getExpansionSlotWidth()) return false;
+		if (getLength() != gpu.getLength()) return false;
+		if (getIntMemory() != gpu.getIntMemory()) return false;
+		if (getTdpW() != gpu.getTdpW()) return false;
+		if (getChipset() != null ? !getChipset().equals(gpu.getChipset()) : gpu.getChipset() != null)
+			return false;
+		if (getCooling() != null ? !getCooling().equals(gpu.getCooling()) : gpu.getCooling() != null)
+			return false;
+		if (getExternalPower() != null ? !getExternalPower().equals(gpu.getExternalPower()) : gpu.getExternalPower() != null)
+			return false;
+		if (getFrameSync() != null ? !getFrameSync().equals(gpu.getFrameSync()) : gpu.getFrameSync() != null)
+			return false;
+		if (getGpuInterface() != null ? !getGpuInterface().equals(gpu.getGpuInterface()) : gpu.getGpuInterface() != null)
+			return false;
+		if (getIntMemoryType() != null ? !getIntMemoryType().equals(gpu.getIntMemoryType()) : gpu.getIntMemoryType() != null)
+			return false;
+		return getVideoPorts() != null ? getVideoPorts().equals(gpu.getVideoPorts()) : gpu.getVideoPorts() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + getBoostClockSpeed();
+		result = 31 * result + (getChipset() != null ? getChipset().hashCode() : 0);
+		result = 31 * result + (getCooling() != null ? getCooling().hashCode() : 0);
+		result = 31 * result + getCoreClockSpeed();
+		result = 31 * result + getEffectiveMemClockSpeed();
+		result = 31 * result + getExpansionSlotWidth();
+		result = 31 * result + (getExternalPower() != null ? getExternalPower().hashCode() : 0);
+		result = 31 * result + (getFrameSync() != null ? getFrameSync().hashCode() : 0);
+		result = 31 * result + (getGpuInterface() != null ? getGpuInterface().hashCode() : 0);
+		result = 31 * result + getLength();
+		result = 31 * result + getIntMemory();
+		result = 31 * result + (getIntMemoryType() != null ? getIntMemoryType().hashCode() : 0);
+		result = 31 * result + getTdpW();
+		result = 31 * result + (getVideoPorts() != null ? getVideoPorts().hashCode() : 0);
+		return result;
+	}
 }

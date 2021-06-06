@@ -1,7 +1,5 @@
 package com.example.buildmypc;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -27,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.util.Log.d;
@@ -81,13 +80,6 @@ public class MainActivity extends AppCompatActivity {
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 
 		// the code to parse the JSON parts file into usable stuff
-		ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
-
-		} else {
-			
-		}
 	}
 
 	@Override
@@ -105,5 +97,20 @@ public class MainActivity extends AppCompatActivity {
 	public ArrayList<Part> parsePartsJSON(JSONObject jsonObject) {
 		// funny
 		return null;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		MainActivity that = (MainActivity) o;
+
+		return Objects.equals(mAppBarConfiguration, that.mAppBarConfiguration);
+	}
+
+	@Override
+	public int hashCode() {
+		return mAppBarConfiguration != null ? mAppBarConfiguration.hashCode() : 0;
 	}
 }

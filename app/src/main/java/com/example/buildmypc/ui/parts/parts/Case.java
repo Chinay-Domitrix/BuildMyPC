@@ -1,6 +1,7 @@
 package com.example.buildmypc.ui.parts.parts;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Case extends ExternalPart {
 
@@ -116,5 +117,52 @@ public class Case extends ExternalPart {
 
 	public void setVolume(double volume) {
 		this.volume = volume;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Case aCase = (Case) o;
+
+		if (getFullExpansionSlotCount() != aCase.getFullExpansionSlotCount()) return false;
+		if (getHalfExpansionSlotCount() != aCase.getHalfExpansionSlotCount()) return false;
+		if (getInternalDrive2_5Count() != aCase.getInternalDrive2_5Count()) return false;
+		if (getInternalDrive3_5Count() != aCase.getInternalDrive3_5Count()) return false;
+		if (Double.compare(aCase.getVolume(), getVolume()) != 0) return false;
+		if (getColor() != null ? !getColor().equals(aCase.getColor()) : aCase.getColor() != null)
+			return false;
+		if (!Arrays.equals(getDimensionsMm(), aCase.getDimensionsMm())) return false;
+		if (getSupportedFrontUSBs() != null ? !getSupportedFrontUSBs().equals(aCase.getSupportedFrontUSBs()) : aCase.getSupportedFrontUSBs() != null)
+			return false;
+		if (getMaxGPULength() != null ? !getMaxGPULength().equals(aCase.getMaxGPULength()) : aCase.getMaxGPULength() != null)
+			return false;
+		if (getMbFormFactor() != null ? !getMbFormFactor().equals(aCase.getMbFormFactor()) : aCase.getMbFormFactor() != null)
+			return false;
+		if (getSidePanel() != null ? !getSidePanel().equals(aCase.getSidePanel()) : aCase.getSidePanel() != null)
+			return false;
+		return getType() != null ? getType().equals(aCase.getType()) : aCase.getType() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		long temp;
+		result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
+		result = 31 * result + Arrays.hashCode(getDimensionsMm());
+		result = 31 * result + getFullExpansionSlotCount();
+		result = 31 * result + getHalfExpansionSlotCount();
+		result = 31 * result + (getSupportedFrontUSBs() != null ? getSupportedFrontUSBs().hashCode() : 0);
+		result = 31 * result + getInternalDrive2_5Count();
+		result = 31 * result + getInternalDrive3_5Count();
+		result = 31 * result + (getMaxGPULength() != null ? getMaxGPULength().hashCode() : 0);
+		result = 31 * result + (getMbFormFactor() != null ? getMbFormFactor().hashCode() : 0);
+		result = 31 * result + (getSidePanel() != null ? getSidePanel().hashCode() : 0);
+		result = 31 * result + (getType() != null ? getType().hashCode() : 0);
+		temp = Double.doubleToLongBits(getVolume());
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		return result;
 	}
 }
