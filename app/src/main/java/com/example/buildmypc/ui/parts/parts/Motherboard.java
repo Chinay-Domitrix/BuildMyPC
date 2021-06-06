@@ -1,8 +1,14 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 
-public class Motherboard extends Part {
+public class Motherboard extends Part implements Parcelable {
 
 	private boolean ecc;
 	private String chipset;
@@ -16,7 +22,7 @@ public class Motherboard extends Part {
 	private int mSATA_slotCount; // love SSDs
 	private ArrayList<String> incEthernetSupp;
 	private String incVideo; // no idea what this is
-	private ArrayList<PCISlot> PCISlotList; // had to create a subobject for this
+	private ArrayList<CountedString> PCISlotList; // had to create a subobject for this
 	private boolean hasRAID; // has "Redundant Array of Inexpensive Disks"
 	private int sata6gbpsCount; // no clue
 	private int gen1USBCount;
@@ -115,11 +121,11 @@ public class Motherboard extends Part {
 		this.incVideo = incVideo;
 	}
 
-	public ArrayList<PCISlot> getPciSlotList() {
+	public ArrayList<CountedString> getPciSlotList() {
 		return PCISlotList;
 	}
 
-	public void setPciSlotList(ArrayList<PCISlot> PCISlotList) {
+	public void setPciSlotList(ArrayList<CountedString> PCISlotList) {
 		this.PCISlotList = PCISlotList;
 	}
 
@@ -161,24 +167,6 @@ public class Motherboard extends Part {
 
 	public void setWireless(boolean wireless) {
 		isWireless = wireless;
-	}
-
-	public class PCISlot {
-		private final String name;
-		private final int count;
-
-		public PCISlot(String name, int count) {
-			this.name = name;
-			this.count = count;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public int getCount() {
-			return count;
-		}
 	}
 
 	@Override
@@ -236,5 +224,50 @@ public class Motherboard extends Part {
 		result = 31 * result + getGen2USBcount();
 		result = 31 * result + (isWireless() ? 1 : 0);
 		return result;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeBoolean(ecc);
+		dest.writeString(chipset);
+		dest.writeString(formFactor);
+		dest.writeStringList(m2slots);
+		dest.writeInt(maxMemSupport);
+		dest.writeInt(memSlots);
+		dest.writeStringList(compatibleMem);
+		dest.writeString(memType);
+		dest.writeInt(mSATA_slotCount);
+		dest.writeStringList(incEthernetSupp);
+		dest.writeString(incVideo);
+		dest.writeParcelableList(PCISlotList, flags);
+		dest.writeBoolean(hasRAID);
+		dest.writeInt(sata6gbpsCount);
+		dest.writeInt(gen1USBCount);
+		dest.writeInt(gen2USBcount);
+		dest.writeBoolean(isWireless);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Motherboard(Parcel in){
+		super(in.readString(), in.readString());
+		ecc = in.readBoolean();
+		chipset = in.readString();
+		formFactor = in.readString();
+		in.readStringList(m2slots);
+		maxMemSupport = in.readInt();
+		memSlots = in.readInt();
+		in.readStringList(compatibleMem);
+		memType = in.readString();
+		mSATA_slotCount = in.readInt();
+		in.readStringList(incEthernetSupp);
+		incVideo = in.readString();
+		in.readParcelableList(PCISlotList, PCISlotList.getClass().getClassLoader());
+		hasRAID = in.readBoolean();
+		sata6gbpsCount = in.readInt();
+		gen1USBCount = in.readInt();
+		gen2USBcount = in.readInt();
+		isWireless = in.readBoolean();
 	}
 }
