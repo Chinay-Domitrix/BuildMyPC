@@ -6,23 +6,31 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="7dp"
         android:layout_width="130dp"
-        android:layout_height="170dp"
+        android:layout_height="175dp"
+        android:gravity="center"
         android:orientation="vertical"
+        android:padding="7dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp">
 
         <ImageView
             android:id="@+id/gridView_imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
 
         <TextView
             android:id="@+id/gridView_textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
             android:text="TextView" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
