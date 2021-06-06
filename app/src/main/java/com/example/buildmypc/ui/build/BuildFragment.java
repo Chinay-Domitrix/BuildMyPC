@@ -1,17 +1,12 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -31,11 +26,10 @@ import com.example.buildmypc.ui.parts.parts.Motherboard;
 import com.example.buildmypc.ui.parts.parts.OS;
 import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.StorageComp;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
@@ -139,7 +133,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -153,7 +147,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -167,7 +161,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -181,7 +175,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -195,7 +189,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 			builds.add(new PCBuild(
@@ -209,7 +203,7 @@ public class BuildFragment extends Fragment {
 					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
 					new OS("Windows 10 Pro", "Microsoft"),
 					new PSU("RM750 (2019)", "Corsair"),
-					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
+					new Storage("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
 		}

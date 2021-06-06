@@ -11,7 +11,7 @@ import com.example.buildmypc.ui.parts.parts.Motherboard;
 import com.example.buildmypc.ui.parts.parts.OS;
 import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.StorageComp;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import java.util.ArrayList;
 
@@ -28,13 +28,13 @@ public class PCBuild {
 	private Motherboard motherboard;
 	private OS os;
 	private PSU psu;
-	private StorageComp storageComp;
+	private Storage storage;
 	private ArrayList<Part> extraParts; // for all of your extra part needs (this won't be explicitly checked against, will possibly be a dropdown menu)
 
 	public PCBuild() {
 	}
 
-	public PCBuild(String name, Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, StorageComp storageComp, ArrayList<Part> extraParts) {
+	public PCBuild(String name, Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts) {
 		this.name = name;
 		this.logo = logo;
 		this.cooler = cooler;
@@ -45,7 +45,7 @@ public class PCBuild {
 		this.motherboard = motherboard;
 		this.os = os;
 		this.psu = psu;
-		this.storageComp = storageComp;
+		this.storage = storage;
 		this.extraParts = extraParts;
 	}
 
@@ -113,12 +113,12 @@ public class PCBuild {
 		this.psu = psu;
 	}
 
-	public StorageComp getStorageComp() {
-		return storageComp;
+	public Storage getStorageComp() {
+		return storage;
 	}
 
-	public void setStorageComp(StorageComp storageComp) {
-		this.storageComp = storageComp;
+	public void setStorageComp(Storage storage) {
+		this.storage = storage;
 	}
 
 	public ArrayList<Part> getExtraParts() {
