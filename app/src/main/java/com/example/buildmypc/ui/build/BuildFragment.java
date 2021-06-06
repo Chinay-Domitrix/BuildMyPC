@@ -212,8 +212,6 @@ public class BuildFragment extends Fragment {
 					new StorageComp("Barracuda Compute 2 TB", "Seagate"),
 					new ArrayList<Part>()
 			));
-
-
 		}
 	}
 }
