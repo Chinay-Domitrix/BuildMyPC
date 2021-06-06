@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.buildmypc.databinding.FragmentGalleryBinding;
+import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.buildmypc.MainActivity.database;
-import static com.example.buildmypc.databinding.FragmentGalleryBinding.inflate;
+import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
-	private FragmentGalleryBinding binding;
+	private FragmentPartsBinding binding;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		PartsViewModel partsViewModel = new ViewModelProvider(this).get(PartsViewModel.class);

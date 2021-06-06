@@ -13,10 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.buildmypc.R;
+import com.example.buildmypc.ui.build.PCBuild;
 
 public class EditorFragment extends Fragment {
 
 	private EditorViewModel mViewModel;
+
+	private PCBuild currentBuild;
+
+	public EditorFragment(PCBuild currentBuild){
+		this.currentBuild = currentBuild;
+	}
 
 	public static EditorFragment newInstance() {
 		return new EditorFragment();

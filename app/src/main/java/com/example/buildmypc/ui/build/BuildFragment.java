@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
+import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
 import com.example.buildmypc.ui.parts.parts.GPU;
@@ -93,6 +94,18 @@ public class BuildFragment extends Fragment {
 
 			holder.image.setImageDrawable(currentBuild.getLogo());
 			holder.text.setText(currentBuild.getName());
+			// setting the OnClickListener to start a new fragment while passing in the currentBuild object
+			holder.image.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					EditorFragment editorFragment = new EditorFragment(currentBuild);
+					int id = ((ViewGroup)getView().getParent()).getId();;
+					getActivity().getSupportFragmentManager().beginTransaction()
+							.add(editorFragment, "editorFragmentIdentifier")
+							.addToBackStack(null)
+							.commit();
+				}
+			});
 		}
 
 		@Override
@@ -109,6 +122,13 @@ public class BuildFragment extends Fragment {
 				super(itemView);
 				image = itemView.findViewById(R.id.gridView_imageView);
 				text = itemView.findViewById(R.id.gridView_textView);
+
+//				image.setOnClickListener(new View.OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						EditorFragment editor = new EditorFragment()
+//					}
+//				});
 			}
 		}
 	}
