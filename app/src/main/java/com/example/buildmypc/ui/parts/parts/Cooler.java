@@ -6,9 +6,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public final class Cooler extends Part implements Parcelable {
 //	private final String manufacturer;
@@ -76,32 +74,27 @@ public final class Cooler extends Part implements Parcelable {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
 
 		Cooler cooler = (Cooler) o;
 
 		if (getHeight() != cooler.getHeight()) return false;
 		if (isWaterCooled() != cooler.isWaterCooled()) return false;
 		if (isFanless() != cooler.isFanless()) return false;
-		if (getManufacturer() != null ? !getManufacturer().equals(cooler.getManufacturer()) : cooler.getManufacturer() != null)
-			return false;
-		if (getModel() != null ? !getModel().equals(cooler.getModel()) : cooler.getModel() != null)
-			return false;
 		if (getRpm() != null ? !getRpm().equals(cooler.getRpm()) : cooler.getRpm() != null)
 			return false;
 		if (getNoiseLevel() != null ? !getNoiseLevel().equals(cooler.getNoiseLevel()) : cooler.getNoiseLevel() != null)
 			return false;
-		// Probably incorrect - comparing Object[] arrays with Arrays.equals
-		return getSocketSupport().equals(cooler.getSocketSupport());
+		return getSocketSupport() != null ? getSocketSupport().equals(cooler.getSocketSupport()) : cooler.getSocketSupport() == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getManufacturer() != null ? getManufacturer().hashCode() : 0;
-		result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
+		int result = super.hashCode();
 		result = 31 * result + (getRpm() != null ? getRpm().hashCode() : 0);
 		result = 31 * result + (getNoiseLevel() != null ? getNoiseLevel().hashCode() : 0);
 		result = 31 * result + getHeight();
-		result = 31 * result + getSocketSupport().hashCode();
+		result = 31 * result + (getSocketSupport() != null ? getSocketSupport().hashCode() : 0);
 		result = 31 * result + (isWaterCooled() ? 1 : 0);
 		result = 31 * result + (isFanless() ? 1 : 0);
 		return result;
