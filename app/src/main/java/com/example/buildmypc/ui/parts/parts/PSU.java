@@ -1,10 +1,16 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 
-public class PSU extends Part { // stands for "Portable Communication Unit"
+public class PSU extends Part implements Parcelable { // stands for "Portable Communication Unit"
 
-	private ArrayList<Connector> connectorList;
+	private ArrayList<CountedString> connectorList;
 	private String efficiencyRating;
 	private boolean hasFan;
 	private String formFactor;
@@ -16,11 +22,11 @@ public class PSU extends Part { // stands for "Portable Communication Unit"
 		super(model, manufacturer);
 	}
 
-	public ArrayList<Connector> getConnectorList() {
+	public ArrayList<CountedString> getConnectorList() {
 		return connectorList;
 	}
 
-	public void setConnectorList(ArrayList<Connector> connectorList) {
+	public void setConnectorList(ArrayList<CountedString> connectorList) {
 		this.connectorList = connectorList;
 	}
 
@@ -72,32 +78,6 @@ public class PSU extends Part { // stands for "Portable Communication Unit"
 		this.wattage = wattage;
 	}
 
-	public class Connector {
-		private String name;
-		private int count;
-
-		public Connector(String name, int count) {
-			this.name = name;
-			this.count = count;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public int getCount() {
-			return count;
-		}
-
-		public void setCount(int count) {
-			this.count = count;
-		}
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -129,5 +109,30 @@ public class PSU extends Part { // stands for "Portable Communication Unit"
 		result = 31 * result + (getModular() != null ? getModular().hashCode() : 0);
 		result = 31 * result + getWattage();
 		return result;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeParcelableList(connectorList, flags);
+		dest.writeString(efficiencyRating);
+		dest.writeBoolean(hasFan);
+		dest.writeString(formFactor);
+		dest.writeInt(length);
+		dest.writeString(modular);
+		dest.writeInt(wattage);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public PSU(Parcel in){
+		super(in.readString(), in.readString());
+		in.readParcelableList(connectorList, connectorList.getClass().getClassLoader());
+		efficiencyRating = in.readString();
+		hasFan = in.readBoolean();
+		formFactor = in.readString();
+		length = in.readInt();
+		modular = in.readString();
+		wattage = in.readInt();
 	}
 }
