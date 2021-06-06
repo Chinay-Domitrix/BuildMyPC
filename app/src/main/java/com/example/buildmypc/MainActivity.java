@@ -1,5 +1,7 @@
 package com.example.buildmypc;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -8,7 +10,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
@@ -38,8 +50,16 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
-
-//	public ArrayList<PCBuild> preBuilds;
+	public static final AtomicReference<ArrayList<CPU>> cpus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Cooler>> coolers = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Motherboard>> motherboards = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Memory>> memory = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Storage>> storage = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<GPU>> gpus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Case>> pcCases = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<PSU>> psus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<OS>> oss = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Monitor>> monitors = new AtomicReference<>(new ArrayList<>());
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +81,13 @@ public class MainActivity extends AppCompatActivity {
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 
 		// the code to parse the JSON parts file into usable stuff
+		ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
 
-
+		} else {
+			
+		}
 	}
 
 	@Override
