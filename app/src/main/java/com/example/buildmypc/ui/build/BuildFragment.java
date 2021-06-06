@@ -1,14 +1,12 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -19,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
-import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
 import com.example.buildmypc.ui.parts.parts.GPU;
@@ -99,7 +96,7 @@ public class BuildFragment extends Fragment {
 			holder.image.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					int id = ((ViewGroup)getView().getParent()).getId();
+					int id = ((ViewGroup) getView().getParent()).getId();
 					openEditorFragment(currentBuild);
 
 				}
@@ -111,7 +108,7 @@ public class BuildFragment extends Fragment {
 			return buildList.size();
 		}
 
-		public class GridHolder extends RecyclerView.ViewHolder{
+		public class GridHolder extends RecyclerView.ViewHolder {
 
 			ImageView image;
 			TextView text;
