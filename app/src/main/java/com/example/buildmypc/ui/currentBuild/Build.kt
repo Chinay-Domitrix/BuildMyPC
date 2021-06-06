@@ -1,4 +1,4 @@
-package com.example.buildmypc.ui.build
+package com.example.buildmypc.ui.currentBuild
 
 import com.example.buildmypc.ui.parts.parts.*
 
@@ -7,7 +7,7 @@ data class Build(
 	val cooler: Cooler,
 	val motherboard: Motherboard,
 	val memory: Array<Memory>,
-	val storage: Array<StorageComp>,
+	val storage: Array<Storage>,
 	val gpu: Array<GPU>,
 	val case: Case,
 	val psu: PSU,
