@@ -1,8 +1,14 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class Memory extends Part {
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-	private double hasECC;
+import androidx.annotation.RequiresApi;
+
+public class Memory extends Part implements Parcelable {
+
+	private boolean hasECC;
 	private int latencyCAS; // backwards to respect carrot case
 	private int ddrGen; // pretty much always 4
 	private int firstWordLatency; // in nanoseconds
@@ -18,11 +24,11 @@ public class Memory extends Part {
 		super(model, manufacturer);
 	}
 
-	public double getHasECC() {
+	public boolean getHasECC() {
 		return hasECC;
 	}
 
-	public void setHasECC(double hasECC) {
+	public void setHasECC(boolean hasECC) {
 		this.hasECC = hasECC;
 	}
 
@@ -114,7 +120,7 @@ public class Memory extends Part {
 
 		Memory memory = (Memory) o;
 
-		if (Double.compare(memory.getHasECC(), getHasECC()) != 0) return false;
+		if (Boolean.compare(memory.getHasECC(), getHasECC()) != 0) return false;
 		if (getLatencyCAS() != memory.getLatencyCAS()) return false;
 		if (getDdrGen() != memory.getDdrGen()) return false;
 		if (getFirstWordLatency() != memory.getFirstWordLatency()) return false;
@@ -128,12 +134,11 @@ public class Memory extends Part {
 		return getTiming() != null ? getTiming().equals(memory.getTiming()) : memory.getTiming() == null;
 	}
 
-	@Override
+	@Override // TODO fix this
 	public int hashCode() {
 		int result = super.hashCode();
 		long temp;
-		temp = Double.doubleToLongBits(getHasECC());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (getHasECC() ? 1 : 0);
 		result = 31 * result + getLatencyCAS();
 		result = 31 * result + getDdrGen();
 		result = 31 * result + getFirstWordLatency();
@@ -147,5 +152,38 @@ public class Memory extends Part {
 		temp = Double.doubleToLongBits(getVoltage());
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeBoolean(hasECC);
+		dest.writeInt(latencyCAS);
+		dest.writeInt(ddrGen);
+		dest.writeInt(firstWordLatency);
+		dest.writeString(formFactor);
+		dest.writeDouble(heatSpreader);
+		dest.writeInt(moduleSize);
+		dest.writeInt(moduleCount);
+		dest.writeInt(speed);
+		dest.writeString(timing);
+		dest.writeDouble(voltage);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Memory(Parcel in){
+		super(in.readString(), in.readString());
+		hasECC = in.readBoolean();
+		latencyCAS = in.readInt();
+		ddrGen = in.readInt();
+		firstWordLatency = in.readInt();
+		formFactor = in.readString();
+		heatSpreader = in.readDouble();
+		moduleSize = in.readInt();
+		moduleCount = in.readInt();
+		speed = in.readInt();
+		timing = in.readString();
+		voltage = in.readDouble();
 	}
 }
