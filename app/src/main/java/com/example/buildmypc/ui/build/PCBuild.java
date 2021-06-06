@@ -65,7 +65,7 @@ public class PCBuild implements Parcelable {
 		os = in.readParcelable(os.getClass().getClassLoader());
 		psu = in.readParcelable(psu.getClass().getClassLoader());
 		storage = in.readParcelable(storage.getClass().getClassLoader());
-		extraParts = in.readParcelableList(extraParts, extraParts.getClass().getClassLoader());
+		extraParts = new ArrayList<>(in.readParcelableList(extraParts, extraParts.getClass().getClassLoader()));
 	}
 
 	public String getName() {
