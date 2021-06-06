@@ -1,5 +1,7 @@
 package com.example.buildmypc.ui.parts;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static com.example.buildmypc.MainActivity.database;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
@@ -25,20 +28,27 @@ public class PartsFragment extends Fragment {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		final TextView textView = binding.textGallery;
-		FirebaseDatabase firebaseDatabase = database.get();
-		DatabaseReference cpu = firebaseDatabase.getReference("cpu"),
-				cooler = firebaseDatabase.getReference("cooler"),
-				motherboard = firebaseDatabase.getReference("motherboard"),
-				memory = firebaseDatabase.getReference("memory"),
-				storage = firebaseDatabase.getReference("storage"),
-				gpu = firebaseDatabase.getReference("gpu"),
-				pcCase = firebaseDatabase.getReference("case"),
-				psu = firebaseDatabase.getReference("psu"),
-				os = firebaseDatabase.getReference("os"),
-				monitor = firebaseDatabase.getReference("monitor");
-		new Thread() {
+		ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
+			FirebaseDatabase firebaseDatabase = database.get();
+			DatabaseReference cpu = firebaseDatabase.getReference("cpu"),
+					cooler = firebaseDatabase.getReference("cooler"),
+					motherboard = firebaseDatabase.getReference("motherboard"),
+					memory = firebaseDatabase.getReference("memory"),
+					storage = firebaseDatabase.getReference("storage"),
+					gpu = firebaseDatabase.getReference("gpu"),
+					pcCase = firebaseDatabase.getReference("case"),
+					psu = firebaseDatabase.getReference("psu"),
+					os = firebaseDatabase.getReference("os"),
+					monitor = firebaseDatabase.getReference("monitor");
+			new Thread() {
 
-		}.start();
+			}.start();
+		} else {
+
+		}
+
 		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
