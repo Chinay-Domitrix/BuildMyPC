@@ -1,6 +1,8 @@
 package com.example.buildmypc.ui.build;
 
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
@@ -15,7 +17,7 @@ import com.example.buildmypc.ui.parts.parts.Storage;
 
 import java.util.ArrayList;
 
-public class PCBuild {
+public class PCBuild implements Parcelable {
 
 	private String name;
 	private Drawable logo;
@@ -47,6 +49,10 @@ public class PCBuild {
 		this.psu = psu;
 		this.storage = storage;
 		this.extraParts = extraParts;
+	}
+
+	protected PCBuild(Parcel in) {
+		name = in.readString();
 	}
 
 	public String getName() {
@@ -193,4 +199,28 @@ public class PCBuild {
 		result = 31 * result + (getExtraParts() != null ? getExtraParts().hashCode() : 0);
 		return result;
 	}
+
+	// TODO Parcelable
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+	}
+
+	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
+		@Override
+		public PCBuild createFromParcel(Parcel in) {
+			return new PCBuild(in);
+		}
+
+		@Override
+		public PCBuild[] newArray(int size) {
+			return new PCBuild[size];
+		}
+	};
 }

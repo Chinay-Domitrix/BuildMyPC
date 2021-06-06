@@ -1,12 +1,14 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -77,7 +79,6 @@ public class BuildFragment extends Fragment {
 			this.buildList = buildList;
 		}
 
-
 		@NonNull
 		@NotNull
 		@Override
@@ -98,12 +99,9 @@ public class BuildFragment extends Fragment {
 			holder.image.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					EditorFragment editorFragment = new EditorFragment(currentBuild);
-					int id = ((ViewGroup)getView().getParent()).getId();;
-					getActivity().getSupportFragmentManager().beginTransaction()
-							.add(editorFragment, "editorFragmentIdentifier")
-							.addToBackStack(null)
-							.commit();
+					int id = ((ViewGroup)getView().getParent()).getId();
+					openEditorFragment(currentBuild);
+
 				}
 			});
 		}
@@ -131,6 +129,10 @@ public class BuildFragment extends Fragment {
 //				});
 			}
 		}
+	}
+
+	private void openEditorFragment(PCBuild currentBuild) {
+
 	}
 
 	public class Prebuilds {

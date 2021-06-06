@@ -17,16 +17,23 @@ import com.example.buildmypc.ui.build.PCBuild;
 
 public class EditorFragment extends Fragment {
 
-	private EditorViewModel mViewModel;
+	private static final String BUILD = "pcbuild";
 
+	private EditorViewModel mViewModel;
 	private PCBuild currentBuild;
 
-	public EditorFragment(PCBuild currentBuild){
-		this.currentBuild = currentBuild;
+	public EditorFragment() {}
+
+	public static EditorFragment newInstance(PCBuild build) {
+		EditorFragment editorFragment = new EditorFragment();
+		Bundle args = new Bundle();
+//		args.putParcelable(build); TODO MAKE EVERYTHING PARCELABLE
+		return new EditorFragment();
 	}
 
-	public static EditorFragment newInstance() {
-		return new EditorFragment();
+	@Override
+	public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
