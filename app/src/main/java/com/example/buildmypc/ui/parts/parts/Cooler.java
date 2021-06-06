@@ -1,12 +1,13 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+
+import static android.os.Build.VERSION_CODES.Q;
 
 public final class Cooler extends Part implements Parcelable {
 //	private final String manufacturer;
@@ -100,7 +101,7 @@ public final class Cooler extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@RequiresApi(api = Q)
 	public Cooler(Parcel in) {
 		super(in.readString(), in.readString());
 		rpm = in.readString();
@@ -112,7 +113,7 @@ public final class Cooler extends Part implements Parcelable {
 		fanless = in.readBoolean();
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@RequiresApi(api = Q)
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
