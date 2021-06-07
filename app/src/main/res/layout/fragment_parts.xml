@@ -1,176 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:padding="32dp"
 	tools:context=".ui.parts.PartsFragment">
 
-	<LinearLayout
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:layout_height="match_parent"
+		android:padding="32dp">
 
-		<TextView
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="CPUs"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			android:orientation="vertical">
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_cpu_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="CPUs"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_cpu_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:fontFamily="serif"
-			android:text="Coolers"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_cooler_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Coolers"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_cooler_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:fontFamily="serif"
-			android:gravity="center"
-			android:text="Motherboards"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_motherboard_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Motherboards"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_motherboard_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Memory"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_memory_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Memory"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Storage"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_memory_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_storage_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Video Cards"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Storage"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_gpu_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_storage_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Power Supplies"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_psu_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Video Cards"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Operating Systems"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_gpu_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_os_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
 
-		<Space
-			android:layout_width="wrap_content"
-			android:layout_height="16dp" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/design_default_color_secondary"
-			android:gravity="center"
-			android:text="Monitors"
-			android:fontFamily="serif"
-			android:textColor="@color/design_default_color_on_secondary"
-			android:textSize="16pt" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Power Supplies"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/parts_monitor_recyclerview"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
-	</LinearLayout>
-</ScrollView>
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_psu_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Operating Systems"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_os_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
+				android:text="Monitors"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="16pt" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_monitor_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
