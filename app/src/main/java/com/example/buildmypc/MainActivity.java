@@ -20,7 +20,6 @@ import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.Storage;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ import static com.example.buildmypc.R.id.nav_home;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.id.nav_newsfeed;
 import static com.example.buildmypc.R.menu.main;
-import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
@@ -69,11 +67,6 @@ public class MainActivity extends AppCompatActivity {
 		NavController navController = findNavController(this, nav_host_fragment_content_main);
 		setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 		setupWithNavController(binding.navView, navController);
-		try {
-			parts.set(new JSONObject(getString(parts_list)));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 //		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 		// the code to parse the JSON parts file into usable stuff
 	}
