@@ -3,7 +3,7 @@ package com.example.buildmypc
 import com.example.buildmypc.MainActivity.parts
 import com.example.buildmypc.ui.parts.parts.CPU
 
-class PartsJSONParse : Runnable {
+class PartsJSONParse : Thread() {
 	override fun run() {
 		val tempJSONObject = parts.get()
 		val cpus = tempJSONObject.getJSONArray("cpus")
