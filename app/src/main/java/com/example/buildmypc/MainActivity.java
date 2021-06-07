@@ -83,10 +83,9 @@ public class MainActivity extends AppCompatActivity {
 			e.printStackTrace();
 		}
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
-
 		// the code to parse the JSON parts file into usable stuff
 		try {
-			initializeApp(new FirebaseOptions.Builder().setCredentials(fromStream(new FileInputStream("app/src/main/java/com/example/buildmypc/buildmypc-ac8c3-firebase-adminsdk-ryfk0-0ccb4f1c62.json"))).setDatabaseUrl("https://buildmypc-ac8c3-default-rtdb.firebaseio.com").build());
+			initializeApp(FirebaseOptions.builder().setCredentials(fromStream(new FileInputStream("app/src/main/java/com/example/buildmypc/buildmypc-ac8c3-firebase-adminsdk-ryfk0-0ccb4f1c62.json"))).setDatabaseUrl("https://buildmypc-ac8c3-default-rtdb.firebaseio.com").build());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
