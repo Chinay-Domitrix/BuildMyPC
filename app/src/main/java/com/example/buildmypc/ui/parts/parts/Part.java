@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 // the start of the part hierarchy
 public class Part implements Parcelable {
-
 	private String model;
 	private String manufacturer;
 
@@ -14,7 +13,7 @@ public class Part implements Parcelable {
 		this.manufacturer = manufacturer;
 	}
 
-	public Part(Parcel in){
+	public Part(Parcel in) {
 		model = in.readString();
 		manufacturer = in.readString();
 	}
