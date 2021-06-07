@@ -6,8 +6,12 @@
     tools:context=".ui.currentBuild.EditorFragment">
 
     <TextView
+        android:id="@+id/editorFragment_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:gravity="center"
+        android:text="fragment@!!"
+        android:textAlignment="gravity"
+        android:textSize="24sp" />
 
 </FrameLayout>
