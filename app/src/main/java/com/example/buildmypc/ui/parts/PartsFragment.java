@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,7 +26,7 @@ public class PartsFragment extends Fragment {
 		PartsViewModel partsViewModel = new ViewModelProvider(this).get(PartsViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		final TextView textView = binding.textGallery;
+//		final TextView textView = binding.textParts;
 		ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
@@ -49,7 +48,7 @@ public class PartsFragment extends Fragment {
 
 		}
 
-		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
 	}
 

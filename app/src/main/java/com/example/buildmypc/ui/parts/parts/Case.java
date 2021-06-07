@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Case extends Part implements Parcelable {
-
+//hello
 	private String color;
 	private int[] dimensionsMm; // 1-d int arraylist with 3 entries,
 	private int fullExpansionSlotCount;
