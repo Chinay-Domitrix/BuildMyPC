@@ -1,6 +1,12 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class Storage extends Part {
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
+public class Storage extends Part implements Parcelable {
 
 	double formFactor;
 	private int cacheSizeMB; // in mb
@@ -101,5 +107,30 @@ public class Storage extends Part {
 		result = 31 * result + getRpm();
 		result = 31 * result + (getType() != null ? getType().hashCode() : 0);
 		return result;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeDouble(formFactor);
+		dest.writeInt(cacheSizeMB);
+		dest.writeInt(capacity);
+		dest.writeString(sataInterface);
+		dest.writeBoolean(nvme);
+		dest.writeInt(rpm);
+		dest.writeString(type);
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Storage(Parcel in){
+		super(in.toString(), in.toString());
+		formFactor = in.readDouble();
+		cacheSizeMB = in.readInt();
+		capacity = in.readInt();
+		sataInterface = in.readString();
+		nvme = in.readBoolean();
+		rpm = in.readInt();
+		type = in.readString();
 	}
 }

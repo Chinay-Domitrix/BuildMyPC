@@ -1,6 +1,9 @@
 package com.example.buildmypc.ui.parts.parts;
 
-public class OS extends Accessory {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class OS extends Accessory implements Parcelable {
 
 	private String bitMode;
 	private double maxMemSupport;
@@ -81,5 +84,24 @@ public class OS extends Accessory {
 		result = 31 * result + (getEdition() != null ? getEdition().hashCode() : 0);
 		result = 31 * result + (getOem_retail() != null ? getOem_retail().hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(bitMode);
+		dest.writeDouble(maxMemSupport);
+		dest.writeString(type);
+		dest.writeString(edition);
+		dest.writeString(oem_retail);
+	}
+
+	public OS(Parcel in){
+		super(in.readString(), in.readString());
+		bitMode = in.readString();
+		maxMemSupport = in.readDouble();
+		type = in.readString();
+		edition = in.readString();
+		oem_retail = in.readString();
 	}
 }

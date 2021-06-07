@@ -1,9 +1,15 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Monitor extends Part {
+public class Monitor extends Part implements Parcelable {
 
 	private String aspectRatio;
 	private String brightness; // in candla per square meter
@@ -11,7 +17,7 @@ public class Monitor extends Part {
 	private ArrayList<String> frameSync;
 	private String hdrTier;
 	private boolean builtInSpeakers;
-	private MonitorInterface monitorInterfaces;
+	private ArrayList<CountedString> monitorInterfaces;
 	private String panelType;
 	private double refreshRate; // in hertz
 	private int[] resolution; // 2-element integer array; e.g. {1920, 1080}
@@ -22,6 +28,14 @@ public class Monitor extends Part {
 
 	public Monitor(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	public ArrayList<CountedString> getMonitorInterfaces() {
+		return monitorInterfaces;
+	}
+
+	public void setMonitorInterfaces(ArrayList<CountedString> monitorInterfaces) {
+		this.monitorInterfaces = monitorInterfaces;
 	}
 
 	public String getAspectRatio() {
@@ -70,14 +84,6 @@ public class Monitor extends Part {
 
 	public void setBuiltInSpeakers(boolean builtInSpeakers) {
 		this.builtInSpeakers = builtInSpeakers;
-	}
-
-	public MonitorInterface getMonitorInterfaces() {
-		return monitorInterfaces;
-	}
-
-	public void setMonitorInterfaces(MonitorInterface monitorInterfaces) {
-		this.monitorInterfaces = monitorInterfaces;
 	}
 
 	public String getPanelType() {
@@ -136,32 +142,6 @@ public class Monitor extends Part {
 		isWidescreen = widescreen;
 	}
 
-	public class MonitorInterface {
-		private String name;
-		private String count;
-
-		public MonitorInterface(String name, String count) {
-			this.name = name;
-			this.count = count;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getCount() {
-			return count;
-		}
-
-		public void setCount(String count) {
-			this.count = count;
-		}
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -214,5 +194,45 @@ public class Monitor extends Part {
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		result = 31 * result + (isWidescreen() ? 1 : 0);
 		return result;
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(aspectRatio);
+		dest.writeString(brightness);
+		dest.writeBoolean(isCurved);
+		dest.writeStringList(frameSync);
+		dest.writeString(hdrTier);
+		dest.writeBoolean(builtInSpeakers);
+		dest.writeParcelableList(monitorInterfaces, flags);
+		dest.writeString(panelType);
+		dest.writeDouble(refreshRate);
+		dest.writeIntArray(resolution); // 2 elements
+		dest.writeInt(responseTimeMs);
+		dest.writeDouble(screenSizeIn);
+		dest.writeDouble(viewingAngle);
+		dest.writeBoolean(isWidescreen);
+
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Monitor(Parcel in){
+		super(in.readString(), in.readString());
+		aspectRatio = in.readString();
+		brightness = in.readString();
+		isCurved = in.readBoolean();
+		in.readStringList(frameSync);
+		hdrTier = in.readString();
+		builtInSpeakers = in.readBoolean();
+		monitorInterfaces = (ArrayList<CountedString>) in.readParcelableList(monitorInterfaces, monitorInterfaces.getClass().getClassLoader()); // probably doesn't work
+		panelType = in.readString();
+		refreshRate = in.readDouble();
+		in.readIntArray(resolution);
+		responseTimeMs = in.readInt();
+		screenSizeIn = in.readDouble();
+		viewingAngle = in.readDouble();
+		isWidescreen = in.readBoolean();
 	}
 }

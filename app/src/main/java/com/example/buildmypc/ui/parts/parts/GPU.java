@@ -1,8 +1,11 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class GPU extends Part { // the only important part for 12 year old me buying a gaming PC
+public class GPU extends Part implements Parcelable { // the only important part for 12 year old me buying a gaming PC
 
 	private int boostClockSpeed; // in mhz
 	private String chipset;
@@ -183,5 +186,42 @@ public class GPU extends Part { // the only important part for 12 year old me bu
 		result = 31 * result + getTdpW();
 		result = 31 * result + (getVideoPorts() != null ? getVideoPorts().hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeInt(boostClockSpeed);
+		dest.writeString(chipset);
+		dest.writeString(cooling);
+		dest.writeInt(coreClockSpeed);
+		dest.writeInt(effectiveMemClockSpeed);
+		dest.writeInt(expansionSlotWidth);
+		dest.writeString(externalPower);
+		dest.writeString(frameSync);
+		dest.writeString(gpuInterface);
+		dest.writeInt(length);
+		dest.writeInt(intMemory);
+		dest.writeString(intMemoryType);
+		dest.writeInt(tdpW);
+		dest.writeStringList(videoPorts);
+	}
+
+	public GPU(Parcel in){
+		super(in.readString(), in.readString());
+		boostClockSpeed = in.readInt();
+		chipset = in.readString();
+		cooling = in.readString();
+		coreClockSpeed = in.readInt();
+		effectiveMemClockSpeed = in.readInt();
+		expansionSlotWidth = in.readInt();
+		externalPower = in.readString();
+		frameSync = in.readString();
+		gpuInterface = in.readString();
+		length = in.readInt();
+		intMemory = in.readInt();
+		intMemoryType = in.readString();
+		tdpW = in.readInt();
+		in.readStringList(videoPorts);
 	}
 }
