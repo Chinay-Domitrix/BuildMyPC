@@ -19,11 +19,14 @@ import com.example.buildmypc.ui.parts.parts.OS;
 import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.Storage;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -43,6 +46,8 @@ import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
+import static com.google.auth.oauth2.GoogleCredentials.fromStream;
+import static com.google.firebase.FirebaseApp.initializeApp;
 import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class MainActivity extends AppCompatActivity {
@@ -80,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
 		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 
 		// the code to parse the JSON parts file into usable stuff
+		try {
+			initializeApp(new FirebaseOptions.Builder().setCredentials(fromStream(new FileInputStream("app/src/main/java/com/example/buildmypc/buildmypc-ac8c3-firebase-adminsdk-ryfk0-0ccb4f1c62.json"))).setDatabaseUrl("https://buildmypc-ac8c3-default-rtdb.firebaseio.com").build());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
