@@ -2,6 +2,7 @@ package com.example.buildmypc.ui.currentBuild;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,19 +22,22 @@ public class EditorFragment extends Fragment {
 
 	private EditorViewModel mViewModel;
 	private PCBuild currentBuild;
+	private OnFragmentInteractionListener mListener;
+
 
 	public EditorFragment() {}
 
 	public static EditorFragment newInstance(PCBuild build) {
 		EditorFragment editorFragment = new EditorFragment();
 		Bundle args = new Bundle();
-//		args.putParcelable(build); TODO MAKE EVERYTHING PARCELABLE
+		args.putParcelable(BUILD, build);
 		return new EditorFragment();
 	}
 
 	@Override
 	public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		PCBuild build = getArguments().getParcelable(BUILD);
 	}
 
 	@Override
@@ -49,4 +53,31 @@ public class EditorFragment extends Fragment {
 		// TODO: Use the ViewModel
 	}
 
+	public void sendBack(PCBuild updatedBuild){
+		if(mListener != null){
+			mListener.onFragmentInteraction(updatedBuild);
+		}
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof OnFragmentInteractionListener) {
+			mListener = (OnFragmentInteractionListener) context;
+		} else {
+			throw new RuntimeException(context.toString()
+					+ " must implement OnFragmentInteractionListener");
+		}
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mListener = null;
+	}
+
+	public interface OnFragmentInteractionListener {
+		// TODO: Update argument type and name
+		void onFragmentInteraction(PCBuild sendBackText);
+	}
 }

@@ -11,12 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
+import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
 import com.example.buildmypc.ui.parts.parts.GPU;
@@ -37,6 +39,8 @@ import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 public class BuildFragment extends Fragment {
 	ArrayList<PCBuild> displayedBuilds;
 	private FragmentHomeBinding binding;
+
+	private static final String BUILD = "pcbuild";
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
@@ -129,7 +133,12 @@ public class BuildFragment extends Fragment {
 	}
 
 	private void openEditorFragment(PCBuild currentBuild) {
-
+		EditorFragment fragment = EditorFragment.newInstance(currentBuild);
+		getParentFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+				.addToBackStack(null)
+				.add(R.id.nav_host_fragment_content_main, fragment, BUILD)
+				.commit();
 	}
 
 	public class Prebuilds {
