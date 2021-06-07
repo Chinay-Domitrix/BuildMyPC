@@ -1,5 +1,7 @@
 package com.example.buildmypc.ui.parts;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
@@ -21,9 +24,9 @@ public class PartsFragment extends Fragment {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 //		final TextView textView = binding.textParts;
-//		ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
-//		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-//		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
+		ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		if (activeNetwork != null && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
 //			FirebaseDatabase firebaseDatabase = database.get();
 //			DatabaseReference cpu = firebaseDatabase.getReference("cpu"),
 //					cooler = firebaseDatabase.getReference("cooler"),
@@ -38,9 +41,9 @@ public class PartsFragment extends Fragment {
 			new Thread() {
 
 			}.start();
-//		} else {
-//
-//		}
+		} else {
+
+		}
 
 //		partsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 		return root;
