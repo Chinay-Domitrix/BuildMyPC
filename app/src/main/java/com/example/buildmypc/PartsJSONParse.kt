@@ -76,18 +76,40 @@ class PartsJSONParse : Thread() {
 				val oe = getJSONArray("onboard-ethernet")
 				val eth = ArrayList<String>()
 				(0 until oe.length()).mapTo(eth) { it1 -> oe[it1] as String }
-				val pciSlots = getJSONArray("onboard-ethernet")
-				val pci = ArrayList<CountedString>()
-				(0 until oe.length()).mapTo(eth) { it1 -> memorySpeeds[it1] as String }
+				val pciSlots = getJSONObject("pci-slots")
+				val pci = ArrayList<CountedString>().apply {
+					add(CountedString("e-x1", pciSlots.getInt("e-x1")))
+					add(CountedString("e-x16", pciSlots.getInt("e-x16")))
+					add(CountedString("e-x4", pciSlots.getInt("e-x4")))
+					add(CountedString("e-x8", pciSlots.getInt("e-x8")))
+					add(CountedString("standard", pciSlots.getInt("standard")))
+				}
+				val usbHeaders = getJSONObject("usb-headers")
+				val usb = ArrayList<CountedString>().apply {
+					add(CountedString("gen-1", usbHeaders.getJSONObject("3-2").getInt("gen-1")))
+					add(CountedString("gen-2", usbHeaders.getJSONObject("3-2").getInt("gen-2")))
+					add(CountedString("gen-2x2", usbHeaders.getJSONObject("3-2").getInt("gen-2x2")))
+				}
 				tempMotherboards += Motherboard(
 					getString("model"),
 					getString("manufacturer"),
 					getBoolean("ecc"),
 					getString("chipset"),
 					getString("form-factor"),
-					m2Slots,
-					getBoolean("water-cooled"),
-					getBoolean("smt")
+					m2,
+					getInt("max-memory-gb"),
+					getInt("memory-slots"),
+					mem,
+					getString("memory-type"),
+					getInt("msata-slots"),
+					eth,
+					getString("onboard-video"),
+					pci,
+					getBoolean("raid"),
+					getInt("sata-6gbps"),
+					usbHeaders.getInt("2"),
+					usb,
+					getBoolean("wireless")
 				)
 			}
 		}
