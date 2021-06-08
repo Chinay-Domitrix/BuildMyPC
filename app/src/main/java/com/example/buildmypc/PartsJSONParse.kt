@@ -157,28 +157,25 @@ class PartsJSONParse : Thread() {
 				MainActivity.memory.set(tempMemory)
 			})
 			add(Thread {
-				val memory = tempJSONObject.getJSONArray("memory")
-				val tempMemory = MainActivity.memory.get()
-				(0 until memory.length()).forEach {
-					memory.getJSONObject(it).apply {
-						tempMemory += Memory(
+				val storage = tempJSONObject.getJSONArray("storage")
+				val tempStorage = MainActivity.storage.get()
+				(0 until storage.length()).forEach {
+					storage.getJSONObject(it).apply {
+						tempStorage += Storage(
 							getString("model"),
 							getString("manufacturer"),
-							getBoolean("ecc"),
-							getInt("cas-latency"),
-							getInt("ddr-gen"),
-							getInt("first-word-latency-ns"),
-							getString("form-factor"),
-							getBoolean("heat-spreader"),
-							getJSONObject("modules").getInt("size-gb"),
-							getJSONObject("modules").getInt("quantity"),
-							getInt("speed-mhz"),
-							getString("timing"),
-							getDouble("voltage")
+							getDouble("form-factor"),
+							getInt("cache-mb"),
+							getJSONObject("capacity").getInt("size")
+								.toString() + getJSONObject("capacity").getString("unit"),
+							getString("interface"),
+							getBoolean("nvme"),
+							getInt("rpm"),
+							getString("type")
 						)
 					}
 				}
-				MainActivity.memory.set(tempMemory)
+				MainActivity.storage.set(tempStorage)
 			})
 		}.forEach(Thread::start)
 	}
