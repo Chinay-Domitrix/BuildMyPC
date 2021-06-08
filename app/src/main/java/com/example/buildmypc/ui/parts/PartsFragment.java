@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.toolbox.StringRequest;
-import com.example.buildmypc.PartsJSONParse;
+//import com.example.buildmypc.PartsJSONParse;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 
 import org.json.JSONException;
@@ -49,7 +49,7 @@ public class PartsFragment extends Fragment {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		new PartsJSONParse().start();
+//		new PartsJSONParse().start();
 		return root;
 	}
 

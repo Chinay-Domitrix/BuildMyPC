@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,8 +41,20 @@ import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 public class BuildFragment extends Fragment {
 	ArrayList<PCBuild> displayedBuilds;
 	private FragmentHomeBinding binding;
+	PCBuild currentEditedBuild;
 
 	private static final String BUILD = "pcbuild";
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		getParentFragmentManager().setFragmentResultListener(BUILD, this, new FragmentResultListener() {
+			@Override
+			public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle result) {
+				currentEditedBuild = result.getParcelable(BUILD);
+			}
+		});
+	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
@@ -101,7 +115,11 @@ public class BuildFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					int id = ((ViewGroup) getView().getParent()).getId();
-					openEditorFragment(currentBuild);
+					getActivity().getSupportFragmentManager().beginTransaction()
+							.replace(id, new EditorFragment(currentBuild), "findThisFragment")
+							.addToBackStack(null)
+							.commit();
+//					openEditorFragment(currentBuild);
 
 				}
 			});
