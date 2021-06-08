@@ -6,14 +6,15 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
-public class Memory extends Part implements Parcelable {
+import org.jetbrains.annotations.NotNull;
 
+public class Memory extends Part implements Parcelable {
 	private boolean hasECC;
 	private int latencyCAS; // backwards to respect carrot case
-	private int ddrGen; // pretty much always 4
+	private int ddrGen; // pretty much always four
 	private int firstWordLatency; // in nanoseconds
 	private String formFactor;
-	private double heatSpreader;
+	private boolean heatSpreader;
 	private int moduleSize; // in gb
 	private int moduleCount; // regular old integer
 	private int speed; // in mhz
@@ -24,7 +25,7 @@ public class Memory extends Part implements Parcelable {
 		super(model, manufacturer);
 	}
 
-	public Memory(String model, String manufacturer, boolean hasECC, int latencyCAS, int ddrGen, int firstWordLatency, String formFactor, double heatSpreader, int moduleSize, int moduleCount, int speed, String timing, double voltage) {
+	public Memory(String model, String manufacturer, boolean hasECC, int latencyCAS, int ddrGen, int firstWordLatency, String formFactor, boolean heatSpreader, int moduleSize, int moduleCount, int speed, String timing, double voltage) {
 		this(model, manufacturer);
 		this.hasECC = hasECC;
 		this.latencyCAS = latencyCAS;
@@ -79,11 +80,11 @@ public class Memory extends Part implements Parcelable {
 		this.formFactor = formFactor;
 	}
 
-	public double getHeatSpreader() {
+	public boolean hasHeatSpreader() {
 		return heatSpreader;
 	}
 
-	public void setHeatSpreader(double heatSpreader) {
+	public void setHeatSpreader(boolean heatSpreader) {
 		this.heatSpreader = heatSpreader;
 	}
 
@@ -135,11 +136,11 @@ public class Memory extends Part implements Parcelable {
 
 		Memory memory = (Memory) o;
 
-		if (Boolean.compare(memory.getHasECC(), getHasECC()) != 0) return false;
+		if (getHasECC() != memory.getHasECC()) return false;
 		if (getLatencyCAS() != memory.getLatencyCAS()) return false;
 		if (getDdrGen() != memory.getDdrGen()) return false;
 		if (getFirstWordLatency() != memory.getFirstWordLatency()) return false;
-		if (Double.compare(memory.getHeatSpreader(), getHeatSpreader()) != 0) return false;
+		if (heatSpreader != memory.heatSpreader) return false;
 		if (getModuleSize() != memory.getModuleSize()) return false;
 		if (getModuleCount() != memory.getModuleCount()) return false;
 		if (getSpeed() != memory.getSpeed()) return false;
@@ -149,7 +150,7 @@ public class Memory extends Part implements Parcelable {
 		return getTiming() != null ? getTiming().equals(memory.getTiming()) : memory.getTiming() == null;
 	}
 
-	@Override // TODO fix this
+	@Override
 	public int hashCode() {
 		int result = super.hashCode();
 		long temp;
@@ -158,8 +159,7 @@ public class Memory extends Part implements Parcelable {
 		result = 31 * result + getDdrGen();
 		result = 31 * result + getFirstWordLatency();
 		result = 31 * result + (getFormFactor() != null ? getFormFactor().hashCode() : 0);
-		temp = Double.doubleToLongBits(getHeatSpreader());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (heatSpreader ? 1 : 0);
 		result = 31 * result + getModuleSize();
 		result = 31 * result + getModuleCount();
 		result = 31 * result + getSpeed();
@@ -171,14 +171,14 @@ public class Memory extends Part implements Parcelable {
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeBoolean(hasECC);
 		dest.writeInt(latencyCAS);
 		dest.writeInt(ddrGen);
 		dest.writeInt(firstWordLatency);
 		dest.writeString(formFactor);
-		dest.writeDouble(heatSpreader);
+		dest.writeBoolean(heatSpreader);
 		dest.writeInt(moduleSize);
 		dest.writeInt(moduleCount);
 		dest.writeInt(speed);
@@ -187,14 +187,14 @@ public class Memory extends Part implements Parcelable {
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public Memory(Parcel in){
+	public Memory(Parcel in) {
 		super(in.readString(), in.readString());
 		hasECC = in.readBoolean();
 		latencyCAS = in.readInt();
 		ddrGen = in.readInt();
 		firstWordLatency = in.readInt();
 		formFactor = in.readString();
-		heatSpreader = in.readDouble();
+		heatSpreader = in.readBoolean();
 		moduleSize = in.readInt();
 		moduleCount = in.readInt();
 		speed = in.readInt();
