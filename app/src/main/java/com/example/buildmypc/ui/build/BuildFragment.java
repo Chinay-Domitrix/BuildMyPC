@@ -2,6 +2,7 @@ package com.example.buildmypc.ui.build;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
+import com.example.buildmypc.ui.currentBuild.Build;
 import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
@@ -35,6 +38,7 @@ import com.example.buildmypc.ui.parts.parts.Storage;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
@@ -44,6 +48,12 @@ public class BuildFragment extends Fragment {
 	PCBuild currentEditedBuild;
 
 	private static final String BUILD = "pcbuild";
+
+	public BuildFragment(PCBuild build) {
+		this.currentEditedBuild = build;
+	}
+
+	public BuildFragment() {}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState){
@@ -58,6 +68,10 @@ public class BuildFragment extends Fragment {
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
+
+//		if(((AppCompatActivity) getActivity()).getActionBar() != null)
+//			((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 //		final TextView textView = binding.textHome;
@@ -66,6 +80,7 @@ public class BuildFragment extends Fragment {
 		// building myBuilds
 		displayedBuilds = new ArrayList<PCBuild>();
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
+		if(currentEditedBuild != null) displayedBuilds.add(currentEditedBuild);
 		// TODO add adding custom builds, saving them, and accessing them in the future (prob Sunday/Monday/Tuesday if we're that late)
 
 		RecyclerView recyclerView = binding.buildFragRecyclerView;
@@ -157,6 +172,13 @@ public class BuildFragment extends Fragment {
 				.addToBackStack(null)
 				.add(R.id.nav_host_fragment_content_main, fragment, BUILD)
 				.commit();
+	}
+
+	public static BuildFragment newInstance(PCBuild build) {
+		BuildFragment fragment = new BuildFragment();
+		Bundle args = new Bundle();
+		args.putParcelable(BUILD, build);
+		return new BuildFragment(build);
 	}
 
 	public class Prebuilds {

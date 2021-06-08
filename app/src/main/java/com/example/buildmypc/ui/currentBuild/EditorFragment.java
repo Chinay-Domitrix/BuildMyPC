@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,20 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildmypc.R;
+import com.example.buildmypc.databinding.FragmentHomeBinding;
+import com.example.buildmypc.ui.build.BuildFragment;
 import com.example.buildmypc.ui.build.PCBuild;
+
+import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
 public class EditorFragment extends Fragment {
 
 	private static final String BUILD = "pcbuild";
+	public static final String BACK = "buildbackbetter";
 
 	private EditorViewModel mViewModel;
 	private PCBuild currentBuild;
-	private OnFragmentInteractionListener mListener;
+	private FragmentHomeBinding binding;
 
 	private Button goBackButton;
-	private TextView textView;
+	private TextView myTextView;
 
 
 	public EditorFragment(PCBuild currentBuild) {
@@ -49,11 +56,36 @@ public class EditorFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		goBackButton = container.findViewById(R.id.editorFragmentGoBackButton);
-		textView = container.findViewById(R.id.editorFragment_textView);
-		textView.setText(String.valueOf((int)(Math.random)));
-		return inflater.inflate(R.layout.fragment_editor, container, false);
+
+//		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
+
+		View root = inflater.inflate(R.layout.fragment_editor, container, false);
+		goBackButton = root.findViewById(R.id.editorFragmentGoBackButton);
+		goBackButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				String random = String.valueOf((int)(Math.random() * 10));
+				myTextView.setText(random);
+
+				// create the bundle
+				PCBuild updatedBuild = new PCBuild();
+				updatedBuild.setName(random);
+//				Bundle result = new Bundle();
+//				result.putParcelable(BACK, updatedBuild);
+
+				int id = ((ViewGroup) getView().getParent()).getId();
+				getActivity().getSupportFragmentManager().beginTransaction()
+						.replace(id, new BuildFragment(currentBuild), "findThisOtherFragment")
+						.addToBackStack(null)
+						.commit();
+			}
+		});
+		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
+		myTextView.setText(currentBuild.getName());
+		return root;
 	}
+
+
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -85,18 +117,23 @@ public class EditorFragment extends Fragment {
 //		}
 //	}
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		mListener = null;
-	}
-
-	public interface OnFragmentInteractionListener {
-		// TODO: Update argument type and name
-		void onFragmentInteraction(PCBuild sendBackText);
-	}
-
-//	public void testFragmentResultListener(){
-//		scenario = launchFragmentIn
+//	@Override
+//	public void onDetach() {
+//		super.onDetach();
+//		mListener = null;
 //	}
+
+//	public interface OnFragmentInteractionListener {
+//		// TODO: Update argument type and name
+//		void onFragmentInteraction(PCBuild sendBackText);
+//	}
+
+	private void openBuildFragment(PCBuild build) {
+		BuildFragment fragment = BuildFragment.newInstance(currentBuild);
+		getParentFragmentManager().beginTransaction()
+				.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right)
+				.addToBackStack(null)
+				.add(R.id.nav_host_fragment_content_main, fragment, BUILD)
+				.commit();
+	}
 }
