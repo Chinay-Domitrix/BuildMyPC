@@ -60,11 +60,6 @@ public class Case extends Part implements Parcelable {
 		dest.writeDouble(volume);
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
 	public static final Creator<Case> CREATOR = new Creator<Case>() {
 		@Override
 		public Case createFromParcel(Parcel in) {

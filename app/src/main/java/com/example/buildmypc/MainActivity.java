@@ -8,6 +8,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
+import com.example.buildmypc.ui.build.PCBuild;
+import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Case;
 import com.example.buildmypc.ui.parts.parts.Cooler;
@@ -40,7 +42,7 @@ import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditorFragment.OnFragmentInteractionListener {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 //	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
@@ -101,5 +103,10 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public int hashCode() {
 		return mAppBarConfiguration != null ? mAppBarConfiguration.hashCode() : 0;
+	}
+
+	@Override
+	public void onFragmentInteraction(PCBuild sendBackText) {
+
 	}
 }
