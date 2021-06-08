@@ -132,7 +132,7 @@ class PartsJSONParse : Thread() {
 				}
 				MainActivity.motherboards.set(tempMotherboards)
 			})
-			add(Thread {
+			/*add(Thread {
 				val memory = tempJSONObject.getJSONArray("memory")
 				val tempMemory = MainActivity.memory.get()
 				(0 until memory.length()).forEach {
@@ -144,12 +144,12 @@ class PartsJSONParse : Thread() {
 							getInt("cas-latency"),
 							getInt("ddr-gen"),
 							getInt("first-word-latency-ns"),
-							
+
 						)
 					}
 				}
 				MainActivity.memory.set(tempMemory)
-			})
+			})*/
 		}.forEach(Thread::start)
 	}
 }
