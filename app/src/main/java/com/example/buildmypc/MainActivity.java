@@ -42,7 +42,7 @@ import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
 
-public class MainActivity extends AppCompatActivity implements EditorFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 //	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
@@ -103,10 +103,5 @@ public class MainActivity extends AppCompatActivity implements EditorFragment.On
 	@Override
 	public int hashCode() {
 		return mAppBarConfiguration != null ? mAppBarConfiguration.hashCode() : 0;
-	}
-
-	@Override
-	public void onFragmentInteraction(PCBuild sendBackText) {
-
 	}
 }
