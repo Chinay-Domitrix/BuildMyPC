@@ -24,6 +24,21 @@ public class Memory extends Part implements Parcelable {
 		super(model, manufacturer);
 	}
 
+	public Memory(String model, String manufacturer, boolean hasECC, int latencyCAS, int ddrGen, int firstWordLatency, String formFactor, double heatSpreader, int moduleSize, int moduleCount, int speed, String timing, double voltage) {
+		this(model, manufacturer);
+		this.hasECC = hasECC;
+		this.latencyCAS = latencyCAS;
+		this.ddrGen = ddrGen;
+		this.firstWordLatency = firstWordLatency;
+		this.formFactor = formFactor;
+		this.heatSpreader = heatSpreader;
+		this.moduleSize = moduleSize;
+		this.moduleCount = moduleCount;
+		this.speed = speed;
+		this.timing = timing;
+		this.voltage = voltage;
+	}
+
 	public boolean getHasECC() {
 		return hasECC;
 	}
