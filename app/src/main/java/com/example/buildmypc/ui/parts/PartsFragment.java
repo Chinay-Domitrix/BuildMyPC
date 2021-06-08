@@ -35,7 +35,7 @@ public class PartsFragment extends Fragment {
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered())
 			newRequestQueue(root.getContext()).add(new StringRequest(GET,
-					"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token="+getString(firebase_key),
+					"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
 					response -> {
 						try {
 							parts.set(new JSONObject(response));
