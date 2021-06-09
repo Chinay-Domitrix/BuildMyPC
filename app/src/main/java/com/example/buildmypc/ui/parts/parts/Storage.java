@@ -6,11 +6,13 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Storage extends Part implements Parcelable {
 
-	double formFactor;
+	private double formFactor;
 	private int cacheSizeMB; // in mb
-	private int capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
+	private String capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
 	private String sataInterface; // which SATA does this part connect to
 	private boolean nvme; // NMVe, or non-volatile memory express
 	private int rpm; // only applies for HDDs
@@ -18,6 +20,17 @@ public class Storage extends Part implements Parcelable {
 
 	public Storage(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	public Storage(String model, String manufacturer, double formFactor, int cacheSizeMB, String capacity, String hardwareInterface, boolean nvme, int rpm, String type) {
+		super(model, manufacturer);
+		this.formFactor = formFactor;
+		this.cacheSizeMB = cacheSizeMB;
+		this.capacity = capacity;
+		this.sataInterface = hardwareInterface;
+		this.nvme = nvme;
+		this.rpm = rpm;
+		this.type = type;
 	}
 
 	public int getCacheSizeMB() {
@@ -28,11 +41,11 @@ public class Storage extends Part implements Parcelable {
 		this.cacheSizeMB = cacheSizeMB;
 	}
 
-	public int getCapacity() {
+	public String  getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
+	public void setCapacity(String  capacity) {
 		this.capacity = capacity;
 	}
 
@@ -101,7 +114,7 @@ public class Storage extends Part implements Parcelable {
 		temp = Double.doubleToLongBits(getFormFactor());
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		result = 31 * result + getCacheSizeMB();
-		result = 31 * result + getCapacity();
+		result = 31 * result + getCapacity().hashCode();
 		result = 31 * result + (getSataInterface() != null ? getSataInterface().hashCode() : 0);
 		result = 31 * result + (getNvme() ? 1 : 0);
 		result = 31 * result + getRpm();
@@ -111,11 +124,11 @@ public class Storage extends Part implements Parcelable {
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeDouble(formFactor);
 		dest.writeInt(cacheSizeMB);
-		dest.writeInt(capacity);
+		dest.writeString(capacity);
 		dest.writeString(sataInterface);
 		dest.writeBoolean(nvme);
 		dest.writeInt(rpm);
@@ -123,11 +136,11 @@ public class Storage extends Part implements Parcelable {
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public Storage(Parcel in){
+	public Storage(Parcel in) {
 		super(in.toString(), in.toString());
 		formFactor = in.readDouble();
 		cacheSizeMB = in.readInt();
-		capacity = in.readInt();
+		capacity = in.readString();
 		sataInterface = in.readString();
 		nvme = in.readBoolean();
 		rpm = in.readInt();
