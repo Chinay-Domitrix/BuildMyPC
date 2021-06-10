@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.StringRequest;
-//import com.example.buildmypc.PartsJSONParse;
+import com.example.buildmypc.PartsJSONParse;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.example.buildmypc.ui.parts.parts.Part;
@@ -41,23 +40,26 @@ public class PartsFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered())
-			newRequestQueue(root.getContext()).add(new StringRequest(GET,
-					"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
-					response -> {
-						try {
-							parts.set(new JSONObject(response));
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					},
-					Throwable::printStackTrace));
-		else try {
-			parts.set(new JSONObject(getString(parts_list)));
-		} catch (JSONException e) {
-			e.printStackTrace();
+		if (parts.get().equals(new JSONObject())){
+			ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
+			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered())
+				newRequestQueue(root.getContext()).add(new StringRequest(GET,
+						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
+						response -> {
+							try {
+								parts.set(new JSONObject(response));
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						},
+						Throwable::printStackTrace));
+			else try {
+				parts.set(new JSONObject(getString(parts_list)));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			new PartsJSONParse().start();
 		}
 //		new PartsJSONParse().start();
 
@@ -65,10 +67,7 @@ public class PartsFragment extends Fragment {
 		// --> using the same XML for each
 
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
-		PartsRecyclerViewAdapter cpuAdapter = new PartsRecyclerViewAdapter();
-
-
-
+//		PartsRecyclerViewAdapter cpuAdapter = new PartsRecyclerViewAdapter();
 		return root;
 	}
 
@@ -78,7 +77,7 @@ public class PartsFragment extends Fragment {
 		binding = null;
 	}
 
-	public class PartsRecyclerViewAdapter extends RecyclerView.Adapter<>{
+	public class PartsRecyclerViewAdapter extends RecyclerView.Adapter{
 		Context parentContext;
 		ArrayList<Part> internalList;
 
