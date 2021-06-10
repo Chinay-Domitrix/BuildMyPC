@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.android.volley.toolbox.StringRequest;
 import com.example.buildmypc.PartsJSONParse;
@@ -27,9 +28,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static android.view.LayoutInflater.from;
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.toolbox.Volley.newRequestQueue;
 import static com.example.buildmypc.MainActivity.parts;
+import static com.example.buildmypc.R.id.partsList_addButton;
+import static com.example.buildmypc.R.id.partsList_nameTextView;
 import static com.example.buildmypc.R.string.firebase_key;
 import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
@@ -40,7 +44,7 @@ public class PartsFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		if (parts.get().equals(new JSONObject())){
+		if (parts.get().equals(new JSONObject())) {
 			ConnectivityManager cm = ((ConnectivityManager) root.getContext().getSystemService(CONNECTIVITY_SERVICE));
 			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered())
@@ -70,7 +74,6 @@ public class PartsFragment extends Fragment {
 //		PartsRecyclerViewAdapter cpuAdapter = new PartsRecyclerViewAdapter();
 
 
-
 		return root;
 	}
 
@@ -80,11 +83,11 @@ public class PartsFragment extends Fragment {
 		binding = null;
 	}
 
-	public class PartsRecyclerViewAdapter extends RecyclerView.Adapter{
+	public class PartsRecyclerViewAdapter extends Adapter<PartsRecyclerViewAdapter.RecyclerViewHolder> {
 		Context parentContext;
 		ArrayList<Part> internalList;
 
-		public PartsRecyclerViewAdapter(Context c, ArrayList<Part> list){
+		public PartsRecyclerViewAdapter(Context c, ArrayList<Part> list) {
 			parentContext = c;
 			internalList = list;
 		}
@@ -92,15 +95,13 @@ public class PartsFragment extends Fragment {
 		@NonNull
 		@NotNull
 		@Override
-		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			// where the XML is inflated
-			View view = LayoutInflater.from(parentContext).inflate(R.layout.parts_list, parent, false);
-			RecyclerViewHolder holder = new RecyclerViewHolder(view);
-			return holder;
+			return new RecyclerViewHolder(from(getContext()).inflate(R.layout.parts_list, parent, false));
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method where info is set for EACH individual layout element for each list entry
 			Part currentPart = internalList.get(position);
 
@@ -120,8 +121,8 @@ public class PartsFragment extends Fragment {
 			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
 				// this is where the findViewById stuff goes for each element, and only the findViewByID
-				nameTextView = itemView.findViewById(R.id.partsList_nameTextView);
-				internalButton = itemView.findViewById(R.id.partsList_addButton);
+				nameTextView = itemView.findViewById(partsList_nameTextView);
+				internalButton = itemView.findViewById(partsList_addButton);
 			}
 		}
 	}
