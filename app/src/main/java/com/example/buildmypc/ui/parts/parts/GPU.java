@@ -230,7 +230,7 @@ public class GPU extends Part implements Parcelable { // the only important part
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public GPU(Parcel in){
+	public GPU(Parcel in) {
 		super(in.readString(), in.readString());
 		boostClockSpeed = in.readInt();
 		chipset = in.readString();
