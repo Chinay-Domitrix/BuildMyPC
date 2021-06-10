@@ -68,6 +68,9 @@ public class PartsFragment extends Fragment {
 
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
 //		PartsRecyclerViewAdapter cpuAdapter = new PartsRecyclerViewAdapter();
+
+
+
 		return root;
 	}
 
