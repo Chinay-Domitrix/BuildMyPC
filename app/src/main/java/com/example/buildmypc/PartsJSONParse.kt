@@ -177,11 +177,19 @@ class PartsJSONParse : Thread() {
 				}
 				MainActivity.storage.set(tempStorage)
 			})
-			add(Thread{
+			add(Thread {
 				val gpus = tempJSONObject.getJSONArray("gpu")
 				val tempGPUs = MainActivity.gpus.get()
 				(0 until gpus.length()).forEach {
-
+					gpus.getJSONObject(it).apply{
+						tempGPUs += GPU(
+							getString("model"),
+							getString("manufacturer"),
+							getInt("boost-clock-mhz"),
+							getString("chipset"),
+							
+						)
+					}
 				}
 				MainActivity.gpus.set(tempGPUs)
 			})
