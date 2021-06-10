@@ -1,26 +1,48 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class GPU extends Part implements Parcelable { // the only important part for 12 year old me buying a gaming PC
-
-	private int boostClockSpeed; // in mhz
+	private int boostClockSpeed; // in megahertz
 	private String chipset;
 	private String cooling;
-	private int coreClockSpeed; // in mhz
-	private int effectiveMemClockSpeed; // also in mhz; unrelated to boostClockSpeed and coreClockSpeed
+	private int coreClockSpeed; // in megahertz
+	private int effectiveMemClockSpeed; // also in megahertz; unrelated to boostClockSpeed and coreClockSpeed
 	private int expansionSlotWidth;
 	private String externalPower;
 	private String frameSync;
 	private String gpuInterface;
 	private int length; // in millimeters
-	private int intMemory; // internal gpu memory; in gb, usually
+	private int intMemory; // internal gpu memory, in gb
 	private String intMemoryType;
 	private int tdpW; // thermal design power wattage (how much of a beating the computer is usually able to take, measured in watts)
-	private ArrayList<String> videoPorts; // I don't wanna make a custom object for this if I need to implement parcelable eventually
+	private ArrayList<CountedString> videoPorts; // I don't wanna make a custom object for this if I need to implement parcelable eventually
+
+	public GPU(String model, String manufacturer, int boostClockSpeed, String chipset, String cooling, int coreClockSpeed, int effectiveMemClockSpeed, int expansionSlotWidth, String externalPower, String frameSync, String gpuInterface, int length, int intMemory, String intMemoryType, int tdpW, ArrayList<CountedString> videoPorts) {
+		super(model, manufacturer);
+		this.boostClockSpeed = boostClockSpeed;
+		this.chipset = chipset;
+		this.cooling = cooling;
+		this.coreClockSpeed = coreClockSpeed;
+		this.effectiveMemClockSpeed = effectiveMemClockSpeed;
+		this.expansionSlotWidth = expansionSlotWidth;
+		this.externalPower = externalPower;
+		this.frameSync = frameSync;
+		this.gpuInterface = gpuInterface;
+		this.length = length;
+		this.intMemory = intMemory;
+		this.intMemoryType = intMemoryType;
+		this.tdpW = tdpW;
+		this.videoPorts = videoPorts;
+	}
 
 	public GPU(String model, String manufacturer) {
 		super(model, manufacturer);
@@ -130,11 +152,11 @@ public class GPU extends Part implements Parcelable { // the only important part
 		this.tdpW = tdpW;
 	}
 
-	public ArrayList<String> getVideoPorts() {
+	public ArrayList<CountedString> getVideoPorts() {
 		return videoPorts;
 	}
 
-	public void setVideoPorts(ArrayList<String> videoPorts) {
+	public void setVideoPorts(ArrayList<CountedString> videoPorts) {
 		this.videoPorts = videoPorts;
 	}
 
@@ -189,7 +211,7 @@ public class GPU extends Part implements Parcelable { // the only important part
 	}
 
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeInt(boostClockSpeed);
 		dest.writeString(chipset);
@@ -204,9 +226,10 @@ public class GPU extends Part implements Parcelable { // the only important part
 		dest.writeInt(intMemory);
 		dest.writeString(intMemoryType);
 		dest.writeInt(tdpW);
-		dest.writeStringList(videoPorts);
+		dest.writeTypedList(videoPorts);
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	public GPU(Parcel in){
 		super(in.readString(), in.readString());
 		boostClockSpeed = in.readInt();
@@ -222,6 +245,6 @@ public class GPU extends Part implements Parcelable { // the only important part
 		intMemory = in.readInt();
 		intMemoryType = in.readString();
 		tdpW = in.readInt();
-		in.readStringList(videoPorts);
+		in.readParcelableList(videoPorts, videoPorts.getClass().getClassLoader());
 	}
 }
