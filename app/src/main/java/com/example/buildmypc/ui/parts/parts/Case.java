@@ -4,42 +4,65 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Case extends Part implements Parcelable {
-//hello
+	//hello
 	private String color;
-	private int[] dimensionsMm; // 1-d int arraylist with 3 entries,
-	private int fullExpansionSlotCount;
-	private int halfExpansionSlotCount;
+	private ArrayList<String> dimensionsMm; // 1-d int arraylist with 3 entries,
+	private ArrayList<CountedString> expansionSlots;
 	private ArrayList<String> supportedFrontUSBs;
-	private int internalDrive2_5Count;
-	private int internalDrive3_5Count;
+	private ArrayList<CountedString> internalDriveBays;
 	private ArrayList<String> maxGPULength;
 	private ArrayList<String> mbFormFactor;
 	private String sidePanel;
-
 	private String type;
-	private double volume; // in liters because screw bri'ish units
+	private ArrayList<String> volume; // in liters because screw bri'ish units
+	private boolean psuShroud;
 
 	public Case(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
 
+	public Case(String model,
+	            String manufacturer,
+	            String color,
+	            ArrayList<String> dimensionsMm,
+	            ArrayList<CountedString> expansionSlots,
+	            ArrayList<String> supportedFrontUSBs,
+	            ArrayList<CountedString> internalDriveBays,
+	            ArrayList<String> maxGPULength,
+	            ArrayList<String> mbFormFactor,
+	            String sidePanel,
+	            String type,
+	            ArrayList<String> volume,
+	            boolean psuShroud) {
+		super(model, manufacturer);
+		this.color = color;
+		this.dimensionsMm = dimensionsMm;
+		this.expansionSlots = expansionSlots;
+		this.supportedFrontUSBs = supportedFrontUSBs;
+		this.internalDriveBays = internalDriveBays;
+		this.maxGPULength = maxGPULength;
+		this.mbFormFactor = mbFormFactor;
+		this.sidePanel = sidePanel;
+		this.type = type;
+		this.volume = volume;
+		this.psuShroud = psuShroud;
+	}
+
 	protected Case(Parcel in) {
 		super(in.readString(), in.readString());
 		color = in.readString();
-		dimensionsMm = in.createIntArray();
-		fullExpansionSlotCount = in.readInt();
-		halfExpansionSlotCount = in.readInt();
+		dimensionsMm = in.createStringArrayList();
+		expansionSlots = in.createTypedArrayList(CountedString.CREATOR);
 		supportedFrontUSBs = in.createStringArrayList();
-		internalDrive2_5Count = in.readInt();
-		internalDrive3_5Count = in.readInt();
+		internalDriveBays = in.createTypedArrayList(CountedString.CREATOR);
 		maxGPULength = in.createStringArrayList();
 		mbFormFactor = in.createStringArrayList();
 		sidePanel = in.readString();
 		type = in.readString();
-		volume = in.readDouble();
+		volume = in.createStringArrayList();
+		psuShroud = in.readBoolean();
 	}
 
 	@Override
@@ -47,17 +70,16 @@ public class Case extends Part implements Parcelable {
 		dest.writeString(super.getModel());
 		dest.writeString(super.getManufacturer());
 		dest.writeString(color);
-		dest.writeIntArray(dimensionsMm);
-		dest.writeInt(fullExpansionSlotCount);
-		dest.writeInt(halfExpansionSlotCount);
+		dest.writeStringList(dimensionsMm);
+		dest.writeTypedList(expansionSlots);
 		dest.writeStringList(supportedFrontUSBs);
-		dest.writeInt(internalDrive2_5Count);
-		dest.writeInt(internalDrive3_5Count);
+		dest.writeTypedList(internalDriveBays);
 		dest.writeStringList(maxGPULength);
 		dest.writeStringList(mbFormFactor);
 		dest.writeString(sidePanel);
 		dest.writeString(type);
-		dest.writeDouble(volume);
+		dest.writeStringList(volume);
+		dest.writeBoolean(psuShroud);
 	}
 
 	public static final Creator<Case> CREATOR = new Creator<Case>() {
@@ -80,28 +102,20 @@ public class Case extends Part implements Parcelable {
 		this.color = color;
 	}
 
-	public int[] getDimensionsMm() {
+	public ArrayList<String> getDimensionsMm() {
 		return dimensionsMm;
 	}
 
-	public void setDimensionsMm(int[] dimensionsMm) {
+	public void setDimensionsMm(ArrayList<String> dimensionsMm) {
 		this.dimensionsMm = dimensionsMm;
 	}
 
-	public int getFullExpansionSlotCount() {
-		return fullExpansionSlotCount;
+	public ArrayList<CountedString> getExpansionSlots() {
+		return expansionSlots;
 	}
 
-	public void setFullExpansionSlotCount(int fullExpansionSlotCount) {
-		this.fullExpansionSlotCount = fullExpansionSlotCount;
-	}
-
-	public int getHalfExpansionSlotCount() {
-		return halfExpansionSlotCount;
-	}
-
-	public void setHalfExpansionSlotCount(int halfExpansionSlotCount) {
-		this.halfExpansionSlotCount = halfExpansionSlotCount;
+	public void setExpansionSlots(ArrayList<CountedString> expansionSlots) {
+		this.expansionSlots = expansionSlots;
 	}
 
 	public ArrayList<String> getSupportedFrontUSBs() {
@@ -112,20 +126,12 @@ public class Case extends Part implements Parcelable {
 		this.supportedFrontUSBs = supportedFrontUSBs;
 	}
 
-	public int getInternalDrive2_5Count() {
-		return internalDrive2_5Count;
+	public ArrayList<CountedString> getInternalDriveBays() {
+		return internalDriveBays;
 	}
 
-	public void setInternalDrive2_5Count(int internalDrive2_5Count) {
-		this.internalDrive2_5Count = internalDrive2_5Count;
-	}
-
-	public int getInternalDrive3_5Count() {
-		return internalDrive3_5Count;
-	}
-
-	public void setInternalDrive3_5Count(int internalDrive3_5Count) {
-		this.internalDrive3_5Count = internalDrive3_5Count;
+	public void setInternalDriveBays(ArrayList<CountedString> internalDriveBays) {
+		this.internalDriveBays = internalDriveBays;
 	}
 
 	public ArrayList<String> getMaxGPULength() {
@@ -160,12 +166,20 @@ public class Case extends Part implements Parcelable {
 		this.type = type;
 	}
 
-	public double getVolume() {
+	public ArrayList<String> getVolume() {
 		return volume;
 	}
 
-	public void setVolume(double volume) {
+	public void setVolume(ArrayList<String> volume) {
 		this.volume = volume;
+	}
+
+	public boolean isPsuShroud() {
+		return psuShroud;
+	}
+
+	public void setPsuShroud(boolean psuShroud) {
+		this.psuShroud = psuShroud;
 	}
 
 	@Override
@@ -176,15 +190,16 @@ public class Case extends Part implements Parcelable {
 
 		Case aCase = (Case) o;
 
-		if (getFullExpansionSlotCount() != aCase.getFullExpansionSlotCount()) return false;
-		if (getHalfExpansionSlotCount() != aCase.getHalfExpansionSlotCount()) return false;
-		if (getInternalDrive2_5Count() != aCase.getInternalDrive2_5Count()) return false;
-		if (getInternalDrive3_5Count() != aCase.getInternalDrive3_5Count()) return false;
-		if (Double.compare(aCase.getVolume(), getVolume()) != 0) return false;
+		if (isPsuShroud() != aCase.isPsuShroud()) return false;
 		if (getColor() != null ? !getColor().equals(aCase.getColor()) : aCase.getColor() != null)
 			return false;
-		if (!Arrays.equals(getDimensionsMm(), aCase.getDimensionsMm())) return false;
+		if (getDimensionsMm() != null ? !getDimensionsMm().equals(aCase.getDimensionsMm()) : aCase.getDimensionsMm() != null)
+			return false;
+		if (getExpansionSlots() != null ? !getExpansionSlots().equals(aCase.getExpansionSlots()) : aCase.getExpansionSlots() != null)
+			return false;
 		if (getSupportedFrontUSBs() != null ? !getSupportedFrontUSBs().equals(aCase.getSupportedFrontUSBs()) : aCase.getSupportedFrontUSBs() != null)
+			return false;
+		if (getInternalDriveBays() != null ? !getInternalDriveBays().equals(aCase.getInternalDriveBays()) : aCase.getInternalDriveBays() != null)
 			return false;
 		if (getMaxGPULength() != null ? !getMaxGPULength().equals(aCase.getMaxGPULength()) : aCase.getMaxGPULength() != null)
 			return false;
@@ -192,26 +207,25 @@ public class Case extends Part implements Parcelable {
 			return false;
 		if (getSidePanel() != null ? !getSidePanel().equals(aCase.getSidePanel()) : aCase.getSidePanel() != null)
 			return false;
-		return getType() != null ? getType().equals(aCase.getType()) : aCase.getType() == null;
+		if (getType() != null ? !getType().equals(aCase.getType()) : aCase.getType() != null)
+			return false;
+		return getVolume() != null ? getVolume().equals(aCase.getVolume()) : aCase.getVolume() == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		long temp;
 		result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
-		result = 31 * result + Arrays.hashCode(getDimensionsMm());
-		result = 31 * result + getFullExpansionSlotCount();
-		result = 31 * result + getHalfExpansionSlotCount();
+		result = 31 * result + (getDimensionsMm() != null ? getDimensionsMm().hashCode() : 0);
+		result = 31 * result + (getExpansionSlots() != null ? getExpansionSlots().hashCode() : 0);
 		result = 31 * result + (getSupportedFrontUSBs() != null ? getSupportedFrontUSBs().hashCode() : 0);
-		result = 31 * result + getInternalDrive2_5Count();
-		result = 31 * result + getInternalDrive3_5Count();
+		result = 31 * result + (getInternalDriveBays() != null ? getInternalDriveBays().hashCode() : 0);
 		result = 31 * result + (getMaxGPULength() != null ? getMaxGPULength().hashCode() : 0);
 		result = 31 * result + (getMbFormFactor() != null ? getMbFormFactor().hashCode() : 0);
 		result = 31 * result + (getSidePanel() != null ? getSidePanel().hashCode() : 0);
 		result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-		temp = Double.doubleToLongBits(getVolume());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (getVolume() != null ? getVolume().hashCode() : 0);
+		result = 31 * result + (isPsuShroud() ? 1 : 0);
 		return result;
 	}
 }
