@@ -136,6 +136,25 @@
 				android:background="@color/design_default_color_secondary"
 				android:fontFamily="serif"
 				android:gravity="center"
+				android:text="Cases"
+				android:textColor="@color/design_default_color_on_secondary"
+				android:textSize="10pt" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/parts_case_recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<Space
+				android:layout_width="wrap_content"
+				android:layout_height="16dp" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/design_default_color_secondary"
+				android:fontFamily="serif"
+				android:gravity="center"
 				android:text="Power Supplies"
 				android:textColor="@color/design_default_color_on_secondary"
 				android:textSize="10pt" />

@@ -46,16 +46,16 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
 //	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
-	public static final AtomicReference<ArrayList<CPU>> cpus = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Cooler>> coolers = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Motherboard>> motherboards = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Memory>> memory = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Storage>> storage = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<GPU>> gpus = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Case>> cases = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<PSU>> psus = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<OS>> oss = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Monitor>> monitors = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> cpus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> coolers = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> motherboards = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> memory = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> storage = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> gpus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> pcCases = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> psus = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> oss = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 		setupWithNavController(binding.navView, navController);
 //		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 		// the code to parse the JSON parts file into usable stuff
+
+		parts.set(new JSONObject());
 	}
 
 	@Override

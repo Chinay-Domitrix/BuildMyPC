@@ -10,18 +10,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.build.BuildFragment;
 import com.example.buildmypc.ui.build.PCBuild;
+import com.example.buildmypc.ui.parts.parts.Part;
+
+import java.util.ArrayList;
 
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
 
-public class EditorFragment extends Fragment {
+public class EditorFragment extends Fragment implements AdapterView.OnItemSelectedListener  {
 
 	private static final String BUILD = "pcbuild";
 	public static final String BACK = "buildbackbetter";
@@ -80,12 +88,65 @@ public class EditorFragment extends Fragment {
 						.commit();
 			}
 		});
-		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
-		myTextView.setText(currentBuild.getName());
+//		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
+//		myTextView.setText(currentBuild.getName());
+
+		ArrayList<Part> customList = new ArrayList<Part>();
+
+		// spinners!
+		Spinner caseSpinner = (Spinner) root.findViewById(R.id.editorFrag_caseSpinner);
+		customList = MainActivity.pcCases.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner coolerSpinner = (Spinner) root.findViewById(R.id.editorFrag_coolerSpinner);
+		customList = MainActivity.coolers.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner cpuSpinner = (Spinner) root.findViewById(R.id.editorFrag_cpuSpinner);
+		customList = MainActivity.cpus.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner gpuSpinner = (Spinner) root.findViewById(R.id.editorFrag_gpuSpinner);
+		customList = MainActivity.gpus.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner memorySpinner = (Spinner) root.findViewById(R.id.editorFrag_memorySpinner);
+		customList = MainActivity.memory.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner monitorSpinner = (Spinner) root.findViewById(R.id.editorFrag_monitorSpinner);
+		customList = MainActivity.monitors.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner motherboardSpinner = (Spinner) root.findViewById(R.id.editorFrag_motherboardSpinner);
+		customList = MainActivity.motherboards.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner osSpinner = (Spinner) root.findViewById(R.id.editorFrag_osSpinner);
+		customList = MainActivity.memory.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner psuSpinner = (Spinner) root.findViewById(R.id.editorFrag_psuSpinner);
+		customList = MainActivity.psus.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+		Spinner storageSpinner = (Spinner) root.findViewById(R.id.editorFrag_storageSpinner);
+		customList = MainActivity.storage.get();
+		customList.add(0, new Part(" ", " "));
+		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), customList));
+
+
 		return root;
 	}
-
-
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -135,5 +196,15 @@ public class EditorFragment extends Fragment {
 				.addToBackStack(null)
 				.add(R.id.nav_host_fragment_content_main, fragment, BUILD)
 				.commit();
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+
 	}
 }

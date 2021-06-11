@@ -1,31 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:theme="@style/Theme.BuildMyPC.NoActionBar"
     android:background="@color/white"
     android:backgroundTint="@color/white"
+    android:clickable="true"
+    android:theme="@style/Theme.BuildMyPC.NoActionBar"
     tools:context=".ui.currentBuild.EditorFragment">
-
-    <TextView
-        android:id="@+id/editorFragment_textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="fragment@!!"
-        android:textAlignment="gravity"
-        android:textSize="24sp" />
 
     <Button
         android:id="@+id/editorFragmentGoBackButton"
+        android:layout_width="225dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#008000"
+        android:text="DONE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/editorFrag_cpuText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="231dp"
-        android:backgroundTint="#008000"
-        android:text="GO BACK" />
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="28dp"
+        android:text="CPU:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/editorFrag_gpuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="GPU:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_cpuText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_cpuText" />
+
+    <TextView
+        android:id="@+id/editorFrag_memoryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="RAM:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_gpuText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_gpuText" />
+
+    <TextView
+        android:id="@+id/editorFrag_motherboardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Motherboard:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_memoryText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_memoryText" />
+
+    <TextView
+        android:id="@+id/editorFrag_osText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="OS:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_motherboardText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_motherboardText" />
+
+    <TextView
+        android:id="@+id/editorFrag_psuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Power Supply:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_osText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_osText" />
+
+    <TextView
+        android:id="@+id/editorFrag_coolerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Cooler:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_psuText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_psuText" />
+
+    <TextView
+        android:id="@+id/editorFrag_storageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Internal Storage:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_coolerText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_coolerText" />
+
+    <TextView
+        android:id="@+id/editorFrag_monitorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Monitor:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_storageText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_storageText" />
+
+    <TextView
+        android:id="@+id/editorFrag_caseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="15dp"
+        android:text="Case:"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/editorFrag_monitorText"
+        app:layout_constraintTop_toBottomOf="@+id/editorFrag_monitorText" />
+
+    <Spinner
+        android:id="@+id/editorFrag_cpuSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_cpuText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_cpuText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_gpuSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_gpuText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_gpuText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_memorySpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_memoryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_memoryText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_motherboardSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_motherboardText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_motherboardText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_osSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_osText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_osText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_psuSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_psuText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_psuText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_coolerSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_coolerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_coolerText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_storageSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_storageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_storageText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_monitorSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_monitorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_monitorText"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Spinner
+        android:id="@+id/editorFrag_caseSpinner"
+        android:layout_width="226dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editorFrag_caseText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editorFrag_caseText"
+        app:layout_constraintVertical_bias="0.611" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
