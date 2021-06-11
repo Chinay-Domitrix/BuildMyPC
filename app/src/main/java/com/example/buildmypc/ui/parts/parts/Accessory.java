@@ -8,6 +8,18 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 public class Accessory extends Part implements Parcelable {
+	public static final Creator<Accessory> CREATOR = new Creator<Accessory>() {
+		@Override
+		public Accessory createFromParcel(Parcel in) {
+			return new Accessory(in);
+		}
+
+		@Override
+		public Accessory[] newArray(int size) {
+			return new Accessory[size];
+		}
+	};
+
 	public Accessory(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
@@ -25,18 +37,6 @@ public class Accessory extends Part implements Parcelable {
 	public int describeContents() {
 		return 0;
 	}
-
-	public static final Creator<Accessory> CREATOR = new Creator<Accessory>() {
-		@Override
-		public Accessory createFromParcel(Parcel in) {
-			return new Accessory(in);
-		}
-
-		@Override
-		public Accessory[] newArray(int size) {
-			return new Accessory[size];
-		}
-	};
 
 	@NonNull
 	@NotNull
