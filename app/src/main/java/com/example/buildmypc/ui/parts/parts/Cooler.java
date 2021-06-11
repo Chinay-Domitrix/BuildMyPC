@@ -123,6 +123,6 @@ public final class Cooler extends Part implements Parcelable {
 	@NotNull
 	@Override
 	public String toString() {
-		return "Cooler " + getModel() + " " + getManufacturer();
+		return "Cooler: " + getModel() + " " + getManufacturer();
 	}
 }
