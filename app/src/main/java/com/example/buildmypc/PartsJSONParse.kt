@@ -2,6 +2,7 @@ package com.example.buildmypc
 
 import android.util.Log.d
 import com.example.buildmypc.MainActivity.parts
+import com.example.buildmypc.MainActivity.pcCases
 import com.example.buildmypc.ui.parts.parts.*
 
 class PartsJSONParse : Thread() {
@@ -208,7 +209,7 @@ class PartsJSONParse : Thread() {
 			})
 			add(Thread {
 				val cases = tempJSONObject.getJSONArray("case")
-				val tempCases = MainActivity.cases.get()
+				val tempCases = pcCases.get()
 				(0 until cases.length()).forEach {
 					cases.getJSONObject(it).apply {
 						tempCases += Case(
@@ -260,10 +261,10 @@ class PartsJSONParse : Thread() {
 					}
 				}
 				d("PARSE_TAG", "cases completed somewhat")
-				MainActivity.cases.set(tempCases)
+				pcCases.set(tempCases)
 			})
-			add(Thread{
-				
+			add(Thread {
+
 			})
 		}.forEach(Thread::start)
 	}
