@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
 import com.example.buildmypc.ui.parts.parts.Cooler;
 import com.example.buildmypc.ui.parts.parts.GPU;
 import com.example.buildmypc.ui.parts.parts.Memory;
@@ -25,6 +26,7 @@ public class PCBuild implements Parcelable {
 	private String name;
 	private Drawable logo;
 
+	private Case pcCase;
 	private Cooler cooler;
 	private CPU cpu;
 	private GPU gpu;
@@ -39,9 +41,10 @@ public class PCBuild implements Parcelable {
 	public PCBuild() {
 	}
 
-	public PCBuild(String name, Drawable logo, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts) {
+	public PCBuild(String name, Drawable logo, Case pcCase, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts) {
 		this.name = name;
 		this.logo = logo;
+		this.pcCase = pcCase;
 		this.cooler = cooler;
 		this.cpu = cpu;
 		this.gpu = gpu;
@@ -54,8 +57,9 @@ public class PCBuild implements Parcelable {
 		this.extraParts = extraParts;
 	}
 
-	,iresApi(api = Build.VERSION_CODES.Q)
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	public PCBuild(Parcel in) {
+		pcCase = in.readParcelable(pcCase.getClass().getClassLoader());
 		cooler = in.readParcelable(cooler.getClass().getClassLoader());
 		cpu = in.readParcelable(cpu.getClass().getClassLoader());
 		gpu = in.readParcelable(gpu.getClass().getClassLoader());
@@ -164,6 +168,14 @@ public class PCBuild implements Parcelable {
 		this.extraParts = extraParts;
 	}
 
+	public Case getPcCase() {
+		return pcCase;
+	}
+
+	public void setPcCase(Case pcCase) {
+		this.pcCase = pcCase;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -175,6 +187,7 @@ public class PCBuild implements Parcelable {
 			return false;
 		if (getLogo() != null ? !getLogo().equals(pcBuild.getLogo()) : pcBuild.getLogo() != null)
 			return false;
+		if (pcCase != null ? !pcCase.equals(pcBuild.pcCase) : pcBuild.pcCase != null) return false;
 		if (getCooler() != null ? !getCooler().equals(pcBuild.getCooler()) : pcBuild.getCooler() != null)
 			return false;
 		if (getCpu() != null ? !getCpu().equals(pcBuild.getCpu()) : pcBuild.getCpu() != null)
@@ -200,6 +213,7 @@ public class PCBuild implements Parcelable {
 	public int hashCode() {
 		int result = getName() != null ? getName().hashCode() : 0;
 		result = 31 * result + (getLogo() != null ? getLogo().hashCode() : 0);
+		result = 31 * result + (pcCase != null ? pcCase.hashCode() : 0);
 		result = 31 * result + (getCooler() != null ? getCooler().hashCode() : 0);
 		result = 31 * result + (getCpu() != null ? getCpu().hashCode() : 0);
 		result = 31 * result + (getGpu() != null ? getGpu().hashCode() : 0);
@@ -213,16 +227,15 @@ public class PCBuild implements Parcelable {
 		return result;
 	}
 
-	// TODO Parcelable
-
 	@Override
 	public int describeContents() {
 		return 0;
 	}
 
-	,iresApi(api = Build.VERSION_CODES.Q)
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeParcelable(pcCase, flags);
 		dest.writeParcelable(cooler, flags);
 		dest.writeParcelable(cpu, flags);
 		dest.writeParcelable(gpu, flags);
@@ -236,7 +249,7 @@ public class PCBuild implements Parcelable {
 	}
 
 	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
-		,iresApi(api = Build.VERSION_CODES.Q)
+		@RequiresApi(api = Build.VERSION_CODES.Q)
 		@Override
 		public PCBuild createFromParcel(Parcel in) {
 			return new PCBuild(in);

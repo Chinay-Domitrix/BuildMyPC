@@ -1,6 +1,7 @@
 package com.example.buildmypc.ui.build;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.currentBuild.Build;
 import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
 import com.example.buildmypc.ui.parts.parts.Cooler;
 import com.example.buildmypc.ui.parts.parts.GPU;
 import com.example.buildmypc.ui.parts.parts.Memory;
@@ -192,7 +194,8 @@ public class BuildFragment extends Fragment {
 			builds = new ArrayList<PCBuild>();
 			builds.add(new PCBuild(
 					"Build 1",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.h510_elite_black, getResources().newTheme()),
+					new Case("H510 Elite Tower", "Corsair", "Black"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
@@ -206,7 +209,8 @@ public class BuildFragment extends Fragment {
 			));
 			builds.add(new PCBuild(
 					"Build 2",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.h510_elite_white, getResources().newTheme()),
+					new Case("H510 Elite Tower", "Corsair", "White"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
@@ -220,7 +224,8 @@ public class BuildFragment extends Fragment {
 			));
 			builds.add(new PCBuild(
 					"Build 3",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.h510_elite_black, getResources().newTheme()),
+					new Case("H510 Elite Tower", "Corsair", "Black"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
@@ -234,7 +239,8 @@ public class BuildFragment extends Fragment {
 			));
 			builds.add(new PCBuild(
 					"Build 4",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.a_275r_black, getResources().newTheme()),
+					new Case("275R Tower", "Corsair", "Black"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
@@ -248,7 +254,8 @@ public class BuildFragment extends Fragment {
 			));
 			builds.add(new PCBuild(
 					"Build 5",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.a_4000d_airflow_black, getResources().newTheme()),
+					new Case("4000D Airflow", "Corsair", "Black"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
@@ -262,7 +269,8 @@ public class BuildFragment extends Fragment {
 			));
 			builds.add(new PCBuild(
 					"Build 6",
-					ResourcesCompat.getDrawable(getResources(), R.drawable.engadget, getResources().newTheme()),
+					ResourcesCompat.getDrawable(getResources(), R.drawable.h510_elite_black, getResources().newTheme()),
+					new Case("H510 Elite Tower", "Corsair", "Black"),
 					new Cooler("Hyper 212 EVO", "Cooler Master"),
 					new CPU("Ryzen 5 3600", "AMD"),
 					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
