@@ -92,7 +92,7 @@ public class Memory extends Part implements Parcelable {
 		this.formFactor = formFactor;
 	}
 
-	public boolean hasHeatSpreader() {
+	public boolean getHeatSpreader() {
 		return heatSpreader;
 	}
 
@@ -152,7 +152,7 @@ public class Memory extends Part implements Parcelable {
 		if (getLatencyCAS() != memory.getLatencyCAS()) return false;
 		if (getDdrGen() != memory.getDdrGen()) return false;
 		if (getFirstWordLatency() != memory.getFirstWordLatency()) return false;
-		if (heatSpreader != memory.heatSpreader) return false;
+		if (getHeatSpreader() != memory.getHeatSpreader()) return false;
 		if (getModuleSize() != memory.getModuleSize()) return false;
 		if (getModuleCount() != memory.getModuleCount()) return false;
 		if (getSpeed() != memory.getSpeed()) return false;
@@ -171,7 +171,7 @@ public class Memory extends Part implements Parcelable {
 		result = 31 * result + getDdrGen();
 		result = 31 * result + getFirstWordLatency();
 		result = 31 * result + (getFormFactor() != null ? getFormFactor().hashCode() : 0);
-		result = 31 * result + (heatSpreader ? 1 : 0);
+		result = 31 * result + (getHeatSpreader() ? 1 : 0);
 		result = 31 * result + getModuleSize();
 		result = 31 * result + getModuleCount();
 		result = 31 * result + getSpeed();
