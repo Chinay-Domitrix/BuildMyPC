@@ -225,7 +225,7 @@ class PartsJSONParse : Thread() {
 									(0 until this.length()).forEach { i -> add(getString(i)) }
 								}
 							},
-							
+							ArrayList<>
 						)
 					}
 				}

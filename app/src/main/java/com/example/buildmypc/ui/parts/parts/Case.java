@@ -6,6 +6,17 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class Case extends Part implements Parcelable {
+	public static final Creator<Case> CREATOR = new Creator<Case>() {
+		@Override
+		public Case createFromParcel(Parcel in) {
+			return new Case(in);
+		}
+
+		@Override
+		public Case[] newArray(int size) {
+			return new Case[size];
+		}
+	};
 	//hello
 	private String color;
 	private ArrayList<String> dimensionsMm; // 1-d int arraylist with 3 entries,
@@ -81,18 +92,6 @@ public class Case extends Part implements Parcelable {
 		dest.writeStringList(volume);
 		dest.writeBoolean(psuShroud);
 	}
-
-	public static final Creator<Case> CREATOR = new Creator<Case>() {
-		@Override
-		public Case createFromParcel(Parcel in) {
-			return new Case(in);
-		}
-
-		@Override
-		public Case[] newArray(int size) {
-			return new Case[size];
-		}
-	};
 
 	public String getColor() {
 		return color;

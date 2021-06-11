@@ -1,18 +1,20 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static android.os.Build.VERSION_CODES.Q;
+
 public class Motherboard extends Part implements Parcelable {
-	private boolean ecc;
+	private boolean ecc; // has error correction coding (all chips should tbh)
 	private String chipset;
-	//	private boolean hasEcc; // has error correction coding (all chips should tbh)
 	private String formFactor;
 	private ArrayList<String> m2slots; // no clue what this is
 	private int maxMemSupport;
@@ -248,9 +250,8 @@ public class Motherboard extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeBoolean(ecc);
 		dest.writeString(chipset);
@@ -271,16 +272,16 @@ public class Motherboard extends Part implements Parcelable {
 		dest.writeBoolean(isWireless);
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public Motherboard(Parcel in) {
+	@RequiresApi(Q)
+	public Motherboard(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		ecc = in.readBoolean();
 		chipset = in.readString();
 		formFactor = in.readString();
-		in.readStringList(m2slots);
+		m2slots=in.createStringArrayList();
 		maxMemSupport = in.readInt();
 		memSlots = in.readInt();
-		in.readStringList(compatibleMem);
+		compatibleMem=in.readStringList(compatibleMem);
 		memType = in.readString();
 		mSATA_slotCount = in.readInt();
 		in.readStringList(incEthernetSupp);

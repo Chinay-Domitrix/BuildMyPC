@@ -1,12 +1,13 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
+
+import static android.os.Build.VERSION_CODES.Q;
 
 public class Memory extends Part implements Parcelable {
 	private boolean hasECC;
@@ -169,7 +170,6 @@ public class Memory extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
@@ -186,8 +186,8 @@ public class Memory extends Part implements Parcelable {
 		dest.writeDouble(voltage);
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public Memory(Parcel in) {
+	@RequiresApi(Q)
+	public Memory(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		hasECC = in.readBoolean();
 		latencyCAS = in.readInt();

@@ -1,6 +1,5 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,6 +8,8 @@ import androidx.annotation.RequiresApi;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+
+import static android.os.Build.VERSION_CODES.Q;
 
 public class GPU extends Part implements Parcelable { // the only important part for 12 year old me buying a gaming PC
 	private int boostClockSpeed; // in megahertz
@@ -46,6 +47,25 @@ public class GPU extends Part implements Parcelable { // the only important part
 
 	public GPU(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	@RequiresApi(Q)
+	public GPU(Parcel in) {
+		super(in.readString(), in.readString());
+		boostClockSpeed = in.readInt();
+		chipset = in.readString();
+		cooling = in.readString();
+		coreClockSpeed = in.readInt();
+		effectiveMemClockSpeed = in.readInt();
+		expansionSlotWidth = in.readInt();
+		externalPower = in.readString();
+		frameSync = in.readString();
+		gpuInterface = in.readString();
+		length = in.readInt();
+		intMemory = in.readInt();
+		intMemoryType = in.readString();
+		tdpW = in.readInt();
+		videoPorts = in.createTypedArrayList(CountedString.CREATOR);
 	}
 
 	public int getBoostClockSpeed() {
@@ -227,24 +247,5 @@ public class GPU extends Part implements Parcelable { // the only important part
 		dest.writeString(intMemoryType);
 		dest.writeInt(tdpW);
 		dest.writeTypedList(videoPorts);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public GPU(Parcel in) {
-		super(in.readString(), in.readString());
-		boostClockSpeed = in.readInt();
-		chipset = in.readString();
-		cooling = in.readString();
-		coreClockSpeed = in.readInt();
-		effectiveMemClockSpeed = in.readInt();
-		expansionSlotWidth = in.readInt();
-		externalPower = in.readString();
-		frameSync = in.readString();
-		gpuInterface = in.readString();
-		length = in.readInt();
-		intMemory = in.readInt();
-		intMemoryType = in.readString();
-		tdpW = in.readInt();
-		in.readParcelableList(videoPorts, videoPorts.getClass().getClassLoader());
 	}
 }

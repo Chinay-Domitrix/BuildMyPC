@@ -4,14 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class CountedString implements Parcelable {
-	private String name;
-	private int amount;
-
-	public CountedString(String name, int amount) {
-		this.name = name;
-		this.amount = amount;
-	}
-
 	public static final Creator<CountedString> CREATOR = new Creator<CountedString>() {
 		@Override
 		public CountedString createFromParcel(Parcel in) {
@@ -23,6 +15,18 @@ public class CountedString implements Parcelable {
 			return new CountedString[size];
 		}
 	};
+	private String name;
+	private int amount;
+
+	public CountedString(String name, int amount) {
+		this.name = name;
+		this.amount = amount;
+	}
+
+	public CountedString(Parcel in){
+		name = in.readString();
+		amount = in.readInt();
+	}
 
 	public String getName() {
 		return name;
@@ -49,11 +53,6 @@ public class CountedString implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeInt(amount);
-	}
-
-	public CountedString(Parcel in){
-		name = in.readString();
-		amount = in.readInt();
 	}
 
 	@Override

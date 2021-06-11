@@ -3,6 +3,8 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.NotNull;
+
 public class OS extends Accessory implements Parcelable {
 
 	private String bitMode;
@@ -87,7 +89,7 @@ public class OS extends Accessory implements Parcelable {
 	}
 
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(bitMode);
 		dest.writeDouble(maxMemSupport);

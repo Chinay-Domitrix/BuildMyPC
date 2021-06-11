@@ -41,13 +41,16 @@ public final class Cooler extends Part implements Parcelable {
 		this.fanless = fanless;
 	}
 
-//	public String getManufacturer() {
-//		return manufacturer;
-//	}
-//
-//	public String getModel() {
-//		return model;
-//	}
+	@RequiresApi(Q)
+	public Cooler(@NotNull Parcel in) {
+		super(in.readString(), in.readString());
+		rpm = in.readString();
+		noiseLevel = in.readString();
+		height = in.readInt();
+		socketSupport = in.createStringArrayList();
+		waterCooled = in.readBoolean();
+		fanless = in.readBoolean();
+	}
 
 	public String getRpm() {
 		return rpm;
@@ -104,20 +107,8 @@ public final class Cooler extends Part implements Parcelable {
 	}
 
 	@RequiresApi(Q)
-	public Cooler(@NotNull Parcel in) {
-		super(in.readString(), in.readString());
-		rpm = in.readString();
-		noiseLevel = in.readString();
-		height = in.readInt();
-		socketSupport = new ArrayList<>();
-		in.readStringList(socketSupport);
-		waterCooled = in.readBoolean();
-		fanless = in.readBoolean();
-	}
-
-	@RequiresApi(Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(rpm);
 		dest.writeString(noiseLevel);
