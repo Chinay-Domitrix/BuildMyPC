@@ -44,7 +44,8 @@ open class Part : Parcelable {
 	}
 
 	companion object {
-		@JvmField val CREATOR: Creator<Part> = object : Creator<Part> {
+		@JvmField
+		val CREATOR: Creator<Part> = object : Creator<Part> {
 			override fun createFromParcel(`in`: Parcel) = Part(`in`)
 
 			override fun newArray(size: Int): Array<Part?> = arrayOfNulls(size)
@@ -52,6 +53,6 @@ open class Part : Parcelable {
 	}
 
 	override fun toString(): String {
-		return "Part $model $manufacturer"
+		return javaClass.name + ": $manufacturer $model"
 	}
 }
