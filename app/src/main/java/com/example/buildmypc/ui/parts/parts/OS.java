@@ -3,12 +3,9 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 import org.jetbrains.annotations.NotNull;
 
 public class OS extends Accessory implements Parcelable {
-
 	private String bitMode;
 	private double maxMemSupport;
 	private String type;
@@ -91,7 +88,7 @@ public class OS extends Accessory implements Parcelable {
 	}
 
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(bitMode);
 		dest.writeDouble(maxMemSupport);
@@ -107,12 +104,5 @@ public class OS extends Accessory implements Parcelable {
 		type = in.readString();
 		edition = in.readString();
 		oem_retail = in.readString();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "OS " + getModel() + " " + getManufacturer();
 	}
 }

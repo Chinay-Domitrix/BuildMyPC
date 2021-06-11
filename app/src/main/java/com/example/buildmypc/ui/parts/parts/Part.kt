@@ -3,6 +3,7 @@ package com.example.buildmypc.ui.parts.parts
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
+import org.jetbrains.annotations.NotNull
 
 // the start of the part hierarchy
 open class Part : Parcelable {
@@ -30,29 +31,24 @@ open class Part : Parcelable {
 		return if (manufacturer != null) manufacturer == part.manufacturer else part.manufacturer == null
 	}
 
-	override fun hashCode(): Int {
-		var result = if (model != null) model.hashCode() else 0
-		result = 31 * result + if (manufacturer != null) manufacturer.hashCode() else 0
-		return result
-	}
+	override fun hashCode() =
+		31 * (if (model != null) model.hashCode() else 0) + if (manufacturer != null) manufacturer.hashCode() else 0
 
 	override fun describeContents() = 0
 
-	override fun writeToParcel(dest: Parcel, flags: Int) {
+	override fun writeToParcel(@NotNull dest: Parcel, flags: Int) {
 		dest.writeString(model)
 		dest.writeString(manufacturer)
 	}
 
 	companion object {
 		@JvmField
-		val CREATOR: Creator<Part> = object : Creator<Part> {
+		val CREATOR = object : Creator<Part> {
 			override fun createFromParcel(`in`: Parcel) = Part(`in`)
 
 			override fun newArray(size: Int): Array<Part?> = arrayOfNulls(size)
 		}
 	}
 
-	override fun toString(): String {
-		return javaClass.name + ": $manufacturer $model"
-	}
+	override fun toString() = javaClass.name + ": $manufacturer $model"
 }

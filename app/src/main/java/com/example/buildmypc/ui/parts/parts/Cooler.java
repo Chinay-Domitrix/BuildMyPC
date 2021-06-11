@@ -3,18 +3,11 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static android.os.Build.VERSION_CODES.Q;
-
 public final class Cooler extends Part implements Parcelable {
-//	private final String manufacturer;
-//	private final String model;
 	private final String rpm;
 	private final String noiseLevel;
 	private final int height;
@@ -42,7 +35,6 @@ public final class Cooler extends Part implements Parcelable {
 		this.fanless = fanless;
 	}
 
-	@RequiresApi(Q)
 	public Cooler(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		rpm = in.readString();
@@ -107,7 +99,6 @@ public final class Cooler extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(Q)
 	@Override
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
@@ -117,12 +108,5 @@ public final class Cooler extends Part implements Parcelable {
 		dest.writeStringList(socketSupport);
 		dest.writeBoolean(waterCooled);
 		dest.writeBoolean(fanless);
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "Cooler: " + getModel() + " " + getManufacturer();
 	}
 }

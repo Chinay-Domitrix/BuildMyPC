@@ -3,12 +3,7 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-
 import org.jetbrains.annotations.NotNull;
-
-import static android.os.Build.VERSION_CODES.Q;
 
 public class Memory extends Part implements Parcelable {
 	private boolean hasECC;
@@ -40,6 +35,21 @@ public class Memory extends Part implements Parcelable {
 		this.speed = speed;
 		this.timing = timing;
 		this.voltage = voltage;
+	}
+
+	public Memory(@NotNull Parcel in) {
+		super(in.readString(), in.readString());
+		hasECC = in.readBoolean();
+		latencyCAS = in.readInt();
+		ddrGen = in.readInt();
+		firstWordLatency = in.readInt();
+		formFactor = in.readString();
+		heatSpreader = in.readBoolean();
+		moduleSize = in.readInt();
+		moduleCount = in.readInt();
+		speed = in.readInt();
+		timing = in.readString();
+		voltage = in.readDouble();
 	}
 
 	public boolean getHasECC() {
@@ -185,28 +195,5 @@ public class Memory extends Part implements Parcelable {
 		dest.writeInt(speed);
 		dest.writeString(timing);
 		dest.writeDouble(voltage);
-	}
-
-	@RequiresApi(Q)
-	public Memory(@NotNull Parcel in) {
-		super(in.readString(), in.readString());
-		hasECC = in.readBoolean();
-		latencyCAS = in.readInt();
-		ddrGen = in.readInt();
-		firstWordLatency = in.readInt();
-		formFactor = in.readString();
-		heatSpreader = in.readBoolean();
-		moduleSize = in.readInt();
-		moduleCount = in.readInt();
-		speed = in.readInt();
-		timing = in.readString();
-		voltage = in.readDouble();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "Memory " + getModel() + " " + getManufacturer();
 	}
 }

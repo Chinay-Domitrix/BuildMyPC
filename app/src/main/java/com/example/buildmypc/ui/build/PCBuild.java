@@ -54,7 +54,7 @@ public class PCBuild implements Parcelable {
 		this.extraParts = extraParts;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
+	,iresApi(api = Build.VERSION_CODES.Q)
 	public PCBuild(Parcel in) {
 		cooler = in.readParcelable(cooler.getClass().getClassLoader());
 		cpu = in.readParcelable(cpu.getClass().getClassLoader());
@@ -220,7 +220,7 @@ public class PCBuild implements Parcelable {
 		return 0;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
+	,iresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeParcelable(cooler, flags);
@@ -236,7 +236,7 @@ public class PCBuild implements Parcelable {
 	}
 
 	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
-		@RequiresApi(api = Build.VERSION_CODES.Q)
+		,iresApi(api = Build.VERSION_CODES.Q)
 		@Override
 		public PCBuild createFromParcel(Parcel in) {
 			return new PCBuild(in);

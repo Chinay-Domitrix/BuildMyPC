@@ -1,17 +1,11 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 
 public final class CPU extends Part implements Parcelable {
-//	private final String manufacturer;
-//	private final String model;
 	private final int coreCount;
 	private final double coreClock;
 	private final double boostClock;
@@ -60,13 +54,22 @@ public final class CPU extends Part implements Parcelable {
 		this.smt = smt;
 	}
 
-//	public String getManufacturer() {
-//		return manufacturer;
-//	}
-//
-//	public String getModel() {
-//		return model;
-//	}
+	public CPU(@NotNull Parcel in) {
+		super(in.readString(), in.readString());
+		coreCount = in.readInt();
+		coreClock = in.readDouble();
+		boostClock = in.readDouble();
+		tdp = in.readInt();
+		series = in.readString();
+		microarchitecture = in.readString();
+		coreFamily = in.readString();
+		socket = in.readString();
+		iGPU = in.readBoolean();
+		maxMemory = in.readInt();
+		ecc = in.readBoolean();
+		cooler = in.readBoolean();
+		smt = in.readBoolean();
+	}
 
 	public int getCoreCount() {
 		return coreCount;
@@ -173,9 +176,8 @@ public final class CPU extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeInt(coreCount);
 		dest.writeDouble(coreClock);
@@ -190,30 +192,5 @@ public final class CPU extends Part implements Parcelable {
 		dest.writeBoolean(ecc);
 		dest.writeBoolean(cooler);
 		dest.writeBoolean(smt);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public CPU(Parcel in){
-		super(in.readString(), in.readString());
-		coreCount = in.readInt();
-		coreClock = in.readDouble();
-		boostClock = in.readDouble();
-		tdp = in.readInt();
-		series = in.readString();
-		microarchitecture = in.readString();
-		coreFamily = in.readString();
-		socket = in.readString();
-		iGPU = in.readBoolean();
-		maxMemory = in.readInt();
-		ecc = in.readBoolean();
-		cooler = in.readBoolean();
-		smt = in.readBoolean();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "CPU " + getModel() + " " + getManufacturer();
 	}
 }

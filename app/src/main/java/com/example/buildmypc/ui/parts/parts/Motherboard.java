@@ -3,15 +3,10 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static android.os.Build.VERSION_CODES.Q;
 
 public class Motherboard extends Part implements Parcelable {
 	private boolean ecc; // has error correction coding (all chips should tbh)
@@ -55,6 +50,27 @@ public class Motherboard extends Part implements Parcelable {
 		this.gen2USBCount = gen2USBCount;
 		this.gen32USBcount = gen32USBcount;
 		this.isWireless = hasWireless;
+	}
+
+	public Motherboard(@NotNull Parcel in) {
+		super(in.readString(), in.readString());
+		ecc = in.readBoolean();
+		chipset = in.readString();
+		formFactor = in.readString();
+		m2slots = in.createStringArrayList();
+		maxMemSupport = in.readInt();
+		memSlots = in.readInt();
+		compatibleMem = in.createStringArrayList();
+		memType = in.readString();
+		mSATA_slotCount = in.readInt();
+		incEthernetSupp = in.createStringArrayList();
+		incVideo = in.readString();
+		PCISlotList = in.createTypedArrayList(CountedString.CREATOR);
+		hasRAID = in.readBoolean();
+		sata6gbpsCount = in.readInt();
+		gen2USBCount = in.readInt();
+		gen32USBcount = in.createTypedArrayList(CountedString.CREATOR);
+		isWireless = in.readBoolean();
 	}
 
 	public boolean isEcc() {
@@ -271,34 +287,5 @@ public class Motherboard extends Part implements Parcelable {
 		dest.writeInt(gen2USBCount);
 		dest.writeParcelableList(gen32USBcount, flags);
 		dest.writeBoolean(isWireless);
-	}
-
-	@RequiresApi(Q)
-	public Motherboard(@NotNull Parcel in) {
-		super(in.readString(), in.readString());
-		ecc = in.readBoolean();
-		chipset = in.readString();
-		formFactor = in.readString();
-		m2slots=in.createStringArrayList();
-		maxMemSupport = in.readInt();
-		memSlots = in.readInt();
-		compatibleMem=in.readStringList(compatibleMem);
-		memType = in.readString();
-		mSATA_slotCount = in.readInt();
-		in.readStringList(incEthernetSupp);
-		incVideo = in.readString();
-		in.readParcelableList(PCISlotList, PCISlotList.getClass().getClassLoader());
-		hasRAID = in.readBoolean();
-		sata6gbpsCount = in.readInt();
-		gen2USBCount = in.readInt();
-		in.readParcelableList(gen32USBcount, gen32USBcount.getClass().getClassLoader());
-		isWireless = in.readBoolean();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "Motherboard " + getModel() + " " + getManufacturer();
 	}
 }

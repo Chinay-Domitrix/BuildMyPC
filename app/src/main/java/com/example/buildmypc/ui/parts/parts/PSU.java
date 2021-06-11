@@ -1,18 +1,13 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class PSU extends Part implements Parcelable { // stands for "Portable Communication Unit"
-
+public class PSU extends Part implements Parcelable { // stands for "Power Supply Unit"
 	private ArrayList<CountedString> connectorList;
 	private String efficiencyRating;
 	private boolean hasFan;
@@ -23,6 +18,17 @@ public class PSU extends Part implements Parcelable { // stands for "Portable Co
 
 	public PSU(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	public PSU(Parcel in){
+		super(in.readString(), in.readString());
+		in.readParcelableList(connectorList, connectorList.getClass().getClassLoader());
+		efficiencyRating = in.readString();
+		hasFan = in.readBoolean();
+		formFactor = in.readString();
+		length = in.readInt();
+		modular = in.readString();
+		wattage = in.readInt();
 	}
 
 	public ArrayList<CountedString> getConnectorList() {
@@ -114,9 +120,8 @@ public class PSU extends Part implements Parcelable { // stands for "Portable Co
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeParcelableList(connectorList, flags);
 		dest.writeString(efficiencyRating);
@@ -125,24 +130,5 @@ public class PSU extends Part implements Parcelable { // stands for "Portable Co
 		dest.writeInt(length);
 		dest.writeString(modular);
 		dest.writeInt(wattage);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public PSU(Parcel in){
-		super(in.readString(), in.readString());
-		in.readParcelableList(connectorList, connectorList.getClass().getClassLoader());
-		efficiencyRating = in.readString();
-		hasFan = in.readBoolean();
-		formFactor = in.readString();
-		length = in.readInt();
-		modular = in.readString();
-		wattage = in.readInt();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "PSU " + getModel() + " " + getManufacturer();
 	}
 }

@@ -3,18 +3,12 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static android.os.Build.VERSION_CODES.Q;
-
 public class Case extends Part implements Parcelable {
 	public static final Creator<Case> CREATOR = new Creator<Case>() {
-		@RequiresApi(Q)
 		@Override
 		public Case createFromParcel(Parcel in) {
 			return new Case(in);
@@ -69,7 +63,6 @@ public class Case extends Part implements Parcelable {
 		this.psuShroud = psuShroud;
 	}
 
-	@RequiresApi( Q)
 	protected Case(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		color = in.readString();
@@ -235,12 +228,5 @@ public class Case extends Part implements Parcelable {
 		result = 31 * result + (getVolume() != null ? getVolume().hashCode() : 0);
 		result = 31 * result + (isPsuShroud() ? 1 : 0);
 		return result;
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "Case: " + getModel() + " " + getManufacturer();
 	}
 }

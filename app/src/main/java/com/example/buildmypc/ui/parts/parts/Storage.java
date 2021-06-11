@@ -1,16 +1,11 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Storage extends Part implements Parcelable {
-
 	private double formFactor;
 	private int cacheSizeMB; // in mb
 	private String capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
@@ -32,6 +27,17 @@ public class Storage extends Part implements Parcelable {
 		this.nvme = nvme;
 		this.rpm = rpm;
 		this.type = type;
+	}
+
+	public Storage(Parcel in) {
+		super(in.toString(), in.toString());
+		formFactor = in.readDouble();
+		cacheSizeMB = in.readInt();
+		capacity = in.readString();
+		sataInterface = in.readString();
+		nvme = in.readBoolean();
+		rpm = in.readInt();
+		type = in.readString();
 	}
 
 	public int getCacheSizeMB() {
@@ -100,7 +106,7 @@ public class Storage extends Part implements Parcelable {
 
 		if (Double.compare(storage.getFormFactor(), getFormFactor()) != 0) return false;
 		if (getCacheSizeMB() != storage.getCacheSizeMB()) return false;
-		if (getCapacity() != storage.getCapacity()) return false;
+		if (!getCapacity().equals(storage.getCapacity())) return false;
 		if (getNvme() != storage.getNvme()) return false;
 		if (getRpm() != storage.getRpm()) return false;
 		if (getSataInterface() != null ? !getSataInterface().equals(storage.getSataInterface()) : storage.getSataInterface() != null)
@@ -123,7 +129,6 @@ public class Storage extends Part implements Parcelable {
 		return result;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
@@ -134,24 +139,5 @@ public class Storage extends Part implements Parcelable {
 		dest.writeBoolean(nvme);
 		dest.writeInt(rpm);
 		dest.writeString(type);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public Storage(Parcel in) {
-		super(in.toString(), in.toString());
-		formFactor = in.readDouble();
-		cacheSizeMB = in.readInt();
-		capacity = in.readString();
-		sataInterface = in.readString();
-		nvme = in.readBoolean();
-		rpm = in.readInt();
-		type = in.readString();
-	}
-
-	@NonNull
-	@NotNull
-	@Override
-	public String toString() {
-		return "Storage " + getModel() + " " + getManufacturer();
 	}
 }
