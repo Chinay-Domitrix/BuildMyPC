@@ -151,7 +151,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 		motherboardSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), motherboardList));
 
 		Spinner osSpinner = (Spinner) root.findViewById(R.id.editorFrag_osSpinner);
-		ArrayList<Part> osList = MainActivity.memory.get();
+		ArrayList<Part> osList = MainActivity.oss.get();
 		if (currentBuild.toString().trim().length() == 0)
 			osList.add(0, new Part("", " "));
 		else
