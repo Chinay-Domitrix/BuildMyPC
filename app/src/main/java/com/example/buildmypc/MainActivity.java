@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Memory>> memory = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Storage>> storage = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<GPU>> gpus = new AtomicReference<>(new ArrayList<>());
-	public static final AtomicReference<ArrayList<Case>> pcCases = new AtomicReference<>(new ArrayList<>());
+	public static final AtomicReference<ArrayList<Case>> cases = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<PSU>> psus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<OS>> oss = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Monitor>> monitors = new AtomicReference<>(new ArrayList<>());
