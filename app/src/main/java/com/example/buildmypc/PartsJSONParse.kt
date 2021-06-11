@@ -1,5 +1,6 @@
 package com.example.buildmypc
 
+import android.util.Log
 import com.example.buildmypc.MainActivity.parts
 import com.example.buildmypc.ui.parts.parts.*
 
@@ -31,6 +32,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "cpus completed somewhat")
 				MainActivity.cpus.set(tempCPUs)
 			})
 			add(Thread {
@@ -63,6 +65,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "coolers completed somewhat")
 				MainActivity.coolers.set(tempCoolers)
 			})
 			add(Thread {
@@ -117,6 +120,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "motherboards completed somewhat")
 				MainActivity.motherboards.set(tempMotherboards)
 			})
 			add(Thread {
@@ -141,6 +145,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "memory completed somewhat")
 				MainActivity.memory.set(tempMemory)
 			})
 			add(Thread {
@@ -162,6 +167,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "storage completed somewhat")
 				MainActivity.storage.set(tempStorage)
 			})
 			add(Thread {
@@ -197,6 +203,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "gpus completed somewhat")
 				MainActivity.gpus.set(tempGPUs)
 			})
 			add(Thread {
@@ -252,6 +259,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
+				Log.d("PARSE_TAG", "cases completed somewhat")
 				MainActivity.pcCases.set(tempCases)
 			})
 		}.forEach(Thread::start)
