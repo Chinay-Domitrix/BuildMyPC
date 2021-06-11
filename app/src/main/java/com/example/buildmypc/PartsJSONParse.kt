@@ -1,6 +1,6 @@
 package com.example.buildmypc
 
-import android.util.Log
+import android.util.Log.d
 import com.example.buildmypc.MainActivity.parts
 import com.example.buildmypc.ui.parts.parts.*
 
@@ -32,7 +32,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "cpus completed somewhat")
+				d("PARSE_TAG", "cpus completed somewhat")
 				MainActivity.cpus.set(tempCPUs)
 			})
 			add(Thread {
@@ -65,7 +65,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "coolers completed somewhat")
+				d("PARSE_TAG", "coolers completed somewhat")
 				MainActivity.coolers.set(tempCoolers)
 			})
 			add(Thread {
@@ -120,7 +120,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "motherboards completed somewhat")
+				d("PARSE_TAG", "motherboards completed somewhat")
 				MainActivity.motherboards.set(tempMotherboards)
 			})
 			add(Thread {
@@ -145,7 +145,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "memory completed somewhat")
+				d("PARSE_TAG", "memory completed somewhat")
 				MainActivity.memory.set(tempMemory)
 			})
 			add(Thread {
@@ -167,7 +167,7 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "storage completed somewhat")
+				d("PARSE_TAG", "storage completed somewhat")
 				MainActivity.storage.set(tempStorage)
 			})
 			add(Thread {
@@ -203,12 +203,12 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "gpus completed somewhat")
+				d("PARSE_TAG", "gpus completed somewhat")
 				MainActivity.gpus.set(tempGPUs)
 			})
 			add(Thread {
 				val cases = tempJSONObject.getJSONArray("case")
-				val tempCases = MainActivity.pcCases.get()
+				val tempCases = MainActivity.cases.get()
 				(0 until cases.length()).forEach {
 					cases.getJSONObject(it).apply {
 						tempCases += Case(
@@ -250,7 +250,7 @@ class PartsJSONParse : Thread() {
 							},
 							getString("side-panel"),
 							getString("type"),
-							ArrayList<String>().apply{
+							ArrayList<String>().apply {
 								getJSONArray("volume").apply {
 									(0 until this.length()).forEach { i -> add(getString(i)) }
 								}
@@ -259,8 +259,11 @@ class PartsJSONParse : Thread() {
 						)
 					}
 				}
-				Log.d("PARSE_TAG", "cases completed somewhat")
-				MainActivity.pcCases.set(tempCases)
+				d("PARSE_TAG", "cases completed somewhat")
+				MainActivity.cases.set(tempCases)
+			})
+			add(Thread{
+				
 			})
 		}.forEach(Thread::start)
 	}
