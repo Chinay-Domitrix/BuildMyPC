@@ -55,4 +55,22 @@ public class CountedString implements Parcelable {
 		name = in.readString();
 		amount = in.readInt();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		CountedString that = (CountedString) o;
+
+		if (getAmount() != that.getAmount()) return false;
+		return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getName() != null ? getName().hashCode() : 0;
+		result = 31 * result + getAmount();
+		return result;
+	}
 }
