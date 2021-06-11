@@ -236,6 +236,7 @@ public class PCBuild implements Parcelable {
 	}
 
 	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
+		@RequiresApi(api = Build.VERSION_CODES.Q)
 		@Override
 		public PCBuild createFromParcel(Parcel in) {
 			return new PCBuild(in);
@@ -246,6 +247,5 @@ public class PCBuild implements Parcelable {
 			return new PCBuild[size];
 		}
 	};
-
 
 }

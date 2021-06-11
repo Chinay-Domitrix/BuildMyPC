@@ -3,6 +3,7 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -116,5 +117,12 @@ public final class Cooler extends Part implements Parcelable {
 		dest.writeStringList(socketSupport);
 		dest.writeBoolean(waterCooled);
 		dest.writeBoolean(fanless);
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Cooler " + getModel() + " " + getManufacturer();
 	}
 }

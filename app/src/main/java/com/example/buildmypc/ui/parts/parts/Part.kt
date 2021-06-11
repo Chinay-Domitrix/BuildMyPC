@@ -50,4 +50,8 @@ open class Part : Parcelable {
 			override fun newArray(size: Int): Array<Part?> = arrayOfNulls(size)
 		}
 	}
+
+	override fun toString(): String {
+		return "Part $model $manufacturer"
+	}
 }

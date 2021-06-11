@@ -3,6 +3,7 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -200,5 +201,12 @@ public class Memory extends Part implements Parcelable {
 		speed = in.readInt();
 		timing = in.readString();
 		voltage = in.readDouble();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Memory " + getModel() + " " + getManufacturer();
 	}
 }

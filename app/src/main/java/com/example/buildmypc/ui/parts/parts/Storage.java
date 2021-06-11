@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -145,5 +146,12 @@ public class Storage extends Part implements Parcelable {
 		nvme = in.readBoolean();
 		rpm = in.readInt();
 		type = in.readString();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Storage " + getModel() + " " + getManufacturer();
 	}
 }

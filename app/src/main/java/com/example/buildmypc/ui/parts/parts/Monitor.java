@@ -1,8 +1,10 @@
 package com.example.buildmypc.ui.parts.parts;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -10,9 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static android.os.Build.VERSION_CODES.Q;
-
 public class Monitor extends Part implements Parcelable {
+
 	private String aspectRatio;
 	private String brightness; // in candla per square meter
 	private boolean isCurved;
@@ -30,25 +31,6 @@ public class Monitor extends Part implements Parcelable {
 
 	public Monitor(String model, String manufacturer) {
 		super(model, manufacturer);
-	}
-
-	@RequiresApi(Q)
-	public Monitor(@NotNull Parcel in) {
-		super(in.readString(), in.readString());
-		aspectRatio = in.readString();
-		brightness = in.readString();
-		isCurved = in.readBoolean();
-		frameSync= in.createStringArrayList();
-		hdrTier = in.readString();
-		builtInSpeakers = in.readBoolean();
-		monitorInterfaces = in.createTypedArrayList(CountedString.CREATOR);
-		panelType = in.readString();
-		refreshRate = in.readDouble();
-		resolution= in.createIntArray();
-		responseTimeMs = in.readInt();
-		screenSizeIn = in.readDouble();
-		viewingAngle = in.readDouble();
-		isWidescreen = in.readBoolean();
 	}
 
 	public ArrayList<CountedString> getMonitorInterfaces() {
@@ -217,8 +199,9 @@ public class Monitor extends Part implements Parcelable {
 		return result;
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(@NotNull Parcel dest, int flags) {
+	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(aspectRatio);
 		dest.writeString(brightness);
@@ -235,5 +218,31 @@ public class Monitor extends Part implements Parcelable {
 		dest.writeDouble(viewingAngle);
 		dest.writeBoolean(isWidescreen);
 
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	public Monitor(Parcel in){
+		super(in.readString(), in.readString());
+		aspectRatio = in.readString();
+		brightness = in.readString();
+		isCurved = in.readBoolean();
+		in.readStringList(frameSync);
+		hdrTier = in.readString();
+		builtInSpeakers = in.readBoolean();
+		monitorInterfaces = (ArrayList<CountedString>) in.readParcelableList(monitorInterfaces, monitorInterfaces.getClass().getClassLoader()); // probably doesn't work
+		panelType = in.readString();
+		refreshRate = in.readDouble();
+		in.readIntArray(resolution);
+		responseTimeMs = in.readInt();
+		screenSizeIn = in.readDouble();
+		viewingAngle = in.readDouble();
+		isWidescreen = in.readBoolean();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Monitor " + getModel() + " " + getManufacturer();
 	}
 }
