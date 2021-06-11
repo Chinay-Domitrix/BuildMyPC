@@ -1,6 +1,5 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,7 +10,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static android.os.Build.VERSION_CODES.Q;
+
 public class Case extends Part implements Parcelable {
+	public static final Creator<Case> CREATOR = new Creator<Case>() {
+		@RequiresApi(Q)
+		@Override
+		public Case createFromParcel(Parcel in) {
+			return new Case(in);
+		}
+
+		@Override
+		public Case[] newArray(int size) {
+			return new Case[size];
+		}
+	};
 	//hello
 	private String color;
 	private ArrayList<String> dimensionsMm; // 1-d int arraylist with 3 entries,
@@ -56,8 +69,8 @@ public class Case extends Part implements Parcelable {
 		this.psuShroud = psuShroud;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	protected Case(Parcel in) {
+	@RequiresApi( Q)
+	protected Case(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		color = in.readString();
 		dimensionsMm = in.createStringArrayList();
@@ -72,9 +85,8 @@ public class Case extends Part implements Parcelable {
 		psuShroud = in.readBoolean();
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		dest.writeString(super.getModel());
 		dest.writeString(super.getManufacturer());
 		dest.writeString(color);
@@ -89,19 +101,6 @@ public class Case extends Part implements Parcelable {
 		dest.writeStringList(volume);
 		dest.writeBoolean(psuShroud);
 	}
-
-	public static final Creator<Case> CREATOR = new Creator<Case>() {
-		@RequiresApi(api = Build.VERSION_CODES.Q)
-		@Override
-		public Case createFromParcel(Parcel in) {
-			return new Case(in);
-		}
-
-		@Override
-		public Case[] newArray(int size) {
-			return new Case[size];
-		}
-	};
 
 	public String getColor() {
 		return color;
@@ -242,6 +241,6 @@ public class Case extends Part implements Parcelable {
 	@NotNull
 	@Override
 	public String toString() {
-		return "Case " + getModel() + " " + getManufacturer();
+		return "Case: " + getModel() + " " + getManufacturer();
 	}
 }
