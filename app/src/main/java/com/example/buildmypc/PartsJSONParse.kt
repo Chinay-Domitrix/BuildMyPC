@@ -107,24 +107,11 @@ class PartsJSONParse : Thread() {
 							getInt("sata-6gbps"),
 							usbHeaders.getInt("2"),
 							ArrayList<CountedString>().apply {
-								add(
-									CountedString(
-										"gen-1",
-										usbHeaders.getJSONObject("3-2").getInt("gen-1")
-									)
-								)
-								add(
-									CountedString(
-										"gen-2",
-										usbHeaders.getJSONObject("3-2").getInt("gen-2")
-									)
-								)
-								add(
-									CountedString(
-										"gen-2x2",
-										usbHeaders.getJSONObject("3-2").getInt("gen-2x2")
-									)
-								)
+								usbHeaders.getJSONObject("3-2").apply {
+									add(CountedString("gen-1", getInt("gen-1")))
+									add(CountedString("gen-2", getInt("gen-2")))
+									add(CountedString("gen-2x2", getInt("gen-2x2")))
+								}
 							},
 							getBoolean("wireless")
 						)
@@ -181,17 +168,68 @@ class PartsJSONParse : Thread() {
 				val gpus = tempJSONObject.getJSONArray("gpu")
 				val tempGPUs = MainActivity.gpus.get()
 				(0 until gpus.length()).forEach {
-					gpus.getJSONObject(it).apply{
+					gpus.getJSONObject(it).apply {
 						tempGPUs += GPU(
 							getString("model"),
 							getString("manufacturer"),
 							getInt("boost-clock-mhz"),
 							getString("chipset"),
-							
+							getString("cooling"),
+							getInt("core-clock-mhz"),
+							getInt("effective-memory-clock-mhz"),
+							getInt("expansion-slot-width"),
+							getString("external-power"),
+							getString("frame-sync"),
+							getString("interface"),
+							getInt("length-mm"),
+							getInt("memory-gb"),
+							getString("memory-type"),
+							getInt("tdp-w"),
+							ArrayList<CountedString>().apply {
+								getJSONObject("video-ports").apply {
+									add(CountedString("dp", getInt("dp")))
+									add(CountedString("dvi", getInt("dvi")))
+									add(CountedString("hdmi", getInt("hdmi")))
+									add(CountedString("mini-dp", getInt("mini-dp")))
+									add(CountedString("mini-hdmi", getInt("mini-hdmi")))
+								}
+							}
 						)
 					}
 				}
 				MainActivity.gpus.set(tempGPUs)
+			})
+			add(Thread {
+				val cases = tempJSONObject.getJSONArray("case")
+				val tempCases = MainActivity.pcCases.get()
+				(0 until cases.length()).forEach {
+					cases.getJSONObject(it).apply {
+						tempCases += Case(
+							getString("model"),
+							getString("manufacturer"),
+							getString("color"),
+							ArrayList<String>().apply {
+								getJSONArray("dimensions").apply {
+									add(getString(0))
+									add(getString(1))
+								}
+							},
+							ArrayList<CountedString>().apply {
+								getJSONObject("expansion-slots").apply {
+									add(CountedString("full-height", getInt("full-height")))
+									add(CountedString("half-height", getInt("half-height")))
+								}
+							},
+							ArrayList<String>().apply {
+								getJSONArray("front-panel-usb").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
+							
+						)
+					}
+				}
+				MainActivity.pcCases.set(tempCases)
 			})
 		}.forEach(Thread::start)
 	}
