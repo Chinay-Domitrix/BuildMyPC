@@ -12,14 +12,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.android.volley.toolbox.StringRequest;
+import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.PartsJSONParse;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
+import com.example.buildmypc.ui.parts.parts.Accessory;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -70,8 +83,53 @@ public class PartsFragment extends Fragment {
 		// RecyclerView time
 		// --> using the same XML for each
 
+		// CPU, Cooler, Motherboard Memory, Storage, GPU, Case, PSU, OS, Monitor, extraParts
+
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
-//		PartsRecyclerViewAdapter cpuAdapter = new PartsRecyclerViewAdapter();
+		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.cpus.get()));
+		cpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView coolerRecycle = binding.partsCpuRecyclerview;
+		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.coolers.get()));
+		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
+		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.motherboards.get()));
+		mbRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView storageRecyclerView = binding.partsStorageRecyclerview;
+		storageRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.storage.get()));
+		storageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView gpuRecyclerView = binding.partsGpuRecyclerview;
+		gpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.gpus.get()));
+		gpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView caseRecyclerView = binding.partsCaseRecyclerview;
+		caseRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.pcCases.get()));
+		caseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView psuRecyclerView = binding.partsPsuRecyclerview; // power supplies
+		psuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.psus.get()));
+		psuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView osRecyclerView = binding.partsOsRecyclerview; // power supplies
+		osRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.oss.get()));
+		osRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView monitorRecyclerView = binding.partsMonitorRecyclerview; // power supplies
+		monitorRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.monitors.get()));
+		monitorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		// in case we ever want accessories
+//		RecyclerView accessoriesRecyclerView = binding.partsAccessoryRecyclerview; // power supplies
+//		accessoriesRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.accessories.get()));
+//		accessoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
+
+
 
 
 		return root;
@@ -82,6 +140,28 @@ public class PartsFragment extends Fragment {
 		super.onDestroyView();
 		binding = null;
 	}
+
+//	public ArrayList<Part> sortList(ArrayList<Part> partList, Class type) throws Exception {
+//		ArrayList<Part> newList = new ArrayList<Part>();
+//
+//		Class[] validTypes = {Accessory.class, Case.class, Cooler.class, CPU.class, GPU.class, Memory.class,
+//				Monitor.class, Motherboard.class, OS.class, PSU.class, Storage.class};
+//
+//		// checking if its valid
+//		boolean isValid = false;
+//		for(Class c : validTypes){
+//			if(type.equals(c)) isValid = true;
+//		}
+//		if(!isValid) throw new Exception("partsList was not given one of the valid types");
+//
+//		// the sorting
+//		for(Part p : partList){
+//			if(p.getClass().equals(type)) newList.add(p);
+//		}
+//		if(newList != null) return newList ;
+//		return null;
+//
+//	}
 
 	public class PartsRecyclerViewAdapter extends Adapter<PartsRecyclerViewAdapter.RecyclerViewHolder> {
 		Context parentContext;
