@@ -1,10 +1,7 @@
 package com.example.buildmypc.ui.parts.parts;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +9,6 @@ import java.util.ArrayList;
 
 public class Case extends Part implements Parcelable {
 	public static final Creator<Case> CREATOR = new Creator<Case>() {
-		@RequiresApi(api = Build.VERSION_CODES.Q)
 		@Override
 		public Case createFromParcel(Parcel in) {
 			return new Case(in);
@@ -40,19 +36,7 @@ public class Case extends Part implements Parcelable {
 		super(model, manufacturer);
 	}
 
-	public Case(String model,
-	            String manufacturer,
-	            String color,
-	            ArrayList<String> dimensionsMm,
-	            ArrayList<CountedString> expansionSlots,
-	            ArrayList<String> supportedFrontUSBs,
-	            ArrayList<CountedString> internalDriveBays,
-	            ArrayList<String> maxGPULength,
-	            ArrayList<String> mbFormFactor,
-	            String sidePanel,
-	            String type,
-	            ArrayList<String> volume,
-	            boolean psuShroud) {
+	public Case(String model, String manufacturer, String color, ArrayList<String> dimensionsMm, ArrayList<CountedString> expansionSlots, ArrayList<String> supportedFrontUSBs, ArrayList<CountedString> internalDriveBays, ArrayList<String> maxGPULength, ArrayList<String> mbFormFactor, String sidePanel, String type, ArrayList<String> volume, boolean psuShroud) {
 		super(model, manufacturer);
 		this.color = color;
 		this.dimensionsMm = dimensionsMm;
@@ -67,20 +51,6 @@ public class Case extends Part implements Parcelable {
 		this.psuShroud = psuShroud;
 	}
 
-	public Case(String model,
-	            String manufacturer,
-	            String color,
-	            ArrayList<String> dimensionsMm,
-	            ArrayList<CountedString> expansionSlots,
-	            ArrayList<String> supportedFrontUSBs){
-		super(model, manufacturer);
-		this.color = color;
-		this.dimensionsMm = dimensionsMm;
-		this.expansionSlots = expansionSlots;
-		this.supportedFrontUSBs = supportedFrontUSBs;
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	protected Case(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		color = in.readString();
@@ -100,7 +70,6 @@ public class Case extends Part implements Parcelable {
 		this(model, manufacturer, color, null, null, null, null, null, null, null, null, null, false);
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		dest.writeString(super.getModel());
