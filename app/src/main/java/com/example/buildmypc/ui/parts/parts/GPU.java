@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -246,5 +247,12 @@ public class GPU extends Part implements Parcelable { // the only important part
 		intMemoryType = in.readString();
 		tdpW = in.readInt();
 		in.readParcelableList(videoPorts, videoPorts.getClass().getClassLoader());
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "GPU " + getModel() + " " + getManufacturer();
 	}
 }

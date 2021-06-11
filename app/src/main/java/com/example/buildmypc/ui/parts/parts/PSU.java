@@ -4,7 +4,10 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -134,5 +137,12 @@ public class PSU extends Part implements Parcelable { // stands for "Portable Co
 		length = in.readInt();
 		modular = in.readString();
 		wattage = in.readInt();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "PSU " + getModel() + " " + getManufacturer();
 	}
 }

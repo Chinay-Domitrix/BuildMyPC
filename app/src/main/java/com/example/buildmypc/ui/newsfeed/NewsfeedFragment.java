@@ -102,7 +102,7 @@ public class NewsfeedFragment extends Fragment {
 
 		@Override
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
-			// the method were info is set for EACH individual layout element for each list entry
+			// the method where info is set for EACH individual layout element for each list entry
 			Article currentEntry = articleViewList.get(position);
 			holder.image.setImageDrawable(currentEntry.getImage());
 			holder.title.setText(currentEntry.getHeading());

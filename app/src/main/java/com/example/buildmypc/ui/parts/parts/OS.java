@@ -3,6 +3,10 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 public class OS extends Accessory implements Parcelable {
 
 	private String bitMode;
@@ -103,5 +107,12 @@ public class OS extends Accessory implements Parcelable {
 		type = in.readString();
 		edition = in.readString();
 		oem_retail = in.readString();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "OS " + getModel() + " " + getManufacturer();
 	}
 }

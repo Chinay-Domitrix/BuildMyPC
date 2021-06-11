@@ -4,7 +4,10 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.NotNull;
 
 public final class CPU extends Part implements Parcelable {
 //	private final String manufacturer;
@@ -205,5 +208,12 @@ public final class CPU extends Part implements Parcelable {
 		ecc = in.readBoolean();
 		cooler = in.readBoolean();
 		smt = in.readBoolean();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "CPU " + getModel() + " " + getManufacturer();
 	}
 }

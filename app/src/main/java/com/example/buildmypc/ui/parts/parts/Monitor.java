@@ -4,7 +4,10 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -234,5 +237,12 @@ public class Monitor extends Part implements Parcelable {
 		screenSizeIn = in.readDouble();
 		viewingAngle = in.readDouble();
 		isWidescreen = in.readBoolean();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Monitor " + getModel() + " " + getManufacturer();
 	}
 }

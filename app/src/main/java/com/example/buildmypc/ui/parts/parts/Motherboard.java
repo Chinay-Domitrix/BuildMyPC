@@ -4,7 +4,10 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -291,5 +294,12 @@ public class Motherboard extends Part implements Parcelable {
 		gen2USBCount = in.readInt();
 		in.readParcelableList(gen32USBcount, gen32USBcount.getClass().getClassLoader());
 		isWireless = in.readBoolean();
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Motherboard " + getModel() + " " + getManufacturer();
 	}
 }

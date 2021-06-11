@@ -3,6 +3,10 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 public class Accessory extends Part implements Parcelable {
 	public Accessory(String model, String manufacturer) {
 		super(model, manufacturer);
@@ -33,4 +37,11 @@ public class Accessory extends Part implements Parcelable {
 			return new Accessory[size];
 		}
 	};
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return "Accessory " + getModel() + " " + getManufacturer();
+	}
 }
