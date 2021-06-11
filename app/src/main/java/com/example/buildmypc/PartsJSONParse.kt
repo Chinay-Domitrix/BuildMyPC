@@ -225,7 +225,30 @@ class PartsJSONParse : Thread() {
 									(0 until this.length()).forEach { i -> add(getString(i)) }
 								}
 							},
-							ArrayList<>
+							ArrayList<CountedString>().apply {
+								getJSONObject("internal-drive-bays").apply {
+									add(CountedString("2-5", getInt("2-5")))
+									add(CountedString("3-5", getInt("3-5")))
+								}
+							},
+							ArrayList<String>().apply {
+								getJSONArray("max-gpu-length").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
+							ArrayList<String>().apply {
+								getJSONArray("mb-form-factor").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
+							getString("side-panel"),
+							getString("type"),
+							ArrayList<String>().apply{
+								getJSONArray("volume").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
+							getBoolean("psu-shroud")
 						)
 					}
 				}
