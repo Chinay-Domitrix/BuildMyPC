@@ -26,15 +26,17 @@ import java.util.List;
 public class PartsSpinnerAdapter extends ArrayAdapter<Part>{
 
 	ArrayList<Part> internalList;
+//	Part currentPart;
 
 	public PartsSpinnerAdapter(@NonNull Context context, @NonNull List<Part> objects) {
 		super(context, 0, objects);
 		internalList = (ArrayList<Part>) objects;
+//		this.currentPart = currentPart;
 	}
 
 	@Override
 	public View getDropDownView(int position, @Nullable @org.jetbrains.annotations.Nullable View convertView, @NonNull @NotNull ViewGroup parent) {
-		return super.getDropDownView(position, convertView, parent);
+		return startView(position, convertView, parent);
 	}
 
 	@NonNull

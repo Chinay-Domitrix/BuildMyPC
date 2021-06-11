@@ -52,7 +52,7 @@ public class Storage extends Part implements Parcelable {
 		return capacity;
 	}
 
-	public void setCapacity(String  capacity) {
+	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
 

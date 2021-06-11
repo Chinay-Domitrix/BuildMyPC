@@ -50,5 +50,5 @@ open class Part : Parcelable {
 		}
 	}
 
-	override fun toString() = javaClass.name + ": $manufacturer $model"
+	override fun toString() = "$manufacturer $model"
 }

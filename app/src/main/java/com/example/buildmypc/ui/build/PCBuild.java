@@ -187,7 +187,8 @@ public class PCBuild implements Parcelable {
 			return false;
 		if (getLogo() != null ? !getLogo().equals(pcBuild.getLogo()) : pcBuild.getLogo() != null)
 			return false;
-		if (pcCase != null ? !pcCase.equals(pcBuild.pcCase) : pcBuild.pcCase != null) return false;
+		if (getPcCase() != null ? !getPcCase().equals(pcBuild.getPcCase()) : pcBuild.getPcCase() != null)
+			return false;
 		if (getCooler() != null ? !getCooler().equals(pcBuild.getCooler()) : pcBuild.getCooler() != null)
 			return false;
 		if (getCpu() != null ? !getCpu().equals(pcBuild.getCpu()) : pcBuild.getCpu() != null)
@@ -213,7 +214,7 @@ public class PCBuild implements Parcelable {
 	public int hashCode() {
 		int result = getName() != null ? getName().hashCode() : 0;
 		result = 31 * result + (getLogo() != null ? getLogo().hashCode() : 0);
-		result = 31 * result + (pcCase != null ? pcCase.hashCode() : 0);
+		result = 31 * result + (getPcCase() != null ? getPcCase().hashCode() : 0);
 		result = 31 * result + (getCooler() != null ? getCooler().hashCode() : 0);
 		result = 31 * result + (getCpu() != null ? getCpu().hashCode() : 0);
 		result = 31 * result + (getGpu() != null ? getGpu().hashCode() : 0);
