@@ -37,10 +37,8 @@ import static com.example.buildmypc.R.id.editorFrag_storageSpinner;
 import static com.example.buildmypc.R.id.editorFragmentGoBackButton;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.layout.fragment_editor;
-import static java.lang.Math.random;
-import static java.lang.String.valueOf;
 
-public class EditorFragment extends Fragment{
+public class EditorFragment extends Fragment {
 	public static final String BACK = "buildbackbetter";
 	private static final String BUILD = "pcbuild";
 	private EditorViewModel mViewModel;
@@ -77,25 +75,15 @@ public class EditorFragment extends Fragment{
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
 		View root = inflater.inflate(fragment_editor, container, false);
 		goBackButton = root.findViewById(editorFragmentGoBackButton);
-		// TODO make it so that you can't edit prebuilts
-		if(!currentBuild.getName().equals("ADD BUILD")) {goBackButton.setText("OVERWRITE");}
-		else {goBackButton.setText("ADD");}
-		goBackButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-				// create the bundle
-				PCBuild updatedBuild = currentBuild;
+		// TODO make it so that you can't edit pre builts
+		goBackButton.setText(!currentBuild.getName().equals("ADD BUILD") ? "OVERWRITE" : "ADD");
+		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			// create the bundle
+			PCBuild updatedBuild = currentBuild;
 //				updatedBuild.setName("funny");
 //				Bundle result = new Bundle();
 //				result.putParcelable(BACK, updatedBuild);
-
-				int id = ((ViewGroup) requireView().getParent()).getId();
-				requireActivity().getSupportFragmentManager().beginTransaction()
-						.replace(id, new BuildFragment(updatedBuild), "findThisOtherFragment")
-						.addToBackStack(null)
-						.commit();
-			}
+			requireActivity().getSupportFragmentManager().beginTransaction().replace(((ViewGroup) requireView().getParent()).getId(), new BuildFragment(updatedBuild), "findThisOtherFragment").addToBackStack(null).commit();
 		});
 //		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
 //		myTextView.setText(currentBuild.getName());
