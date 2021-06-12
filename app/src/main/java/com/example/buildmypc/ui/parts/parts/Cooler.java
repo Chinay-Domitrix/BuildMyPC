@@ -3,11 +3,27 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public final class Cooler extends Part implements Parcelable {
+	public static final Creator<Cooler> CREATOR = new Creator<Cooler>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public Cooler createFromParcel(Parcel in) {
+			return new Cooler(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public Cooler[] newArray(int size) {
+			return new Cooler[size];
+		}
+	};
 	private final String rpm;
 	private final String noiseLevel;
 	private final int height;

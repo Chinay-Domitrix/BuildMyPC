@@ -1,11 +1,8 @@
 package com.example.buildmypc.ui.build;
 
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.RequiresApi;
 
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Case;
@@ -19,13 +16,29 @@ import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.Storage;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class PCBuild implements Parcelable {
+	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public PCBuild createFromParcel(Parcel in) {
+			return new PCBuild(in);
+		}
 
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public PCBuild[] newArray(int size) {
+			return new PCBuild[size];
+		}
+	};
 	private String name;
 	private Drawable logo;
-
 	private Case pcCase;
 	private Cooler cooler;
 	private CPU cpu;
@@ -57,19 +70,18 @@ public class PCBuild implements Parcelable {
 		this.extraParts = extraParts;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
-	public PCBuild(Parcel in) {
-		pcCase = in.readParcelable(pcCase.getClass().getClassLoader());
-		cooler = in.readParcelable(cooler.getClass().getClassLoader());
-		cpu = in.readParcelable(cpu.getClass().getClassLoader());
-		gpu = in.readParcelable(gpu.getClass().getClassLoader());
-		memory = in.readParcelable(memory.getClass().getClassLoader());
-		monitor = in.readParcelable(monitor.getClass().getClassLoader());
-		motherboard = in.readParcelable(motherboard.getClass().getClassLoader());
-		os = in.readParcelable(os.getClass().getClassLoader());
-		psu = in.readParcelable(psu.getClass().getClassLoader());
-		storage = in.readParcelable(storage.getClass().getClassLoader());
-		extraParts = new ArrayList<>(in.readParcelableList(extraParts, extraParts.getClass().getClassLoader()));
+	public PCBuild(@NotNull Parcel in) {
+		pcCase = in.readTypedObject(Case.CREATOR);
+		cooler = in.readTypedObject(Cooler.CREATOR);
+		cpu = in.readTypedObject(CPU.CREATOR);
+		gpu = in.readTypedObject(GPU.CREATOR);
+		memory = in.readTypedObject(Memory.CREATOR);
+		monitor = in.readTypedObject(Monitor.CREATOR);
+		motherboard = in.readTypedObject(Motherboard.CREATOR);
+		os = in.readTypedObject(OS.CREATOR);
+		psu = in.readTypedObject(PSU.CREATOR);
+		storage = in.readTypedObject(Storage.CREATOR);
+		extraParts = new ArrayList<>(in.createTypedArrayList(Part.CREATOR));
 	}
 
 	public String getName() {
@@ -233,9 +245,8 @@ public class PCBuild implements Parcelable {
 		return 0;
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
-	public void writeToParcel(Parcel dest, int flags) {
+	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		dest.writeParcelable(pcCase, flags);
 		dest.writeParcelable(cooler, flags);
 		dest.writeParcelable(cpu, flags);
@@ -248,18 +259,4 @@ public class PCBuild implements Parcelable {
 		dest.writeParcelable(storage, flags);
 		dest.writeParcelableList(extraParts, flags);
 	}
-
-	public static final Creator<PCBuild> CREATOR = new Creator<PCBuild>() {
-		@RequiresApi(api = Build.VERSION_CODES.Q)
-		@Override
-		public PCBuild createFromParcel(Parcel in) {
-			return new PCBuild(in);
-		}
-
-		@Override
-		public PCBuild[] newArray(int size) {
-			return new PCBuild[size];
-		}
-	};
-
 }

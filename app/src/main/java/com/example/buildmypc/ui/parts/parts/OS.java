@@ -3,9 +3,25 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class OS extends Accessory implements Parcelable {
+	public static final Creator<OS> CREATOR = new Creator<OS>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public OS createFromParcel(Parcel in) {
+			return new OS(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public OS[] newArray(int size) {
+			return new OS[size];
+		}
+	};
 	private String bitMode;
 	private double maxMemSupport;
 	private String type;
@@ -14,6 +30,15 @@ public class OS extends Accessory implements Parcelable {
 
 	public OS(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	public OS(Parcel in) {
+		super(in.readString(), in.readString());
+		bitMode = in.readString();
+		maxMemSupport = in.readDouble();
+		type = in.readString();
+		edition = in.readString();
+		oem_retail = in.readString();
 	}
 
 	public String getBitMode() {
@@ -95,14 +120,5 @@ public class OS extends Accessory implements Parcelable {
 		dest.writeString(type);
 		dest.writeString(edition);
 		dest.writeString(oem_retail);
-	}
-
-	public OS(Parcel in){
-		super(in.readString(), in.readString());
-		bitMode = in.readString();
-		maxMemSupport = in.readDouble();
-		type = in.readString();
-		edition = in.readString();
-		oem_retail = in.readString();
 	}
 }

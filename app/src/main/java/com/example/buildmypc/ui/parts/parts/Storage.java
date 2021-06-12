@@ -3,9 +3,25 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Storage extends Part implements Parcelable {
+	public static final Creator<Storage> CREATOR = new Creator<Storage>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public Storage createFromParcel(Parcel in) {
+			return new Storage(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public Storage[] newArray(int size) {
+			return new Storage[size];
+		}
+	};
 	private double formFactor;
 	private int cacheSizeMB; // in mb
 	private String capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
@@ -48,7 +64,7 @@ public class Storage extends Part implements Parcelable {
 		this.cacheSizeMB = cacheSizeMB;
 	}
 
-	public String  getCapacity() {
+	public String getCapacity() {
 		return capacity;
 	}
 

@@ -3,12 +3,28 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Motherboard extends Part implements Parcelable {
+	public static final Creator<Motherboard> CREATOR = new Creator<Motherboard>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public Motherboard createFromParcel(Parcel in) {
+			return new Motherboard(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public Motherboard[] newArray(int size) {
+			return new Motherboard[size];
+		}
+	};
 	private boolean ecc; // has error correction coding (all chips should tbh)
 	private String chipset;
 	private String formFactor;

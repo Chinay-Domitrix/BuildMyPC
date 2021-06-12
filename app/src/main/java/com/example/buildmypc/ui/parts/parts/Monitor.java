@@ -3,12 +3,28 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Monitor extends Part implements Parcelable {
+	public static final Creator<Monitor> CREATOR = new Creator<Monitor>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public Monitor createFromParcel(Parcel in) {
+			return new Monitor(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public Monitor[] newArray(int size) {
+			return new Monitor[size];
+		}
+	};
 	private String aspectRatio;
 	private String brightness; // in candla per square meter
 	private boolean isCurved;
@@ -28,7 +44,7 @@ public class Monitor extends Part implements Parcelable {
 		super(model, manufacturer);
 	}
 
-	public Monitor(Parcel in) {
+	public Monitor(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		aspectRatio = in.readString();
 		brightness = in.readString();

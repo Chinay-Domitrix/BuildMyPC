@@ -3,9 +3,25 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Memory extends Part implements Parcelable {
+	public static final Creator<Memory> CREATOR = new Creator<Memory>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public Memory createFromParcel(Parcel in) {
+			return new Memory(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public Memory[] newArray(int size) {
+			return new Memory[size];
+		}
+	};
 	private boolean hasECC;
 	private int latencyCAS; // backwards to respect carrot case
 	private int ddrGen; // pretty much always four

@@ -3,9 +3,25 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public final class CPU extends Part implements Parcelable {
+	public static final Creator<CPU> CREATOR = new Creator<CPU>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public CPU createFromParcel(Parcel in) {
+			return new CPU(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public CPU[] newArray(int size) {
+			return new CPU[size];
+		}
+	};
 	private final int coreCount;
 	private final double coreClock;
 	private final double boostClock;

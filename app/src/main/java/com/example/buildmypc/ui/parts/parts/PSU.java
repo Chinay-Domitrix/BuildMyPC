@@ -3,11 +3,27 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class PSU extends Part implements Parcelable { // stands for "Power Supply Unit"
+	public static final Creator<PSU> CREATOR = new Creator<PSU>() {
+		@NotNull
+		@Contract("_ -> new")
+		@Override
+		public PSU createFromParcel(Parcel in) {
+			return new PSU(in);
+		}
+
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
+		@Override
+		public PSU[] newArray(int size) {
+			return new PSU[size];
+		}
+	};
 	private ArrayList<CountedString> connectorList;
 	private String efficiencyRating;
 	private boolean hasFan;
@@ -20,7 +36,7 @@ public class PSU extends Part implements Parcelable { // stands for "Power Suppl
 		super(model, manufacturer);
 	}
 
-	public PSU(Parcel in){
+	public PSU(Parcel in) {
 		super(in.readString(), in.readString());
 		in.readParcelableList(connectorList, connectorList.getClass().getClassLoader());
 		efficiencyRating = in.readString();

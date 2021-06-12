@@ -8,6 +8,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class GPU extends Part implements Parcelable { // the only important part for 12 year old me buying a gaming PC
+	public static final Creator<GPU> CREATOR = new Creator<GPU>() {
+		@Override
+		public GPU createFromParcel(Parcel in) {
+			return new GPU(in);
+		}
+
+		@Override
+		public GPU[] newArray(int size) {
+			return new GPU[size];
+		}
+	};
 	private int boostClockSpeed; // in megahertz
 	private String chipset;
 	private String cooling;

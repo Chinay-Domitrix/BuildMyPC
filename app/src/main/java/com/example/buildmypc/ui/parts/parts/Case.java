@@ -3,17 +3,22 @@ package com.example.buildmypc.ui.parts.parts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class Case extends Part implements Parcelable {
 	public static final Creator<Case> CREATOR = new Creator<Case>() {
+		@NotNull
+		@Contract("_ -> new")
 		@Override
 		public Case createFromParcel(Parcel in) {
 			return new Case(in);
 		}
 
+		@NotNull
+		@Contract(value = "_ -> new", pure = true)
 		@Override
 		public Case[] newArray(int size) {
 			return new Case[size];
