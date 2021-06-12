@@ -2,7 +2,6 @@ package com.example.buildmypc.ui.build;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static android.util.Log.d;
 import static android.view.LayoutInflater.from;
 import static androidx.core.content.res.ResourcesCompat.getDrawable;
 import static com.example.buildmypc.R.anim.enter_from_right;
@@ -90,20 +90,20 @@ public class BuildFragment extends Fragment {
 		// building myBuilds
 		displayedBuilds = new ArrayList<>();
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
-		if (currentEditedBuild != null){
+		if (currentEditedBuild != null) {
 			int[] idList;
-			if(isIncluded(currentEditedBuild.getIdNumber(), idList(displayedBuilds))){
-				// checks if currentEditedBuild is an edited version of an existing build
-				// find the position of the build with this ID number and replace it
-				for(int i = 0; i < displayedBuilds.size(); i++){
-					if(displayedBuilds.get(i).getIdNumber() == currentEditedBuild.getIdNumber()){
+			// checks if currentEditedBuild is an edited version of an existing build
+			// find the position of the build with this ID number and replace it
+			if (isIncluded(currentEditedBuild.getIdNumber(), idList(displayedBuilds)))
+				for (int i = 0; i < displayedBuilds.size(); i++) {
+					if (displayedBuilds.get(i).getIdNumber() == currentEditedBuild.getIdNumber()) {
 						displayedBuilds.set(i, currentEditedBuild);
 						break;
 					}
-					if(i == displayedBuilds.size() - 1) Log.d("TAG", "Error in isIncluded statement around line 91 -?> for loop didn't find any entries");
+					if (i == displayedBuilds.size() - 1)
+						d("TAG", "Error in isIncluded statement around line 91 -?> for loop didn't find any entries");
 				}
-			}
-			else { displayedBuilds.add(currentEditedBuild); }
+			else displayedBuilds.add(currentEditedBuild);
 		}
 		// adding the (ADD BUILD) entry
 		displayedBuilds.add(new PCBuild(
@@ -142,11 +142,7 @@ public class BuildFragment extends Fragment {
 
 	private void openEditorFragment(PCBuild currentBuild, boolean isEditing) {
 		EditorFragment fragment = EditorFragment.newInstance(currentBuild, isEditing);
-		getParentFragmentManager().beginTransaction()
-				.setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right)
-				.addToBackStack(null)
-				.add(nav_host_fragment_content_main, fragment, BUILD)
-				.commit();
+		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
 	private class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridHolder> {
@@ -171,7 +167,7 @@ public class BuildFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull GridHolder holder, int position) {
 			PCBuild currentBuild = buildList.get(position);
 
-			Log.d("DEBUGSTR", "pos: " + position);
+			d("DEBUGSTR", "pos: " + position);
 
 			holder.image.setImageDrawable(currentBuild.getLogo());
 			holder.text.setText(currentBuild.getName());
@@ -179,8 +175,8 @@ public class BuildFragment extends Fragment {
 			holder.image.setOnClickListener(v -> {
 				// check if we're using the (+) button
 				boolean isEditing = true;
-				if(buildList.get(position).getIdNumber() == -11){
-					currentBuild.setIdNumber((int)(Math.random() * 1000000)); // id generator
+				if (buildList.get(position).getIdNumber() == -11) {
+					currentBuild.setIdNumber((int) (Math.random() * 1000000)); // id generator
 					isEditing = false;
 				}
 
@@ -221,17 +217,18 @@ public class BuildFragment extends Fragment {
 	}
 
 	public int[] idList(ArrayList<PCBuild> builds) {
-		if(builds == null || builds.size() == 0) return null; // throwing a wrench into the system | might make it throw an exception
+		if (builds == null || builds.size() == 0)
+			return null; // throwing a wrench into the system | might make it throw an exception
 		int[] result = new int[builds.size()];
-		for(int i = 0; i < builds.size(); i++){
+		for (int i = 0; i < builds.size(); i++) {
 			result[i] = builds.get(i).getIdNumber();
 		}
 		return result;
 	}
 
-	public boolean isIncluded(int testInt, int[] arr){
-		for(int entry : arr){
-			if(testInt == entry) return true;
+	public boolean isIncluded(int testInt, int[] arr) {
+		for (int entry : arr) {
+			if (testInt == entry) return true;
 		}
 		return false;
 	}
