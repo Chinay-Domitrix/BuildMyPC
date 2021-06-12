@@ -199,8 +199,7 @@ class PartsJSONParse : Thread() {
 									add(CountedString("mini-dp", getInt("mini-dp")))
 									add(CountedString("mini-hdmi", getInt("mini-hdmi")))
 								}
-							}
-						)
+							})
 					}
 				}
 				d("PARSE_TAG", "gpus completed somewhat")
@@ -229,7 +228,9 @@ class PartsJSONParse : Thread() {
 							},
 							ArrayList<String>().apply {
 								getJSONArray("front-panel-usb").apply {
-									(0 until this.length()).forEach { i -> add(getString(i)) }
+									(0 until this.length()).forEach { i ->
+										add(getString(i))
+									}
 								}
 							},
 							ArrayList<CountedString>().apply {
@@ -240,19 +241,25 @@ class PartsJSONParse : Thread() {
 							},
 							ArrayList<String>().apply {
 								getJSONArray("max-gpu-length").apply {
-									(0 until this.length()).forEach { i -> add(getString(i)) }
+									(0 until this.length()).forEach { i ->
+										add(getString(i))
+									}
 								}
 							},
 							ArrayList<String>().apply {
 								getJSONArray("mb-form-factor").apply {
-									(0 until this.length()).forEach { i -> add(getString(i)) }
+									(0 until this.length()).forEach { i ->
+										add(getString(i))
+									}
 								}
 							},
 							getString("side-panel"),
 							getString("type"),
 							ArrayList<String>().apply {
 								getJSONArray("volume").apply {
-									(0 until this.length()).forEach { i -> add(getString(i)) }
+									(0 until this.length()).forEach { i ->
+										add(getString(i))
+									}
 								}
 							},
 							getBoolean("psu-shroud")
@@ -262,8 +269,8 @@ class PartsJSONParse : Thread() {
 				d("PARSE_TAG", "cases completed somewhat")
 				MainActivity.pcCases.set(tempCases)
 			})
-			add(Thread{
-				
+			add(Thread {
+
 			})
 		}.forEach(Thread::start)
 	}
