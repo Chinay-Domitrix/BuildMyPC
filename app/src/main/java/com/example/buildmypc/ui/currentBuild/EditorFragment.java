@@ -40,27 +40,30 @@ import static com.example.buildmypc.R.layout.fragment_editor;
 import static java.lang.Math.random;
 import static java.lang.String.valueOf;
 
-public class EditorFragment extends Fragment implements OnItemSelectedListener {
+public class EditorFragment extends Fragment{
 	public static final String BACK = "buildbackbetter";
 	private static final String BUILD = "pcbuild";
 	private EditorViewModel mViewModel;
 	private PCBuild currentBuild;
+	private boolean isEditing;
 	private FragmentHomeBinding binding;
 	private Button goBackButton;
 	private TextView myTextView;
 
-	public EditorFragment(PCBuild currentBuild) {
+	public EditorFragment(PCBuild currentBuild, boolean isEditing) {
 		this.currentBuild = currentBuild;
+		this.isEditing = isEditing;
 	}
 
 	public EditorFragment() {
 	}
 
-	public static EditorFragment newInstance(PCBuild build) {
+	public static EditorFragment newInstance(PCBuild build, boolean isEditing) {
 		EditorFragment editorFragment = new EditorFragment();
 		Bundle args = new Bundle();
 		args.putParcelable(BUILD, build);
-		return new EditorFragment(build);
+		args.putBoolean(BUILD, isEditing);
+		return new EditorFragment(build, isEditing);
 	}
 
 	@Override
@@ -74,15 +77,26 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
 		View root = inflater.inflate(fragment_editor, container, false);
 		goBackButton = root.findViewById(editorFragmentGoBackButton);
-		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			String random = valueOf((int) (random() * 10));
+		if(isEditing) goBackButton.setText("OVERWRITE");
+		else goBackButton.setText("ADD");
+		goBackButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				String random = valueOf((int) (random() * 10));
 //				myTextView.setText(random);
-			// create the bundle
-			PCBuild updatedBuild = new PCBuild();
-			updatedBuild.setName(random);
+
+				// create the bundle
+				PCBuild updatedBuild = new PCBuild();
+				updatedBuild.setName(random);
 //				Bundle result = new Bundle();
 //				result.putParcelable(BACK, updatedBuild);
-			requireActivity().getSupportFragmentManager().beginTransaction().replace(((ViewGroup) requireView().getParent()).getId(), new BuildFragment(currentBuild), "findThisOtherFragment").addToBackStack(null).commit();
+
+				int id = ((ViewGroup) requireView().getParent()).getId();
+				requireActivity().getSupportFragmentManager().beginTransaction()
+						.replace(id, new BuildFragment(currentBuild), "findThisOtherFragment")
+						.addToBackStack(null)
+						.commit();
+			}
 		});
 //		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
 //		myTextView.setText(currentBuild.getName());
@@ -94,6 +108,17 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 		ArrayList<Part> caseList = MainActivity.pcCases.get();
 		caseList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getPcCase());
 		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), caseList));
+		caseSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				// TODO have this set the newly selected part as a replacement
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
 
 		Spinner coolerSpinner = root.findViewById(editorFrag_coolerSpinner);
 		ArrayList<Part> coolerList = MainActivity.coolers.get();
@@ -190,13 +215,13 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-
-	}
+//	@Override
+//	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//	}
+//
+//	@Override
+//	public void onNothingSelected(AdapterView<?> parent) {
+//
+//	}
 }
