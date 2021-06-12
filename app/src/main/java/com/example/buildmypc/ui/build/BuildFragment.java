@@ -145,6 +145,23 @@ public class BuildFragment extends Fragment {
 		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
+	public int[] idList(ArrayList<PCBuild> builds) {
+		if (builds == null || builds.size() == 0)
+			return null; // throwing a wrench into the system | might make it throw an exception
+		int[] result = new int[builds.size()];
+		for (int i = 0; i < builds.size(); i++) {
+			result[i] = builds.get(i).getIdNumber();
+		}
+		return result;
+	}
+
+	public boolean isIncluded(int testInt, int[] arr) {
+		for (int entry : arr) {
+			if (testInt == entry) return true;
+		}
+		return false;
+	}
+
 	private class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridHolder> {
 
 		private final ArrayList<PCBuild> buildList;
@@ -214,23 +231,6 @@ public class BuildFragment extends Fragment {
 //				});
 			}
 		}
-	}
-
-	public int[] idList(ArrayList<PCBuild> builds) {
-		if (builds == null || builds.size() == 0)
-			return null; // throwing a wrench into the system | might make it throw an exception
-		int[] result = new int[builds.size()];
-		for (int i = 0; i < builds.size(); i++) {
-			result[i] = builds.get(i).getIdNumber();
-		}
-		return result;
-	}
-
-	public boolean isIncluded(int testInt, int[] arr) {
-		for (int entry : arr) {
-			if (testInt == entry) return true;
-		}
-		return false;
 	}
 
 	public class Prebuilds {

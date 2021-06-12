@@ -53,7 +53,7 @@ public class NewsfeedFragment extends Fragment {
 					"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
 					new URL("https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"),
 					"NYTimes",
-					ResourcesCompat.getDrawable(getResources(),nytimes, requireActivity().getTheme()),
+					ResourcesCompat.getDrawable(getResources(), nytimes, requireActivity().getTheme()),
 					new Date(),
 					new SimpleDateFormat("yyyy-MM-dd", getDefault())
 			));

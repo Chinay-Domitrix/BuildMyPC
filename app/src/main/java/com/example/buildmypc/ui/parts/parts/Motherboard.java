@@ -254,7 +254,7 @@ public class Motherboard extends Part implements Parcelable {
 			return false;
 		if (getIncVideo() != null ? !getIncVideo().equals(that.getIncVideo()) : that.getIncVideo() != null)
 			return false;
-		if (PCISlotList != null ? !PCISlotList.equals(that.PCISlotList) : that.PCISlotList != null)
+		if (!Objects.equals(PCISlotList, that.PCISlotList))
 			return false;
 		if (getGen32USBcount() != null ? !getGen32USBcount().equals(that.getGen32USBcount()) : that.getGen32USBcount() != null)
 			return false;

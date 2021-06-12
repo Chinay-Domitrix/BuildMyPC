@@ -215,9 +215,13 @@ public class PCBuild implements Parcelable {
 		this.pcCase = pcCase;
 	}
 
-	public int getIdNumber() { return idNumber; }
+	public int getIdNumber() {
+		return idNumber;
+	}
 
-	public void setIdNumber(int id) { this.idNumber = id; }
+	public void setIdNumber(int id) {
+		this.idNumber = id;
+	}
 
 	@Override
 	public boolean equals(Object o) { // hashcode and equals do NOT take into account idNumbers

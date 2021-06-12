@@ -37,8 +37,6 @@ import static com.google.android.material.snackbar.Snackbar.make;
 
 public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
-	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
-	private AppBarConfiguration mAppBarConfiguration;
 	public static final AtomicReference<ArrayList<Part>> cpus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> coolers = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> motherboards = new AtomicReference<>(new ArrayList<>());
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Part>> psus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> oss = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
+	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
+	private AppBarConfiguration mAppBarConfiguration;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

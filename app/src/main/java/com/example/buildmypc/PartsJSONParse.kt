@@ -146,167 +146,167 @@ class PartsJSONParse : Thread() {
 					d("ACTUAL_PARSER", "motherboards completed somewhat")
 					MainActivity.motherboards.set(tempMotherboards)
 				})
-			add(Thread {
-				val memory = getJSONArray("memory")
-				val tempMemory = MainActivity.memory.get()
-				d("ACTUAL_PARSER", "memory list started")
-				(0 until memory.length()).forEach {
-					memory.getJSONObject(it).apply {
-						tempMemory += Memory(
-							getString("model"),
-							getString("manufacturer"),
-							getBoolean("ecc"),
-							getInt("cas-latency"),
-							getInt("ddr-gen"),
-							getInt("first-word-latency-ns"),
-							getString("form-factor"),
-							getBoolean("heat-spreader"),
-							getJSONObject("modules").getInt("size-gb"),
-							getJSONObject("modules").getInt("quantity"),
-							getInt("speed-mhz"),
-							getString("timing"),
-							getDouble("voltage")
-						)
+				add(Thread {
+					val memory = getJSONArray("memory")
+					val tempMemory = MainActivity.memory.get()
+					d("ACTUAL_PARSER", "memory list started")
+					(0 until memory.length()).forEach {
+						memory.getJSONObject(it).apply {
+							tempMemory += Memory(
+								getString("model"),
+								getString("manufacturer"),
+								getBoolean("ecc"),
+								getInt("cas-latency"),
+								getInt("ddr-gen"),
+								getInt("first-word-latency-ns"),
+								getString("form-factor"),
+								getBoolean("heat-spreader"),
+								getJSONObject("modules").getInt("size-gb"),
+								getJSONObject("modules").getInt("quantity"),
+								getInt("speed-mhz"),
+								getString("timing"),
+								getDouble("voltage")
+							)
+						}
 					}
-				}
-				d("ACTUAL_PARSER", "memory completed somewhat")
-				MainActivity.memory.set(tempMemory)
-			})
-			add(Thread {
-				val storage = getJSONArray("storage")
-				val tempStorage = MainActivity.storage.get()
-				d("ACTUAL_PARSER", "storage list started")
-				(0 until storage.length()).forEach {
-					storage.getJSONObject(it).apply {
-						tempStorage += Storage(
-							getString("model"),
-							getString("manufacturer"),
-							getString("form-factor"),
-							try {
-								getInt("cache-mb")
-							} catch(e : JSONException){
-								-1
-							},
-							getJSONObject("capacity").getInt("size")
-								.toString() + getJSONObject("capacity").getString("unit"),
-							getString("interface"),
-							getBoolean("nvme"),
-							try {
-								getInt("rpm")
-							} catch(e : JSONException){
-								-1
-							},
-							getString("type")
-						)
+					d("ACTUAL_PARSER", "memory completed somewhat")
+					MainActivity.memory.set(tempMemory)
+				})
+				add(Thread {
+					val storage = getJSONArray("storage")
+					val tempStorage = MainActivity.storage.get()
+					d("ACTUAL_PARSER", "storage list started")
+					(0 until storage.length()).forEach {
+						storage.getJSONObject(it).apply {
+							tempStorage += Storage(
+								getString("model"),
+								getString("manufacturer"),
+								getString("form-factor"),
+								try {
+									getInt("cache-mb")
+								} catch (e: JSONException) {
+									-1
+								},
+								getJSONObject("capacity").getInt("size")
+									.toString() + getJSONObject("capacity").getString("unit"),
+								getString("interface"),
+								getBoolean("nvme"),
+								try {
+									getInt("rpm")
+								} catch (e: JSONException) {
+									-1
+								},
+								getString("type")
+							)
+						}
 					}
-				}
-				d("ACTUAL_PARSER", "storage completed somewhat")
-				MainActivity.storage.set(tempStorage)
-			})
-			add(Thread {
-				val gpus = getJSONArray("gpu")
-				val tempGPUs = MainActivity.gpus.get()
-				d("ACTUAL_PARSER", "gpu list started")
-				(0 until gpus.length()).forEach {
-					gpus.getJSONObject(it).apply {
-						tempGPUs += GPU(
-							getString("model"),
-							getString("manufacturer"),
-							getInt("boost-clock-mhz"),
-							getString("chipset"),
-							getString("cooling"),
-							getInt("core-clock-mhz"),
-							getInt("effective-memory-clock-mhz"),
-							getInt("expansion-slot-width"),
-							getString("external-power"),
-							getString("frame-sync"),
-							getString("interface"),
-							getInt("length-mm"),
-							getInt("memory-gb"),
-							getString("memory-type"),
-							getInt("tdp-w"),
-							ArrayList<CountedString>().apply {
-								getJSONObject("video-ports").apply {
-									add(CountedString("dp", getInt("dp")))
-									add(CountedString("dvi", getInt("dvi")))
-									add(CountedString("hdmi", getInt("hdmi")))
-									add(CountedString("mini-dp", getInt("mini-dp")))
-									add(CountedString("mini-hdmi", getInt("mini-hdmi")))
-								}
-							})
+					d("ACTUAL_PARSER", "storage completed somewhat")
+					MainActivity.storage.set(tempStorage)
+				})
+				add(Thread {
+					val gpus = getJSONArray("gpu")
+					val tempGPUs = MainActivity.gpus.get()
+					d("ACTUAL_PARSER", "gpu list started")
+					(0 until gpus.length()).forEach {
+						gpus.getJSONObject(it).apply {
+							tempGPUs += GPU(
+								getString("model"),
+								getString("manufacturer"),
+								getInt("boost-clock-mhz"),
+								getString("chipset"),
+								getString("cooling"),
+								getInt("core-clock-mhz"),
+								getInt("effective-memory-clock-mhz"),
+								getInt("expansion-slot-width"),
+								getString("external-power"),
+								getString("frame-sync"),
+								getString("interface"),
+								getInt("length-mm"),
+								getInt("memory-gb"),
+								getString("memory-type"),
+								getInt("tdp-w"),
+								ArrayList<CountedString>().apply {
+									getJSONObject("video-ports").apply {
+										add(CountedString("dp", getInt("dp")))
+										add(CountedString("dvi", getInt("dvi")))
+										add(CountedString("hdmi", getInt("hdmi")))
+										add(CountedString("mini-dp", getInt("mini-dp")))
+										add(CountedString("mini-hdmi", getInt("mini-hdmi")))
+									}
+								})
+						}
 					}
-				}
-				d("ACTUAL_PARSER", "gpus completed somewhat")
-				MainActivity.gpus.set(tempGPUs)
-			})
-			add(Thread {
-				val cases = getJSONArray("case")
-				val tempCases = MainActivity.pcCases.get()
-				d("ACTUAL_PARSER", "case list started")
-				(0 until cases.length()).forEach {
-					cases.getJSONObject(it).apply {
-						tempCases += Case(
-							getString("model"),
-							getString("manufacturer"),
-							getString("color"),
-							ArrayList<String>().apply {
-								getJSONArray("dimensions").apply {
-									add(getString(0))
-									add(getString(1))
-								}
-							},
-							ArrayList<CountedString>().apply {
-								getJSONObject("expansion-slots").apply {
-									add(CountedString("full-height", getInt("full-height")))
-									add(CountedString("half-height", getInt("half-height")))
-								}
-							},
-							ArrayList<String>().apply {
-								getJSONArray("front-panel-usb").apply {
-									(0 until this.length()).forEach { i ->
-										add(getString(i))
+					d("ACTUAL_PARSER", "gpus completed somewhat")
+					MainActivity.gpus.set(tempGPUs)
+				})
+				add(Thread {
+					val cases = getJSONArray("case")
+					val tempCases = MainActivity.pcCases.get()
+					d("ACTUAL_PARSER", "case list started")
+					(0 until cases.length()).forEach {
+						cases.getJSONObject(it).apply {
+							tempCases += Case(
+								getString("model"),
+								getString("manufacturer"),
+								getString("color"),
+								ArrayList<String>().apply {
+									getJSONArray("dimensions").apply {
+										add(getString(0))
+										add(getString(1))
 									}
-								}
-							},
-							ArrayList<CountedString>().apply {
-								getJSONObject("internal-drive-bays").apply {
-									add(CountedString("2-5", getInt("2-5")))
-									add(CountedString("3-5", getInt("3-5")))
-								}
-							},
-							ArrayList<String>().apply {
-								getJSONArray("max-gpu-length").apply {
-									(0 until this.length()).forEach { i ->
-										add(getString(i))
+								},
+								ArrayList<CountedString>().apply {
+									getJSONObject("expansion-slots").apply {
+										add(CountedString("full-height", getInt("full-height")))
+										add(CountedString("half-height", getInt("half-height")))
 									}
-								}
-							},
-							ArrayList<String>().apply {
-								getJSONArray("mb-form-factor").apply {
-									(0 until this.length()).forEach { i ->
-										add(getString(i))
+								},
+								ArrayList<String>().apply {
+									getJSONArray("front-panel-usb").apply {
+										(0 until this.length()).forEach { i ->
+											add(getString(i))
+										}
 									}
-								}
-							},
-							getString("side-panel"),
-							getString("type"),
-							ArrayList<String>().apply {
-								getJSONArray("volume").apply {
-									(0 until this.length()).forEach { i ->
-										add(getString(i))
+								},
+								ArrayList<CountedString>().apply {
+									getJSONObject("internal-drive-bays").apply {
+										add(CountedString("2-5", getInt("2-5")))
+										add(CountedString("3-5", getInt("3-5")))
 									}
-								}
-							},
-							getBoolean("psu-shroud")
-						)
+								},
+								ArrayList<String>().apply {
+									getJSONArray("max-gpu-length").apply {
+										(0 until this.length()).forEach { i ->
+											add(getString(i))
+										}
+									}
+								},
+								ArrayList<String>().apply {
+									getJSONArray("mb-form-factor").apply {
+										(0 until this.length()).forEach { i ->
+											add(getString(i))
+										}
+									}
+								},
+								getString("side-panel"),
+								getString("type"),
+								ArrayList<String>().apply {
+									getJSONArray("volume").apply {
+										(0 until this.length()).forEach { i ->
+											add(getString(i))
+										}
+									}
+								},
+								getBoolean("psu-shroud")
+							)
+						}
 					}
-				}
-				d("ACTUAL_PARSER", "cases completed somewhat")
-				MainActivity.pcCases.set(tempCases)
-			})
-			add(Thread {
+					d("ACTUAL_PARSER", "cases completed somewhat")
+					MainActivity.pcCases.set(tempCases)
+				})
+				add(Thread {
 
-			})
+				})
 			}.forEach(Thread::start)
 		}
 	}
