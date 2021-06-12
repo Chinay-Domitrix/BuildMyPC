@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.android.volley.toolbox.StringRequest;
-import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.PartsJSONParse;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
@@ -33,7 +32,16 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.view.LayoutInflater.from;
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.toolbox.Volley.newRequestQueue;
+import static com.example.buildmypc.MainActivity.coolers;
+import static com.example.buildmypc.MainActivity.cpus;
+import static com.example.buildmypc.MainActivity.gpus;
+import static com.example.buildmypc.MainActivity.monitors;
+import static com.example.buildmypc.MainActivity.motherboards;
+import static com.example.buildmypc.MainActivity.oss;
 import static com.example.buildmypc.MainActivity.parts;
+import static com.example.buildmypc.MainActivity.pcCases;
+import static com.example.buildmypc.MainActivity.psus;
+import static com.example.buildmypc.MainActivity.storage;
 import static com.example.buildmypc.R.id.partsList_addButton;
 import static com.example.buildmypc.R.id.partsList_nameTextView;
 import static com.example.buildmypc.R.string.firebase_key;
@@ -75,39 +83,39 @@ public class PartsFragment extends Fragment {
 		// CPU, Cooler, Motherboard Memory, Storage, GPU, Case, PSU, OS, Monitor, extraParts
 
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
-		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.cpus.get()));
+		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), cpus.get()));
 		cpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView coolerRecycle = binding.partsCpuRecyclerview;
-		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.coolers.get()));
+		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
 		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
-		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.motherboards.get()));
+		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
 		mbRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView storageRecyclerView = binding.partsStorageRecyclerview;
-		storageRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.storage.get()));
+		storageRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), storage.get()));
 		storageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView gpuRecyclerView = binding.partsGpuRecyclerview;
-		gpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.gpus.get()));
+		gpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), gpus.get()));
 		gpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView caseRecyclerView = binding.partsCaseRecyclerview;
-		caseRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.pcCases.get()));
+		caseRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), pcCases.get()));
 		caseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView psuRecyclerView = binding.partsPsuRecyclerview; // power supplies
-		psuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.psus.get()));
+		psuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), psus.get()));
 		psuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView osRecyclerView = binding.partsOsRecyclerview; // power supplies
-		osRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.oss.get()));
+		osRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), oss.get()));
 		osRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		RecyclerView monitorRecyclerView = binding.partsMonitorRecyclerview; // power supplies
-		monitorRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.monitors.get()));
+		monitorRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), monitors.get()));
 		monitorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		// in case we ever want accessories

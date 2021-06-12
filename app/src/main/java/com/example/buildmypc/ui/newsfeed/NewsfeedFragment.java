@@ -1,6 +1,5 @@
 package com.example.buildmypc.ui.newsfeed;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
@@ -29,7 +31,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static android.Manifest.permission.INTERNET;
+import static com.example.buildmypc.R.drawable.nytimes;
+import static com.example.buildmypc.R.id.newslist_descTextView;
+import static com.example.buildmypc.R.id.newslist_imageView;
+import static com.example.buildmypc.R.id.newslist_publisherTextView;
+import static com.example.buildmypc.R.id.newslist_titleTextView;
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
+import static java.util.Locale.getDefault;
 
 public class NewsfeedFragment extends Fragment {
 	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
@@ -44,19 +53,18 @@ public class NewsfeedFragment extends Fragment {
 					"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
 					new URL("https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"),
 					"NYTimes",
-					getResources().getDrawable(R.drawable.nytimes),
+					ResourcesCompat.getDrawable(getResources(),nytimes, requireActivity().getTheme()),
 					new Date(),
-					new SimpleDateFormat("YYYY-MM-DD")
+					new SimpleDateFormat("yyyy-MM-dd", getDefault())
 			));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		finalArticleList.set(temp);
-
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
-		((Activity) (root.getContext())).requestPermissions(new String[]{Manifest.permission.INTERNET}, 0);
+		((Activity) (root.getContext())).requestPermissions(new String[]{INTERNET}, 0);
 		RecyclerView recyclerView = binding.newsfeedRecyclerView;
 		Button button = binding.newsfeedFragButton;
 		button.setOnClickListener(v -> {
@@ -68,11 +76,9 @@ public class NewsfeedFragment extends Fragment {
 			new RSSAsyncTask().execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", "NYTimes");
 			new RSSAsyncTask().execute("https://www.engadget.com/rss.xml", "Engadget");
 		});
-
 		RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), finalArticleList.get());
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
 		return root;
 	}
 
@@ -82,7 +88,7 @@ public class NewsfeedFragment extends Fragment {
 		binding = null;
 	}
 
-	public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+	public static class RecyclerViewAdapter extends Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 		Context parentContext;
 		ArrayList<Article> articleViewList;
 
@@ -115,7 +121,7 @@ public class NewsfeedFragment extends Fragment {
 			return articleViewList.size();
 		}
 
-		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+		public static class RecyclerViewHolder extends ViewHolder {
 			ImageView image;
 			TextView title;
 			TextView desc;
@@ -124,12 +130,11 @@ public class NewsfeedFragment extends Fragment {
 			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
 				// this is where the findViewById stuff goes for each element, and only the findViewByID
-				image = itemView.findViewById(R.id.newslist_imageView);
-				title = itemView.findViewById(R.id.newslist_titleTextView);
-				desc = itemView.findViewById(R.id.newslist_descTextView);
-				dateAndPublisher = itemView.findViewById(R.id.newslist_publisherTextView);
+				image = itemView.findViewById(newslist_imageView);
+				title = itemView.findViewById(newslist_titleTextView);
+				desc = itemView.findViewById(newslist_descTextView);
+				dateAndPublisher = itemView.findViewById(newslist_publisherTextView);
 			}
 		}
 	}
-
 }
