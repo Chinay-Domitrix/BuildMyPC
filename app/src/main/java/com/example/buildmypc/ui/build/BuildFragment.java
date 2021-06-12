@@ -47,6 +47,7 @@ import static com.example.buildmypc.R.id.gridView_textView;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.layout.row_item;
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
+import static java.util.Arrays.asList;
 
 public class BuildFragment extends Fragment {
 	private static final String BUILD = "pcbuild";
@@ -78,28 +79,23 @@ public class BuildFragment extends Fragment {
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
-
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null)
 //			((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 //		final TextView textView = binding.textHome;
 //		buildViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-		// building myBuilds
+//		building myBuilds
 		displayedBuilds = new ArrayList<>();
 		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
 		if (currentEditedBuild != null) displayedBuilds.add(currentEditedBuild);
 //		TODO add adding custom builds, saving them, and accessing them in the future (prob Sunday/Monday/Tuesday if we're that late)
-
 		RecyclerView recyclerView = binding.buildFragRecyclerView;
 		LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(layoutManager);
 		GridAdapter gridAdapter = new GridAdapter(getContext(), displayedBuilds);
 		recyclerView.setAdapter(gridAdapter);
-
 		return root;
 	}
 
@@ -115,7 +111,6 @@ public class BuildFragment extends Fragment {
 	}
 
 	private class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridHolder> {
-
 		private final ArrayList<PCBuild> buildList;
 
 		public GridAdapter(Context context, ArrayList<PCBuild> buildList) {
@@ -128,26 +123,16 @@ public class BuildFragment extends Fragment {
 		public GridHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			View layout = from(parent.getContext()).inflate(row_item, null);
 			GridHolder holder = new GridHolder(layout);
-
 			return holder;
 		}
 
 		@Override
 		public void onBindViewHolder(@NonNull @NotNull GridHolder holder, int position) {
 			PCBuild currentBuild = buildList.get(position);
-
 			holder.image.setImageDrawable(currentBuild.getLogo());
 			holder.text.setText(currentBuild.getName());
 			// setting the OnClickListener to start a new fragment while passing in the currentBuild object
-			holder.image.setOnClickListener(v -> {
-				int id = ((ViewGroup) requireView().getParent()).getId();
-				requireActivity().getSupportFragmentManager().beginTransaction()
-						.replace(id, new EditorFragment(currentBuild), "findThisFragment")
-						.addToBackStack(null)
-						.commit();
-//					openEditorFragment(currentBuild);
-
-			});
+			holder.image.setOnClickListener(v -> requireActivity().getSupportFragmentManager().beginTransaction().replace(((ViewGroup) requireView().getParent()).getId(), new EditorFragment(currentBuild), "findThisFragment").addToBackStack(null).commit()); //	openEditorFragment(currentBuild);
 		}
 
 		@Override
@@ -156,7 +141,6 @@ public class BuildFragment extends Fragment {
 		}
 
 		public class GridHolder extends RecyclerView.ViewHolder {
-
 			final ImageView image;
 			final TextView text;
 
@@ -179,97 +163,84 @@ public class BuildFragment extends Fragment {
 		private final ArrayList<PCBuild> builds;
 
 		public Prebuilds() {
-			builds = new ArrayList<>();
-			builds.add(new PCBuild(
-					"Build 1",
-					getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
-					new Case("H510 Elite Tower", "Corsair", "Black"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
-			builds.add(new PCBuild(
-					"Build 2",
-					getDrawable(getResources(), h510_elite_white, getResources().newTheme()),
-					new Case("H510 Elite Tower", "Corsair", "White"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
-			builds.add(new PCBuild(
-					"Build 3",
-					getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
-					new Case("H510 Elite Tower", "Corsair", "Black"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
-			builds.add(new PCBuild(
-					"Build 4",
-					getDrawable(getResources(), a_275r_black, getResources().newTheme()),
-					new Case("275R Tower", "Corsair", "Black"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
-			builds.add(new PCBuild(
-					"Build 5",
-					getDrawable(getResources(), a_4000d_airflow_black, getResources().newTheme()),
-					new Case("4000D Airflow", "Corsair", "Black"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
-			builds.add(new PCBuild(
-					"Build 6",
-					getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
-					new Case("H510 Elite Tower", "Corsair", "Black"),
-					new Cooler("Hyper 212 EVO", "Cooler Master"),
-					new CPU("Ryzen 5 3600", "AMD"),
-					new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
-					new Memory("Vengeance LPX 16 GB", "Corsair"),
-					new Monitor("ROG Swift PG65UQ", "Asus"),
-					new Motherboard("B450 TOMAHAWK MAX", "MSI"),
-					new OS("Windows 10 Pro", "Microsoft"),
-					new PSU("RM750 (2019)", "Corsair"),
-					new Storage("Barracuda Compute 2 TB", "Seagate"),
-					new ArrayList<>()
-			));
+			builds = new ArrayList<>(asList(new PCBuild("Build 1",
+							getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
+							new Case("H510 Elite Tower", "Corsair", "Black"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>()),
+					new PCBuild("Build 2",
+							getDrawable(getResources(), h510_elite_white, getResources().newTheme()),
+							new Case("H510 Elite Tower", "Corsair", "White"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>()),
+					new PCBuild("Build 3",
+							getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
+							new Case("H510 Elite Tower", "Corsair", "Black"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>()),
+					new PCBuild("Build 4",
+							getDrawable(getResources(), a_275r_black, getResources().newTheme()),
+							new Case("275R Tower", "Corsair", "Black"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>()),
+					new PCBuild("Build 5",
+							getDrawable(getResources(), a_4000d_airflow_black, getResources().newTheme()),
+							new Case("4000D Airflow", "Corsair", "Black"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>()),
+					new PCBuild("Build 6",
+							getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
+							new Case("H510 Elite Tower", "Corsair", "Black"),
+							new Cooler("Hyper 212 EVO", "Cooler Master"),
+							new CPU("Ryzen 5 3600", "AMD"),
+							new GPU("GeForce RTX 3070 Founders Edition", "NVIDIA"),
+							new Memory("Vengeance LPX 16 GB", "Corsair"),
+							new Monitor("ROG Swift PG65UQ", "Asus"),
+							new Motherboard("B450 TOMAHAWK MAX", "MSI"),
+							new OS("Windows 10 Pro", "Microsoft"),
+							new PSU("RM750 (2019)", "Corsair"),
+							new Storage("Barracuda Compute 2 TB", "Seagate"),
+							new ArrayList<>())));
 		}
 
 		public ArrayList<PCBuild> getPrebuiltList() {
