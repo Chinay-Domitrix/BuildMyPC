@@ -1,22 +1,17 @@
 package com.example.buildmypc.ui.currentBuild;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.R;
@@ -27,13 +22,10 @@ import com.example.buildmypc.ui.parts.parts.Part;
 
 import java.util.ArrayList;
 
-import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
+public class EditorFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-public class EditorFragment extends Fragment implements AdapterView.OnItemSelectedListener  {
-
-	private static final String BUILD = "pcbuild";
 	public static final String BACK = "buildbackbetter";
-
+	private static final String BUILD = "pcbuild";
 	private EditorViewModel mViewModel;
 	private PCBuild currentBuild;
 	private FragmentHomeBinding binding;
@@ -46,7 +38,8 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 		this.currentBuild = currentBuild;
 	}
 
-	public EditorFragment() {}
+	public EditorFragment() {
+	}
 
 	public static EditorFragment newInstance(PCBuild build) {
 		EditorFragment editorFragment = new EditorFragment();
@@ -72,7 +65,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 		goBackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				String random = String.valueOf((int)(Math.random() * 10));
+				String random = String.valueOf((int) (Math.random() * 10));
 //				myTextView.setText(random);
 
 				// create the bundle
@@ -94,7 +87,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 //		ArrayList<Part> customList = new ArrayList<Part>();
 
 		// spinners!
-		Spinner caseSpinner = (Spinner) root.findViewById(R.id.editorFrag_caseSpinner);
+		Spinner caseSpinner = root.findViewById(R.id.editorFrag_caseSpinner);
 		ArrayList<Part> caseList = MainActivity.pcCases.get();
 		if (currentBuild.toString().trim().length() == 0)
 			caseList.add(0, new Part("", " "));
@@ -102,7 +95,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			caseList.add(0, currentBuild.getPcCase());
 		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), caseList));
 
-		Spinner coolerSpinner = (Spinner) root.findViewById(R.id.editorFrag_coolerSpinner);
+		Spinner coolerSpinner = root.findViewById(R.id.editorFrag_coolerSpinner);
 		ArrayList<Part> coolerList = MainActivity.coolers.get();
 		if (currentBuild.toString().trim().length() == 0)
 			coolerList.add(0, new Part("", " "));
@@ -110,7 +103,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			coolerList.add(0, currentBuild.getCooler());
 		coolerSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), coolerList));
 
-		Spinner cpuSpinner = (Spinner) root.findViewById(R.id.editorFrag_cpuSpinner);
+		Spinner cpuSpinner = root.findViewById(R.id.editorFrag_cpuSpinner);
 		ArrayList<Part> cpuList = MainActivity.cpus.get();
 		if (currentBuild.toString().trim().length() == 0)
 			cpuList.add(0, new Part("", " "));
@@ -118,7 +111,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			cpuList.add(0, currentBuild.getCpu());
 		cpuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), cpuList));
 
-		Spinner gpuSpinner = (Spinner) root.findViewById(R.id.editorFrag_gpuSpinner);
+		Spinner gpuSpinner = root.findViewById(R.id.editorFrag_gpuSpinner);
 		ArrayList<Part> gpuList = MainActivity.gpus.get();
 		if (currentBuild.toString().trim().length() == 0)
 			gpuList.add(0, new Part("", " "));
@@ -126,7 +119,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			gpuList.add(0, currentBuild.getGpu());
 		gpuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), gpuList));
 
-		Spinner memorySpinner = (Spinner) root.findViewById(R.id.editorFrag_memorySpinner);
+		Spinner memorySpinner = root.findViewById(R.id.editorFrag_memorySpinner);
 		ArrayList<Part> memoryList = MainActivity.memory.get();
 		if (currentBuild.toString().trim().length() == 0)
 			memoryList.add(0, new Part("", " "));
@@ -134,7 +127,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			memoryList.add(0, currentBuild.getMemory());
 		memorySpinner.setAdapter(new PartsSpinnerAdapter(getContext(), memoryList));
 
-		Spinner monitorSpinner = (Spinner) root.findViewById(R.id.editorFrag_monitorSpinner);
+		Spinner monitorSpinner = root.findViewById(R.id.editorFrag_monitorSpinner);
 		ArrayList<Part> monitorList = MainActivity.monitors.get();
 		if (currentBuild.toString().trim().length() == 0)
 			monitorList.add(0, new Part("", " "));
@@ -142,7 +135,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			monitorList.add(0, currentBuild.getMonitor());
 		monitorSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), monitorList));
 
-		Spinner motherboardSpinner = (Spinner) root.findViewById(R.id.editorFrag_motherboardSpinner);
+		Spinner motherboardSpinner = root.findViewById(R.id.editorFrag_motherboardSpinner);
 		ArrayList<Part> motherboardList = MainActivity.motherboards.get();
 		if (currentBuild.toString().trim().length() == 0)
 			motherboardList.add(0, new Part("", " "));
@@ -150,7 +143,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			motherboardList.add(0, currentBuild.getMotherboard());
 		motherboardSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), motherboardList));
 
-		Spinner osSpinner = (Spinner) root.findViewById(R.id.editorFrag_osSpinner);
+		Spinner osSpinner = root.findViewById(R.id.editorFrag_osSpinner);
 		ArrayList<Part> osList = MainActivity.memory.get();
 		if (currentBuild.toString().trim().length() == 0)
 			osList.add(0, new Part("", " "));
@@ -158,7 +151,7 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			osList.add(0, currentBuild.getOs());
 		osSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), osList));
 
-		Spinner psuSpinner = (Spinner) root.findViewById(R.id.editorFrag_psuSpinner);
+		Spinner psuSpinner = root.findViewById(R.id.editorFrag_psuSpinner);
 		ArrayList<Part> psuList = MainActivity.psus.get();
 		if (currentBuild.toString().trim().length() == 0)
 			psuList.add(0, new Part("", " "));
@@ -166,14 +159,13 @@ public class EditorFragment extends Fragment implements AdapterView.OnItemSelect
 			psuList.add(0, currentBuild.getPsu());
 		psuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), psuList));
 
-		Spinner storageSpinner = (Spinner) root.findViewById(R.id.editorFrag_storageSpinner);
+		Spinner storageSpinner = root.findViewById(R.id.editorFrag_storageSpinner);
 		ArrayList<Part> storageList = MainActivity.storage.get();
 		if (currentBuild.toString().trim().length() == 0)
 			storageList.add(0, new Part("", " "));
 		else
 			storageList.add(0, currentBuild.getStorage());
 		storageSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), storageList));
-
 
 
 		return root;

@@ -1,15 +1,9 @@
 package com.example.buildmypc.ui.currentBuild;
 
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,26 +16,30 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class PartsSpinnerAdapter extends ArrayAdapter<Part>{
+import static android.view.LayoutInflater.from;
+import static com.example.buildmypc.R.layout.spinner_custom;
+
+public class PartsSpinnerAdapter extends ArrayAdapter<Part> {
 
 	ArrayList<Part> internalList;
 //	Part currentPart;
 
-	public PartsSpinnerAdapter(@NonNull Context context, @NonNull List<Part> objects) {
+	public PartsSpinnerAdapter(Context context, List<Part> objects) {
 		super(context, 0, objects);
 		internalList = (ArrayList<Part>) objects;
 //		this.currentPart = currentPart;
 	}
 
 	@Override
-	public View getDropDownView(int position, @Nullable @org.jetbrains.annotations.Nullable View convertView, @NonNull @NotNull ViewGroup parent) {
+	public View getDropDownView(int position, View convertView, @NotNull ViewGroup parent) {
 		return startView(position, convertView, parent);
 	}
 
 	@NonNull
 	@Override
-	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 		return startView(position, convertView, parent);
 	}
 
@@ -51,15 +49,13 @@ public class PartsSpinnerAdapter extends ArrayAdapter<Part>{
 		return internalList.get(position);
 	}
 
+	@NotNull
 	private View startView(int position, View convertView, ViewGroup parent) {
-		if(convertView == null){
-			convertView = LayoutInflater.from(getContext()).inflate(
-					R.layout.spinner_custom, parent, false
-			);
-		}
+		if (convertView == null)
+			convertView = from(getContext()).inflate(spinner_custom, parent, false);
 
 		TextView text = convertView.findViewById(R.id.spinner_internalTextView);
-		text.setText(getItem(position).toString());
+		text.setText(Objects.requireNonNull(getItem(position)).toString());
 
 		return convertView;
 	}

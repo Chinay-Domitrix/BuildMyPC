@@ -21,18 +21,7 @@ import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.PartsJSONParse;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.parts.parts.Accessory;
-import com.example.buildmypc.ui.parts.parts.CPU;
-import com.example.buildmypc.ui.parts.parts.Case;
-import com.example.buildmypc.ui.parts.parts.Cooler;
-import com.example.buildmypc.ui.parts.parts.GPU;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Monitor;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.OS;
-import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -125,11 +114,6 @@ public class PartsFragment extends Fragment {
 //		RecyclerView accessoriesRecyclerView = binding.partsAccessoryRecyclerview; // power supplies
 //		accessoriesRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.accessories.get()));
 //		accessoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
-
-
 
 
 		return root;
