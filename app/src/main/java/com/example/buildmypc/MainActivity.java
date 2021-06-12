@@ -1,5 +1,7 @@
 package com.example.buildmypc;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -7,21 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.android.volley.toolbox.StringRequest;
 import com.example.buildmypc.databinding.ActivityMainBinding;
-import com.example.buildmypc.ui.build.PCBuild;
-import com.example.buildmypc.ui.currentBuild.EditorFragment;
-import com.example.buildmypc.ui.parts.parts.CPU;
-import com.example.buildmypc.ui.parts.parts.Case;
-import com.example.buildmypc.ui.parts.parts.Cooler;
-import com.example.buildmypc.ui.parts.parts.GPU;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Monitor;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.OS;
-import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.Storage;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -33,11 +25,15 @@ import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+import static com.android.volley.Request.Method.GET;
+import static com.android.volley.toolbox.Volley.newRequestQueue;
 import static com.example.buildmypc.R.id.nav_gallery;
 import static com.example.buildmypc.R.id.nav_home;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.id.nav_newsfeed;
 import static com.example.buildmypc.R.menu.main;
+import static com.example.buildmypc.R.string.firebase_key;
+import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
@@ -71,8 +67,28 @@ public class MainActivity extends AppCompatActivity {
 		setupWithNavController(binding.navView, navController);
 //		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 		// the code to parse the JSON parts file into usable stuff
-
 		parts.set(new JSONObject());
+		if (parts.get().equals(new JSONObject())) {
+			ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered())
+				newRequestQueue(this).add(new StringRequest(GET,
+						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
+						response -> {
+							try {
+								parts.set(new JSONObject(response));
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						},
+						Throwable::printStackTrace));
+			else try {
+				parts.set(new JSONObject(getString(parts_list)));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			new PartsJSONParse().start();
+		}
 	}
 
 	@Override
