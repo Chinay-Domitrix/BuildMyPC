@@ -51,10 +51,29 @@ public class PCBuild implements Parcelable {
 	private Storage storage;
 	private ArrayList<Part> extraParts; // for all of your extra part needs (this won't be explicitly checked against, will possibly be a dropdown menu)
 
+	private int idNumber;
+
 	public PCBuild() {
 	}
 
-	public PCBuild(String name, Drawable logo, Case pcCase, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts) {
+//	public PCBuild(String name, Drawable logo, Case pcCase, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts) {
+//		this.name = name;
+//		this.logo = logo;
+//		this.pcCase = pcCase;
+//		this.cooler = cooler;
+//		this.cpu = cpu;
+//		this.gpu = gpu;
+//		this.memory = memory;
+//		this.monitor = monitor;
+//		this.motherboard = motherboard;
+//		this.os = os;
+//		this.psu = psu;
+//		this.storage = storage;
+//		this.extraParts = extraParts;
+//		this.idNumber = (int)(Math.random() * 1000000); // id generator
+//	}
+
+	public PCBuild(String name, Drawable logo, Case pcCase, Cooler cooler, CPU cpu, GPU gpu, Memory memory, Monitor monitor, Motherboard motherboard, OS os, PSU psu, Storage storage, ArrayList<Part> extraParts, int idNumber) {
 		this.name = name;
 		this.logo = logo;
 		this.pcCase = pcCase;
@@ -68,6 +87,7 @@ public class PCBuild implements Parcelable {
 		this.psu = psu;
 		this.storage = storage;
 		this.extraParts = extraParts;
+		this.idNumber = idNumber;
 	}
 
 	public PCBuild(@NotNull Parcel in) {
@@ -82,7 +102,12 @@ public class PCBuild implements Parcelable {
 		psu = in.readTypedObject(PSU.CREATOR);
 		storage = in.readTypedObject(Storage.CREATOR);
 		extraParts = new ArrayList<>(in.createTypedArrayList(Part.CREATOR));
+		idNumber = in.readInt();
 	}
+
+//	public PCBuild(Drawable logo){
+//		this(" ", logo, null, null, null, null, null, null, null, null, null, null, null);
+//	}
 
 	public String getName() {
 		return name;
@@ -188,8 +213,12 @@ public class PCBuild implements Parcelable {
 		this.pcCase = pcCase;
 	}
 
+	public int getIdNumber() { return idNumber; }
+
+	public void setIdNumber(int id) { this.idNumber = id; }
+
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object o) { // hashcode and equals do NOT take into account idNumbers
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
@@ -258,5 +287,6 @@ public class PCBuild implements Parcelable {
 		dest.writeParcelable(psu, flags);
 		dest.writeParcelable(storage, flags);
 		dest.writeParcelableList(extraParts, flags);
+		dest.writeInt(idNumber);
 	}
 }
