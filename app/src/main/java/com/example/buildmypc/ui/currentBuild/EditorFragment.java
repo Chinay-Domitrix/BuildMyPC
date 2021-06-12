@@ -74,24 +74,15 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
 		View root = inflater.inflate(fragment_editor, container, false);
 		goBackButton = root.findViewById(editorFragmentGoBackButton);
-		goBackButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				String random = valueOf((int) (random() * 10));
+		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			String random = valueOf((int) (random() * 10));
 //				myTextView.setText(random);
-
-				// create the bundle
-				PCBuild updatedBuild = new PCBuild();
-				updatedBuild.setName(random);
+			// create the bundle
+			PCBuild updatedBuild = new PCBuild();
+			updatedBuild.setName(random);
 //				Bundle result = new Bundle();
 //				result.putParcelable(BACK, updatedBuild);
-
-				int id = ((ViewGroup) requireView().getParent()).getId();
-				requireActivity().getSupportFragmentManager().beginTransaction()
-						.replace(id, new BuildFragment(currentBuild), "findThisOtherFragment")
-						.addToBackStack(null)
-						.commit();
-			}
+			requireActivity().getSupportFragmentManager().beginTransaction().replace(((ViewGroup) requireView().getParent()).getId(), new BuildFragment(currentBuild), "findThisOtherFragment").addToBackStack(null).commit();
 		});
 //		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
 //		myTextView.setText(currentBuild.getName());
