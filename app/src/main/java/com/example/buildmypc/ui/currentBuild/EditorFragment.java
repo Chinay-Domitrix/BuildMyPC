@@ -15,15 +15,31 @@ import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.build.BuildFragment;
 import com.example.buildmypc.ui.build.PCBuild;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import static android.widget.AdapterView.OnItemSelectedListener;
+import static androidx.core.content.res.ResourcesCompat.getDrawable;
 import static com.example.buildmypc.R.anim.enter_from_right;
 import static com.example.buildmypc.R.anim.exit_to_right;
+import static com.example.buildmypc.R.drawable.a_275r_black;
+import static com.example.buildmypc.R.drawable.a_4000d_airflow_black;
+import static com.example.buildmypc.R.drawable.h510_elite_black;
+import static com.example.buildmypc.R.drawable.h510_elite_white;
+import static com.example.buildmypc.R.drawable.pc011dx_black;
 import static com.example.buildmypc.R.id.editorFrag_caseSpinner;
 import static com.example.buildmypc.R.id.editorFrag_coolerSpinner;
 import static com.example.buildmypc.R.id.editorFrag_cpuSpinner;
@@ -47,6 +63,19 @@ public class EditorFragment extends Fragment {
 	private FragmentHomeBinding binding;
 	private Button goBackButton;
 	private TextView myTextView;
+
+	private ArrayList<Part> cpuList;
+	private ArrayList<Part> gpuList;
+	private ArrayList<Part> memoryList;
+	private ArrayList<Part> motherboardList;
+	private ArrayList<Part> osList;
+	private ArrayList<Part> psuList;
+	private ArrayList<Part> coolerList;
+	private ArrayList<Part> storageList;
+	private ArrayList<Part> monitorList;
+	private ArrayList<Part> caseList;
+
+
 
 	public EditorFragment(PCBuild currentBuild, boolean isEditing) {
 		this.currentBuild = currentBuild;
@@ -80,10 +109,57 @@ public class EditorFragment extends Fragment {
 		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			// create the bundle
 			PCBuild updatedBuild = currentBuild;
-//				updatedBuild.setName("funny");
-//				Bundle result = new Bundle();
-//				result.putParcelable(BACK, updatedBuild);
-			requireActivity().getSupportFragmentManager().beginTransaction().replace(((ViewGroup) requireView().getParent()).getId(), new BuildFragment(updatedBuild), "findThisOtherFragment").addToBackStack(null).commit();
+			switch(currentBuild.getPcCase().toString()){
+			/*  White NZXT H510 ATX Mid Tower
+				Black NZXT H510 ATX Mid Tower
+				Black Corsair 4000D Airflow ATX Mid Tower
+				Black Corsair 275R Airflow AIX Mid Tower
+				Black Lian Li PC-O11DX ATX Full Tower   */
+				// TODO fix this
+				case "White NZXT H510 ATX Mid Tower":
+					updatedBuild.setLogo(getDrawable(getResources(), h510_elite_white, requireActivity().getTheme()));
+					break;
+
+				case "Black NZXT H510 ATX Mid Tower":
+					updatedBuild.setLogo((getDrawable(getResources(), h510_elite_black, requireActivity().getTheme())));
+					break;
+
+				case "Black Corsair 4000D Airflow ATX Mid Tower":
+					updatedBuild.setLogo(getDrawable(getResources(), a_4000d_airflow_black, requireActivity().getTheme()));
+					break;
+
+				case "Black Corsair 275R Airflow AIX Mid Tower":
+					updatedBuild.setLogo(getDrawable(getResources(), a_275r_black, requireActivity().getTheme()));
+					break;
+
+				case "Black Lian Li PC-O11DX ATX Full Tower":
+					updatedBuild.setLogo(getDrawable(getResources(), pc011dx_black, requireActivity().getTheme()));
+					break;
+
+
+			}
+				updatedBuild.setName("");
+				Bundle result = new Bundle();
+				result.putParcelable(BACK, updatedBuild);
+			// destroy the lists
+			cpuList.remove(0);
+			gpuList.remove(0);
+			memoryList.remove(0);
+			motherboardList.remove(0);
+//			osList.remove(0);
+//			psuList.remove(0);
+			coolerList.remove(0);
+			storageList.remove(0);
+//			monitorList.remove(0);
+			caseList.remove(0);
+
+			// switch fragments
+			requireActivity()
+					.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(((ViewGroup) requireView().getParent()).getId(), new BuildFragment(updatedBuild), "findThisOtherFragment")
+					.addToBackStack(null)
+					.commit();
 		});
 //		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
 //		myTextView.setText(currentBuild.getName());
@@ -91,14 +167,17 @@ public class EditorFragment extends Fragment {
 //		ArrayList<Part> customList = new ArrayList<Part>();
 
 		// spinners!
+		// TODO gray out the add/overwrite button if only the "Part" elements are selected instead of the subclass elements
 		Spinner caseSpinner = root.findViewById(editorFrag_caseSpinner);
-		ArrayList<Part> caseList = MainActivity.pcCases.get();
-		caseList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getPcCase());
+		caseList = MainActivity.pcCases.get();
+		caseList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getPcCase());
 		caseSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), caseList));
 		caseSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				// TODO have this set the newly selected part as a replacement
+				// TODO incorporate this into every part
+				if(caseList.get(position) instanceof Case)
+					currentBuild.setPcCase((Case) caseList.get(position));
 			}
 
 			@Override
@@ -108,48 +187,49 @@ public class EditorFragment extends Fragment {
 		});
 
 		Spinner coolerSpinner = root.findViewById(editorFrag_coolerSpinner);
-		ArrayList<Part> coolerList = MainActivity.coolers.get();
-		coolerList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getCooler());
+		coolerList = MainActivity.coolers.get();
+		coolerList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getCooler());
 		coolerSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), coolerList));
 
+
 		Spinner cpuSpinner = root.findViewById(editorFrag_cpuSpinner);
-		ArrayList<Part> cpuList = MainActivity.cpus.get();
-		cpuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getCpu());
+		cpuList = MainActivity.cpus.get();
+		cpuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getCpu());
 		cpuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), cpuList));
 
 		Spinner gpuSpinner = root.findViewById(editorFrag_gpuSpinner);
-		ArrayList<Part> gpuList = MainActivity.gpus.get();
-		gpuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getGpu());
+		gpuList = MainActivity.gpus.get();
+		gpuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getGpu());
 		gpuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), gpuList));
 
 		Spinner memorySpinner = root.findViewById(editorFrag_memorySpinner);
-		ArrayList<Part> memoryList = MainActivity.memory.get();
-		memoryList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getMemory());
+		memoryList = MainActivity.memory.get();
+		memoryList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getMemory());
 		memorySpinner.setAdapter(new PartsSpinnerAdapter(getContext(), memoryList));
 
 		Spinner monitorSpinner = root.findViewById(editorFrag_monitorSpinner);
-		ArrayList<Part> monitorList = MainActivity.monitors.get();
-		monitorList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getMonitor());
+		monitorList = MainActivity.monitors.get();
+		monitorList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getMonitor());
 		monitorSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), monitorList));
 
 		Spinner motherboardSpinner = root.findViewById(editorFrag_motherboardSpinner);
-		ArrayList<Part> motherboardList = MainActivity.motherboards.get();
-		motherboardList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getMotherboard());
+		motherboardList = MainActivity.motherboards.get();
+		motherboardList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getMotherboard());
 		motherboardSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), motherboardList));
 
 		Spinner osSpinner = root.findViewById(editorFrag_osSpinner);
-		ArrayList<Part> osList = MainActivity.oss.get();
-		osList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getOs());
+		osList = MainActivity.oss.get();
+		osList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getOs());
 		osSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), osList));
 
 		Spinner psuSpinner = root.findViewById(editorFrag_psuSpinner);
-		ArrayList<Part> psuList = MainActivity.psus.get();
-		psuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getPsu());
+		psuList = MainActivity.psus.get();
+		psuList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getPsu());
 		psuSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), psuList));
 
 		Spinner storageSpinner = root.findViewById(editorFrag_storageSpinner);
-		ArrayList<Part> storageList = MainActivity.storage.get();
-		storageList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", " ") : currentBuild.getStorage());
+		storageList = MainActivity.storage.get();
+		storageList.add(0, (currentBuild.toString().trim().length() == 0) ? new Part("", "") : currentBuild.getStorage());
 		storageSpinner.setAdapter(new PartsSpinnerAdapter(getContext(), storageList));
 
 

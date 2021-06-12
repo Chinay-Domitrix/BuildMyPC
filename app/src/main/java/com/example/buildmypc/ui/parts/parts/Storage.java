@@ -22,7 +22,7 @@ public class Storage extends Part implements Parcelable {
 			return new Storage[size];
 		}
 	};
-	private double formFactor;
+	private String formFactor;
 	private int cacheSizeMB; // in mb
 	private String capacity; // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
 	private String sataInterface; // which SATA does this part connect to
@@ -34,7 +34,7 @@ public class Storage extends Part implements Parcelable {
 		super(model, manufacturer);
 	}
 
-	public Storage(String model, String manufacturer, double formFactor, int cacheSizeMB, String capacity, String hardwareInterface, boolean nvme, int rpm, String type) {
+	public Storage(String model, String manufacturer, String formFactor, int cacheSizeMB, String capacity, String hardwareInterface, boolean nvme, int rpm, String type) {
 		super(model, manufacturer);
 		this.formFactor = formFactor;
 		this.cacheSizeMB = cacheSizeMB;
@@ -47,7 +47,7 @@ public class Storage extends Part implements Parcelable {
 
 	public Storage(Parcel in) {
 		super(in.toString(), in.toString());
-		formFactor = in.readDouble();
+		formFactor = in.readString();
 		cacheSizeMB = in.readInt();
 		capacity = in.readString();
 		sataInterface = in.readString();
@@ -72,11 +72,11 @@ public class Storage extends Part implements Parcelable {
 		this.capacity = capacity;
 	}
 
-	public double getFormFactor() {
+	public String getFormFactor() {
 		return formFactor;
 	}
 
-	public void setFormFactor(double formFactor) {
+	public void setFormFactor(String formFactor) {
 		this.formFactor = formFactor;
 	}
 
@@ -120,10 +120,11 @@ public class Storage extends Part implements Parcelable {
 
 		Storage storage = (Storage) o;
 
-		if (Double.compare(storage.getFormFactor(), getFormFactor()) != 0) return false;
 		if (getCacheSizeMB() != storage.getCacheSizeMB()) return false;
 		if (getNvme() != storage.getNvme()) return false;
 		if (getRpm() != storage.getRpm()) return false;
+		if (getFormFactor() != null ? !getFormFactor().equals(storage.getFormFactor()) : storage.getFormFactor() != null)
+			return false;
 		if (getCapacity() != null ? !getCapacity().equals(storage.getCapacity()) : storage.getCapacity() != null)
 			return false;
 		if (getSataInterface() != null ? !getSataInterface().equals(storage.getSataInterface()) : storage.getSataInterface() != null)
@@ -134,9 +135,7 @@ public class Storage extends Part implements Parcelable {
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(getFormFactor());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (getFormFactor() != null ? getFormFactor().hashCode() : 0);
 		result = 31 * result + getCacheSizeMB();
 		result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
 		result = 31 * result + (getSataInterface() != null ? getSataInterface().hashCode() : 0);
@@ -149,7 +148,7 @@ public class Storage extends Part implements Parcelable {
 	@Override
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeDouble(formFactor);
+		dest.writeString(formFactor);
 		dest.writeInt(cacheSizeMB);
 		dest.writeString(capacity);
 		dest.writeString(sataInterface);

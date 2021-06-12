@@ -226,4 +226,15 @@ public class Case extends Part implements Parcelable {
 		result = 31 * result + (isPsuShroud() ? 1 : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return getColor() + " " + super.toString() + " " + getType();
+		/*  White NZXT H510 ATX Mid Tower
+			Black NZXT H510 ATX Mid Tower
+			Black Corsair 4000D Airflow ATX Mid Tower
+			Black Corsair 275R Airflow AIX Mid Tower
+			Black Lian Li PC-O11DX ATX Full Tower */
+
+	}
 }

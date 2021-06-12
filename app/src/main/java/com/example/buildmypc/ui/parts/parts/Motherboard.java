@@ -41,13 +41,13 @@ public class Motherboard extends Part implements Parcelable {
 	private int sata6gbpsCount; // no clue
 	private int gen2USBCount;
 	private ArrayList<CountedString> gen32USBcount; // I don't feel like making a new USB object to only be used once
-	private boolean isWireless;
+	private String wireless;
 
 	public Motherboard(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
 
-	public Motherboard(String model, String manufacturer, boolean ecc, String chipset, String formFactor, ArrayList<String> m2slots, int maxMemSupport, int memSlots, ArrayList<String> compatibleMem, String memType, int mSATA_slotCount, ArrayList<String> incEthernetSupp, String incVideo, ArrayList<CountedString> PCISlotList, boolean hasRAID, int sata6gbpsCount, int gen2USBCount, ArrayList<CountedString> gen32USBcount, boolean hasWireless) {
+	public Motherboard(String model, String manufacturer, boolean ecc, String chipset, String formFactor, ArrayList<String> m2slots, int maxMemSupport, int memSlots, ArrayList<String> compatibleMem, String memType, int mSATA_slotCount, ArrayList<String> incEthernetSupp, String incVideo, ArrayList<CountedString> PCISlotList, boolean hasRAID, int sata6gbpsCount, int gen2USBCount, ArrayList<CountedString> gen32USBcount, String wireless) {
 		this(model, manufacturer);
 		this.ecc = ecc;
 		this.chipset = chipset;
@@ -65,7 +65,7 @@ public class Motherboard extends Part implements Parcelable {
 		this.sata6gbpsCount = sata6gbpsCount;
 		this.gen2USBCount = gen2USBCount;
 		this.gen32USBcount = gen32USBcount;
-		this.isWireless = hasWireless;
+		this.wireless = wireless;
 	}
 
 	public Motherboard(@NotNull Parcel in) {
@@ -86,7 +86,7 @@ public class Motherboard extends Part implements Parcelable {
 		sata6gbpsCount = in.readInt();
 		gen2USBCount = in.readInt();
 		gen32USBcount = in.createTypedArrayList(CountedString.CREATOR);
-		isWireless = in.readBoolean();
+		wireless = in.readString();
 	}
 
 	public boolean isEcc() {
@@ -217,12 +217,12 @@ public class Motherboard extends Part implements Parcelable {
 		this.gen32USBcount = gen32USBcount;
 	}
 
-	public boolean isWireless() {
-		return isWireless;
+	public String getWireless() {
+		return wireless;
 	}
 
-	public void setWireless(boolean wireless) {
-		isWireless = wireless;
+	public void setWireless(String wireless) {
+		this.wireless = wireless;
 	}
 
 	@Override
@@ -240,7 +240,6 @@ public class Motherboard extends Part implements Parcelable {
 		if (isHasRAID() != that.isHasRAID()) return false;
 		if (getSata6gbpsCount() != that.getSata6gbpsCount()) return false;
 		if (getGen2USBCount() != that.getGen2USBCount()) return false;
-		if (isWireless() != that.isWireless()) return false;
 		if (getChipset() != null ? !getChipset().equals(that.getChipset()) : that.getChipset() != null)
 			return false;
 		if (getFormFactor() != null ? !getFormFactor().equals(that.getFormFactor()) : that.getFormFactor() != null)
@@ -255,8 +254,11 @@ public class Motherboard extends Part implements Parcelable {
 			return false;
 		if (getIncVideo() != null ? !getIncVideo().equals(that.getIncVideo()) : that.getIncVideo() != null)
 			return false;
-		if (!Objects.equals(PCISlotList, that.PCISlotList)) return false;
-		return getGen32USBcount() != null ? getGen32USBcount().equals(that.getGen32USBcount()) : that.getGen32USBcount() == null;
+		if (PCISlotList != null ? !PCISlotList.equals(that.PCISlotList) : that.PCISlotList != null)
+			return false;
+		if (getGen32USBcount() != null ? !getGen32USBcount().equals(that.getGen32USBcount()) : that.getGen32USBcount() != null)
+			return false;
+		return getWireless() != null ? getWireless().equals(that.getWireless()) : that.getWireless() == null;
 	}
 
 	@Override
@@ -278,7 +280,7 @@ public class Motherboard extends Part implements Parcelable {
 		result = 31 * result + getSata6gbpsCount();
 		result = 31 * result + getGen2USBCount();
 		result = 31 * result + (getGen32USBcount() != null ? getGen32USBcount().hashCode() : 0);
-		result = 31 * result + (isWireless() ? 1 : 0);
+		result = 31 * result + (getWireless() != null ? getWireless().hashCode() : 0);
 		return result;
 	}
 
@@ -301,6 +303,6 @@ public class Motherboard extends Part implements Parcelable {
 		dest.writeInt(sata6gbpsCount);
 		dest.writeInt(gen2USBCount);
 		dest.writeParcelableList(gen32USBcount, flags);
-		dest.writeBoolean(isWireless);
+		dest.writeString(wireless);
 	}
 }

@@ -614,7 +614,7 @@
 				"size": 2,
 				"unit": "TB"
 			},
-			"form-factor": 3.5,
+			"form-factor": "3.5\"",
 			"interface": "SATA 6 Gb/s",
 			"manufacturer": "Seagate",
 			"model": "Barracuda Compute 2 TB",
@@ -629,7 +629,7 @@
 				"size": 1,
 				"unit": "TB"
 			},
-			"form-factor": 2.5,
+			"form-factor": "2.5\"",
 			"interface": "SATA 6 Gb/s",
 			"manufacturer": "Samsung",
 			"model": "860 Evo 1 TB",
