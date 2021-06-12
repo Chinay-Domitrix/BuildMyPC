@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Case;
 import com.example.buildmypc.ui.parts.parts.Cooler;
@@ -288,5 +290,12 @@ public class PCBuild implements Parcelable {
 		dest.writeParcelable(storage, flags);
 		dest.writeParcelableList(extraParts, flags);
 		dest.writeInt(idNumber);
+	}
+
+	@NonNull
+	@NotNull
+	@Override
+	public String toString() {
+		return getName() + super.toString();
 	}
 }

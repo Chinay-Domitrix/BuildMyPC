@@ -171,13 +171,17 @@ public class BuildFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull GridHolder holder, int position) {
 			PCBuild currentBuild = buildList.get(position);
 
+			Log.d("DEBUGSTR", "pos: " + position);
+
 			holder.image.setImageDrawable(currentBuild.getLogo());
 			holder.text.setText(currentBuild.getName());
 			// setting the OnClickListener to start a new fragment while passing in the currentBuild object
 			holder.image.setOnClickListener(v -> {
 				// check if we're using the (+) button
+				boolean isEditing = true;
 				if(buildList.get(position).getIdNumber() == -11){
 					currentBuild.setIdNumber((int)(Math.random() * 1000000)); // id generator
+					isEditing = false;
 				}
 
 				// generating and stuffing the new fragment into the current view

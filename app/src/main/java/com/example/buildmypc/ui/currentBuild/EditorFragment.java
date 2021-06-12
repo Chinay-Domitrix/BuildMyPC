@@ -77,23 +77,22 @@ public class EditorFragment extends Fragment{
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
 		View root = inflater.inflate(fragment_editor, container, false);
 		goBackButton = root.findViewById(editorFragmentGoBackButton);
-		if(isEditing) goBackButton.setText("OVERWRITE");
-		else goBackButton.setText("ADD");
+		// TODO make it so that you can't edit prebuilts
+		if(!currentBuild.getName().equals("ADD BUILD")) {goBackButton.setText("OVERWRITE");}
+		else {goBackButton.setText("ADD");}
 		goBackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				String random = valueOf((int) (random() * 10));
-//				myTextView.setText(random);
 
 				// create the bundle
-				PCBuild updatedBuild = new PCBuild();
-				updatedBuild.setName(random);
+				PCBuild updatedBuild = currentBuild;
+//				updatedBuild.setName("funny");
 //				Bundle result = new Bundle();
 //				result.putParcelable(BACK, updatedBuild);
 
 				int id = ((ViewGroup) requireView().getParent()).getId();
 				requireActivity().getSupportFragmentManager().beginTransaction()
-						.replace(id, new BuildFragment(currentBuild), "findThisOtherFragment")
+						.replace(id, new BuildFragment(updatedBuild), "findThisOtherFragment")
 						.addToBackStack(null)
 						.commit();
 			}
