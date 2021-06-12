@@ -184,8 +184,8 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 //		mViewModel = new ViewModelProvider(this).get(EditorViewModel.class);
 		// do stuff
 		PCBuild finalResult = new PCBuild();
@@ -226,11 +226,7 @@ public class EditorFragment extends Fragment implements OnItemSelectedListener {
 
 	private void openBuildFragment(PCBuild build) {
 		BuildFragment fragment = BuildFragment.newInstance(currentBuild);
-		getParentFragmentManager().beginTransaction()
-				.setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right)
-				.addToBackStack(null)
-				.add(nav_host_fragment_content_main, fragment, BUILD)
-				.commit();
+		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
 	@Override
