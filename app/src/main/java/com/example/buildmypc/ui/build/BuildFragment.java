@@ -29,6 +29,7 @@ import com.example.buildmypc.ui.parts.parts.OS;
 import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Storage;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class BuildFragment extends Fragment {
 	public BuildFragment() {
 	}
 
+	@NotNull
+	@Contract("_ -> new")
 	public static BuildFragment newInstance(PCBuild build) {
 		BuildFragment fragment = new BuildFragment();
 		Bundle args = new Bundle();
@@ -108,11 +111,7 @@ public class BuildFragment extends Fragment {
 
 	private void openEditorFragment(PCBuild currentBuild) {
 		EditorFragment fragment = EditorFragment.newInstance(currentBuild);
-		getParentFragmentManager().beginTransaction()
-				.setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right)
-				.addToBackStack(null)
-				.add(nav_host_fragment_content_main, fragment, BUILD)
-				.commit();
+		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
 	private class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridHolder> {
