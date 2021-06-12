@@ -73,15 +73,6 @@ class PartsJSONParse : Thread() {
 				val tempMotherboards = MainActivity.motherboards.get()
 				(0 until motherboards.length()).forEach {
 					motherboards.getJSONObject(it).apply {
-						val m2Slots = getJSONArray("m2-slots")
-						val m2 = ArrayList<String>()
-						(0 until m2Slots.length()).mapTo(m2) { it1 -> m2Slots[it1] as String }
-						val memorySpeeds = getJSONArray("memory-speeds")
-						val mem = ArrayList<String>()
-						(0 until memorySpeeds.length()).mapTo(mem) { it1 -> memorySpeeds[it1] as String }
-						val oe = getJSONArray("onboard-ethernet")
-						val eth = ArrayList<String>()
-						(0 until oe.length()).mapTo(eth) { it1 -> oe[it1] as String }
 						val usbHeaders = getJSONObject("usb-headers")
 						tempMotherboards += Motherboard(
 							getString("model"),
@@ -89,13 +80,25 @@ class PartsJSONParse : Thread() {
 							getBoolean("ecc"),
 							getString("chipset"),
 							getString("form-factor"),
-							m2,
+							ArrayList<String>().apply {
+								getJSONArray("m2-slots").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
 							getInt("max-memory-gb"),
 							getInt("memory-slots"),
-							mem,
+							ArrayList<String>().apply {
+								getJSONArray("memory-speeds").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
 							getString("memory-type"),
 							getInt("msata-slots"),
-							eth,
+							ArrayList<String>().apply {
+								getJSONArray("onboard-ethernet").apply {
+									(0 until this.length()).forEach { i -> add(getString(i)) }
+								}
+							},
 							getString("onboard-video"),
 							ArrayList<CountedString>().apply {
 								getJSONObject("pci-slots").apply {
