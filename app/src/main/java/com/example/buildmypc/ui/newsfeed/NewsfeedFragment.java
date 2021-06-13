@@ -22,8 +22,6 @@ import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,17 +46,13 @@ public class NewsfeedFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// jank testing of finalArticleList actually being used in the RecyclerView
 		ArrayList<Article> temp = finalArticleList.get();
-		try {
-			temp.add(new Article("The U.S. added 559,000 jobs in May",
-					"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
-					new URL("https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"),
-					"NYTimes",
-					getDrawable(getResources(), nytimes, requireActivity().getTheme()),
-					new Date(),
-					new SimpleDateFormat("yyyy-MM-dd", getDefault())));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+		temp.add(new Article("The U.S. added 559,000 jobs in May",
+				"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
+				/*new URL(*/"https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"/*)*/,
+				"NYTimes",
+				getDrawable(getResources(), nytimes, requireActivity().getTheme()),
+				new Date(),
+				new SimpleDateFormat("yyyy-MM-dd", getDefault())));
 		finalArticleList.set(temp);
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);

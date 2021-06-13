@@ -2,7 +2,6 @@ package com.example.buildmypc.ui.newsfeed;
 
 import android.graphics.drawable.Drawable;
 
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +9,7 @@ import java.util.Date;
 public class Article {
 	private String heading;
 	private String desc;
-	private URL originURL;
+	private String originURL;
 	private String publisher;
 	private Drawable image;
 	private Date date;
@@ -20,7 +19,7 @@ public class Article {
 		this("", "", null, "", null, null, null);
 	}
 
-	public Article(String heading, String desc, URL originURL, String publisher, Drawable image, Date date, SimpleDateFormat format) {
+	public Article(String heading, String desc, String originURL, String publisher, Drawable image, Date date, SimpleDateFormat format) {
 		this.heading = heading;
 		this.desc = desc;
 		this.originURL = originURL;
@@ -46,11 +45,11 @@ public class Article {
 		this.desc = desc;
 	}
 
-	public URL getOriginURL() {
+	public String getOriginURL() {
 		return originURL;
 	}
 
-	public void setOriginURL(URL originURL) {
+	public void setOriginURL(String originURL) {
 		this.originURL = originURL;
 	}
 

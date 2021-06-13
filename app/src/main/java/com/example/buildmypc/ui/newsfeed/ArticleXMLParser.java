@@ -3,7 +3,6 @@ package com.example.buildmypc.ui.newsfeed;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -57,7 +56,7 @@ public class ArticleXMLParser {
 			} else if (line.contains("<" + urlInd)) { // url indicator
 				signifierLen = ("<" + urlInd + ">").length();
 				remainder = line.substring(signifierLen, line.length() - signifierLen - 1);
-				currentArticle.setOriginURL(new URL(remainder));
+				currentArticle.setOriginURL(/*new URL(*/remainder)/*)*/;
 			}
 			dataIndex++;
 		}
