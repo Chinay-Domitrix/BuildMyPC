@@ -15,17 +15,8 @@ import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.build.BuildFragment;
 import com.example.buildmypc.ui.build.PCBuild;
-import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Case;
-import com.example.buildmypc.ui.parts.parts.Cooler;
-import com.example.buildmypc.ui.parts.parts.GPU;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Monitor;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.OS;
-import com.example.buildmypc.ui.parts.parts.PSU;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -76,7 +67,6 @@ public class EditorFragment extends Fragment {
 	private ArrayList<Part> caseList;
 
 
-
 	public EditorFragment(PCBuild currentBuild, boolean isEditing) {
 		this.currentBuild = currentBuild;
 		this.isEditing = isEditing;
@@ -109,7 +99,7 @@ public class EditorFragment extends Fragment {
 		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			// create the bundle
 			PCBuild updatedBuild = currentBuild;
-			switch(currentBuild.getPcCase().toString()){
+			switch (currentBuild.getPcCase().toString()) {
 			/*  White NZXT H510 ATX Mid Tower
 				Black NZXT H510 ATX Mid Tower
 				Black Corsair 4000D Airflow ATX Mid Tower
@@ -138,9 +128,9 @@ public class EditorFragment extends Fragment {
 
 
 			}
-				updatedBuild.setName("");
-				Bundle result = new Bundle();
-				result.putParcelable(BACK, updatedBuild);
+			updatedBuild.setName("");
+			Bundle result = new Bundle();
+			result.putParcelable(BACK, updatedBuild);
 			// destroy the lists
 			cpuList.remove(0);
 			gpuList.remove(0);
@@ -176,7 +166,7 @@ public class EditorFragment extends Fragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				// TODO incorporate this into every part
-				if(caseList.get(position) instanceof Case)
+				if (caseList.get(position) instanceof Case)
 					currentBuild.setPcCase((Case) caseList.get(position));
 			}
 

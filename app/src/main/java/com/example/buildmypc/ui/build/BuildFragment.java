@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static android.util.Log.d;
 import static android.view.LayoutInflater.from;
@@ -49,6 +50,7 @@ import static com.example.buildmypc.R.id.gridView_textView;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.layout.row_item;
 import static com.example.buildmypc.databinding.FragmentHomeBinding.inflate;
+import static java.lang.Integer.MAX_VALUE;
 
 public class BuildFragment extends Fragment {
 	private static final String BUILD = "pcbuild";
@@ -145,6 +147,23 @@ public class BuildFragment extends Fragment {
 		getParentFragmentManager().beginTransaction().setCustomAnimations(enter_from_right, exit_to_right, enter_from_right, exit_to_right).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit();
 	}
 
+	public int[] idList(ArrayList<PCBuild> builds) {
+		if (builds == null || builds.size() == 0)
+			return null; // throwing a wrench into the system | might make it throw an exception
+		int[] result = new int[builds.size()];
+		for (int i = 0; i < builds.size(); i++) {
+			result[i] = builds.get(i).getIdNumber();
+		}
+		return result;
+	}
+
+	public boolean isIncluded(int testInt, int[] arr) {
+		for (int entry : arr) {
+			if (testInt == entry) return true;
+		}
+		return false;
+	}
+
 	private class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridHolder> {
 
 		private final ArrayList<PCBuild> buildList;
@@ -176,16 +195,21 @@ public class BuildFragment extends Fragment {
 				// check if we're using the (+) button
 				boolean isEditing = true;
 				if (buildList.get(position).getIdNumber() == -11) {
-					currentBuild.setIdNumber((int) (Math.random() * 1000000)); // id generator
+					currentBuild.setIdNumber(new Random().nextInt(MAX_VALUE)); // id generator
 					isEditing = false;
 				}
-
 				// generating and stuffing the new fragment into the current view
-				int id = ((ViewGroup) requireView().getParent()).getId();
-				requireActivity().getSupportFragmentManager().beginTransaction()
-						.replace(id, new EditorFragment(currentBuild, true), "findThisFragment")
-						.addToBackStack(null)
-						.commit();
+				requireActivity().
+						getSupportFragmentManager().
+						beginTransaction().
+						replace(((ViewGroup) requireView().
+										getParent()).
+										getId(),
+								new EditorFragment(currentBuild,
+										true),
+								"findThisFragment").
+						addToBackStack(null).
+						commit();
 //					openEditorFragment(currentBuild);
 
 			});
@@ -216,23 +240,6 @@ public class BuildFragment extends Fragment {
 		}
 	}
 
-	public int[] idList(ArrayList<PCBuild> builds) {
-		if (builds == null || builds.size() == 0)
-			return null; // throwing a wrench into the system | might make it throw an exception
-		int[] result = new int[builds.size()];
-		for (int i = 0; i < builds.size(); i++) {
-			result[i] = builds.get(i).getIdNumber();
-		}
-		return result;
-	}
-
-	public boolean isIncluded(int testInt, int[] arr) {
-		for (int entry : arr) {
-			if (testInt == entry) return true;
-		}
-		return false;
-	}
-
 	public class Prebuilds {
 		private final ArrayList<PCBuild> builds;
 
@@ -250,8 +257,7 @@ public class BuildFragment extends Fragment {
 							new PSU("RM750 (2019)", "Corsair"),
 							new Storage("Barracuda Compute 2 TB", "Seagate"),
 							new ArrayList<>(),
-							-1
-					),
+							-1),
 					new PCBuild("Build 2",
 							getDrawable(getResources(), h510_elite_white, getResources().newTheme()),
 							new Case("H510 Elite Tower", "Corsair", "White"),
@@ -265,8 +271,7 @@ public class BuildFragment extends Fragment {
 							new PSU("RM750 (2019)", "Corsair"),
 							new Storage("Barracuda Compute 2 TB", "Seagate"),
 							new ArrayList<>(),
-							-2
-					),
+							-2),
 					new PCBuild("Build 3",
 							getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
 							new Case("H510 Elite Tower", "Corsair", "Black"),
@@ -280,8 +285,7 @@ public class BuildFragment extends Fragment {
 							new PSU("RM750 (2019)", "Corsair"),
 							new Storage("Barracuda Compute 2 TB", "Seagate"),
 							new ArrayList<>(),
-							-3
-					),
+							-3),
 					new PCBuild("Build 4",
 							getDrawable(getResources(), a_275r_black, getResources().newTheme()),
 							new Case("275R Tower", "Corsair", "Black"),
@@ -295,8 +299,7 @@ public class BuildFragment extends Fragment {
 							new PSU("RM750 (2019)", "Corsair"),
 							new Storage("Barracuda Compute 2 TB", "Seagate"),
 							new ArrayList<>(),
-							-4
-					),
+							-4),
 					new PCBuild("Build 5",
 							getDrawable(getResources(), a_4000d_airflow_black, getResources().newTheme()),
 							new Case("4000D Airflow", "Corsair", "Black"),
@@ -310,8 +313,7 @@ public class BuildFragment extends Fragment {
 							new PSU("RM750 (2019)", "Corsair"),
 							new Storage("Barracuda Compute 2 TB", "Seagate"),
 							new ArrayList<>(),
-							-5
-					),
+							-5),
 					new PCBuild("Build 6",
 							getDrawable(getResources(), h510_elite_black, getResources().newTheme()),
 							new Case("H510 Elite Tower", "Corsair", "Black"),

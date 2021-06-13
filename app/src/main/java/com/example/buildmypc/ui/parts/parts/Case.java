@@ -227,6 +227,7 @@ public class Case extends Part implements Parcelable {
 		return result;
 	}
 
+	@NotNull
 	@Override
 	public String toString() {
 		return getColor() + " " + super.toString() + " " + getType();

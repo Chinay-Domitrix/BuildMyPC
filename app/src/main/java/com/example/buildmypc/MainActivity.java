@@ -3,14 +3,12 @@ package com.example.buildmypc;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.android.volley.toolbox.StringRequest;
 import com.example.buildmypc.databinding.ActivityMainBinding;
 import com.example.buildmypc.ui.parts.parts.Part;
 
@@ -21,20 +19,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static android.util.Log.d;
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
 import static androidx.navigation.ui.NavigationUI.navigateUp;
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
-import static com.android.volley.Request.Method.GET;
-import static com.android.volley.toolbox.Volley.newRequestQueue;
 import static com.example.buildmypc.R.id.nav_gallery;
 import static com.example.buildmypc.R.id.nav_home;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.id.nav_newsfeed;
 import static com.example.buildmypc.R.menu.main;
-import static com.example.buildmypc.R.string.*;
-import static com.example.buildmypc.R.string.firebase_key;
 import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
@@ -42,8 +37,6 @@ import static com.google.android.material.snackbar.Snackbar.make;
 
 public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
-	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
-	private AppBarConfiguration mAppBarConfiguration;
 	public static final AtomicReference<ArrayList<Part>> cpus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> coolers = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> motherboards = new AtomicReference<>(new ArrayList<>());
@@ -54,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Part>> psus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> oss = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
+	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
+	private AppBarConfiguration mAppBarConfiguration;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
 //		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 		// the code to parse the JSON parts file into usable stuff
 		parts.set(new JSONObject());
-		Log.d("PARSER", "mainactivity runs");
+		d("PARSER", "mainactivity runs");
 		if (parts.get().toString().length() < 10) { // if there's nothing inside of it
-			Log.d("PARSER", "if-statement runs");
+			d("PARSER", "if-statement runs");
 			ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
 			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 //			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
@@ -93,10 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
 			/*else*/
 			try {
-				String x = getString(parts_list);
-				Log.d("PARSER", x);
 				parts.set(new JSONObject(getString(parts_list)));
-				Log.d("PARSER", "resulted in using the file");
+				d("PARSER", "resulted in using the file");
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
