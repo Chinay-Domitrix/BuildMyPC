@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
 import com.example.buildmypc.ui.parts.parts.Part;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +32,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import static android.view.LayoutInflater.from;
+import static android.view.View.*;
 import static com.example.buildmypc.MainActivity.coolers;
 import static com.example.buildmypc.MainActivity.cpus;
 import static com.example.buildmypc.MainActivity.gpus;
@@ -165,7 +168,7 @@ public class PartsFragment extends Fragment {
 
 			// since only the basic data is displayed, we'll do that first
 			holder.nameTextView.setText(currentPart.toString());
-			holder.internalButton.setOnClickListener(new View.OnClickListener() {
+			holder.internalButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// this is where the pop-up window'll be
@@ -194,7 +197,7 @@ public class PartsFragment extends Fragment {
 			}
 		}
 
-		public void createNewPopupWindow(Part part){
+		public void createNewPopupWindow(Part part) {
 			dialogBuilder = new AlertDialog.Builder(getContext());
 			final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
 			TextView[][] tvs = new TextView[15][2];
@@ -250,7 +253,7 @@ public class PartsFragment extends Fragment {
 
 			ArrayList<LinearLayout> linearLayouts = new ArrayList<>();
 			ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
-			switch(part.getClass().getSimpleName()){
+			switch (part.getClass().getSimpleName()) {
 				case "CPU": // jank setup of autogenerating textviews failed, so I just hardcoded it like a junior dev should
 //					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
 //					Log.d("PARTSFRAG", String.valueOf(part.getParamCount()));
@@ -292,74 +295,240 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("# of Cores:");
-					tvs[1][1].setText(String.valueOf(((CPU)part).getCoreCount()));
+					tvs[1][1].setText(String.valueOf(((CPU) part).getCoreCount()));
 
 					tvs[2][0].setText("Clock Speed:");
-					tvs[2][1].setText(((CPU)part).getCoreClock() + " GHz");
+					tvs[2][1].setText(((CPU) part).getCoreClock() + " GHz");
 
 					tvs[3][0].setText("Boost Clock Speed:");
-					tvs[3][1].setText(((CPU)part).getBoostClock() + " GHz");
+					tvs[3][1].setText(((CPU) part).getBoostClock() + " GHz");
 
 					tvs[4][0].setText("Thermal Design Power:");
-					tvs[4][1].setText(((CPU)part).getTdp() + " W");
+					tvs[4][1].setText(((CPU) part).getTdp() + " W");
 
 					tvs[5][0].setText("Microarchitecture:");
-					tvs[5][1].setText(((CPU)part).getMicroarchitecture());
+					tvs[5][1].setText(((CPU) part).getMicroarchitecture());
 
 					tvs[6][0].setText("Core Family:");
-					tvs[6][1].setText(((CPU)part).getCoreFamily());
+					tvs[6][1].setText(((CPU) part).getCoreFamily());
 
 					tvs[7][0].setText("Socket Type");
-					tvs[7][1].setText(((CPU)part).getSocket());
+					tvs[7][1].setText(((CPU) part).getSocket());
 
 					tvs[8][0].setText("Has Integrated GPU?: ");
-					if(((CPU)part).isiGPU()) { tvs[8][1].setText("Yes"); }
-					else { tvs[8][1].setText("No"); }
+					if (((CPU) part).isiGPU()) {
+						tvs[8][1].setText("Yes");
+					} else {
+						tvs[8][1].setText("No");
+					}
 
 					tvs[9][0].setText("Max Supported Memory: ");
-					tvs[9][1].setText(((CPU)part).getMaxMemory() + " GB");
+					tvs[9][1].setText(((CPU) part).getMaxMemory() + " GB");
 
 					tvs[10][0].setText("Can error-correct?: ");
-					if(((CPU)part).isEcc()) { tvs[10][1].setText("Yes"); }
-					else { tvs[10][1].setText("No"); }
+					if (((CPU) part).isEcc()) {
+						tvs[10][1].setText("Yes");
+					} else {
+						tvs[10][1].setText("No");
+					}
 
 					tvs[11][0].setText("Has an internal cooler?: ");
-					if(((CPU)part).isCooler()) { tvs[11][1].setText("Yes"); }
-					else { tvs[11][1].setText("No"); }
+					if (((CPU) part).isCooler()) {
+						tvs[11][1].setText("Yes");
+					} else {
+						tvs[11][1].setText("No");
+					}
 
 					tvs[12][0].setText("Has s.\"multithreading\"?: ");
-					if(((CPU)part).isSmt()) { tvs[11][1].setText("Yes"); }
-					else { tvs[11][1].setText("No"); }
+					if (((CPU) part).isSmt()) {
+						tvs[12][1].setText("Yes");
+					} else {
+						tvs[12][1].setText("No");
+					}
 
+					for (int i = 13; i < 15; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
 					break;
 
 				case "Cooler":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Watercooled or Fan?: ");
+					if (((Cooler) part).isWaterCooled()) {
+						tvs[1][1].setText("Watercooled");
+					} else {
+						tvs[1][1].setText("Fan");
+					}
+
+					tvs[2][0].setText("Includes Fan: ");
+					if (((Cooler) part).isFanless()) {
+						tvs[2][1].setText("Yes");
+					} else {
+						tvs[2][1].setText("No");
+					}
+
+					tvs[3][0].setText("Height: ");
+					tvs[3][1].setText(((Cooler) part).getHeight() + " mm");
+
+					tvs[4][0].setText("Noise Level: ");
+					tvs[4][1].setText(((Cooler) part).getNoiseLevel() +  " dB");
+
+					tvs[5][0].setText("Supported Sockets: \n");
+					// build the string of all of the supported sockets
+					String str = "";
+					for(String s : ((Cooler) part).getSocketSupport()){
+						str += s + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[5][1].setText(str);
+
+					if(((Cooler) part).isFanless()){
+						tvs[6][0].setText("Fan RPM:");
+						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
+					}
+					else {
+						tvs[6][0].setVisibility(GONE);
+						tvs[6][1].setVisibility(GONE);
+					}
+
+					for (int i = 7; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 
 				case "Motherboard":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
+
+					/*if (((Motherboard) part).n bh()) {
+						tvs[1][1].setText("Yes");
+					} else {
+						tvs[1][1].setText("No");
+					}*/
+
 					break;
 
 				case "Memory":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Can error-correct?: ");
+					if (((Motherboard) part).isEcc()) {
+						tvs[12][1].setText("Yes");
+					} else {
+						tvs[12][1].setText("No");
+					}
+
+					tvs[3][0].setText("Form Factor:");
+					tvs[3][1].setText(((Motherboard) part).getFormFactor());
+
+					// TODO format this properly
+					tvs[4][0].setText("M.2 slots:"); // m2slots
+					str = "";
+					for(String s : ((Motherboard) part).getM2slots()){
+						str += s + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[4][1].setText(str);
+
+					tvs[5][0].setText("Max Supported Memory:");
+					tvs[5][1].setText(((Motherboard) part).getMaxMemSupport() + " GB");
+
+					tvs[6][0].setText("# of Memory Slots: ");
+					str = "";
+					for(String s : ((Motherboard) part).getCompatibleMem()){
+						str += s + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[6][1].setText(str);
+
+					tvs[7][0].setText("Compatible Memory Types: ");
+					tvs[7][1].setText(((Motherboard) part).getChipset());
+
+					tvs[8][0].setText("Chipset: ");
+					tvs[8][1].setText(((Motherboard) part).getChipset());
+
+					tvs[9][0].setText("Chipset: ");
+					tvs[9][1].setText(((Motherboard) part).getChipset());
+
+					tvs[10][0].setText("Chipset: ");
+					tvs[10][1].setText(((Motherboard) part).getChipset());
+
+					tvs[11][0].setText("Chipset: ");
+					tvs[11][1].setText(((Motherboard) part).getChipset());
+
+
 					break;
 
 				case "Storage":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 
 				case "GPU":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 
 				case "Case":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 
 				case "PSU":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 
 				case "OS":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 
 				case "Monitor":
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
 					break;
 			}
+
+			// for loop for removing whitespace below everything
+			for (int i = part.getParamCount(); i < tvs.length; i++) {
+				tvs[i][0].setVisibility(GONE);
+				tvs[i][1].setVisibility(GONE);
+			}
+
 			dialogBuilder.setView(infoPopUp);
 			dialog = dialogBuilder.create();
 			dialog.show();
@@ -375,8 +544,8 @@ public class PartsFragment extends Fragment {
 //			});
 		}
 
-		public int getIDFromFormula(){
-			return (int)(Math.random() * (10 ^ 7));
+		public int getIDFromFormula() {
+			return (int) (Math.random() * (10 ^ 7));
 		}
 	}
 }
