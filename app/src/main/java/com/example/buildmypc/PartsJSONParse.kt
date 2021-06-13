@@ -338,7 +338,7 @@ class PartsJSONParse : Thread() {
 			// os parser
 			add(Thread {
 				val oss = getJSONArray("os")
-				val tempOSs = MainActivity.oss.get();
+				val tempOSs = MainActivity.oss.get()
 				d("ACTUAL_PARSER", "os list started")
 				(0 until oss.length()).forEach {
 					oss.getJSONObject(it).apply {
