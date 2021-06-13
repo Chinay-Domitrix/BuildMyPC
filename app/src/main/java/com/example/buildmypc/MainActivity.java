@@ -34,6 +34,7 @@ import static com.example.buildmypc.R.id.nav_home;
 import static com.example.buildmypc.R.id.nav_host_fragment_content_main;
 import static com.example.buildmypc.R.id.nav_newsfeed;
 import static com.example.buildmypc.R.menu.main;
+import static com.example.buildmypc.R.string.firebase_key;
 import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
 				d("PARSER", "second if-statement runs");
 				newRequestQueue(this).add(new StringRequest(GET,
-						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(R.string.firebase_key),
+						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
 						response -> {
 							try {
 								Log.d("PARSER", "try-block runs");
