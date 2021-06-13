@@ -6,9 +6,13 @@ import android.util.Xml;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static android.util.Log.d;
 import static com.example.buildmypc.ui.newsfeed.NewsfeedFragment.finalArticleList;
@@ -24,15 +28,14 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 		ArticleXMLParser xmlParser;
 		JSONObject webpageObj = null;
 
-		/*try {
-			String line;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(strings[0]).openConnection().getInputStream()));
-			while ((line = reader.readLine()) != null)
-				builder.append(line); // the total file, once this runs, is converted into a string and is accessible via "builder.toString();"
+		try {
+			Scanner reader = new Scanner(new InputStreamReader(new URL(strings[0]).openConnection().getInputStream()));
+			while (reader.hasNextLine())
+				builder.append(reader.nextLine()); // the total file, once this runs, is converted into a string and is accessible via "builder.toString();"
 		} catch (IOException e) {
 			d("GAMING", "Stacking! + " + e.toString());
-		}*/
-
+		}
+		
 		// parsing the XML result into something workable
 		switch (strings[1].toUpperCase()) {
 			case "TECHMEME":
