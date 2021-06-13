@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,7 +28,7 @@ public class Monitor extends Part implements Parcelable {
 		}
 	};
 	private String aspectRatio;
-	private String brightness; // in candla per square meter
+	private int brightness; // in candla per square meter
 	private boolean isCurved;
 	private ArrayList<String> frameSync;
 	private String hdrTier;
@@ -37,17 +39,39 @@ public class Monitor extends Part implements Parcelable {
 	private int[] resolution; // 2-element integer array; e.g. {1920, 1080}
 	private int responseTimeMs; // in milliseconds
 	private double screenSizeIn; // in square inches
-	private double viewingAngle;
+	private String viewingAngle;
 	private boolean isWidescreen;
 
 	public Monitor(String model, String manufacturer) {
 		super(model, manufacturer);
 	}
 
+	public Monitor(@Nullable String model, @Nullable String manufacturer, String aspectRatio, int brightness, boolean isCurved, ArrayList<String> frameSync, String hdrTier, boolean builtInSpeakers, ArrayList<CountedString> monitorInterfaces, String panelType, double refreshRate, ArrayList<?> resolution, int responseTimeMs, double screenSizeIn, String viewingAngle, boolean isWidescreen) {
+		super(model, manufacturer);
+		this.aspectRatio = aspectRatio;
+		this.brightness = brightness;
+		this.isCurved = isCurved;
+		this.frameSync = frameSync;
+		this.hdrTier = hdrTier;
+		this.builtInSpeakers = builtInSpeakers;
+		this.monitorInterfaces = monitorInterfaces;
+		this.panelType = panelType;
+		this.refreshRate = refreshRate;
+		// this is a jank solution to Kotlin arrays not being translated well into Java arrays
+		this.resolution = new int[2];
+		for(int i = 0; i < 2; i++){
+			this.resolution[i] = (int) resolution.get(i);
+		}
+		this.responseTimeMs = responseTimeMs;
+		this.screenSizeIn = screenSizeIn;
+		this.viewingAngle = viewingAngle;
+		this.isWidescreen = isWidescreen;
+	}
+
 	public Monitor(@NotNull Parcel in) {
 		super(in.readString(), in.readString());
 		aspectRatio = in.readString();
-		brightness = in.readString();
+		brightness = in.readInt();
 		isCurved = in.readBoolean();
 		frameSync = in.createStringArrayList();
 		hdrTier = in.readString();
@@ -58,7 +82,7 @@ public class Monitor extends Part implements Parcelable {
 		resolution = in.createIntArray();
 		responseTimeMs = in.readInt();
 		screenSizeIn = in.readDouble();
-		viewingAngle = in.readDouble();
+		viewingAngle = in.readString();
 		isWidescreen = in.readBoolean();
 	}
 
@@ -78,11 +102,11 @@ public class Monitor extends Part implements Parcelable {
 		this.aspectRatio = aspectRatio;
 	}
 
-	public String getBrightness() {
+	public int getBrightness() {
 		return brightness;
 	}
 
-	public void setBrightness(String brightness) {
+	public void setBrightness(int brightness) {
 		this.brightness = brightness;
 	}
 
@@ -158,11 +182,11 @@ public class Monitor extends Part implements Parcelable {
 		this.screenSizeIn = screenSizeIn;
 	}
 
-	public double getViewingAngle() {
+	public String getViewingAngle() {
 		return viewingAngle;
 	}
 
-	public void setViewingAngle(double viewingAngle) {
+	public void setViewingAngle(String viewingAngle) {
 		this.viewingAngle = viewingAngle;
 	}
 
@@ -182,16 +206,14 @@ public class Monitor extends Part implements Parcelable {
 
 		Monitor monitor = (Monitor) o;
 
+		if (getBrightness() != monitor.getBrightness()) return false;
 		if (isCurved() != monitor.isCurved()) return false;
 		if (isBuiltInSpeakers() != monitor.isBuiltInSpeakers()) return false;
 		if (Double.compare(monitor.getRefreshRate(), getRefreshRate()) != 0) return false;
 		if (getResponseTimeMs() != monitor.getResponseTimeMs()) return false;
 		if (Double.compare(monitor.getScreenSizeIn(), getScreenSizeIn()) != 0) return false;
-		if (Double.compare(monitor.getViewingAngle(), getViewingAngle()) != 0) return false;
 		if (isWidescreen() != monitor.isWidescreen()) return false;
 		if (getAspectRatio() != null ? !getAspectRatio().equals(monitor.getAspectRatio()) : monitor.getAspectRatio() != null)
-			return false;
-		if (getBrightness() != null ? !getBrightness().equals(monitor.getBrightness()) : monitor.getBrightness() != null)
 			return false;
 		if (getFrameSync() != null ? !getFrameSync().equals(monitor.getFrameSync()) : monitor.getFrameSync() != null)
 			return false;
@@ -201,7 +223,8 @@ public class Monitor extends Part implements Parcelable {
 			return false;
 		if (getPanelType() != null ? !getPanelType().equals(monitor.getPanelType()) : monitor.getPanelType() != null)
 			return false;
-		return Arrays.equals(getResolution(), monitor.getResolution());
+		if (!Arrays.equals(getResolution(), monitor.getResolution())) return false;
+		return getViewingAngle() != null ? getViewingAngle().equals(monitor.getViewingAngle()) : monitor.getViewingAngle() == null;
 	}
 
 	@Override
@@ -209,7 +232,7 @@ public class Monitor extends Part implements Parcelable {
 		int result = super.hashCode();
 		long temp;
 		result = 31 * result + (getAspectRatio() != null ? getAspectRatio().hashCode() : 0);
-		result = 31 * result + (getBrightness() != null ? getBrightness().hashCode() : 0);
+		result = 31 * result + getBrightness();
 		result = 31 * result + (isCurved() ? 1 : 0);
 		result = 31 * result + (getFrameSync() != null ? getFrameSync().hashCode() : 0);
 		result = 31 * result + (getHdrTier() != null ? getHdrTier().hashCode() : 0);
@@ -222,8 +245,7 @@ public class Monitor extends Part implements Parcelable {
 		result = 31 * result + getResponseTimeMs();
 		temp = Double.doubleToLongBits(getScreenSizeIn());
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(getViewingAngle());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (getViewingAngle() != null ? getViewingAngle().hashCode() : 0);
 		result = 31 * result + (isWidescreen() ? 1 : 0);
 		return result;
 	}
@@ -232,7 +254,7 @@ public class Monitor extends Part implements Parcelable {
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(aspectRatio);
-		dest.writeString(brightness);
+		dest.writeInt(brightness);
 		dest.writeBoolean(isCurved);
 		dest.writeStringList(frameSync);
 		dest.writeString(hdrTier);
@@ -243,7 +265,7 @@ public class Monitor extends Part implements Parcelable {
 		dest.writeIntArray(resolution); // 2 elements
 		dest.writeInt(responseTimeMs);
 		dest.writeDouble(screenSizeIn);
-		dest.writeDouble(viewingAngle);
+		dest.writeString(viewingAngle);
 		dest.writeBoolean(isWidescreen);
 
 	}

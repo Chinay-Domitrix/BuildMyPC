@@ -304,8 +304,103 @@ class PartsJSONParse : Thread() {
 				d("ACTUAL_PARSER", "cases completed somewhat")
 				MainActivity.pcCases.set(tempCases)
 			})
+				// psu parser
 			add(Thread {
+				val psus = getJSONArray("psu")
+				val tempPSUs = MainActivity.psus.get()
+				d("ACTUAL_PARSER", "power supply list started")
+				(0 until psus.length()).forEach {
+					psus.getJSONObject(it).apply {
+						tempPSUs += PSU(
+							getString("model"),
+							getString("manufacturer"),
+							ArrayList<CountedString>().apply {
+								getJSONObject("connectors").apply {
+									add(CountedString("eps", getInt("eps")))
+									add(CountedString("molex-4-pin", getInt("molex-4-pin")))
+									add(CountedString("pcie-6+2-pin", getInt("pcie-6+2-pin")))
+									add(CountedString("sata", getInt("sata")))
+								}
+							},
+							getString("efficiency-rating"),
+							getBoolean("fanless"),
+							getString("form-factor"),
+							getInt("length-mm"),
+							getString("modular"),
+							getInt("wattage")
+						)
+					}
+				}
+				d("ACTUAL_PARSER", "power supply list completed somewhat")
+				MainActivity.psus.set(tempPSUs)
+			})
 
+			// os parser
+			add(Thread {
+				val oss = getJSONArray("os")
+				val tempOSs = MainActivity.oss.get();
+				d("ACTUAL_PARSER", "os list started")
+				(0 until oss.length()).forEach {
+					oss.getJSONObject(it).apply {
+						tempOSs += OS(
+							getJSONObject("version").getString("edition"),
+							getString("manufacturer"),
+							getString("bit-mode"),
+							getInt("max-memory-support-gb"),
+							getString("type"),
+							getJSONObject("version").getString("oem-retail"),
+						)
+					}
+				}
+				d("ACTUAL_PARSER", "os list completed somewhat")
+				MainActivity.oss.set(tempOSs)
+			})
+
+			// monitor parser
+			add(Thread {
+				val monitors = getJSONArray("monitor")
+				val tempMonitors = MainActivity.monitors.get()
+				d("ACTUAL_PARSER", "monitor list started")
+				d("ACTUAL_PARSER", monitors.getJSONObject(0).getJSONArray("interface").toString())
+				(0 until monitors.length()).forEach {
+					monitors.getJSONObject(it).apply {
+						tempMonitors += Monitor(
+							getString("model"),
+							getString("manufacturer"),
+							getString("aspect-ratio"),
+							getInt("brightness-cd-per-sq-m"),
+							getBoolean("curved-screen"),
+							ArrayList<String>().apply {
+								getJSONArray("frame-sync").apply {
+									(0 until this.length()).forEach { i ->
+										add(getString(i))
+									}
+								}
+							},
+							getString("hdr-tier"),
+							getBoolean("inbuilt-speakers"),
+							ArrayList<CountedString>().apply {
+								getJSONArray("interface").apply {
+									(0 until this.length()).forEach { i ->
+										add(CountedString(getJSONObject(i).getString("name"), getJSONObject(i).getInt("quantity")))
+									}
+								}
+							},
+							getString("panel-type"),
+							getDouble("refresh-rate-hz"),
+							ArrayList<Int>().apply {
+								add(getString("resolution").split("x")[0].substring(0, 4).toInt()) // jank solution assuming BOTH resolution entries are 4 digits in length
+								add(getString("resolution").split("x")[0].substring(0, 4).toInt())
+							},
+							getInt("response-time-ms"),
+							getDouble("screen-size-in"),
+							getString("viewing-angle"),
+							getBoolean("widescreen")
+						)
+					}
+				}
+				d("ACTUAL_PARSER", "monitor list completed somewhat")
+				MainActivity.monitors.set(tempMonitors)
 			})
 			}.forEach(Thread::start)
 		}

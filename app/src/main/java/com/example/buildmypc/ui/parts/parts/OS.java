@@ -23,9 +23,9 @@ public class OS extends Accessory implements Parcelable {
 		}
 	};
 	private String bitMode;
-	private double maxMemSupport;
+	private int maxMemSupport;
 	private String type;
-	private String edition;
+//	private String edition;
 	private String oem_retail;
 
 	public OS(String model, String manufacturer) {
@@ -35,10 +35,18 @@ public class OS extends Accessory implements Parcelable {
 	public OS(Parcel in) {
 		super(in.readString(), in.readString());
 		bitMode = in.readString();
-		maxMemSupport = in.readDouble();
+		maxMemSupport = in.readInt();
 		type = in.readString();
-		edition = in.readString();
+//		edition = in.readString();
 		oem_retail = in.readString();
+	}
+
+	public OS(String model, String manufacturer, String bitMode, int maxMemSupport, String type, String oem_retail) {
+		super(model, manufacturer);
+		this.bitMode = bitMode;
+		this.maxMemSupport = maxMemSupport;
+		this.type = type;
+		this.oem_retail = oem_retail;
 	}
 
 	public String getBitMode() {
@@ -49,11 +57,11 @@ public class OS extends Accessory implements Parcelable {
 		this.bitMode = bitMode;
 	}
 
-	public double getMaxMemSupport() {
+	public int getMaxMemSupport() {
 		return maxMemSupport;
 	}
 
-	public void setMaxMemSupport(double maxMemSupport) {
+	public void setMaxMemSupport(int maxMemSupport) {
 		this.maxMemSupport = maxMemSupport;
 	}
 
@@ -65,13 +73,13 @@ public class OS extends Accessory implements Parcelable {
 		this.type = type;
 	}
 
-	public String getEdition() {
-		return edition;
-	}
-
-	public void setEdition(String edition) {
-		this.edition = edition;
-	}
+//	public String getEdition() {
+//		return edition;
+//	}
+//
+//	public void setEdition(String edition) {
+//		this.edition = edition;
+//	}
 
 	public String getOem_retail() {
 		return oem_retail;
@@ -89,12 +97,10 @@ public class OS extends Accessory implements Parcelable {
 
 		OS os = (OS) o;
 
-		if (Double.compare(os.getMaxMemSupport(), getMaxMemSupport()) != 0) return false;
+		if (getMaxMemSupport() != os.getMaxMemSupport()) return false;
 		if (getBitMode() != null ? !getBitMode().equals(os.getBitMode()) : os.getBitMode() != null)
 			return false;
 		if (getType() != null ? !getType().equals(os.getType()) : os.getType() != null)
-			return false;
-		if (getEdition() != null ? !getEdition().equals(os.getEdition()) : os.getEdition() != null)
 			return false;
 		return getOem_retail() != null ? getOem_retail().equals(os.getOem_retail()) : os.getOem_retail() == null;
 	}
@@ -102,12 +108,9 @@ public class OS extends Accessory implements Parcelable {
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		long temp;
 		result = 31 * result + (getBitMode() != null ? getBitMode().hashCode() : 0);
-		temp = Double.doubleToLongBits(getMaxMemSupport());
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + getMaxMemSupport();
 		result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-		result = 31 * result + (getEdition() != null ? getEdition().hashCode() : 0);
 		result = 31 * result + (getOem_retail() != null ? getOem_retail().hashCode() : 0);
 		return result;
 	}
@@ -116,9 +119,9 @@ public class OS extends Accessory implements Parcelable {
 	public void writeToParcel(@NotNull Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeString(bitMode);
-		dest.writeDouble(maxMemSupport);
+		dest.writeInt(maxMemSupport);
 		dest.writeString(type);
-		dest.writeString(edition);
+//		dest.writeString(edition);
 		dest.writeString(oem_retail);
 	}
 }

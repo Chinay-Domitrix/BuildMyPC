@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,17 @@ public class PSU extends Part implements Parcelable { // stands for "Power Suppl
 
 	public PSU(String model, String manufacturer) {
 		super(model, manufacturer);
+	}
+
+	public PSU(@Nullable String model, @Nullable String manufacturer, ArrayList<CountedString> connectorList, String efficiencyRating, boolean hasFan, String formFactor, int length, String modular, int wattage) {
+		super(model, manufacturer);
+		this.connectorList = connectorList;
+		this.efficiencyRating = efficiencyRating;
+		this.hasFan = hasFan;
+		this.formFactor = formFactor;
+		this.length = length;
+		this.modular = modular;
+		this.wattage = wattage;
 	}
 
 	public PSU(Parcel in) {
