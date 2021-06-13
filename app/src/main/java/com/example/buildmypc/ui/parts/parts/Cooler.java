@@ -125,4 +125,9 @@ public final class Cooler extends Part implements Parcelable {
 		dest.writeBoolean(waterCooled);
 		dest.writeBoolean(fanless);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 8;
+	}
 }

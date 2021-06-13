@@ -212,4 +212,9 @@ public class Memory extends Part implements Parcelable {
 		dest.writeString(timing);
 		dest.writeDouble(voltage);
 	}
+
+	@Override
+	public int getParamCount(){
+		return 13;
+	}
 }

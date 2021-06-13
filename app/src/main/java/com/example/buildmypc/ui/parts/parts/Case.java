@@ -238,4 +238,9 @@ public class Case extends Part implements Parcelable {
 			Black Lian Li PC-O11DX ATX Full Tower */
 
 	}
+
+	@Override
+	public int getParamCount() {
+		return 13;
+	}
 }

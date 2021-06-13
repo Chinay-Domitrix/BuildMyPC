@@ -269,4 +269,9 @@ public class Monitor extends Part implements Parcelable {
 		dest.writeBoolean(isWidescreen);
 
 	}
+
+	@Override
+	public int getParamCount() {
+		return 16;
+	}
 }

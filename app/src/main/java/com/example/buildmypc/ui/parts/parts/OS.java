@@ -124,4 +124,9 @@ public class OS extends Accessory implements Parcelable {
 //		dest.writeString(edition);
 		dest.writeString(oem_retail);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 6;
+	}
 }

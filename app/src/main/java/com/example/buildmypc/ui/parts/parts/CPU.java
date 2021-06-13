@@ -209,4 +209,9 @@ public final class CPU extends Part implements Parcelable {
 		dest.writeBoolean(cooler);
 		dest.writeBoolean(smt);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 15;
+	}
 }

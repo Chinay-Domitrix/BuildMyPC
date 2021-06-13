@@ -156,4 +156,9 @@ public class Storage extends Part implements Parcelable {
 		dest.writeInt(rpm);
 		dest.writeString(type);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 9;
+	}
 }

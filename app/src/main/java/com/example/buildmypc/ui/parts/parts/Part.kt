@@ -23,6 +23,10 @@ open class Part : Parcelable {
 	val name
 		get() = "$manufacturer $model"
 
+	// returns the base number of params -- will be overriden for every subclass of Part
+	open val paramCount
+		get() = 2
+
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || javaClass != other.javaClass) return false
@@ -40,6 +44,8 @@ open class Part : Parcelable {
 		dest.writeString(model)
 		dest.writeString(manufacturer)
 	}
+
+
 
 	companion object {
 		@JvmField

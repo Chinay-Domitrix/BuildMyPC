@@ -305,4 +305,9 @@ public class Motherboard extends Part implements Parcelable {
 		dest.writeParcelableList(gen32USBcount, flags);
 		dest.writeString(wireless);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 19;
+	}
 }

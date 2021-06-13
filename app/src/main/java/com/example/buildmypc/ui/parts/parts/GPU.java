@@ -254,4 +254,9 @@ public class GPU extends Part implements Parcelable { // the only important part
 		dest.writeInt(tdpW);
 		dest.writeTypedList(videoPorts);
 	}
+
+	@Override
+	public int getParamCount(){
+		return 16;
+	}
 }

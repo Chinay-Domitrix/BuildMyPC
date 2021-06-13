@@ -159,4 +159,9 @@ public class PSU extends Part implements Parcelable { // stands for "Power Suppl
 		dest.writeString(modular);
 		dest.writeInt(wattage);
 	}
+
+	@Override
+	public int getParamCount() {
+		return 9;
+	}
 }

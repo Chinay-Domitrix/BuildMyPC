@@ -1,7 +1,9 @@
 package com.example.buildmypc.ui.parts;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
+import com.example.buildmypc.ui.build.PCBuild;
+import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Part;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +31,7 @@ import static android.view.LayoutInflater.from;
 import static com.example.buildmypc.MainActivity.coolers;
 import static com.example.buildmypc.MainActivity.cpus;
 import static com.example.buildmypc.MainActivity.gpus;
+import static com.example.buildmypc.MainActivity.memory;
 import static com.example.buildmypc.MainActivity.monitors;
 import static com.example.buildmypc.MainActivity.motherboards;
 import static com.example.buildmypc.MainActivity.oss;
@@ -53,9 +59,10 @@ public class PartsFragment extends Fragment {
 		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), cpus.get()));
 		cpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		RecyclerView coolerRecycle = binding.partsCpuRecyclerview;
+		RecyclerView coolerRecycle = binding.partsCoolerRecyclerview;
 		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
 		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+		Log.d("PARTSFRAG", coolers.get().toString());
 
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
 		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
@@ -84,6 +91,10 @@ public class PartsFragment extends Fragment {
 		RecyclerView monitorRecyclerView = binding.partsMonitorRecyclerview;
 		monitorRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), monitors.get()));
 		monitorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		RecyclerView memoryRecyclerView = binding.partsMemoryRecyclerview;
+		memoryRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), memory.get()));
+		memoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		// in case we ever want accessories
 //		RecyclerView accessoriesRecyclerView = binding.partsAccessoryRecyclerview; // power supplies
@@ -145,6 +156,15 @@ public class PartsFragment extends Fragment {
 			Part currentPart = internalList.get(position);
 
 			// since only the basic data is displayed, we'll do that first
+			holder.nameTextView.setText(currentPart.toString());
+			holder.internalButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// this is where the pop-up window'll be
+					// debug statement to test out getSimpleName
+					Log.d("PARTSFRAG", currentPart.getClass().getSimpleName());
+				}
+			});
 			// TODO write this and write the clickable code to make a popup window (specifics of the display determined by a switch(getCLass().getName()))
 		}
 
@@ -157,11 +177,61 @@ public class PartsFragment extends Fragment {
 			TextView nameTextView;
 			Button internalButton;
 
+			private AlertDialog dialog;
+			private AlertDialog.Builder dialogBuilder;
+			private TextView nameView;
+
+
 			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
 				// this is where the findViewById stuff goes for each element, and only the findViewByID
 				nameTextView = itemView.findViewById(partsList_nameTextView);
 				internalButton = itemView.findViewById(partsList_addButton);
+			}
+
+			public void createNewPopupWindow(Part part, RecyclerViewHolder holder){
+				dialogBuilder = new AlertDialog.Builder(getContext());
+				final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
+				/* Automatically generate all the textviews needed
+				 *
+				 */
+
+				ArrayList<TextView> tvList = new ArrayList<>();
+				ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
+				switch(part.getClass().getSimpleName()){
+					case "CPU":
+						for(int i = 0; i < part.getParamCount(); i++){
+
+						}
+						break;
+
+					case "Cooler":
+						break;
+
+					case "Motherboard":
+						break;
+
+					case "Memory":
+						break;
+
+					case "Storage":
+						break;
+
+					case "GPU":
+						break;
+
+					case "Case":
+						break;
+
+					case "PSU":
+						break;
+
+					case "OS":
+						break;
+
+					case "Monitor":
+						break;
+				}
 			}
 		}
 	}
