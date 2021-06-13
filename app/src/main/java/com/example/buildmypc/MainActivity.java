@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //		d("TAG", "onCreate: " + database.get().getReference("case").child("0").toString());
 		// the code to parse the JSON parts file into usable stuff
 		parts.set(new JSONObject());
-		d("PARSER", "mainactivity runs");
+		d("PARSER", "MainActivity runs");
 		if (parts.get().toString().length() < 10) { // if there's nothing inside of it
 			d("PARSER", "if-statement runs");
 			ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
 				d("PARSER", "second if-statement runs");
 				newRequestQueue(this).add(new StringRequest(GET,
-						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key),
+						"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(R.string.firebase_key),
 						response -> {
 							try {
 								Log.d("PARSER", "try-block runs");
