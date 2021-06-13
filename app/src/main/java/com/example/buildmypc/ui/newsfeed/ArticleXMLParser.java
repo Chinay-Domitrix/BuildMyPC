@@ -71,10 +71,8 @@ public class ArticleXMLParser {
 		ArticleXMLParser that = (ArticleXMLParser) o;
 
 		if (!Objects.equals(data, that.data)) return false;
-		if (!Objects.equals(publisher, that.publisher))
-			return false;
-		if (!Objects.equals(itemDivisor, that.itemDivisor))
-			return false;
+		if (!Objects.equals(publisher, that.publisher)) return false;
+		if (!Objects.equals(itemDivisor, that.itemDivisor)) return false;
 		if (!Objects.equals(nameInd, that.nameInd)) return false;
 		if (!Objects.equals(descInd, that.descInd)) return false;
 		if (!Objects.equals(dateInd, that.dateInd)) return false;
