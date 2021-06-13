@@ -1,93 +1,492 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:id="@+id/popup_constraintLayout">
+	android:id="@+id/popup_baseLinearLayout"
+	android:layout_width="350dp"
+	android:layout_height="400dp"
+	android:orientation="vertical">
 
-<!--    each one of these bad boys is a different field for text to go inside of    -->
-	<LinearLayout
-		android:id="@+id/popup_layout1"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingTop="10dp"
-		app:layout_constraintTop_toTopOf="parent">
+	<ScrollView
+		android:id="@+id/popup_scrollView"
+		android:layout_width="350dp"
+		android:layout_height="400dp"
+		android:orientation="vertical">
 
-		<TextView
-			android:id="@+id/popup_title1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:textSize="16sp"
-			android:text="TextView" />
+		<!--    each one of these bad boys is a different field for text to go inside of    -->
 
-		<TextView
-			android:id="@+id/popup_message1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="3"
-			android:textSize="16sp"
-			android:text="TextView" />
-	</LinearLayout>
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/popup_constraintLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/popup_layout2"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="15dp"
-		android:orientation="horizontal"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/popup_layout1">
+			<!--    each one of these bad boys is a different field for text to go inside of    -->
 
-		<TextView
-			android:id="@+id/popup_title2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="TextView"
-			android:textSize="16sp" />
+			<TextView
+				android:id="@+id/popup_headerTextView"
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:background="#0000CD"
+				android:gravity="center"
+				android:text="Part Data Sheet"
+				android:textColor="#F5F5F5"
+				android:textSize="30sp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
 
-		<TextView
-			android:id="@+id/popup_message2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="3"
-			android:text="TextView"
-			android:textSize="16sp" />
-	</LinearLayout>
+			<TextView
+				android:id="@+id/popup_superTitleTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:paddingTop="10dp"
+				android:paddingBottom="10dp"
+				android:text="AMD Processor"
+				android:textSize="20sp"
+				android:textStyle="bold"
+				app:layout_constraintTop_toBottomOf="@+id/popup_headerTextView"/>
 
-	<LinearLayout
-		android:id="@+id/popup_layout3"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="15dp"
-		android:orientation="horizontal"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/popup_layout2">
+			<LinearLayout
+				android:id="@+id/popup_layout1"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_superTitleTextView">
 
-		<TextView
-			android:id="@+id/popup_title3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="TextView"
-			android:textSize="16sp" />
+				<TextView
+					android:id="@+id/popup_title1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
 
-		<TextView
-			android:id="@+id/popup_message3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="3"
-			android:text="TextView"
-			android:textSize="16sp" />
-	</LinearLayout>
+				<TextView
+					android:id="@+id/popup_message1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout2"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout1">
+
+				<TextView
+					android:id="@+id/popup_title2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout3"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout2">
+
+				<TextView
+					android:id="@+id/popup_title3"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message3"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout4"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout3">
+
+				<TextView
+					android:id="@+id/popup_title4"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message4"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout5"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout4">
+
+				<TextView
+					android:id="@+id/popup_title5"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message5"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout6"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout5">
+
+				<TextView
+					android:id="@+id/popup_title6"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message6"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout7"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout6">
+
+				<TextView
+					android:id="@+id/popup_title7"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message7"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout8"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout7">
+
+				<TextView
+					android:id="@+id/popup_title8"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message8"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout9"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout8">
+
+				<TextView
+					android:id="@+id/popup_title9"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message9"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout10"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout9">
+
+				<TextView
+					android:id="@+id/popup_title10"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message10"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout11"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout10">
+
+				<TextView
+					android:id="@+id/popup_title11"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message11"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout12"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout11">
+
+				<TextView
+					android:id="@+id/popup_title12"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message12"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout13"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout12">
+
+				<TextView
+					android:id="@+id/popup_title13"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message13"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout14"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout13">
+
+				<TextView
+					android:id="@+id/popup_title14"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message14"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/popup_layout15"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:paddingRight="10dp"
+				app:layout_constraintTop_toBottomOf="@+id/popup_layout14">
+
+				<TextView
+					android:id="@+id/popup_title15"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text=""
+					android:textSize="16sp" />
+
+				<TextView
+					android:id="@+id/popup_message15"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="3"
+					android:gravity="right"
+					android:text=""
+					android:textSize="16sp"
+					android:layout_marginRight="8dp"/>
+			</LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+	</ScrollView>
+
+
+</LinearLayout>

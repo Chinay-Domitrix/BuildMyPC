@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +21,11 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.build.PCBuild;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Part;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,12 @@ import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
 	private FragmentPartsBinding binding;
+
+	// popup window declarations
+	private AlertDialog dialog;
+	private AlertDialog.Builder dialogBuilder;
+//	private TextView nameView;
+
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		binding = inflate(inflater, container, false);
@@ -163,6 +171,7 @@ public class PartsFragment extends Fragment {
 					// this is where the pop-up window'll be
 					// debug statement to test out getSimpleName
 					Log.d("PARTSFRAG", currentPart.getClass().getSimpleName());
+					createNewPopupWindow(currentPart);
 				}
 			});
 			// TODO write this and write the clickable code to make a popup window (specifics of the display determined by a switch(getCLass().getName()))
@@ -177,62 +186,197 @@ public class PartsFragment extends Fragment {
 			TextView nameTextView;
 			Button internalButton;
 
-			private AlertDialog dialog;
-			private AlertDialog.Builder dialogBuilder;
-			private TextView nameView;
-
-
 			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
 				// this is where the findViewById stuff goes for each element, and only the findViewByID
 				nameTextView = itemView.findViewById(partsList_nameTextView);
 				internalButton = itemView.findViewById(partsList_addButton);
 			}
+		}
 
-			public void createNewPopupWindow(Part part, RecyclerViewHolder holder){
-				dialogBuilder = new AlertDialog.Builder(getContext());
-				final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
-				/* Automatically generate all the textviews needed
-				 *
-				 */
+		public void createNewPopupWindow(Part part){
+			dialogBuilder = new AlertDialog.Builder(getContext());
+			final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
+			TextView[][] tvs = new TextView[15][2];
+			// I don't know how to automatically do this so it's manual time
+			tvs[0][0] = infoPopUp.findViewById(R.id.popup_title1);
+			tvs[0][1] = infoPopUp.findViewById(R.id.popup_message1);
 
-				ArrayList<TextView> tvList = new ArrayList<>();
-				ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
-				switch(part.getClass().getSimpleName()){
-					case "CPU":
-						for(int i = 0; i < part.getParamCount(); i++){
+			tvs[1][0] = infoPopUp.findViewById(R.id.popup_title2);
+			tvs[1][1] = infoPopUp.findViewById(R.id.popup_message2);
 
-						}
-						break;
+			tvs[2][0] = infoPopUp.findViewById(R.id.popup_title3);
+			tvs[2][1] = infoPopUp.findViewById(R.id.popup_message3);
 
-					case "Cooler":
-						break;
+			tvs[3][0] = infoPopUp.findViewById(R.id.popup_title4);
+			tvs[3][1] = infoPopUp.findViewById(R.id.popup_message4);
 
-					case "Motherboard":
-						break;
+			tvs[4][0] = infoPopUp.findViewById(R.id.popup_title5);
+			tvs[4][1] = infoPopUp.findViewById(R.id.popup_message5);
 
-					case "Memory":
-						break;
+			tvs[5][0] = infoPopUp.findViewById(R.id.popup_title6);
+			tvs[5][1] = infoPopUp.findViewById(R.id.popup_message6);
 
-					case "Storage":
-						break;
+			tvs[6][0] = infoPopUp.findViewById(R.id.popup_title7);
+			tvs[6][1] = infoPopUp.findViewById(R.id.popup_message7);
 
-					case "GPU":
-						break;
+			tvs[7][0] = infoPopUp.findViewById(R.id.popup_title8);
+			tvs[7][1] = infoPopUp.findViewById(R.id.popup_message8);
 
-					case "Case":
-						break;
+			tvs[8][0] = infoPopUp.findViewById(R.id.popup_title9);
+			tvs[8][1] = infoPopUp.findViewById(R.id.popup_message9);
 
-					case "PSU":
-						break;
+			tvs[9][0] = infoPopUp.findViewById(R.id.popup_title10);
+			tvs[9][1] = infoPopUp.findViewById(R.id.popup_message10);
 
-					case "OS":
-						break;
+			tvs[10][0] = infoPopUp.findViewById(R.id.popup_title11);
+			tvs[10][1] = infoPopUp.findViewById(R.id.popup_message11);
 
-					case "Monitor":
-						break;
-				}
+			tvs[11][0] = infoPopUp.findViewById(R.id.popup_title12);
+			tvs[11][1] = infoPopUp.findViewById(R.id.popup_message12);
+
+			tvs[12][0] = infoPopUp.findViewById(R.id.popup_title13);
+			tvs[12][1] = infoPopUp.findViewById(R.id.popup_message13);
+
+			tvs[13][0] = infoPopUp.findViewById(R.id.popup_title14);
+			tvs[13][1] = infoPopUp.findViewById(R.id.popup_message14);
+
+			tvs[14][0] = infoPopUp.findViewById(R.id.popup_title15);
+			tvs[14][1] = infoPopUp.findViewById(R.id.popup_message15);
+
+			/* Automatically generate all the textviews needed
+			 *
+			 */
+
+			ArrayList<LinearLayout> linearLayouts = new ArrayList<>();
+			ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
+			switch(part.getClass().getSimpleName()){
+				case "CPU": // jank setup of autogenerating textviews failed, so I just hardcoded it like a junior dev should
+//					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
+//					Log.d("PARTSFRAG", String.valueOf(part.getParamCount()));
+//						for(int i = 1; i < part.getParamCount(); i++){
+//							// generating the linear layout TODO fix this
+//							LinearLayout currentLinearLayout = new LinearLayout(getContext());
+//							currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//							currentLinearLayout.setPadding(10, 0, 10, 0);
+//							ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//							ConstraintSet set = new ConstraintSet();
+//							Log.d("PARTSFRAG", String.valueOf(linearLayouts.size()));
+//							if(i > 0) {
+//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.BOTTOM, currentLinearLayout.getId(), ConstraintSet.TOP);
+//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.LEFT, currentLinearLayout.getId(), ConstraintSet.LEFT);
+//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.RIGHT, currentLinearLayout.getId(), ConstraintSet.RIGHT);
+//							}
+//							else { set.clone(); }
+//							set.constrainMinHeight(currentLinearLayout.getId(), 15); // assuming height is in density pixels
+//							set.applyTo(baseLayout);
+//
+//							// inserting the two text views
+//							TextView tv1 = new TextView(getContext());
+//							tv1.setId(2 * i); // adding constant noise as to not interfere with previous IDs
+//							tv1.setLayoutParams(new LinearLayout.LayoutParams(30, LinearLayout.LayoutParams.WRAP_CONTENT));
+//							currentLinearLayout.addView(tv1);
+//
+//							TextView tv2 = new TextView(getContext());
+//							tv1.setId(2*i + 1); // +1 added to the previous ID
+//							tv2.setLayoutParams(new LinearLayout.LayoutParams(90, LinearLayout.LayoutParams.WRAP_CONTENT));
+//							currentLinearLayout.addView(tv2);
+//
+//							// adding the LinearLayout to the bunch
+//							linearLayouts.add(currentLinearLayout);
+//						}
+					TextView name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("# of Cores:");
+					tvs[1][1].setText(String.valueOf(((CPU)part).getCoreCount()));
+
+					tvs[2][0].setText("Clock Speed:");
+					tvs[2][1].setText(((CPU)part).getCoreClock() + " GHz");
+
+					tvs[3][0].setText("Boost Clock Speed:");
+					tvs[3][1].setText(((CPU)part).getBoostClock() + " GHz");
+
+					tvs[4][0].setText("Thermal Design Power:");
+					tvs[4][1].setText(((CPU)part).getTdp() + " W");
+
+					tvs[5][0].setText("Microarchitecture:");
+					tvs[5][1].setText(((CPU)part).getMicroarchitecture());
+
+					tvs[6][0].setText("Core Family:");
+					tvs[6][1].setText(((CPU)part).getCoreFamily());
+
+					tvs[7][0].setText("Socket Type");
+					tvs[7][1].setText(((CPU)part).getSocket());
+
+					tvs[8][0].setText("Has Integrated GPU?: ");
+					if(((CPU)part).isiGPU()) { tvs[8][1].setText("Yes"); }
+					else { tvs[8][1].setText("No"); }
+
+					tvs[9][0].setText("Max Supported Memory: ");
+					tvs[9][1].setText(((CPU)part).getMaxMemory() + " GB");
+
+					tvs[10][0].setText("Can error-correct?: ");
+					if(((CPU)part).isEcc()) { tvs[10][1].setText("Yes"); }
+					else { tvs[10][1].setText("No"); }
+
+					tvs[11][0].setText("Has an internal cooler?: ");
+					if(((CPU)part).isCooler()) { tvs[11][1].setText("Yes"); }
+					else { tvs[11][1].setText("No"); }
+
+					tvs[12][0].setText("Has s.\"multithreading\"?: ");
+					if(((CPU)part).isSmt()) { tvs[11][1].setText("Yes"); }
+					else { tvs[11][1].setText("No"); }
+
+					break;
+
+				case "Cooler":
+					break;
+
+				case "Motherboard":
+					break;
+
+				case "Memory":
+					break;
+
+				case "Storage":
+					break;
+
+				case "GPU":
+					break;
+
+				case "Case":
+					break;
+
+				case "PSU":
+					break;
+
+				case "OS":
+					break;
+
+				case "Monitor":
+					break;
 			}
+			dialogBuilder.setView(infoPopUp);
+			dialog = dialogBuilder.create();
+			dialog.show();
+
+			// not needed
+//			baseLayout.setOnLongClickListener(new View.OnLongClickListener() {
+//				@Override
+//				public boolean onLongClick(View v) {
+//					// writing the cancel stuff
+//					dialog.dismiss();
+//					return true;
+//				}
+//			});
+		}
+
+		public int getIDFromFormula(){
+			return (int)(Math.random() * (10 ^ 7));
 		}
 	}
 }
