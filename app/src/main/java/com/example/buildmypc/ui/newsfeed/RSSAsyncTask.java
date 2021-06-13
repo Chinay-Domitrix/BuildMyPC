@@ -35,7 +35,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 		} catch (IOException e) {
 			d("GAMING", "Stacking! + " + e.toString());
 		}
-		
+
 		// parsing the XML result into something workable
 		switch (strings[1].toUpperCase()) {
 			case "TECHMEME":
@@ -43,7 +43,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				try { // try-catch handles both MalformedURLException and ParseException
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (ParseException | MalformedURLException e) {
-					d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 				}
 				break;
 //			case "TECHCRUNCH":
@@ -62,7 +62,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //						usableArticleList.add(article);
 //					}
 //				} catch (ParseException | MalformedURLException e) {
-//					Log.d("CHIRAGERROR", e.toString());
+//					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 //				}
 //				break;
 //			case "MIT_TECHNOLOGY":
@@ -81,7 +81,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 //						usableArticleList.add(article);
 //					}
 //				} catch (ParseException | MalformedURLException e) {
-//					Log.d("CHIRAGERROR", e.toString());
+//					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 //				}
 //				break;
 			case "THE VERGE":
@@ -89,7 +89,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				try { // try-catch handles both MalformedURLException and ParseException
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (ParseException | MalformedURLException e) {
-					d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 				}
 				break;
 			case "WIRED":
@@ -97,7 +97,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				try { /// try-catch handles both MalformedURLException and ParseException
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (ParseException | MalformedURLException e) {
-					d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 				}
 				break;
 			case "NYTIMES":
@@ -105,7 +105,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				try { // try-catch handles both MalformedURLException and ParseException
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (ParseException | MalformedURLException e) {
-					d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 				}
 				break;
 //			case "ARS_TECHNICHA":
@@ -115,11 +115,12 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				try { // try-catch handles both MalformedURLException and ParseException
 					usableArticleList.addAll(xmlParser.parseData());
 				} catch (ParseException | MalformedURLException e) {
-					d("CHIRAGERROR", e.toString());
+					d("CHIRAGERROR", e.getClass().getCanonicalName(), e);
 				}
 				break;
 			default:
-				throw new IllegalStateException("Unexpected value: " + strings[1].toUpperCase());
+				d("Article Exception","Illegal Article", new IllegalStateException("Unexpected value: " + strings[1].toUpperCase()));
+				break;
 		}
 		return usableArticleList;
 	}
