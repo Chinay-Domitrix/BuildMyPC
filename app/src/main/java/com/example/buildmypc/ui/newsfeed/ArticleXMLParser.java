@@ -1,5 +1,7 @@
 package com.example.buildmypc.ui.newsfeed;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -16,7 +18,7 @@ public class ArticleXMLParser {
 	private final String urlInd;
 	private final String imageInd;
 
-	public ArticleXMLParser(String data, String publisher, String itemDivisor, String nameInd, String descInd, String dateInd, String urlInd, String imageInd) {
+	public ArticleXMLParser(String data, @NotNull String publisher, @NotNull String itemDivisor, @NotNull String nameInd, @NotNull String descInd, @NotNull String dateInd, String urlInd, String imageInd) {
 		this.data = data;
 		this.publisher = publisher.toUpperCase();
 		this.itemDivisor = itemDivisor.toUpperCase();
