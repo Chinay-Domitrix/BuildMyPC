@@ -119,7 +119,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, ArrayList<Article>> {
 				}
 				break;
 			default:
-				d("Article Exception","Illegal Article", new IllegalStateException("Unexpected value: " + strings[1].toUpperCase()));
+				d("Article Exception", "Illegal Article", new IllegalStateException("Unexpected value: " + strings[1].toUpperCase()));
 				break;
 		}
 		return usableArticleList;
