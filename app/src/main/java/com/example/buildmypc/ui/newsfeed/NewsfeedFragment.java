@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentNewsfeedBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,11 +30,14 @@ import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.Manifest.permission.INTERNET;
+import static android.view.LayoutInflater.from;
+import static androidx.core.content.res.ResourcesCompat.getDrawable;
 import static com.example.buildmypc.R.drawable.nytimes;
 import static com.example.buildmypc.R.id.newslist_descTextView;
 import static com.example.buildmypc.R.id.newslist_imageView;
 import static com.example.buildmypc.R.id.newslist_publisherTextView;
 import static com.example.buildmypc.R.id.newslist_titleTextView;
+import static com.example.buildmypc.R.layout.layout_newsfeed_list;
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 import static java.util.Locale.getDefault;
 
@@ -48,15 +49,13 @@ public class NewsfeedFragment extends Fragment {
 		// jank testing of finalArticleList actually being used in the RecyclerView
 		ArrayList<Article> temp = finalArticleList.get();
 		try {
-			temp.add(new Article(
-					"The U.S. added 559,000 jobs in May",
+			temp.add(new Article("The U.S. added 559,000 jobs in May",
 					"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
 					new URL("https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"),
 					"NYTimes",
-					ResourcesCompat.getDrawable(getResources(), nytimes, requireActivity().getTheme()),
+					getDrawable(getResources(), nytimes, requireActivity().getTheme()),
 					new Date(),
-					new SimpleDateFormat("yyyy-MM-dd", getDefault())
-			));
+					new SimpleDateFormat("yyyy-MM-dd", getDefault())));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +100,7 @@ public class NewsfeedFragment extends Fragment {
 		@Override
 		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			// inflate xml here
-			View view = LayoutInflater.from(parentContext).inflate(R.layout.layout_newsfeed_list, parent, false);
+			View view = from(parentContext).inflate(layout_newsfeed_list, parent, false);
 			RecyclerViewHolder holder = new RecyclerViewHolder(view);
 			return holder;
 		}
