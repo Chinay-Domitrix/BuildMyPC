@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +29,10 @@ import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.Manifest.permission.INTERNET;
+import static android.net.Uri.parse;
 import static android.view.LayoutInflater.from;
+import static android.view.View.OnClickListener;
+import static androidx.browser.customtabs.CustomTabsIntent.Builder;
 import static androidx.core.content.res.ResourcesCompat.getDrawable;
 import static com.example.buildmypc.R.drawable.nytimes;
 import static com.example.buildmypc.R.id.newslist_descTextView;
@@ -103,10 +107,19 @@ public class NewsfeedFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method where info is set for EACH individual layout element for each list entry
 			Article currentEntry = articleViewList.get(position);
+			OnClickListener onClickListener = v -> {
+				Builder builder = new Builder();
+				CustomTabsIntent customTabsIntent = builder.build();
+				customTabsIntent.launchUrl(parentContext, parse(currentEntry.getOriginURL()));
+			};
 			holder.image.setImageDrawable(currentEntry.getImage());
 			holder.title.setText(currentEntry.getHeading());
 			holder.desc.setText(currentEntry.getDesc());
 			holder.dateAndPublisher.setText(currentEntry.getPublisher() + " at " + currentEntry.getDate().toString());
+			holder.image.setOnClickListener(onClickListener);
+			holder.title.setOnClickListener(onClickListener);
+			holder.desc.setOnClickListener(onClickListener);
+			holder.dateAndPublisher.setOnClickListener(onClickListener);
 		}
 
 		@Override
