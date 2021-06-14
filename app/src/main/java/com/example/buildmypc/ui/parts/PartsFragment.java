@@ -615,6 +615,11 @@ public class PartsFragment extends Fragment {
 					tvs[8][0].setText("Capacity:");
 					tvs[8][1].setText(((Storage) part).getCapacity());
 
+					for (int i = 9; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 
 				case "GPU":
