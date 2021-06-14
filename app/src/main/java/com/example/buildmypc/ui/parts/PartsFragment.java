@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,32 +20,16 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.parts.parts.CPU;
-import com.example.buildmypc.ui.parts.parts.Cooler;
-import com.example.buildmypc.ui.parts.parts.CountedString;
-import com.example.buildmypc.ui.parts.parts.GPU;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.Storage;
+import com.example.buildmypc.ui.parts.parts.*;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import static android.view.LayoutInflater.from;
-import static android.view.View.*;
-import static com.example.buildmypc.MainActivity.coolers;
-import static com.example.buildmypc.MainActivity.cpus;
-import static com.example.buildmypc.MainActivity.gpus;
-import static com.example.buildmypc.MainActivity.memory;
-import static com.example.buildmypc.MainActivity.monitors;
-import static com.example.buildmypc.MainActivity.motherboards;
-import static com.example.buildmypc.MainActivity.oss;
-import static com.example.buildmypc.MainActivity.pcCases;
-import static com.example.buildmypc.MainActivity.psus;
-import static com.example.buildmypc.MainActivity.storage;
+import static android.view.View.GONE;
+import static android.view.View.OnClickListener;
+import static com.example.buildmypc.MainActivity.*;
 import static com.example.buildmypc.R.id.partsList_addButton;
 import static com.example.buildmypc.R.id.partsList_nameTextView;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
@@ -397,22 +380,21 @@ public class PartsFragment extends Fragment {
 					tvs[3][1].setText(((Cooler) part).getHeight() + " mm");
 
 					tvs[4][0].setText("Noise Level: ");
-					tvs[4][1].setText(((Cooler) part).getNoiseLevel() +  " dB");
+					tvs[4][1].setText(((Cooler) part).getNoiseLevel() + " dB");
 
 					tvs[5][0].setText("Supported Sockets: \n");
 					// build the string of all of the supported sockets
 					String str = "";
-					for(String s : ((Cooler) part).getSocketSupport()){
-						str += s +"\n";
+					for (String s : ((Cooler) part).getSocketSupport()) {
+						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
 					tvs[5][1].setText(str);
 
-					if(!((Cooler) part).isFanless()){
+					if (!((Cooler) part).isFanless()) {
 						tvs[6][0].setText("Fan RPM:");
 						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
-					}
-					else {
+					} else {
 						tvs[6][0].setVisibility(GONE);
 						tvs[6][1].setVisibility(GONE);
 					}
@@ -447,7 +429,7 @@ public class PartsFragment extends Fragment {
 					// TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
 					str = "";
-					for(String s : ((Motherboard) part).getM2slots()){
+					for (String s : ((Motherboard) part).getM2slots()) {
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -461,7 +443,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[7][0].setText("Compatible Memory Types: ");
 					str = "";
-					for(String s : ((Motherboard) part).getCompatibleMem()){
+					for (String s : ((Motherboard) part).getCompatibleMem()) {
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -472,7 +454,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[9][0].setText("Compatible Ethernet Types: ");
 					str = "";
-					for(String s : ((Motherboard) part).getIncEthernetSupp()){
+					for (String s : ((Motherboard) part).getIncEthernetSupp()) {
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -483,7 +465,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("PCI Slot List: ");
 					str = "";
-					for(CountedString cstr : ((Motherboard) part).getPciSlotList()){
+					for (CountedString cstr : ((Motherboard) part).getPciSlotList()) {
 						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -504,7 +486,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
 					str = "";
-					for(CountedString cstr : ((Motherboard) part).getGen32USBcount()){
+					for (CountedString cstr : ((Motherboard) part).getGen32USBcount()) {
 						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -569,7 +551,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("Voltage:");
 					tvs[11][1].setText(String.valueOf(((Memory) part).getVoltage()));
-					if(tvs[11][1].getText().equals("null")){
+					if (tvs[11][1].getText().equals("null")) {
 						tvs[11][1].setText("N/A");
 					}
 
@@ -611,7 +593,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[7][0].setText("RPM:");
 					tvs[7][1].setText(((Storage) part).getRpm() + " rpm");
-					if(tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
+					if (tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
 
 					tvs[8][0].setText("Capacity:");
 					tvs[8][1].setText(((Storage) part).getCapacity());
@@ -631,37 +613,37 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Core Clock Speed:");
-					tvs[1][1].setText(((GPU)part).getCoreClockSpeed() + " MHz");
+					tvs[1][1].setText(((GPU) part).getCoreClockSpeed() + " MHz");
 
 					tvs[2][0].setText("Boost Clock Speed:");
-					tvs[2][1].setText(((GPU)part).getBoostClockSpeed() + " MHz");
+					tvs[2][1].setText(((GPU) part).getBoostClockSpeed() + " MHz");
 
 					tvs[3][0].setText("Effective Memory Clock Speed:");
-					tvs[3][1].setText(((GPU)part).getEffectiveMemClockSpeed() + " MHz");
+					tvs[3][1].setText(((GPU) part).getEffectiveMemClockSpeed() + " MHz");
 
 					tvs[4][0].setText("Chipset:");
-					tvs[4][1].setText(((GPU)part).getChipset());
+					tvs[4][1].setText(((GPU) part).getChipset());
 
 					tvs[5][0].setText("Cooling:");
-					tvs[5][1].setText(((GPU)part).getCooling());
+					tvs[5][1].setText(((GPU) part).getCooling());
 
 					tvs[6][0].setText("Expansion Slot Width:");
-					tvs[6][1].setText(((GPU)part).getExpansionSlotWidth() + " cm");
+					tvs[6][1].setText(((GPU) part).getExpansionSlotWidth() + " cm");
 
 					tvs[7][0].setText("External Power:");
-					tvs[7][1].setText(((GPU)part).getExternalPower());
+					tvs[7][1].setText(((GPU) part).getExternalPower());
 
 					tvs[8][0].setText("GPU Interface:");
-					tvs[8][1].setText(((GPU)part).getFrameSync());
+					tvs[8][1].setText(((GPU) part).getFrameSync());
 
 					tvs[9][0].setText("Frame Sync:");
-					tvs[9][1].setText(((GPU)part).getFrameSync());
+					tvs[9][1].setText(((GPU) part).getFrameSync());
 
 					tvs[10][0].setText("Frame Sync:");
-					tvs[10][1].setText(((GPU)part).getFrameSync());
+					tvs[10][1].setText(((GPU) part).getFrameSync());
 
 					tvs[11][0].setText("Frame Sync:");
-					tvs[11][1].setText(((GPU)part).getFrameSync());
+					tvs[11][1].setText(((GPU) part).getFrameSync());
 
 					break;
 
