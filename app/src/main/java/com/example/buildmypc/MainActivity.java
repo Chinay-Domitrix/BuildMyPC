@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.buildmypc.databinding.ActivityMainBinding;
 import com.example.buildmypc.ui.parts.parts.Part;
+import com.google.firebase.storage.FirebaseStorage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
 	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
+	FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
 	@SuppressWarnings("deprecation")
 	@Override
