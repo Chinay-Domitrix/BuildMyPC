@@ -310,7 +310,7 @@ public class PartsFragment extends Fragment {
 					str.substring(str.length() - 2);
 					tvs[7][1].setText(str.toString());
 					tvs[8][0].setText("mSATA Slot Count:");
-					tvs[8][1].setText(valueOf(((Motherboard) part).getmSATA_slotCount()));
+					tvs[8][1].setText(valueOf(((Motherboard) part).getmSATASlotCount()));
 					tvs[9][0].setText("Compatible Ethernet Types: ");
 					str = new StringBuilder();
 					for (String s : ((Motherboard) part).getIncEthernetSupp())
@@ -538,7 +538,7 @@ public class PartsFragment extends Fragment {
 					tvs[3][0].setText("Type:");
 					tvs[3][1].setText(((OS) part).getType());
 					tvs[4][0].setText("OEM or Retail:");
-					tvs[4][1].setText(((OS) part).getOem_retail());
+					tvs[4][1].setText(((OS) part).getOemRetail());
 					for (int i = 5; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
 						tvs[i][1].setVisibility(GONE);
