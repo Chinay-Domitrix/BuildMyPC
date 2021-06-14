@@ -1,6 +1,7 @@
 package com.example.buildmypc.ui.parts;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class PartsFragment extends Fragment {
 
 	// popup window declarations
 	private AlertDialog dialog;
-	private AlertDialog.Builder dialogBuilder;
+	private Builder dialogBuilder;
 //	private TextView nameView;
 
 
@@ -185,7 +186,7 @@ public class PartsFragment extends Fragment {
 		}
 
 		public void createNewPopupWindow(Part part) {
-			dialogBuilder = new AlertDialog.Builder(getContext());
+			dialogBuilder = new Builder(getContext());
 			final View infoPopUp = getLayoutInflater().inflate(popup, null);
 			TextView[][] tvs = new TextView[20][2];
 			// I don't know how to automatically do this so it's manual time
