@@ -23,8 +23,11 @@ import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.example.buildmypc.ui.parts.parts.CPU;
 import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.CountedString;
+import com.example.buildmypc.ui.parts.parts.Memory;
 import com.example.buildmypc.ui.parts.parts.Motherboard;
 import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -200,7 +203,7 @@ public class PartsFragment extends Fragment {
 		public void createNewPopupWindow(Part part) {
 			dialogBuilder = new AlertDialog.Builder(getContext());
 			final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
-			TextView[][] tvs = new TextView[15][2];
+			TextView[][] tvs = new TextView[20][2];
 			// I don't know how to automatically do this so it's manual time
 			tvs[0][0] = infoPopUp.findViewById(R.id.popup_title1);
 			tvs[0][1] = infoPopUp.findViewById(R.id.popup_message1);
@@ -246,6 +249,21 @@ public class PartsFragment extends Fragment {
 
 			tvs[14][0] = infoPopUp.findViewById(R.id.popup_title15);
 			tvs[14][1] = infoPopUp.findViewById(R.id.popup_message15);
+
+			tvs[15][0] = infoPopUp.findViewById(R.id.popup_title16);
+			tvs[15][1] = infoPopUp.findViewById(R.id.popup_message16);
+
+			tvs[16][0] = infoPopUp.findViewById(R.id.popup_title17);
+			tvs[16][1] = infoPopUp.findViewById(R.id.popup_message17);
+
+			tvs[17][0] = infoPopUp.findViewById(R.id.popup_title18);
+			tvs[17][1] = infoPopUp.findViewById(R.id.popup_message18);
+
+			tvs[18][0] = infoPopUp.findViewById(R.id.popup_title19);
+			tvs[18][1] = infoPopUp.findViewById(R.id.popup_message19);
+
+			tvs[19][0] = infoPopUp.findViewById(R.id.popup_title20);
+			tvs[19][1] = infoPopUp.findViewById(R.id.popup_message20);
 
 			/* Automatically generate all the textviews needed
 			 *
@@ -346,10 +364,11 @@ public class PartsFragment extends Fragment {
 						tvs[12][1].setText("No");
 					}
 
-					for (int i = 13; i < 15; i++) {
+					for (int i = 13; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
 						tvs[i][1].setVisibility(GONE);
 					}
+
 					break;
 
 				case "Cooler":
@@ -383,12 +402,12 @@ public class PartsFragment extends Fragment {
 					// build the string of all of the supported sockets
 					String str = "";
 					for(String s : ((Cooler) part).getSocketSupport()){
-						str += s + "\n";
+						str += s +"\n";
 					}
 					str.substring(str.length() - 2);
 					tvs[5][1].setText(str);
 
-					if(((Cooler) part).isFanless()){
+					if(!((Cooler) part).isFanless()){
 						tvs[6][0].setText("Fan RPM:");
 						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
 					}
@@ -411,27 +430,15 @@ public class PartsFragment extends Fragment {
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 
-					/*if (((Motherboard) part).n bh()) {
+					tvs[1][0].setText("Can error-correct?: ");
+					if (((Motherboard) part).isEcc()) {
 						tvs[1][1].setText("Yes");
 					} else {
 						tvs[1][1].setText("No");
-					}*/
-
-					break;
-
-				case "Memory":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
-					name.setText(part.getName());
-
-					tvs[0][0].setText("Manufacturer:");
-					tvs[0][1].setText(part.getManufacturer());
-
-					tvs[1][0].setText("Can error-correct?: ");
-					if (((Motherboard) part).isEcc()) {
-						tvs[12][1].setText("Yes");
-					} else {
-						tvs[12][1].setText("No");
 					}
+
+					tvs[2][0].setText("Chipset");
+					tvs[2][1].setText(((Motherboard) part).getChipset());
 
 					tvs[3][0].setText("Form Factor:");
 					tvs[3][1].setText(((Motherboard) part).getFormFactor());
@@ -449,28 +456,126 @@ public class PartsFragment extends Fragment {
 					tvs[5][1].setText(((Motherboard) part).getMaxMemSupport() + " GB");
 
 					tvs[6][0].setText("# of Memory Slots: ");
+					tvs[6][1].setText(String.valueOf(((Motherboard) part).getMemSlots()));
+
+					tvs[7][0].setText("Compatible Memory Types: ");
 					str = "";
 					for(String s : ((Motherboard) part).getCompatibleMem()){
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
-					tvs[6][1].setText(str);
+					tvs[7][1].setText(str);
 
-					tvs[7][0].setText("Compatible Memory Types: ");
-					tvs[7][1].setText(((Motherboard) part).getChipset());
+					tvs[8][0].setText("mSATA Slot Count:");
+					tvs[8][1].setText(String.valueOf(((Motherboard) part).getmSATA_slotCount()));
 
-					tvs[8][0].setText("Chipset: ");
-					tvs[8][1].setText(((Motherboard) part).getChipset());
+					tvs[9][0].setText("Compatible Ethernet Types: ");
+					str = "";
+					for(String s : ((Motherboard) part).getIncEthernetSupp()){
+						str += s + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[9][1].setText(str);
 
-					tvs[9][0].setText("Chipset: ");
-					tvs[9][1].setText(((Motherboard) part).getChipset());
+					tvs[10][0].setText("Included GPU: ");
+					tvs[10][1].setText(((Motherboard) part).getIncVideo());
 
-					tvs[10][0].setText("Chipset: ");
-					tvs[10][1].setText(((Motherboard) part).getChipset());
+					tvs[11][0].setText("PCI Slot List: ");
+					str = "";
+					for(CountedString cstr : ((Motherboard) part).getPciSlotList()){
+						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[11][1].setText(str);
 
-					tvs[11][0].setText("Chipset: ");
-					tvs[11][1].setText(((Motherboard) part).getChipset());
+					tvs[12][0].setText("Has RAID?: ");
+					if (((Motherboard) part).isHasRAID()) {
+						tvs[12][1].setText("Yes");
+					} else {
+						tvs[12][1].setText("No");
+					}
 
+					tvs[13][0].setText("SATA 6GB/s Count: ");
+					tvs[13][1].setText(String.valueOf(((Motherboard) part).getSata6gbpsCount()));
+
+					tvs[14][0].setText("Gen 2 USB Count: ");
+					tvs[14][1].setText(String.valueOf(((Motherboard) part).getGen2USBCount()));
+
+					tvs[15][0].setText("Gen 3.2 USB Count: ");
+					str = "";
+					for(CountedString cstr : ((Motherboard) part).getGen32USBcount()){
+						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[15][1].setText(str);
+
+					tvs[16][0].setText("Wireless Type: ");
+					tvs[16][1].setText(((Motherboard) part).getWireless());
+
+					for (int i = 17; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
+					break;
+
+				case "Memory":
+					// ((Memory) part).
+
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name.setText(part.getName());
+
+					tvs[0][0].setText("Manufacturer:");
+					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Can error-correct?:");
+					if (((Memory) part).getHasECC()) {
+						tvs[1][1].setText("Yes");
+					} else {
+						tvs[1][1].setText("No");
+					}
+
+					tvs[2][0].setText("CAS Latency:");
+					tvs[2][1].setText(((Memory) part).getLatencyCAS() + " cycles");
+
+					tvs[3][0].setText("DDR Generation:");
+					tvs[3][1].setText(String.valueOf(((Memory) part).getDdrGen()));
+
+					tvs[4][0].setText("First Word Latency");
+					tvs[4][1].setText(((Memory) part).getFirstWordLatency() + " ns");
+
+					tvs[5][0].setText("Form Factor");
+					tvs[5][1].setText(((Memory) part).getFormFactor());
+
+					tvs[6][0].setText("Has a Heat Spreader?:");
+					if (((Memory) part).getHeatSpreader()) {
+						tvs[6][1].setText("Yes");
+					} else {
+						tvs[6][1].setText("No");
+					}
+
+					tvs[7][0].setText("Module Size:");
+					tvs[7][1].setText(((Memory) part).getModuleSize() + " GB");
+
+					tvs[8][0].setText("Module Count:");
+					tvs[8][1].setText(String.valueOf(((Memory) part).getModuleCount()));
+
+					tvs[9][0].setText("RAM Speed:");
+					tvs[9][1].setText(((Memory) part).getModuleSize() + " MHz");
+
+					tvs[10][0].setText("Timing:");
+					tvs[10][1].setText(((Memory) part).getTiming());
+
+					tvs[11][0].setText("Voltage:");
+					tvs[11][1].setText(String.valueOf(((Memory) part).getVoltage()));
+					if(tvs[11][1].getText().equals("null")){
+						tvs[11][1].setText("N/A");
+					}
+
+					for (int i = 12; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
 
 					break;
 
@@ -480,6 +585,36 @@ public class PartsFragment extends Fragment {
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Type:");
+					tvs[1][1].setText(((Storage) part).getType());
+
+					tvs[2][0].setText("Form Factor:");
+					tvs[2][1].setText(((Storage) part).getFormFactor());
+
+					tvs[3][0].setText("Cache Size:");
+					tvs[3][1].setText(((Storage) part).getCacheSizeMB() + " MB");
+
+					tvs[4][0].setText("Capacity:");
+					tvs[4][1].setText(((Storage) part).getCapacity());
+
+					tvs[5][0].setText("SATA Interface:");
+					tvs[5][1].setText(((Storage) part).getSataInterface());
+
+					tvs[6][0].setText("Has NVM Express?:");
+					if (((Storage) part).getNvme()) {
+						tvs[6][1].setText("Yes");
+					} else {
+						tvs[6][1].setText("No");
+					}
+
+					tvs[7][0].setText("RPM:");
+					tvs[7][1].setText(((Storage) part).getRpm() + " rpm");
+					if(tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
+
+					tvs[8][0].setText("Capacity:");
+					tvs[8][1].setText(((Storage) part).getCapacity());
+
 					break;
 
 				case "GPU":
@@ -521,12 +656,6 @@ public class PartsFragment extends Fragment {
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 					break;
-			}
-
-			// for loop for removing whitespace below everything
-			for (int i = part.getParamCount(); i < tvs.length; i++) {
-				tvs[i][0].setVisibility(GONE);
-				tvs[i][1].setVisibility(GONE);
 			}
 
 			dialogBuilder.setView(infoPopUp);

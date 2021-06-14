@@ -6,7 +6,7 @@ import android.os.Parcelable.Creator
 
 class CountedString : Parcelable {
 	var name: String?
-	private var amount: Int
+	var amount: Int
 
 	constructor(name: String?, amount: Int) {
 		this.name = name
@@ -47,4 +47,6 @@ class CountedString : Parcelable {
 			override fun newArray(size: Int): Array<CountedString?> = arrayOfNulls(size)
 		}
 	}
+
+
 }

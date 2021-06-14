@@ -6,8 +6,8 @@
 	<string name="nav_header_subtitle">The premier PC building app</string>
 	<string name="nav_header_desc">BuildMyPC Logo</string>
 	<string name="action_settings">Settings</string>
-	<string name="menu_home">Home</string>
-	<string name="menu_gallery">Gallery</string>
+	<string name="menu_home">Build</string>
+	<string name="menu_gallery">Parts</string>
 	<string name="menu_newsfeed">Newsfeed</string>
 	<string name="newsfeed_article_image">Newsfeed Article Image</string>
 	<!-- TODO: Remove or change this placeholder text -->
