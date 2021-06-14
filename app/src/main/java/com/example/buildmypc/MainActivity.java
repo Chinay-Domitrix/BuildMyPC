@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.example.buildmypc.databinding.ActivityMainBinding;
 import com.example.buildmypc.ui.parts.parts.Part;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Part>> psus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> oss = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
-	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
+	public static final AtomicReference<StorageReference> storageReference = new AtomicReference<>(FirebaseStorage.getInstance().getReference());
 	private AppBarConfiguration mAppBarConfiguration;
-	FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 							}
 						},
 						Throwable::printStackTrace));*/
-				new PartsAsync(this).execute();
+				new PartsAsync(this).run();
 			} else try {
 				parts.set(new JSONObject(getString(parts_list)));
 				d("PARSER", "resulted in using the file");
