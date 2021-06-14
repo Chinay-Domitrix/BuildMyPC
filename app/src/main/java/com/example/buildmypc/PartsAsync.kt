@@ -1,8 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.buildmypc
 
 import android.Manifest.permission.INTERNET
-import android.app.Activity
-import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.AsyncTask
 import com.example.buildmypc.MainActivity.parts
@@ -11,10 +11,10 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.net.URL
 
-class PartsAsync(private val context: Context) : AsyncTask<Void, Void, String>() {
+class PartsAsync(private val mainActivity: MainActivity) : AsyncTask<Void, Void, String>() {
 	override fun onPreExecute() {
 		super.onPreExecute()
-		if (context.checkSelfPermission(INTERNET) != PERMISSION_GRANTED) (context as Activity).requestPermissions(
+		if (mainActivity.checkSelfPermission(INTERNET) != PERMISSION_GRANTED) mainActivity.requestPermissions(
 			arrayOf(INTERNET),
 			0
 		)
@@ -22,7 +22,7 @@ class PartsAsync(private val context: Context) : AsyncTask<Void, Void, String>()
 
 	override fun doInBackground(vararg strings: Void) =
 		URL(
-			"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + context.getString(
+			"https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + mainActivity.getString(
 				firebase_key
 			)
 		).readText()
