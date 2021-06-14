@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,16 +21,36 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.parts.parts.*;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Case;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.CountedString;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Monitor;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.OS;
+import com.example.buildmypc.ui.parts.parts.PSU;
+import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import static android.view.LayoutInflater.from;
-import static android.view.View.GONE;
-import static android.view.View.OnClickListener;
-import static com.example.buildmypc.MainActivity.*;
+import static android.view.View.*;
+import static com.example.buildmypc.MainActivity.coolers;
+import static com.example.buildmypc.MainActivity.cpus;
+import static com.example.buildmypc.MainActivity.gpus;
+import static com.example.buildmypc.MainActivity.memory;
+import static com.example.buildmypc.MainActivity.monitors;
+import static com.example.buildmypc.MainActivity.motherboards;
+import static com.example.buildmypc.MainActivity.oss;
+import static com.example.buildmypc.MainActivity.pcCases;
+import static com.example.buildmypc.MainActivity.psus;
+import static com.example.buildmypc.MainActivity.storage;
 import static com.example.buildmypc.R.id.partsList_addButton;
 import static com.example.buildmypc.R.id.partsList_nameTextView;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
@@ -380,21 +401,22 @@ public class PartsFragment extends Fragment {
 					tvs[3][1].setText(((Cooler) part).getHeight() + " mm");
 
 					tvs[4][0].setText("Noise Level: ");
-					tvs[4][1].setText(((Cooler) part).getNoiseLevel() + " dB");
+					tvs[4][1].setText(((Cooler) part).getNoiseLevel() +  " dB");
 
 					tvs[5][0].setText("Supported Sockets: \n");
 					// build the string of all of the supported sockets
 					String str = "";
-					for (String s : ((Cooler) part).getSocketSupport()) {
-						str += s + "\n";
+					for(String s : ((Cooler) part).getSocketSupport()){
+						str += s +"\n";
 					}
 					str.substring(str.length() - 2);
 					tvs[5][1].setText(str);
 
-					if (!((Cooler) part).isFanless()) {
+					if(!((Cooler) part).isFanless()){
 						tvs[6][0].setText("Fan RPM:");
 						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
-					} else {
+					}
+					else {
 						tvs[6][0].setVisibility(GONE);
 						tvs[6][1].setVisibility(GONE);
 					}
@@ -429,7 +451,7 @@ public class PartsFragment extends Fragment {
 					// TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
 					str = "";
-					for (String s : ((Motherboard) part).getM2slots()) {
+					for(String s : ((Motherboard) part).getM2slots()){
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -443,7 +465,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[7][0].setText("Compatible Memory Types: ");
 					str = "";
-					for (String s : ((Motherboard) part).getCompatibleMem()) {
+					for(String s : ((Motherboard) part).getCompatibleMem()){
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -454,7 +476,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[9][0].setText("Compatible Ethernet Types: ");
 					str = "";
-					for (String s : ((Motherboard) part).getIncEthernetSupp()) {
+					for(String s : ((Motherboard) part).getIncEthernetSupp()){
 						str += s + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -465,7 +487,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("PCI Slot List: ");
 					str = "";
-					for (CountedString cstr : ((Motherboard) part).getPciSlotList()) {
+					for(CountedString cstr : ((Motherboard) part).getPciSlotList()){
 						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -486,7 +508,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
 					str = "";
-					for (CountedString cstr : ((Motherboard) part).getGen32USBcount()) {
+					for(CountedString cstr : ((Motherboard) part).getGen32USBcount()){
 						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
 					}
 					str.substring(str.length() - 2);
@@ -551,7 +573,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("Voltage:");
 					tvs[11][1].setText(String.valueOf(((Memory) part).getVoltage()));
-					if (tvs[11][1].getText().equals("null")) {
+					if(tvs[11][1].getText().equals("null")){
 						tvs[11][1].setText("N/A");
 					}
 
@@ -593,7 +615,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[7][0].setText("RPM:");
 					tvs[7][1].setText(((Storage) part).getRpm() + " rpm");
-					if (tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
+					if(tvs[7][1].getText().equals("null")) tvs[7][1].setText("N/A");
 
 					tvs[8][0].setText("Capacity:");
 					tvs[8][1].setText(((Storage) part).getCapacity());
@@ -613,46 +635,134 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Core Clock Speed:");
-					tvs[1][1].setText(((GPU) part).getCoreClockSpeed() + " MHz");
+					tvs[1][1].setText(((GPU)part).getCoreClockSpeed() + " MHz");
 
 					tvs[2][0].setText("Boost Clock Speed:");
-					tvs[2][1].setText(((GPU) part).getBoostClockSpeed() + " MHz");
+					tvs[2][1].setText(((GPU)part).getBoostClockSpeed() + " MHz");
 
 					tvs[3][0].setText("Effective Memory Clock Speed:");
-					tvs[3][1].setText(((GPU) part).getEffectiveMemClockSpeed() + " MHz");
+					tvs[3][1].setText(((GPU)part).getEffectiveMemClockSpeed() + " MHz");
 
 					tvs[4][0].setText("Chipset:");
-					tvs[4][1].setText(((GPU) part).getChipset());
+					tvs[4][1].setText(((GPU)part).getChipset());
 
 					tvs[5][0].setText("Cooling:");
-					tvs[5][1].setText(((GPU) part).getCooling());
+					tvs[5][1].setText(((GPU)part).getCooling());
 
 					tvs[6][0].setText("Expansion Slot Width:");
-					tvs[6][1].setText(((GPU) part).getExpansionSlotWidth() + " cm");
+					tvs[6][1].setText(((GPU)part).getExpansionSlotWidth() + " cm");
 
 					tvs[7][0].setText("External Power:");
-					tvs[7][1].setText(((GPU) part).getExternalPower());
+					tvs[7][1].setText(((GPU)part).getExternalPower());
 
 					tvs[8][0].setText("GPU Interface:");
-					tvs[8][1].setText(((GPU) part).getFrameSync());
+					tvs[8][1].setText(((GPU)part).getFrameSync());
 
-					tvs[9][0].setText("Frame Sync:");
-					tvs[9][1].setText(((GPU) part).getFrameSync());
+					tvs[9][0].setText("Component Length:");
+					tvs[9][1].setText(((GPU)part).getLength() + " mm");
 
-					tvs[10][0].setText("Frame Sync:");
-					tvs[10][1].setText(((GPU) part).getFrameSync());
+					tvs[10][0].setText("Internal GPU Memory:");
+					tvs[10][1].setText(((GPU)part).getIntMemory() + " GB");
 
-					tvs[11][0].setText("Frame Sync:");
-					tvs[11][1].setText(((GPU) part).getFrameSync());
+					tvs[11][0].setText("Internal Memory Type:");
+					tvs[11][1].setText(((GPU)part).getIntMemoryType());
+
+					tvs[12][0].setText("Thermal Design Power:");
+					tvs[12][1].setText(((GPU)part).getTdpW() + " W");
+
+					tvs[13][0].setText("Compatible Video Ports:");
+					str = "";
+					for(CountedString cstr : ((GPU) part).getVideoPorts()){
+						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					str.substring(str.length() - 2);
+					tvs[13][1].setText(str);
+
+					for (int i = 14; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
 
 					break;
 
 				case "Case":
 					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
-					name.setText(part.getName());
+					name.setText(((Case)part).toString());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Type:");
+					tvs[1][1].setText(((Case)part).getType());
+
+					tvs[2][0].setText("Dimensions:");
+					ArrayList<String> caseListStr = ((Case)part).getDimensionsMm();
+					tvs[2][1].setText(caseListStr.get(0) + "\n" + caseListStr.get(1));
+
+					tvs[3][0].setText("Expansion Slots:");
+					String output = "";
+					for(CountedString cstr : ((Case) part).getExpansionSlots()){
+						output += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[3][1].setText(output);
+
+
+					tvs[4][0].setText("Supported Front USB Types:");
+					output = "";
+					for(String st : ((Case) part).getSupportedFrontUSBs()){
+						output += st + ",\n";
+					}
+					output.substring(output.length() - 3);
+					tvs[4][1].setText(output);
+
+					tvs[5][0].setText("Internal Drive Bays:");
+					output = "";
+					for(CountedString cstr : ((Case) part).getInternalDriveBays()){
+						output += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[5][1].setText(output);
+
+					tvs[6][0].setText("Max GPU Lengths:");
+					output = "";
+					for(String st : ((Case) part).getMaxGPULength()){
+						output += st + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[6][1].setText(output);
+
+					tvs[7][0].setText("Motherboard Form Factor:");
+					output = "";
+					for(String st : ((Case) part).getMbFormFactor()){
+						output += st + ",\n";
+					}
+					output.substring(output.length() - 3);
+					tvs[7][1].setText(output);
+
+					tvs[8][0].setText("Side Panel:");
+					tvs[8][1].setText(((Case)part).getSidePanel());
+
+					tvs[9][0].setText("Volume:");
+					output = "";
+					for(String st : ((Case) part).getVolume()){
+						output += st + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[9][1].setText(output);
+
+					tvs[10][0].setText("Has PSU Shroud?:");
+					if (((Case) part).isPsuShroud()) {
+						tvs[10][1].setText("Yes");
+					} else {
+						tvs[10][1].setText("No");
+					}
+
+					for (int i = 11; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 
 				case "PSU":
@@ -661,6 +771,42 @@ public class PartsFragment extends Fragment {
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Internal Drive Bays:");
+					output = "";
+					for(CountedString cstr : ((PSU) part).getConnectorList()){
+						output += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[1][1].setText(output);
+
+					tvs[2][0].setText("Efficiency Rating");
+					tvs[2][1].setText(((PSU) part).getEfficiencyRating());
+
+					tvs[3][0].setText("Includes a Fan?:");
+					if (((PSU) part).isHasFan()) {
+						tvs[3][1].setText("Yes");
+					} else {
+						tvs[3][1].setText("No");
+					}
+
+					tvs[4][0].setText("Form Factor:");
+					tvs[4][1].setText(((PSU) part).getFormFactor());
+
+					tvs[5][0].setText("Component Length:");
+					tvs[5][1].setText(((PSU) part).getLength() + " mm");
+
+					tvs[6][0].setText("Modular:");
+					tvs[6][1].setText(((PSU) part).getModular());
+
+					tvs[7][0].setText("Wattage:");
+					tvs[7][1].setText(((PSU) part).getWattage() + " W");
+
+					for (int i = 8; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 
 				case "OS":
@@ -669,6 +815,24 @@ public class PartsFragment extends Fragment {
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Bit Mode:");
+					tvs[1][1].setText(((OS)part).getBitMode());
+
+					tvs[2][0].setText("Max Memory Support:");
+					tvs[2][1].setText(String.valueOf(((OS)part).getMaxMemSupport()));
+
+					tvs[3][0].setText("Type:");
+					tvs[3][1].setText(((OS)part).getType());
+
+					tvs[4][0].setText("OEM or Retail:");
+					tvs[4][1].setText(((OS)part).getOem_retail());
+
+					for (int i = 5; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 
 				case "Monitor":
@@ -677,6 +841,77 @@ public class PartsFragment extends Fragment {
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Aspect Ratio:");
+					tvs[1][1].setText(((Monitor)part).getAspectRatio());
+
+					tvs[2][0].setText("Brightness:");
+					tvs[2][1].setText(((Monitor)part).getBrightness() + " cd/m^2");
+
+					tvs[3][0].setText("Is Curved?:");
+					if (((Monitor) part).isCurved()) {
+						tvs[3][1].setText("Yes");
+					} else {
+						tvs[3][1].setText("No");
+					}
+
+					tvs[4][0].setText("Frame Sync:");
+					output = "";
+					for(String st : ((Monitor) part).getFrameSync()){
+						output += st + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[4][1].setText(output);
+
+					tvs[5][0].setText("HDR Tier:");
+					tvs[5][1].setText(((Monitor)part).getHdrTier());
+					if(tvs[5][1].getText().equals("null")) tvs[5][1].setText("N/A");
+
+					tvs[6][0].setText("Has Built-in Speakers?:");
+					if (((Monitor) part).isBuiltInSpeakers()) {
+						tvs[6][1].setText("Yes");
+					} else {
+						tvs[6][1].setText("No");
+					}
+
+					tvs[7][0].setText("Compatible Monitor Interfaces:");
+					output = "";
+					for(CountedString cstr : ((Monitor) part).getMonitorInterfaces()){
+						output += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
+					output.substring(output.length() - 2);
+					tvs[1][1].setText(output);
+
+					tvs[8][0].setText("Panel Type:");
+					tvs[8][1].setText(((Monitor)part).getPanelType());
+
+					tvs[9][0].setText("Refresh Rate:");
+					tvs[9][1].setText(((Monitor)part).getRefreshRate() + " Hz");
+
+					tvs[10][0].setText("Resolution:");
+					tvs[10][1].setText(((Monitor)part).getResolution()[0] + " by" + ((Monitor)part).getResolution()[1]);
+
+					tvs[11][0].setText("PC Response Time:");
+					tvs[11][1].setText(((Monitor)part).getResponseTimeMs() + " ms");
+
+					tvs[12][0].setText("Screen Size:");
+					tvs[12][1].setText(((Monitor)part).getScreenSizeIn() + " in (diagonal)");
+
+					tvs[13][0].setText("Viewing Angle:");
+					tvs[13][1].setText(((Monitor)part).getViewingAngle());
+
+					tvs[14][0].setText("Is Widescreen?:");
+					if (((Monitor) part).isWidescreen()) {
+						tvs[14][1].setText("Yes");
+					} else {
+						tvs[14][1].setText("No");
+					}
+
+					for (int i = 14; i < tvs.length; i++) {
+						tvs[i][0].setVisibility(GONE);
+						tvs[i][1].setVisibility(GONE);
+					}
+
 					break;
 			}
 
