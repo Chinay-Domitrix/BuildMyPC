@@ -142,7 +142,7 @@ public class PartsFragment extends Fragment {
 			Builder dialogBuilder = new Builder(getContext());
 			final View infoPopUp = getLayoutInflater().inflate(popup, null);
 			TextView[][] tvs = new TextView[20][2];
-			// I don't know how to automatically do this so it's manual time
+			// I don't know how to automatically do this, so it's manual time
 			tvs[0][0] = infoPopUp.findViewById(popup_title1);
 			tvs[0][1] = infoPopUp.findViewById(popup_message1);
 			tvs[1][0] = infoPopUp.findViewById(popup_title2);
@@ -183,11 +183,9 @@ public class PartsFragment extends Fragment {
 			tvs[18][1] = infoPopUp.findViewById(popup_message19);
 			tvs[19][0] = infoPopUp.findViewById(popup_title20);
 			tvs[19][1] = infoPopUp.findViewById(popup_message20);
-			/* Automatically generate all the textviews needed
-			 *
-			 */
+//			Automatically generate all the textviews needed
 			switch (part.getClass().getSimpleName()) {
-				case "CPU": // jank setup of autogenerating textviews failed, so I just hardcoded it like a junior dev should
+				case "CPU": // Janked setup of auto-generating TextViews failed, so I, Alkiepoodlez Kurz, just hardcoded it, as any junior dev should
 //					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
 //					Log.d("PARTSFRAG", String.valueOf(part.getParamCount()));
 //						for(int i = 1; i < part.getParamCount(); i++){
