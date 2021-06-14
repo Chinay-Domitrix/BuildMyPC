@@ -3,7 +3,6 @@ package com.example.buildmypc.ui.parts;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,12 +28,13 @@ import com.example.buildmypc.ui.parts.parts.Part;
 import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.util.Log.d;
 import static android.view.LayoutInflater.from;
-import static android.view.View.*;
+import static android.view.View.GONE;
+import static android.view.View.OnClickListener;
 import static com.example.buildmypc.MainActivity.coolers;
 import static com.example.buildmypc.MainActivity.cpus;
 import static com.example.buildmypc.MainActivity.gpus;
@@ -46,8 +45,10 @@ import static com.example.buildmypc.MainActivity.oss;
 import static com.example.buildmypc.MainActivity.pcCases;
 import static com.example.buildmypc.MainActivity.psus;
 import static com.example.buildmypc.MainActivity.storage;
+import static com.example.buildmypc.R.id.*;
 import static com.example.buildmypc.R.id.partsList_addButton;
 import static com.example.buildmypc.R.id.partsList_nameTextView;
+import static com.example.buildmypc.R.layout.*;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
@@ -76,7 +77,7 @@ public class PartsFragment extends Fragment {
 		RecyclerView coolerRecycle = binding.partsCoolerRecyclerview;
 		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
 		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
-		Log.d("PARTSFRAG", coolers.get().toString());
+		d("PARTSFRAG", coolers.get().toString());
 
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
 		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
@@ -161,7 +162,7 @@ public class PartsFragment extends Fragment {
 		@Override
 		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			// where the XML is inflated
-			return new RecyclerViewHolder(from(getContext()).inflate(R.layout.parts_list, parent, false));
+			return new RecyclerViewHolder(from(getContext()).inflate(parts_list, parent, false));
 		}
 
 		@Override
@@ -176,7 +177,7 @@ public class PartsFragment extends Fragment {
 				public void onClick(View v) {
 					// this is where the pop-up window'll be
 					// debug statement to test out getSimpleName
-					Log.d("PARTSFRAG", currentPart.getClass().getSimpleName());
+					d("PARTSFRAG", currentPart.getClass().getSimpleName());
 					createNewPopupWindow(currentPart);
 				}
 			});
@@ -202,75 +203,75 @@ public class PartsFragment extends Fragment {
 
 		public void createNewPopupWindow(Part part) {
 			dialogBuilder = new AlertDialog.Builder(getContext());
-			final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
+			final View infoPopUp = getLayoutInflater().inflate(popup, null);
 			TextView[][] tvs = new TextView[20][2];
 			// I don't know how to automatically do this so it's manual time
-			tvs[0][0] = infoPopUp.findViewById(R.id.popup_title1);
-			tvs[0][1] = infoPopUp.findViewById(R.id.popup_message1);
+			tvs[0][0] = infoPopUp.findViewById(popup_title1);
+			tvs[0][1] = infoPopUp.findViewById(popup_message1);
 
-			tvs[1][0] = infoPopUp.findViewById(R.id.popup_title2);
-			tvs[1][1] = infoPopUp.findViewById(R.id.popup_message2);
+			tvs[1][0] = infoPopUp.findViewById(popup_title2);
+			tvs[1][1] = infoPopUp.findViewById(popup_message2);
 
-			tvs[2][0] = infoPopUp.findViewById(R.id.popup_title3);
-			tvs[2][1] = infoPopUp.findViewById(R.id.popup_message3);
+			tvs[2][0] = infoPopUp.findViewById(popup_title3);
+			tvs[2][1] = infoPopUp.findViewById(popup_message3);
 
-			tvs[3][0] = infoPopUp.findViewById(R.id.popup_title4);
-			tvs[3][1] = infoPopUp.findViewById(R.id.popup_message4);
+			tvs[3][0] = infoPopUp.findViewById(popup_title4);
+			tvs[3][1] = infoPopUp.findViewById(popup_message4);
 
-			tvs[4][0] = infoPopUp.findViewById(R.id.popup_title5);
-			tvs[4][1] = infoPopUp.findViewById(R.id.popup_message5);
+			tvs[4][0] = infoPopUp.findViewById(popup_title5);
+			tvs[4][1] = infoPopUp.findViewById(popup_message5);
 
-			tvs[5][0] = infoPopUp.findViewById(R.id.popup_title6);
-			tvs[5][1] = infoPopUp.findViewById(R.id.popup_message6);
+			tvs[5][0] = infoPopUp.findViewById(popup_title6);
+			tvs[5][1] = infoPopUp.findViewById(popup_message6);
 
-			tvs[6][0] = infoPopUp.findViewById(R.id.popup_title7);
-			tvs[6][1] = infoPopUp.findViewById(R.id.popup_message7);
+			tvs[6][0] = infoPopUp.findViewById(popup_title7);
+			tvs[6][1] = infoPopUp.findViewById(popup_message7);
 
-			tvs[7][0] = infoPopUp.findViewById(R.id.popup_title8);
-			tvs[7][1] = infoPopUp.findViewById(R.id.popup_message8);
+			tvs[7][0] = infoPopUp.findViewById(popup_title8);
+			tvs[7][1] = infoPopUp.findViewById(popup_message8);
 
-			tvs[8][0] = infoPopUp.findViewById(R.id.popup_title9);
-			tvs[8][1] = infoPopUp.findViewById(R.id.popup_message9);
+			tvs[8][0] = infoPopUp.findViewById(popup_title9);
+			tvs[8][1] = infoPopUp.findViewById(popup_message9);
 
-			tvs[9][0] = infoPopUp.findViewById(R.id.popup_title10);
-			tvs[9][1] = infoPopUp.findViewById(R.id.popup_message10);
+			tvs[9][0] = infoPopUp.findViewById(popup_title10);
+			tvs[9][1] = infoPopUp.findViewById(popup_message10);
 
-			tvs[10][0] = infoPopUp.findViewById(R.id.popup_title11);
-			tvs[10][1] = infoPopUp.findViewById(R.id.popup_message11);
+			tvs[10][0] = infoPopUp.findViewById(popup_title11);
+			tvs[10][1] = infoPopUp.findViewById(popup_message11);
 
-			tvs[11][0] = infoPopUp.findViewById(R.id.popup_title12);
-			tvs[11][1] = infoPopUp.findViewById(R.id.popup_message12);
+			tvs[11][0] = infoPopUp.findViewById(popup_title12);
+			tvs[11][1] = infoPopUp.findViewById(popup_message12);
 
-			tvs[12][0] = infoPopUp.findViewById(R.id.popup_title13);
-			tvs[12][1] = infoPopUp.findViewById(R.id.popup_message13);
+			tvs[12][0] = infoPopUp.findViewById(popup_title13);
+			tvs[12][1] = infoPopUp.findViewById(popup_message13);
 
-			tvs[13][0] = infoPopUp.findViewById(R.id.popup_title14);
-			tvs[13][1] = infoPopUp.findViewById(R.id.popup_message14);
+			tvs[13][0] = infoPopUp.findViewById(popup_title14);
+			tvs[13][1] = infoPopUp.findViewById(popup_message14);
 
-			tvs[14][0] = infoPopUp.findViewById(R.id.popup_title15);
-			tvs[14][1] = infoPopUp.findViewById(R.id.popup_message15);
+			tvs[14][0] = infoPopUp.findViewById(popup_title15);
+			tvs[14][1] = infoPopUp.findViewById(popup_message15);
 
-			tvs[15][0] = infoPopUp.findViewById(R.id.popup_title16);
-			tvs[15][1] = infoPopUp.findViewById(R.id.popup_message16);
+			tvs[15][0] = infoPopUp.findViewById(popup_title16);
+			tvs[15][1] = infoPopUp.findViewById(popup_message16);
 
-			tvs[16][0] = infoPopUp.findViewById(R.id.popup_title17);
-			tvs[16][1] = infoPopUp.findViewById(R.id.popup_message17);
+			tvs[16][0] = infoPopUp.findViewById(popup_title17);
+			tvs[16][1] = infoPopUp.findViewById(popup_message17);
 
-			tvs[17][0] = infoPopUp.findViewById(R.id.popup_title18);
-			tvs[17][1] = infoPopUp.findViewById(R.id.popup_message18);
+			tvs[17][0] = infoPopUp.findViewById(popup_title18);
+			tvs[17][1] = infoPopUp.findViewById(popup_message18);
 
-			tvs[18][0] = infoPopUp.findViewById(R.id.popup_title19);
-			tvs[18][1] = infoPopUp.findViewById(R.id.popup_message19);
+			tvs[18][0] = infoPopUp.findViewById(popup_title19);
+			tvs[18][1] = infoPopUp.findViewById(popup_message19);
 
-			tvs[19][0] = infoPopUp.findViewById(R.id.popup_title20);
-			tvs[19][1] = infoPopUp.findViewById(R.id.popup_message20);
+			tvs[19][0] = infoPopUp.findViewById(popup_title20);
+			tvs[19][1] = infoPopUp.findViewById(popup_message20);
 
 			/* Automatically generate all the textviews needed
 			 *
 			 */
 
 			ArrayList<LinearLayout> linearLayouts = new ArrayList<>();
-			ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
+			ConstraintLayout baseLayout = infoPopUp.findViewById(popup_constraintLayout);
 			switch (part.getClass().getSimpleName()) {
 				case "CPU": // jank setup of autogenerating textviews failed, so I just hardcoded it like a junior dev should
 //					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
@@ -306,7 +307,7 @@ public class PartsFragment extends Fragment {
 //							// adding the LinearLayout to the bunch
 //							linearLayouts.add(currentLinearLayout);
 //						}
-					TextView name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					TextView name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -372,7 +373,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Cooler":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -424,7 +425,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Motherboard":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -522,7 +523,7 @@ public class PartsFragment extends Fragment {
 				case "Memory":
 					// ((Memory) part).
 
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -580,7 +581,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Storage":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -623,7 +624,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "GPU":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -631,7 +632,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Case":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -639,7 +640,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "PSU":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -647,7 +648,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "OS":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -655,7 +656,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Monitor":
-					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
