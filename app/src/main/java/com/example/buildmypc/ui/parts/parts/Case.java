@@ -31,7 +31,7 @@ public class Case extends Part implements Parcelable {
 	private ArrayList<String> supportedFrontUSBs;
 	private ArrayList<CountedString> internalDriveBays;
 	private ArrayList<String> maxGPULength;
-	private ArrayList<String> mbFormFactor;
+	private ArrayList<String> mbFormFactor; // motherboard form factor
 	private String sidePanel;
 	private String type;
 	private ArrayList<String> volume; // in liters because screw bri'ish units
