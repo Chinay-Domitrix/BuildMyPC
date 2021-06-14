@@ -17,15 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
-import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.parts.parts.CPU;
-import com.example.buildmypc.ui.parts.parts.Cooler;
-import com.example.buildmypc.ui.parts.parts.CountedString;
-import com.example.buildmypc.ui.parts.parts.Memory;
-import com.example.buildmypc.ui.parts.parts.Motherboard;
-import com.example.buildmypc.ui.parts.parts.Part;
-import com.example.buildmypc.ui.parts.parts.Storage;
+import com.example.buildmypc.ui.parts.parts.*;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,20 +28,10 @@ import static android.util.Log.d;
 import static android.view.LayoutInflater.from;
 import static android.view.View.GONE;
 import static android.view.View.OnClickListener;
-import static com.example.buildmypc.MainActivity.coolers;
-import static com.example.buildmypc.MainActivity.cpus;
-import static com.example.buildmypc.MainActivity.gpus;
-import static com.example.buildmypc.MainActivity.memory;
-import static com.example.buildmypc.MainActivity.monitors;
-import static com.example.buildmypc.MainActivity.motherboards;
-import static com.example.buildmypc.MainActivity.oss;
-import static com.example.buildmypc.MainActivity.pcCases;
-import static com.example.buildmypc.MainActivity.psus;
-import static com.example.buildmypc.MainActivity.storage;
+import static com.example.buildmypc.MainActivity.*;
 import static com.example.buildmypc.R.id.*;
-import static com.example.buildmypc.R.id.partsList_addButton;
-import static com.example.buildmypc.R.id.partsList_nameTextView;
-import static com.example.buildmypc.R.layout.*;
+import static com.example.buildmypc.R.layout.parts_list;
+import static com.example.buildmypc.R.layout.popup;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
@@ -335,35 +318,19 @@ public class PartsFragment extends Fragment {
 					tvs[7][1].setText(((CPU) part).getSocket());
 
 					tvs[8][0].setText("Has Integrated GPU?: ");
-					if (((CPU) part).isiGPU()) {
-						tvs[8][1].setText("Yes");
-					} else {
-						tvs[8][1].setText("No");
-					}
+					tvs[8][1].setText(((CPU) part).isiGPU() ? "Yes" : "No");
 
 					tvs[9][0].setText("Max Supported Memory: ");
 					tvs[9][1].setText(((CPU) part).getMaxMemory() + " GB");
 
 					tvs[10][0].setText("Can error-correct?: ");
-					if (((CPU) part).isEcc()) {
-						tvs[10][1].setText("Yes");
-					} else {
-						tvs[10][1].setText("No");
-					}
+					tvs[10][1].setText(((CPU) part).isEcc() ? "Yes" : "No");
 
 					tvs[11][0].setText("Has an internal cooler?: ");
-					if (((CPU) part).isCooler()) {
-						tvs[11][1].setText("Yes");
-					} else {
-						tvs[11][1].setText("No");
-					}
+					tvs[11][1].setText(((CPU) part).isCooler() ? "Yes" : "No");
 
 					tvs[12][0].setText("Has s.\"multithreading\"?: ");
-					if (((CPU) part).isSmt()) {
-						tvs[12][1].setText("Yes");
-					} else {
-						tvs[12][1].setText("No");
-					}
+					tvs[12][1].setText(((CPU) part).isSmt() ? "Yes" : "No");
 
 					for (int i = 13; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
@@ -380,39 +347,28 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Watercooled or Fan?: ");
-					if (((Cooler) part).isWaterCooled()) {
-						tvs[1][1].setText("Watercooled");
-					} else {
-						tvs[1][1].setText("Fan");
-					}
+					tvs[1][1].setText(((Cooler) part).isWaterCooled() ? "Watercooled" : "Fan");
 
 					tvs[2][0].setText("Includes Fan: ");
-					if (((Cooler) part).isFanless()) {
-						tvs[2][1].setText("Yes");
-					} else {
-						tvs[2][1].setText("No");
-					}
+					tvs[2][1].setText(((Cooler) part).isFanless() ? "Yes" : "No");
 
 					tvs[3][0].setText("Height: ");
 					tvs[3][1].setText(((Cooler) part).getHeight() + " mm");
 
 					tvs[4][0].setText("Noise Level: ");
-					tvs[4][1].setText(((Cooler) part).getNoiseLevel() +  " dB");
+					tvs[4][1].setText(((Cooler) part).getNoiseLevel() + " dB");
 
 					tvs[5][0].setText("Supported Sockets: \n");
 					// build the string of all of the supported sockets
-					String str = "";
-					for(String s : ((Cooler) part).getSocketSupport()){
-						str += s +"\n";
-					}
+					StringBuilder str = new StringBuilder();
+					for (String s : ((Cooler) part).getSocketSupport()) str.append(s).append("\n");
 					str.substring(str.length() - 2);
-					tvs[5][1].setText(str);
+					tvs[5][1].setText(str.toString());
 
-					if(!((Cooler) part).isFanless()){
+					if (!((Cooler) part).isFanless()) {
 						tvs[6][0].setText("Fan RPM:");
 						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
-					}
-					else {
+					} else {
 						tvs[6][0].setVisibility(GONE);
 						tvs[6][1].setVisibility(GONE);
 					}
@@ -432,11 +388,7 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Can error-correct?: ");
-					if (((Motherboard) part).isEcc()) {
-						tvs[1][1].setText("Yes");
-					} else {
-						tvs[1][1].setText("No");
-					}
+					tvs[1][1].setText(((Motherboard) part).isEcc() ? "Yes" : "No");
 
 					tvs[2][0].setText("Chipset");
 					tvs[2][1].setText(((Motherboard) part).getChipset());
@@ -446,12 +398,10 @@ public class PartsFragment extends Fragment {
 
 					// TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
-					str = "";
-					for(String s : ((Motherboard) part).getM2slots()){
-						str += s + "\n";
-					}
+					str = new StringBuilder();
+					for (String s : ((Motherboard) part).getM2slots()) str.append(s).append("\n");
 					str.substring(str.length() - 2);
-					tvs[4][1].setText(str);
+					tvs[4][1].setText(str.toString());
 
 					tvs[5][0].setText("Max Supported Memory:");
 					tvs[5][1].setText(((Motherboard) part).getMaxMemSupport() + " GB");
@@ -460,41 +410,34 @@ public class PartsFragment extends Fragment {
 					tvs[6][1].setText(String.valueOf(((Motherboard) part).getMemSlots()));
 
 					tvs[7][0].setText("Compatible Memory Types: ");
-					str = "";
-					for(String s : ((Motherboard) part).getCompatibleMem()){
-						str += s + "\n";
-					}
+					str = new StringBuilder();
+					for (String s : ((Motherboard) part).getCompatibleMem())
+						str.append(s).append("\n");
 					str.substring(str.length() - 2);
-					tvs[7][1].setText(str);
+					tvs[7][1].setText(str.toString());
 
 					tvs[8][0].setText("mSATA Slot Count:");
 					tvs[8][1].setText(String.valueOf(((Motherboard) part).getmSATA_slotCount()));
 
 					tvs[9][0].setText("Compatible Ethernet Types: ");
-					str = "";
-					for(String s : ((Motherboard) part).getIncEthernetSupp()){
-						str += s + "\n";
-					}
+					str = new StringBuilder();
+					for (String s : ((Motherboard) part).getIncEthernetSupp())
+						str.append(s).append("\n");
 					str.substring(str.length() - 2);
-					tvs[9][1].setText(str);
+					tvs[9][1].setText(str.toString());
 
 					tvs[10][0].setText("Included GPU: ");
 					tvs[10][1].setText(((Motherboard) part).getIncVideo());
 
 					tvs[11][0].setText("PCI Slot List: ");
-					str = "";
-					for(CountedString cstr : ((Motherboard) part).getPciSlotList()){
-						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
-					}
+					str = new StringBuilder();
+					for (CountedString cstr : ((Motherboard) part).getPciSlotList())
+						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
 					str.substring(str.length() - 2);
-					tvs[11][1].setText(str);
+					tvs[11][1].setText(str.toString());
 
 					tvs[12][0].setText("Has RAID?: ");
-					if (((Motherboard) part).isHasRAID()) {
-						tvs[12][1].setText("Yes");
-					} else {
-						tvs[12][1].setText("No");
-					}
+					tvs[12][1].setText(((Motherboard) part).isHasRAID() ? "Yes" : "No");
 
 					tvs[13][0].setText("SATA 6GB/s Count: ");
 					tvs[13][1].setText(String.valueOf(((Motherboard) part).getSata6gbpsCount()));
@@ -503,12 +446,11 @@ public class PartsFragment extends Fragment {
 					tvs[14][1].setText(String.valueOf(((Motherboard) part).getGen2USBCount()));
 
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
-					str = "";
-					for(CountedString cstr : ((Motherboard) part).getGen32USBcount()){
-						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
-					}
+					str = new StringBuilder();
+					for (CountedString cstr : ((Motherboard) part).getGen32USBcount())
+						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
 					str.substring(str.length() - 2);
-					tvs[15][1].setText(str);
+					tvs[15][1].setText(str.toString());
 
 					tvs[16][0].setText("Wireless Type: ");
 					tvs[16][1].setText(((Motherboard) part).getWireless());
@@ -530,11 +472,7 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Can error-correct?:");
-					if (((Memory) part).getHasECC()) {
-						tvs[1][1].setText("Yes");
-					} else {
-						tvs[1][1].setText("No");
-					}
+					tvs[1][1].setText(((Memory) part).getHasECC() ? "Yes" : "No");
 
 					tvs[2][0].setText("CAS Latency:");
 					tvs[2][1].setText(((Memory) part).getLatencyCAS() + " cycles");
@@ -549,11 +487,7 @@ public class PartsFragment extends Fragment {
 					tvs[5][1].setText(((Memory) part).getFormFactor());
 
 					tvs[6][0].setText("Has a Heat Spreader?:");
-					if (((Memory) part).getHeatSpreader()) {
-						tvs[6][1].setText("Yes");
-					} else {
-						tvs[6][1].setText("No");
-					}
+					tvs[6][1].setText(((Memory) part).getHeatSpreader() ? "Yes" : "No");
 
 					tvs[7][0].setText("Module Size:");
 					tvs[7][1].setText(((Memory) part).getModuleSize() + " GB");
@@ -569,9 +503,7 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("Voltage:");
 					tvs[11][1].setText(String.valueOf(((Memory) part).getVoltage()));
-					if(tvs[11][1].getText().equals("null")){
-						tvs[11][1].setText("N/A");
-					}
+					if (tvs[11][1].getText().equals("null")) tvs[11][1].setText("N/A");
 
 					for (int i = 12; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
@@ -603,15 +535,11 @@ public class PartsFragment extends Fragment {
 					tvs[5][1].setText(((Storage) part).getSataInterface());
 
 					tvs[6][0].setText("Has NVM Express?:");
-					if (((Storage) part).getNvme()) {
-						tvs[6][1].setText("Yes");
-					} else {
-						tvs[6][1].setText("No");
-					}
+					tvs[6][1].setText(((Storage) part).getNvme() ? "Yes" : "No");
 
 					tvs[7][0].setText("RPM:");
 					tvs[7][1].setText(((Storage) part).getRpm() + " rpm");
-					if(tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
+					if (tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
 
 					tvs[8][0].setText("Capacity:");
 					tvs[8][1].setText(((Storage) part).getCapacity());
@@ -662,6 +590,8 @@ public class PartsFragment extends Fragment {
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + part.getClass().getSimpleName());
 			}
 
 			dialogBuilder.setView(infoPopUp);
