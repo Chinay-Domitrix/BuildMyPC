@@ -6,16 +6,16 @@ import android.os.Parcelable.Creator
 import org.jetbrains.annotations.Contract
 
 class Storage : Part, Parcelable {
-	private var formFactor: String? = null
-	private var cacheSizeMB // in mb
+	var formFactor: String? = null
+	var cacheSizeMB // in mb
 			= 0
-	private var capacity // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
+	var capacity // in MB -> 2TB is 2000, 1.5TB is 1500, 512 GB is 512
 			: String? = null
-	private var sataInterface // which SATA does this part connect to
+	var sataInterface // which SATA does this part connect to
 			: String? = null
 	var nvme // NMVe, or non-volatile memory express
 			= false
-	private var rpm // only applies for HDDs
+	var rpm // only applies for HDDs
 			= 0
 	var type // either HDD or SSD
 			: String? = null
