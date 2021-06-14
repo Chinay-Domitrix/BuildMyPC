@@ -1,9 +1,8 @@
-package com.example.buildmypc.ui.parts.partsimport
+package com.example.buildmypc.ui.parts.parts
 
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
-import com.example.buildmypc.ui.parts.parts.Part
 import org.jetbrains.annotations.Contract
 
 class Storage : Part, Parcelable {
