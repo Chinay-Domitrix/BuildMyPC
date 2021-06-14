@@ -29,9 +29,7 @@ class PartsAsync(private val mainActivity: MainActivity) {
 					.await()
 				withContext(Main) { parts.set(JSONObject(File("part_data.json").readText())) }
 			} catch (e: Exception) {
-				withContext(Main) {
-					makeText(mainActivity, e.message, LENGTH_LONG).show()
-				}
+				withContext(Main) { makeText(mainActivity, e.message, LENGTH_LONG).show() }
 			}
 		}
 	}
