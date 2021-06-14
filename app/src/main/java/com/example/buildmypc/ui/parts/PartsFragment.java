@@ -3,6 +3,7 @@ package com.example.buildmypc.ui.parts;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +13,42 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
+import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentPartsBinding;
-import com.example.buildmypc.ui.parts.parts.*;
+import com.example.buildmypc.ui.parts.parts.CPU;
+import com.example.buildmypc.ui.parts.parts.Cooler;
+import com.example.buildmypc.ui.parts.parts.CountedString;
+import com.example.buildmypc.ui.parts.parts.GPU;
+import com.example.buildmypc.ui.parts.parts.Memory;
+import com.example.buildmypc.ui.parts.parts.Motherboard;
+import com.example.buildmypc.ui.parts.parts.Part;
+import com.example.buildmypc.ui.parts.parts.Storage;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-import static android.util.Log.d;
 import static android.view.LayoutInflater.from;
-import static android.view.View.GONE;
-import static android.view.View.OnClickListener;
-import static com.example.buildmypc.MainActivity.*;
-import static com.example.buildmypc.R.id.*;
-import static com.example.buildmypc.R.layout.parts_list;
-import static com.example.buildmypc.R.layout.popup;
+import static android.view.View.*;
+import static com.example.buildmypc.MainActivity.coolers;
+import static com.example.buildmypc.MainActivity.cpus;
+import static com.example.buildmypc.MainActivity.gpus;
+import static com.example.buildmypc.MainActivity.memory;
+import static com.example.buildmypc.MainActivity.monitors;
+import static com.example.buildmypc.MainActivity.motherboards;
+import static com.example.buildmypc.MainActivity.oss;
+import static com.example.buildmypc.MainActivity.pcCases;
+import static com.example.buildmypc.MainActivity.psus;
+import static com.example.buildmypc.MainActivity.storage;
+import static com.example.buildmypc.R.id.partsList_addButton;
+import static com.example.buildmypc.R.id.partsList_nameTextView;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 
 public class PartsFragment extends Fragment {
@@ -60,7 +77,7 @@ public class PartsFragment extends Fragment {
 		RecyclerView coolerRecycle = binding.partsCoolerRecyclerview;
 		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
 		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
-		d("PARTSFRAG", coolers.get().toString());
+		Log.d("PARTSFRAG", coolers.get().toString());
 
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
 		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
@@ -145,7 +162,7 @@ public class PartsFragment extends Fragment {
 		@Override
 		public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 			// where the XML is inflated
-			return new RecyclerViewHolder(from(getContext()).inflate(parts_list, parent, false));
+			return new RecyclerViewHolder(from(getContext()).inflate(R.layout.parts_list, parent, false));
 		}
 
 		@Override
@@ -160,7 +177,7 @@ public class PartsFragment extends Fragment {
 				public void onClick(View v) {
 					// this is where the pop-up window'll be
 					// debug statement to test out getSimpleName
-					d("PARTSFRAG", currentPart.getClass().getSimpleName());
+					Log.d("PARTSFRAG", currentPart.getClass().getSimpleName());
 					createNewPopupWindow(currentPart);
 				}
 			});
@@ -186,75 +203,75 @@ public class PartsFragment extends Fragment {
 
 		public void createNewPopupWindow(Part part) {
 			dialogBuilder = new AlertDialog.Builder(getContext());
-			final View infoPopUp = getLayoutInflater().inflate(popup, null);
+			final View infoPopUp = getLayoutInflater().inflate(R.layout.popup, null);
 			TextView[][] tvs = new TextView[20][2];
 			// I don't know how to automatically do this so it's manual time
-			tvs[0][0] = infoPopUp.findViewById(popup_title1);
-			tvs[0][1] = infoPopUp.findViewById(popup_message1);
+			tvs[0][0] = infoPopUp.findViewById(R.id.popup_title1);
+			tvs[0][1] = infoPopUp.findViewById(R.id.popup_message1);
 
-			tvs[1][0] = infoPopUp.findViewById(popup_title2);
-			tvs[1][1] = infoPopUp.findViewById(popup_message2);
+			tvs[1][0] = infoPopUp.findViewById(R.id.popup_title2);
+			tvs[1][1] = infoPopUp.findViewById(R.id.popup_message2);
 
-			tvs[2][0] = infoPopUp.findViewById(popup_title3);
-			tvs[2][1] = infoPopUp.findViewById(popup_message3);
+			tvs[2][0] = infoPopUp.findViewById(R.id.popup_title3);
+			tvs[2][1] = infoPopUp.findViewById(R.id.popup_message3);
 
-			tvs[3][0] = infoPopUp.findViewById(popup_title4);
-			tvs[3][1] = infoPopUp.findViewById(popup_message4);
+			tvs[3][0] = infoPopUp.findViewById(R.id.popup_title4);
+			tvs[3][1] = infoPopUp.findViewById(R.id.popup_message4);
 
-			tvs[4][0] = infoPopUp.findViewById(popup_title5);
-			tvs[4][1] = infoPopUp.findViewById(popup_message5);
+			tvs[4][0] = infoPopUp.findViewById(R.id.popup_title5);
+			tvs[4][1] = infoPopUp.findViewById(R.id.popup_message5);
 
-			tvs[5][0] = infoPopUp.findViewById(popup_title6);
-			tvs[5][1] = infoPopUp.findViewById(popup_message6);
+			tvs[5][0] = infoPopUp.findViewById(R.id.popup_title6);
+			tvs[5][1] = infoPopUp.findViewById(R.id.popup_message6);
 
-			tvs[6][0] = infoPopUp.findViewById(popup_title7);
-			tvs[6][1] = infoPopUp.findViewById(popup_message7);
+			tvs[6][0] = infoPopUp.findViewById(R.id.popup_title7);
+			tvs[6][1] = infoPopUp.findViewById(R.id.popup_message7);
 
-			tvs[7][0] = infoPopUp.findViewById(popup_title8);
-			tvs[7][1] = infoPopUp.findViewById(popup_message8);
+			tvs[7][0] = infoPopUp.findViewById(R.id.popup_title8);
+			tvs[7][1] = infoPopUp.findViewById(R.id.popup_message8);
 
-			tvs[8][0] = infoPopUp.findViewById(popup_title9);
-			tvs[8][1] = infoPopUp.findViewById(popup_message9);
+			tvs[8][0] = infoPopUp.findViewById(R.id.popup_title9);
+			tvs[8][1] = infoPopUp.findViewById(R.id.popup_message9);
 
-			tvs[9][0] = infoPopUp.findViewById(popup_title10);
-			tvs[9][1] = infoPopUp.findViewById(popup_message10);
+			tvs[9][0] = infoPopUp.findViewById(R.id.popup_title10);
+			tvs[9][1] = infoPopUp.findViewById(R.id.popup_message10);
 
-			tvs[10][0] = infoPopUp.findViewById(popup_title11);
-			tvs[10][1] = infoPopUp.findViewById(popup_message11);
+			tvs[10][0] = infoPopUp.findViewById(R.id.popup_title11);
+			tvs[10][1] = infoPopUp.findViewById(R.id.popup_message11);
 
-			tvs[11][0] = infoPopUp.findViewById(popup_title12);
-			tvs[11][1] = infoPopUp.findViewById(popup_message12);
+			tvs[11][0] = infoPopUp.findViewById(R.id.popup_title12);
+			tvs[11][1] = infoPopUp.findViewById(R.id.popup_message12);
 
-			tvs[12][0] = infoPopUp.findViewById(popup_title13);
-			tvs[12][1] = infoPopUp.findViewById(popup_message13);
+			tvs[12][0] = infoPopUp.findViewById(R.id.popup_title13);
+			tvs[12][1] = infoPopUp.findViewById(R.id.popup_message13);
 
-			tvs[13][0] = infoPopUp.findViewById(popup_title14);
-			tvs[13][1] = infoPopUp.findViewById(popup_message14);
+			tvs[13][0] = infoPopUp.findViewById(R.id.popup_title14);
+			tvs[13][1] = infoPopUp.findViewById(R.id.popup_message14);
 
-			tvs[14][0] = infoPopUp.findViewById(popup_title15);
-			tvs[14][1] = infoPopUp.findViewById(popup_message15);
+			tvs[14][0] = infoPopUp.findViewById(R.id.popup_title15);
+			tvs[14][1] = infoPopUp.findViewById(R.id.popup_message15);
 
-			tvs[15][0] = infoPopUp.findViewById(popup_title16);
-			tvs[15][1] = infoPopUp.findViewById(popup_message16);
+			tvs[15][0] = infoPopUp.findViewById(R.id.popup_title16);
+			tvs[15][1] = infoPopUp.findViewById(R.id.popup_message16);
 
-			tvs[16][0] = infoPopUp.findViewById(popup_title17);
-			tvs[16][1] = infoPopUp.findViewById(popup_message17);
+			tvs[16][0] = infoPopUp.findViewById(R.id.popup_title17);
+			tvs[16][1] = infoPopUp.findViewById(R.id.popup_message17);
 
-			tvs[17][0] = infoPopUp.findViewById(popup_title18);
-			tvs[17][1] = infoPopUp.findViewById(popup_message18);
+			tvs[17][0] = infoPopUp.findViewById(R.id.popup_title18);
+			tvs[17][1] = infoPopUp.findViewById(R.id.popup_message18);
 
-			tvs[18][0] = infoPopUp.findViewById(popup_title19);
-			tvs[18][1] = infoPopUp.findViewById(popup_message19);
+			tvs[18][0] = infoPopUp.findViewById(R.id.popup_title19);
+			tvs[18][1] = infoPopUp.findViewById(R.id.popup_message19);
 
-			tvs[19][0] = infoPopUp.findViewById(popup_title20);
-			tvs[19][1] = infoPopUp.findViewById(popup_message20);
+			tvs[19][0] = infoPopUp.findViewById(R.id.popup_title20);
+			tvs[19][1] = infoPopUp.findViewById(R.id.popup_message20);
 
 			/* Automatically generate all the textviews needed
 			 *
 			 */
 
 			ArrayList<LinearLayout> linearLayouts = new ArrayList<>();
-			ConstraintLayout baseLayout = infoPopUp.findViewById(popup_constraintLayout);
+			ConstraintLayout baseLayout = infoPopUp.findViewById(R.id.popup_constraintLayout);
 			switch (part.getClass().getSimpleName()) {
 				case "CPU": // jank setup of autogenerating textviews failed, so I just hardcoded it like a junior dev should
 //					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
@@ -290,7 +307,7 @@ public class PartsFragment extends Fragment {
 //							// adding the LinearLayout to the bunch
 //							linearLayouts.add(currentLinearLayout);
 //						}
-					TextView name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					TextView name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -318,19 +335,35 @@ public class PartsFragment extends Fragment {
 					tvs[7][1].setText(((CPU) part).getSocket());
 
 					tvs[8][0].setText("Has Integrated GPU?: ");
-					tvs[8][1].setText(((CPU) part).isiGPU() ? "Yes" : "No");
+					if (((CPU) part).isiGPU()) {
+						tvs[8][1].setText("Yes");
+					} else {
+						tvs[8][1].setText("No");
+					}
 
 					tvs[9][0].setText("Max Supported Memory: ");
 					tvs[9][1].setText(((CPU) part).getMaxMemory() + " GB");
 
 					tvs[10][0].setText("Can error-correct?: ");
-					tvs[10][1].setText(((CPU) part).isEcc() ? "Yes" : "No");
+					if (((CPU) part).isEcc()) {
+						tvs[10][1].setText("Yes");
+					} else {
+						tvs[10][1].setText("No");
+					}
 
 					tvs[11][0].setText("Has an internal cooler?: ");
-					tvs[11][1].setText(((CPU) part).isCooler() ? "Yes" : "No");
+					if (((CPU) part).isCooler()) {
+						tvs[11][1].setText("Yes");
+					} else {
+						tvs[11][1].setText("No");
+					}
 
 					tvs[12][0].setText("Has s.\"multithreading\"?: ");
-					tvs[12][1].setText(((CPU) part).isSmt() ? "Yes" : "No");
+					if (((CPU) part).isSmt()) {
+						tvs[12][1].setText("Yes");
+					} else {
+						tvs[12][1].setText("No");
+					}
 
 					for (int i = 13; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
@@ -340,35 +373,46 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Cooler":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Watercooled or Fan?: ");
-					tvs[1][1].setText(((Cooler) part).isWaterCooled() ? "Watercooled" : "Fan");
+					if (((Cooler) part).isWaterCooled()) {
+						tvs[1][1].setText("Watercooled");
+					} else {
+						tvs[1][1].setText("Fan");
+					}
 
 					tvs[2][0].setText("Includes Fan: ");
-					tvs[2][1].setText(((Cooler) part).isFanless() ? "Yes" : "No");
+					if (((Cooler) part).isFanless()) {
+						tvs[2][1].setText("Yes");
+					} else {
+						tvs[2][1].setText("No");
+					}
 
 					tvs[3][0].setText("Height: ");
 					tvs[3][1].setText(((Cooler) part).getHeight() + " mm");
 
 					tvs[4][0].setText("Noise Level: ");
-					tvs[4][1].setText(((Cooler) part).getNoiseLevel() + " dB");
+					tvs[4][1].setText(((Cooler) part).getNoiseLevel() +  " dB");
 
 					tvs[5][0].setText("Supported Sockets: \n");
 					// build the string of all of the supported sockets
-					StringBuilder str = new StringBuilder();
-					for (String s : ((Cooler) part).getSocketSupport()) str.append(s).append("\n");
+					String str = "";
+					for(String s : ((Cooler) part).getSocketSupport()){
+						str += s +"\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[5][1].setText(str.toString());
+					tvs[5][1].setText(str);
 
-					if (!((Cooler) part).isFanless()) {
+					if(!((Cooler) part).isFanless()){
 						tvs[6][0].setText("Fan RPM:");
 						tvs[6][1].setText(((Cooler) part).getRpm() + " rpm");
-					} else {
+					}
+					else {
 						tvs[6][0].setVisibility(GONE);
 						tvs[6][1].setVisibility(GONE);
 					}
@@ -381,14 +425,18 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Motherboard":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Can error-correct?: ");
-					tvs[1][1].setText(((Motherboard) part).isEcc() ? "Yes" : "No");
+					if (((Motherboard) part).isEcc()) {
+						tvs[1][1].setText("Yes");
+					} else {
+						tvs[1][1].setText("No");
+					}
 
 					tvs[2][0].setText("Chipset");
 					tvs[2][1].setText(((Motherboard) part).getChipset());
@@ -398,10 +446,12 @@ public class PartsFragment extends Fragment {
 
 					// TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
-					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getM2slots()) str.append(s).append("\n");
+					str = "";
+					for(String s : ((Motherboard) part).getM2slots()){
+						str += s + "\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[4][1].setText(str.toString());
+					tvs[4][1].setText(str);
 
 					tvs[5][0].setText("Max Supported Memory:");
 					tvs[5][1].setText(((Motherboard) part).getMaxMemSupport() + " GB");
@@ -410,34 +460,41 @@ public class PartsFragment extends Fragment {
 					tvs[6][1].setText(String.valueOf(((Motherboard) part).getMemSlots()));
 
 					tvs[7][0].setText("Compatible Memory Types: ");
-					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getCompatibleMem())
-						str.append(s).append("\n");
+					str = "";
+					for(String s : ((Motherboard) part).getCompatibleMem()){
+						str += s + "\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[7][1].setText(str.toString());
+					tvs[7][1].setText(str);
 
 					tvs[8][0].setText("mSATA Slot Count:");
 					tvs[8][1].setText(String.valueOf(((Motherboard) part).getmSATA_slotCount()));
 
 					tvs[9][0].setText("Compatible Ethernet Types: ");
-					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getIncEthernetSupp())
-						str.append(s).append("\n");
+					str = "";
+					for(String s : ((Motherboard) part).getIncEthernetSupp()){
+						str += s + "\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[9][1].setText(str.toString());
+					tvs[9][1].setText(str);
 
 					tvs[10][0].setText("Included GPU: ");
 					tvs[10][1].setText(((Motherboard) part).getIncVideo());
 
 					tvs[11][0].setText("PCI Slot List: ");
-					str = new StringBuilder();
-					for (CountedString cstr : ((Motherboard) part).getPciSlotList())
-						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+					str = "";
+					for(CountedString cstr : ((Motherboard) part).getPciSlotList()){
+						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[11][1].setText(str.toString());
+					tvs[11][1].setText(str);
 
 					tvs[12][0].setText("Has RAID?: ");
-					tvs[12][1].setText(((Motherboard) part).isHasRAID() ? "Yes" : "No");
+					if (((Motherboard) part).isHasRAID()) {
+						tvs[12][1].setText("Yes");
+					} else {
+						tvs[12][1].setText("No");
+					}
 
 					tvs[13][0].setText("SATA 6GB/s Count: ");
 					tvs[13][1].setText(String.valueOf(((Motherboard) part).getSata6gbpsCount()));
@@ -446,11 +503,12 @@ public class PartsFragment extends Fragment {
 					tvs[14][1].setText(String.valueOf(((Motherboard) part).getGen2USBCount()));
 
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
-					str = new StringBuilder();
-					for (CountedString cstr : ((Motherboard) part).getGen32USBcount())
-						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+					str = "";
+					for(CountedString cstr : ((Motherboard) part).getGen32USBcount()){
+						str += cstr.getName() + ", " + cstr.getAmount() + "\n";
+					}
 					str.substring(str.length() - 2);
-					tvs[15][1].setText(str.toString());
+					tvs[15][1].setText(str);
 
 					tvs[16][0].setText("Wireless Type: ");
 					tvs[16][1].setText(((Motherboard) part).getWireless());
@@ -465,14 +523,18 @@ public class PartsFragment extends Fragment {
 				case "Memory":
 					// ((Memory) part).
 
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 
 					tvs[1][0].setText("Can error-correct?:");
-					tvs[1][1].setText(((Memory) part).getHasECC() ? "Yes" : "No");
+					if (((Memory) part).getHasECC()) {
+						tvs[1][1].setText("Yes");
+					} else {
+						tvs[1][1].setText("No");
+					}
 
 					tvs[2][0].setText("CAS Latency:");
 					tvs[2][1].setText(((Memory) part).getLatencyCAS() + " cycles");
@@ -487,7 +549,11 @@ public class PartsFragment extends Fragment {
 					tvs[5][1].setText(((Memory) part).getFormFactor());
 
 					tvs[6][0].setText("Has a Heat Spreader?:");
-					tvs[6][1].setText(((Memory) part).getHeatSpreader() ? "Yes" : "No");
+					if (((Memory) part).getHeatSpreader()) {
+						tvs[6][1].setText("Yes");
+					} else {
+						tvs[6][1].setText("No");
+					}
 
 					tvs[7][0].setText("Module Size:");
 					tvs[7][1].setText(((Memory) part).getModuleSize() + " GB");
@@ -503,7 +569,9 @@ public class PartsFragment extends Fragment {
 
 					tvs[11][0].setText("Voltage:");
 					tvs[11][1].setText(String.valueOf(((Memory) part).getVoltage()));
-					if (tvs[11][1].getText().equals("null")) tvs[11][1].setText("N/A");
+					if(tvs[11][1].getText().equals("null")){
+						tvs[11][1].setText("N/A");
+					}
 
 					for (int i = 12; i < tvs.length; i++) {
 						tvs[i][0].setVisibility(GONE);
@@ -513,7 +581,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Storage":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -535,11 +603,15 @@ public class PartsFragment extends Fragment {
 					tvs[5][1].setText(((Storage) part).getSataInterface());
 
 					tvs[6][0].setText("Has NVM Express?:");
-					tvs[6][1].setText(((Storage) part).getNvme() ? "Yes" : "No");
+					if (((Storage) part).getNvme()) {
+						tvs[6][1].setText("Yes");
+					} else {
+						tvs[6][1].setText("No");
+					}
 
 					tvs[7][0].setText("RPM:");
 					tvs[7][1].setText(((Storage) part).getRpm() + " rpm");
-					if (tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
+					if(tvs[7][1].getText().equals("null")) tvs[6][1].setText("N/A");
 
 					tvs[8][0].setText("Capacity:");
 					tvs[8][1].setText(((Storage) part).getCapacity());
@@ -552,15 +624,49 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "GPU":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
+
+					tvs[1][0].setText("Core Clock Speed:");
+					tvs[1][1].setText(((GPU)part).getCoreClockSpeed() + " MHz");
+
+					tvs[2][0].setText("Boost Clock Speed:");
+					tvs[2][1].setText(((GPU)part).getBoostClockSpeed() + " MHz");
+
+					tvs[3][0].setText("Effective Memory Clock Speed:");
+					tvs[3][1].setText(((GPU)part).getEffectiveMemClockSpeed() + " MHz");
+
+					tvs[4][0].setText("Chipset:");
+					tvs[4][1].setText(((GPU)part).getChipset());
+
+					tvs[5][0].setText("Cooling:");
+					tvs[5][1].setText(((GPU)part).getCooling());
+
+					tvs[6][0].setText("Expansion Slot Width:");
+					tvs[6][1].setText(((GPU)part).getExpansionSlotWidth() + " cm");
+
+					tvs[7][0].setText("External Power:");
+					tvs[7][1].setText(((GPU)part).getExternalPower());
+
+					tvs[8][0].setText("GPU Interface:");
+					tvs[8][1].setText(((GPU)part).getFrameSync());
+
+					tvs[9][0].setText("Frame Sync:");
+					tvs[9][1].setText(((GPU)part).getFrameSync());
+
+					tvs[10][0].setText("Frame Sync:");
+					tvs[10][1].setText(((GPU)part).getFrameSync());
+
+					tvs[11][0].setText("Frame Sync:");
+					tvs[11][1].setText(((GPU)part).getFrameSync());
+
 					break;
 
 				case "Case":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -568,7 +674,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "PSU":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -576,7 +682,7 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "OS":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
@@ -584,14 +690,12 @@ public class PartsFragment extends Fragment {
 					break;
 
 				case "Monitor":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(R.id.popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 					break;
-				default:
-					throw new IllegalStateException("Unexpected value: " + part.getClass().getSimpleName());
 			}
 
 			dialogBuilder.setView(infoPopUp);
