@@ -45,9 +45,9 @@ public class PartsFragment extends Fragment {
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
 		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), cpus.get()));
 		cpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		RecyclerView coolerRecycle = binding.partsCoolerRecyclerview;
-		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
-		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+		RecyclerView coolerRecyclerView = binding.partsCoolerRecyclerview;
+		coolerRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
+		coolerRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		d("PARTSFRAG", coolers.get().toString());
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
 		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
@@ -73,10 +73,6 @@ public class PartsFragment extends Fragment {
 		RecyclerView memoryRecyclerView = binding.partsMemoryRecyclerview;
 		memoryRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), memory.get()));
 		memoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//		in case we ever want accessories
-//		RecyclerView accessoriesRecyclerView = binding.partsAccessoryRecyclerview; // power supplies
-//		accessoriesRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.accessories.get()));
-//		accessoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		return root;
 	}
 
@@ -107,7 +103,6 @@ public class PartsFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method where info is set for EACH individual layout element for each list entry
 			Part currentPart = internalList.get(position);
-
 			// since only the basic data is displayed, we'll do that first
 			holder.nameTextView.setText(currentPart.toString());
 			holder.internalButton.setOnClickListener(v -> {
@@ -172,40 +167,7 @@ public class PartsFragment extends Fragment {
 			tvs[19][1] = infoPopUp.findViewById(popup_message20);
 //			Automatically generate all the TextViews needed
 			switch (part.getClass().getSimpleName()) {
-				case "CPU": // Janked setup of auto-generating TextViews failed, so I, Alkiepoodlez Kurz, just hardcoded it, as any junior dev should
-//					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
-//					Log.d("PARTSFRAG", String.valueOf(part.getParamCount()));
-//						for(int i = 1; i < part.getParamCount(); i++){
-//							// generating the linear layout TODO fix this
-//							LinearLayout currentLinearLayout = new LinearLayout(getContext());
-//							currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//							currentLinearLayout.setPadding(10, 0, 10, 0);
-//							ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//							ConstraintSet set = new ConstraintSet();
-//							Log.d("PARTSFRAG", String.valueOf(linearLayouts.size()));
-//							if(i > 0) {
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.BOTTOM, currentLinearLayout.getId(), ConstraintSet.TOP);
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.LEFT, currentLinearLayout.getId(), ConstraintSet.LEFT);
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.RIGHT, currentLinearLayout.getId(), ConstraintSet.RIGHT);
-//							}
-//							else { set.clone(); }
-//							set.constrainMinHeight(currentLinearLayout.getId(), 15); // assuming height is in density pixels
-//							set.applyTo(baseLayout);
-//
-//							// inserting the two text views
-//							TextView tv1 = new TextView(getContext());
-//							tv1.setId(2 * i); // adding constant noise as to not interfere with previous IDs
-//							tv1.setLayoutParams(new LinearLayout.LayoutParams(30, LinearLayout.LayoutParams.WRAP_CONTENT));
-//							currentLinearLayout.addView(tv1);
-//
-//							TextView tv2 = new TextView(getContext());
-//							tv1.setId(2*i + 1); // +1 added to the previous ID
-//							tv2.setLayoutParams(new LinearLayout.LayoutParams(90, LinearLayout.LayoutParams.WRAP_CONTENT));
-//							currentLinearLayout.addView(tv2);
-//
-//							// adding the LinearLayout to the bunch
-//							linearLayouts.add(currentLinearLayout);
-//						}
+				case "CPU":
 					TextView name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
@@ -590,7 +552,7 @@ public class PartsFragment extends Fragment {
 
 			public RecyclerViewHolder(@NonNull View itemView) {
 				super(itemView);
-				// this is where the findViewById stuff goes for each element, and only the findViewByID
+//				This is where the findViewById stuff goes for each element, and only the findViewById
 				nameTextView = itemView.findViewById(partsList_nameTextView);
 				internalButton = itemView.findViewById(partsList_addButton);
 			}
