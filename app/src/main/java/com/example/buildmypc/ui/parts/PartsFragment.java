@@ -1,7 +1,6 @@
 package com.example.buildmypc.ui.parts;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.os.Bundle;
@@ -117,7 +116,7 @@ public class PartsFragment extends Fragment {
 				d("PARTSFRAG", currentPart.getClass().getSimpleName());
 				createNewPopupWindow(currentPart);
 			});
-			// TODO write this and write the clickable code to make a popup window (specifics of the display determined by a switch(getCLass().getName()))
+//			TODO write this and write the clickable code to make a popup window (specifics of the display determined by a switch(getCLass().getName()))
 		}
 
 		@Override
@@ -142,7 +141,7 @@ public class PartsFragment extends Fragment {
 			Builder dialogBuilder = new Builder(getContext());
 			final View infoPopUp = getLayoutInflater().inflate(popup, null);
 			TextView[][] tvs = new TextView[20][2];
-			// I don't know how to automatically do this, so it's manual time
+//			I, Alkiepoodlez Kurz, don't know how to automatically do this, so it's manual time
 			tvs[0][0] = infoPopUp.findViewById(popup_title1);
 			tvs[0][1] = infoPopUp.findViewById(popup_message1);
 			tvs[1][0] = infoPopUp.findViewById(popup_title2);
@@ -183,7 +182,7 @@ public class PartsFragment extends Fragment {
 			tvs[18][1] = infoPopUp.findViewById(popup_message19);
 			tvs[19][0] = infoPopUp.findViewById(popup_title20);
 			tvs[19][1] = infoPopUp.findViewById(popup_message20);
-//			Automatically generate all the textviews needed
+//			Automatically generate all the TextViews needed
 			switch (part.getClass().getSimpleName()) {
 				case "CPU": // Janked setup of auto-generating TextViews failed, so I, Alkiepoodlez Kurz, just hardcoded it, as any junior dev should
 //					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
@@ -253,7 +252,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Cooler":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -266,7 +265,7 @@ public class PartsFragment extends Fragment {
 					tvs[4][0].setText("Noise Level: ");
 					tvs[4][1].setText(((Cooler) part).getNoiseLevel() + " dB");
 					tvs[5][0].setText("Supported Sockets: \n");
-					// build the string of all of the supported sockets
+//					Build the string of all the supported sockets
 					StringBuilder str = new StringBuilder();
 					for (String s : ((Cooler) part).getSocketSupport()) str.append(s).append("\n");
 					str.substring(str.length() - 2);
@@ -284,7 +283,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Motherboard":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -294,7 +293,7 @@ public class PartsFragment extends Fragment {
 					tvs[2][1].setText(((Motherboard) part).getChipset());
 					tvs[3][0].setText("Form Factor:");
 					tvs[3][1].setText(((Motherboard) part).getFormFactor());
-					// TODO format this properly
+//					TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
 					str = new StringBuilder();
 					for (String s : ((Motherboard) part).getM2slots()) str.append(s).append("\n");
@@ -335,7 +334,7 @@ public class PartsFragment extends Fragment {
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
 					str = new StringBuilder();
 					for (CountedString cstr : ((Motherboard) part).getGen32USBcount())
-						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					str.substring(str.length() - 2);
 					tvs[15][1].setText(str.toString());
 					tvs[16][0].setText("Wireless Type: ");
@@ -346,8 +345,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Memory":
-					// ((Memory) part).
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -380,7 +378,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Storage":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -407,7 +405,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "GPU":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -438,7 +436,7 @@ public class PartsFragment extends Fragment {
 					tvs[13][0].setText("Compatible Video Ports:");
 					str = new StringBuilder();
 					for (CountedString cstr : ((GPU) part).getVideoPorts())
-						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					str.substring(str.length() - 2);
 					tvs[13][1].setText(str.toString());
 					for (int i = 14; i < tvs.length; i++) {
@@ -447,7 +445,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Case":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.toString());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -459,7 +457,7 @@ public class PartsFragment extends Fragment {
 					tvs[3][0].setText("Expansion Slots:");
 					StringBuilder output = new StringBuilder();
 					for (CountedString cstr : ((Case) part).getExpansionSlots())
-						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[3][1].setText(output.toString());
 					tvs[4][0].setText("Supported Front USB Types:");
@@ -471,13 +469,13 @@ public class PartsFragment extends Fragment {
 					tvs[5][0].setText("Internal Drive Bays:");
 					output = new StringBuilder();
 					for (CountedString cstr : ((Case) part).getInternalDriveBays())
-						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[5][1].setText(output.toString());
 					tvs[6][0].setText("Max GPU Lengths:");
 					output = new StringBuilder();
 					for (String st : ((Case) part).getMaxGPULength())
-						output.append(st).append("\n");
+						output.append(st).append('\n');
 					output.substring(output.length() - 2);
 					tvs[6][1].setText(output.toString());
 					tvs[7][0].setText("Motherboard Form Factor:");
@@ -490,7 +488,7 @@ public class PartsFragment extends Fragment {
 					tvs[8][1].setText(((Case) part).getSidePanel());
 					tvs[9][0].setText("Volume:");
 					output = new StringBuilder();
-					for (String st : ((Case) part).getVolume()) output.append(st).append("\n");
+					for (String st : ((Case) part).getVolume()) output.append(st).append('\n');
 					output.substring(output.length() - 2);
 					tvs[9][1].setText(output.toString());
 					tvs[10][0].setText("Has PSU Shroud?:");
@@ -501,14 +499,14 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "PSU":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
 					tvs[1][0].setText("Internal Drive Bays:");
 					output = new StringBuilder();
 					for (CountedString cstr : ((PSU) part).getConnectorList())
-						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
+						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[1][1].setText(output.toString());
 					tvs[2][0].setText("Efficiency Rating");
@@ -529,7 +527,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "OS":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -547,7 +545,7 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 				case "Monitor":
-					name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
+					name = infoPopUp.findViewById(popup_superTitleTextView); // The name TextView in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
 					tvs[0][1].setText(part.getManufacturer());
@@ -594,10 +592,8 @@ public class PartsFragment extends Fragment {
 					}
 					break;
 			}
-			dialogBuilder.setView(infoPopUp);
-			// popup window declarations
-			AlertDialog dialog = dialogBuilder.create();
-			dialog.show();
+//			Popup window declarations
+			dialogBuilder.setView(infoPopUp).create().show();
 		}
 	}
 }
