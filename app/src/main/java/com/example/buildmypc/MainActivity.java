@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.util.Log.d;
 import static androidx.navigation.Navigation.findNavController;
 import static androidx.navigation.ui.AppBarConfiguration.Builder;
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 		if (parts.get().toString().length() < 10) { // if there's nothing inside of it
 			d("PARSER", "if-statement runs");
 			ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
+			if (checkSelfPermission(ACCESS_NETWORK_STATE) != PERMISSION_GRANTED)
+				requestPermissions(new String[]{ACCESS_NETWORK_STATE}, 0);
 			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 			if ((activeNetwork != null) && activeNetwork.isConnected() && !cm.isActiveNetworkMetered()) {
 				d("PARSER", "second if-statement runs");
