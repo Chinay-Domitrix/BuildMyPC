@@ -2,7 +2,6 @@ package com.example.buildmypc;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -16,11 +15,8 @@ import com.example.buildmypc.ui.parts.parts.Part;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.util.Log.d;
@@ -38,7 +34,6 @@ import static com.example.buildmypc.R.string.parts_list;
 import static com.example.buildmypc.databinding.ActivityMainBinding.inflate;
 import static com.google.android.material.snackbar.Snackbar.LENGTH_LONG;
 import static com.google.android.material.snackbar.Snackbar.make;
-import static com.example.buildmypc.R.string.firebase_key;
 
 public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<JSONObject> parts = new AtomicReference<>();
@@ -89,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 							}
 						},
 						Throwable::printStackTrace));*/
-
+				new PartsAsync(this.getApplicationContext()).execute();
 			} else try {
 				parts.set(new JSONObject(getString(parts_list)));
 				d("PARSER", "resulted in using the file");
@@ -112,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
 		return navigateUp(findNavController(this, nav_host_fragment_content_main), mAppBarConfiguration) || super.onSupportNavigateUp();
 	}
 
-	public ArrayList<Part> parsePartsJSON(JSONObject jsonObject) {
-		// funny
-		return null;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -130,28 +120,5 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public int hashCode() {
 		return mAppBarConfiguration != null ? mAppBarConfiguration.hashCode() : 0;
-	}
-	class PartsAsync extends AsyncTask<String, Void, String >{
-		@Override
-		protected String doInBackground(String... strings) {
-			StringBuilder x = new StringBuilder();
-			try {
-				Scanner scanner = new Scanner(new URL("https://firebasestorage.googleapis.com/v0/b/buildmypc-ac8c3.appspot.com/o/part_data.json?alt=media&token=" + getString(firebase_key)).openConnection().getInputStream());
-				while (scanner.hasNextLine()) x.append(scanner.nextLine());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return x.toString();
-		}
-
-		@Override
-		protected void onPostExecute(String s) {
-			super.onPostExecute(s);
-			try {
-				parts.set(new JSONObject(s));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }
