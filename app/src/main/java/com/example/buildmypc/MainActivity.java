@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
 	private AppBarConfiguration mAppBarConfiguration;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 							}
 						},
 						Throwable::printStackTrace));*/
-				new PartsAsync(this.getApplicationContext()).execute();
+				new PartsAsync(this).execute();
 			} else try {
 				parts.set(new JSONObject(getString(parts_list)));
 				d("PARSER", "resulted in using the file");
