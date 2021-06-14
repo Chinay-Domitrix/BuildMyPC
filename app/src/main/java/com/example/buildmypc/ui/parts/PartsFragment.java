@@ -124,18 +124,6 @@ public class PartsFragment extends Fragment {
 			return internalList.size();
 		}
 
-		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-			TextView nameTextView;
-			Button internalButton;
-
-			public RecyclerViewHolder(@NonNull View itemView) {
-				super(itemView);
-				// this is where the findViewById stuff goes for each element, and only the findViewByID
-				nameTextView = itemView.findViewById(partsList_nameTextView);
-				internalButton = itemView.findViewById(partsList_addButton);
-			}
-		}
-
 		@SuppressLint("SetTextI18n")
 		public void createNewPopupWindow(@NotNull Part part) {
 			Builder dialogBuilder = new Builder(getContext());
@@ -594,6 +582,18 @@ public class PartsFragment extends Fragment {
 			}
 //			Popup window declarations
 			dialogBuilder.setView(infoPopUp).create().show();
+		}
+
+		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+			TextView nameTextView;
+			Button internalButton;
+
+			public RecyclerViewHolder(@NonNull View itemView) {
+				super(itemView);
+				// this is where the findViewById stuff goes for each element, and only the findViewByID
+				nameTextView = itemView.findViewById(partsList_nameTextView);
+				internalButton = itemView.findViewById(partsList_addButton);
+			}
 		}
 	}
 }
