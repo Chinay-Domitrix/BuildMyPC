@@ -2,6 +2,7 @@ package com.example.buildmypc.ui.newsfeed;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,10 @@ import static android.view.LayoutInflater.from;
 import static android.view.View.OnClickListener;
 import static androidx.browser.customtabs.CustomTabsIntent.Builder;
 import static androidx.core.content.res.ResourcesCompat.getDrawable;
+import static com.example.buildmypc.R.drawable.engadget;
 import static com.example.buildmypc.R.drawable.nytimes;
+import static com.example.buildmypc.R.drawable.verge;
+import static com.example.buildmypc.R.drawable.wired;
 import static com.example.buildmypc.R.id.newslist_descTextView;
 import static com.example.buildmypc.R.id.newslist_imageView;
 import static com.example.buildmypc.R.id.newslist_publisherTextView;
@@ -43,38 +47,32 @@ import static com.example.buildmypc.R.layout.layout_newsfeed_list;
 import static com.example.buildmypc.databinding.FragmentNewsfeedBinding.inflate;
 import static java.util.Locale.getDefault;
 
-public class NewsfeedFragment extends Fragment {
+public class NewsfeedFragment extends Fragment implements Article.OnDataSendToActivity {
 	static final AtomicReference<ArrayList<Article>> finalArticleList = new AtomicReference<>(new ArrayList<>());
 	private FragmentNewsfeedBinding binding;
+	private RecyclerViewAdapter fragmentAdapter;
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// jank testing of finalArticleList actually being used in the RecyclerView
-		ArrayList<Article> temp = finalArticleList.get();
-		temp.add(new Article("The U.S. added 559,000 jobs in May",
-				"Many employers report having trouble finding applicants. Economists say the labor market may simply need time to get sorted out.",
-				/*new URL(*/"https://www.nytimes.com/2021/06/04/business/economy/jobs-report-may-2021.html"/*)*/,
-				"NYTimes",
-				getDrawable(getResources(), nytimes, requireActivity().getTheme()),
-				new Date(),
-				new SimpleDateFormat("yyyy-MM-dd", getDefault())));
-		finalArticleList.set(temp);
+		if(finalArticleList == null) finalArticleList.set(new ArrayList<>());
 		NewsfeedViewModel newsfeedViewModel = new ViewModelProvider(this).get(NewsfeedViewModel.class);
 		binding = inflate(inflater, container, false);
 		View root = binding.getRoot();
 		((Activity) (root.getContext())).requestPermissions(new String[]{INTERNET}, 0);
 		RecyclerView recyclerView = binding.newsfeedRecyclerView;
-		Button button = binding.newsfeedFragButton;
-		button.setOnClickListener(v -> {
-			button.setClickable(false);
-			button.setEnabled(false);
-			new RSSAsyncTask().execute("https://www.techmeme.com/feed.xml", "Techmeme");
-			new RSSAsyncTask().execute("https://www.theverge.com/rss/index.xml", "The Verge");
-			new RSSAsyncTask().execute("https://www.wired.com/feed", "WIRED");
-			new RSSAsyncTask().execute("https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", "NYTimes");
-			new RSSAsyncTask().execute("https://www.engadget.com/rss.xml", "Engadget");
-		});
-		RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), finalArticleList.get());
-		recyclerView.setAdapter(adapter);
+
+		if(finalArticleList.get().size() == 0){ // start the chain!
+			Drawable[] logos = {
+					getDrawable(getResources(), verge, requireActivity().getTheme()),
+					getDrawable(getResources(), wired, requireActivity().getTheme()),
+					getDrawable(getResources(), nytimes, requireActivity().getTheme()),
+					getDrawable(getResources(), engadget, requireActivity().getTheme()),
+			};
+			new RSSAsyncTask(logos, this).execute("https://www.theverge.com/rss/index.xml", "The Verge");
+		}
+
+		fragmentAdapter = new RecyclerViewAdapter(getContext(), finalArticleList.get());
+		recyclerView.setAdapter(fragmentAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		return root;
 	}
@@ -83,6 +81,11 @@ public class NewsfeedFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		binding = null;
+	}
+
+	@Override
+	public void refreshList() {
+		fragmentAdapter.notifyDataSetChanged();
 	}
 
 	public static class RecyclerViewAdapter extends Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
@@ -114,8 +117,8 @@ public class NewsfeedFragment extends Fragment {
 			};
 			holder.image.setImageDrawable(currentEntry.getImage());
 			holder.title.setText(currentEntry.getHeading());
-			holder.desc.setText(currentEntry.getDesc());
-			holder.dateAndPublisher.setText(currentEntry.getPublisher() + " at " + currentEntry.getDate().toString());
+			holder.desc.setText("by " + currentEntry.getAuthor());
+			holder.dateAndPublisher.setText("Published at " + currentEntry.getDateStr());
 			holder.image.setOnClickListener(onClickListener);
 			holder.title.setOnClickListener(onClickListener);
 			holder.desc.setOnClickListener(onClickListener);
