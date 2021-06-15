@@ -8,25 +8,24 @@ import java.util.Date;
 
 public class Article {
 	private String heading;
+	private String author;
 	private String desc;
 	private String originURL;
 	private String publisher;
 	private Drawable image;
-	private Date date;
-	private SimpleDateFormat format;
+	private String dateStr;
 
-	public Article() {
-		this("", "", null, "", null, null, null);
-	}
-
-	public Article(String heading, String desc, String originURL, String publisher, Drawable image, Date date, SimpleDateFormat format) {
+	public Article(String heading, String author, String desc, String originURL, String publisher, Drawable image, String dateStr) {
 		this.heading = heading;
+		this.author = author;
 		this.desc = desc;
 		this.originURL = originURL;
 		this.publisher = publisher;
 		this.image = image;
-		this.date = date;
-		this.format = format;
+		this.dateStr = dateStr;
+	}
+
+	public Article() {
 	}
 
 	public String getHeading() {
@@ -35,6 +34,14 @@ public class Article {
 
 	public void setHeading(String heading) {
 		this.heading = heading;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getDesc() {
@@ -69,54 +76,19 @@ public class Article {
 		this.image = image;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getDateStr() {
+		return dateStr;
 	}
 
-	public void setDate(String dateStr) throws ParseException {
-		assert format != null;
-		date = format.parse(dateStr);
+	public void setDateStr(String dateStr) {
+		this.dateStr = dateStr;
 	}
 
-	public SimpleDateFormat getFormat() {
-		return format;
+	public String toString(){
+		return getHeading() + ", written by " + getAuthor() + " on " + getDateStr();
 	}
 
-	public void setFormat(SimpleDateFormat format) {
-		this.format = format;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Article article = (Article) o;
-
-		if (getHeading() != null ? !getHeading().equals(article.getHeading()) : article.getHeading() != null)
-			return false;
-		if (getDesc() != null ? !getDesc().equals(article.getDesc()) : article.getDesc() != null)
-			return false;
-		if (getOriginURL() != null ? !getOriginURL().equals(article.getOriginURL()) : article.getOriginURL() != null)
-			return false;
-		if (getPublisher() != null ? !getPublisher().equals(article.getPublisher()) : article.getPublisher() != null)
-			return false;
-		if (getImage() != null ? !getImage().equals(article.getImage()) : article.getImage() != null)
-			return false;
-		if (getDate() != null ? !getDate().equals(article.getDate()) : article.getDate() != null)
-			return false;
-		return getFormat() != null ? getFormat().equals(article.getFormat()) : article.getFormat() == null;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = getHeading() != null ? getHeading().hashCode() : 0;
-		result = 31 * result + (getDesc() != null ? getDesc().hashCode() : 0);
-		result = 31 * result + (getOriginURL() != null ? getOriginURL().hashCode() : 0);
-		result = 31 * result + (getPublisher() != null ? getPublisher().hashCode() : 0);
-		result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
-		result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
-		result = 31 * result + (getFormat() != null ? getFormat().hashCode() : 0);
-		return result;
+	public interface OnDataSendToActivity {
+		void refreshList();
 	}
 }
