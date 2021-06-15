@@ -168,6 +168,10 @@ public class BuildFragment extends Fragment {
 		GridAdapter gridAdapter = new GridAdapter(getContext(), displayedBuilds);
 		recyclerView.setAdapter(gridAdapter);
 
+		// this decouples the fragment | DO NOT TOUCH
+//		if(MainActivity.personalBuildList.get().size() > 2 && MainActivity.personalBuildList.get().get(MainActivity.personalBuildList.get().size() - 1).getName().equals("ADD BUILD") && currentEditedBuild == null)
+//			MainActivity.personalBuildList.get().remove(MainActivity.personalBuildList.get().size() - 1);
+
 		return root;
 	}
 
