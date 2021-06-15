@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.example.buildmypc.databinding.FragmentPartsBinding;
 import com.example.buildmypc.ui.parts.parts.*;
@@ -32,6 +33,7 @@ import static com.example.buildmypc.R.layout.parts_list;
 import static com.example.buildmypc.R.layout.popup;
 import static com.example.buildmypc.databinding.FragmentPartsBinding.inflate;
 import static java.lang.String.valueOf;
+import static java.util.Objects.requireNonNull;
 
 public class PartsFragment extends Fragment {
 	private FragmentPartsBinding binding;
@@ -45,9 +47,9 @@ public class PartsFragment extends Fragment {
 		RecyclerView cpuRecyclerView = binding.partsCpuRecyclerview;
 		cpuRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), cpus.get()));
 		cpuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		RecyclerView coolerRecycle = binding.partsCoolerRecyclerview;
-		coolerRecycle.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
-		coolerRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+		RecyclerView coolerRecyclerView = binding.partsCoolerRecyclerview;
+		coolerRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), coolers.get()));
+		coolerRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		d("PARTSFRAG", coolers.get().toString());
 		RecyclerView mbRecyclerView = binding.partsMotherboardRecyclerview;
 		mbRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), motherboards.get()));
@@ -73,10 +75,6 @@ public class PartsFragment extends Fragment {
 		RecyclerView memoryRecyclerView = binding.partsMemoryRecyclerview;
 		memoryRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), memory.get()));
 		memoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//		in case we ever want accessories
-//		RecyclerView accessoriesRecyclerView = binding.partsAccessoryRecyclerview; // power supplies
-//		accessoriesRecyclerView.setAdapter(new PartsRecyclerViewAdapter(getContext(), MainActivity.accessories.get()));
-//		accessoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		return root;
 	}
 
@@ -87,8 +85,8 @@ public class PartsFragment extends Fragment {
 	}
 
 	public class PartsRecyclerViewAdapter extends Adapter<PartsRecyclerViewAdapter.RecyclerViewHolder> {
-		Context parentContext;
-		ArrayList<Part> internalList;
+		final Context parentContext;
+		final ArrayList<Part> internalList;
 
 		public PartsRecyclerViewAdapter(Context c, ArrayList<Part> list) {
 			parentContext = c;
@@ -107,7 +105,6 @@ public class PartsFragment extends Fragment {
 		public void onBindViewHolder(@NonNull @NotNull RecyclerViewHolder holder, int position) {
 			// the method where info is set for EACH individual layout element for each list entry
 			Part currentPart = internalList.get(position);
-
 			// since only the basic data is displayed, we'll do that first
 			holder.nameTextView.setText(currentPart.toString());
 			holder.internalButton.setOnClickListener(v -> {
@@ -122,18 +119,6 @@ public class PartsFragment extends Fragment {
 		@Override
 		public int getItemCount() {
 			return internalList.size();
-		}
-
-		public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-			TextView nameTextView;
-			Button internalButton;
-
-			public RecyclerViewHolder(@NonNull View itemView) {
-				super(itemView);
-				// this is where the findViewById stuff goes for each element, and only the findViewByID
-				nameTextView = itemView.findViewById(partsList_nameTextView);
-				internalButton = itemView.findViewById(partsList_addButton);
-			}
 		}
 
 		@SuppressLint("SetTextI18n")
@@ -184,40 +169,7 @@ public class PartsFragment extends Fragment {
 			tvs[19][1] = infoPopUp.findViewById(popup_message20);
 //			Automatically generate all the TextViews needed
 			switch (part.getClass().getSimpleName()) {
-				case "CPU": // Janked setup of auto-generating TextViews failed, so I, Alkiepoodlez Kurz, just hardcoded it, as any junior dev should
-//					linearLayouts.add(infoPopUp.findViewById(R.id.popup_layout1));
-//					Log.d("PARTSFRAG", String.valueOf(part.getParamCount()));
-//						for(int i = 1; i < part.getParamCount(); i++){
-//							// generating the linear layout TODO fix this
-//							LinearLayout currentLinearLayout = new LinearLayout(getContext());
-//							currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//							currentLinearLayout.setPadding(10, 0, 10, 0);
-//							ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//							ConstraintSet set = new ConstraintSet();
-//							Log.d("PARTSFRAG", String.valueOf(linearLayouts.size()));
-//							if(i > 0) {
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.BOTTOM, currentLinearLayout.getId(), ConstraintSet.TOP);
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.LEFT, currentLinearLayout.getId(), ConstraintSet.LEFT);
-//								set.connect(linearLayouts.get(i-1).getId(), ConstraintSet.RIGHT, currentLinearLayout.getId(), ConstraintSet.RIGHT);
-//							}
-//							else { set.clone(); }
-//							set.constrainMinHeight(currentLinearLayout.getId(), 15); // assuming height is in density pixels
-//							set.applyTo(baseLayout);
-//
-//							// inserting the two text views
-//							TextView tv1 = new TextView(getContext());
-//							tv1.setId(2 * i); // adding constant noise as to not interfere with previous IDs
-//							tv1.setLayoutParams(new LinearLayout.LayoutParams(30, LinearLayout.LayoutParams.WRAP_CONTENT));
-//							currentLinearLayout.addView(tv1);
-//
-//							TextView tv2 = new TextView(getContext());
-//							tv1.setId(2*i + 1); // +1 added to the previous ID
-//							tv2.setLayoutParams(new LinearLayout.LayoutParams(90, LinearLayout.LayoutParams.WRAP_CONTENT));
-//							currentLinearLayout.addView(tv2);
-//
-//							// adding the LinearLayout to the bunch
-//							linearLayouts.add(currentLinearLayout);
-//						}
+				case "CPU":
 					TextView name = infoPopUp.findViewById(popup_superTitleTextView); // the name text view in a series
 					name.setText(part.getName());
 					tvs[0][0].setText("Manufacturer:");
@@ -267,7 +219,8 @@ public class PartsFragment extends Fragment {
 					tvs[5][0].setText("Supported Sockets: \n");
 //					Build the string of all the supported sockets
 					StringBuilder str = new StringBuilder();
-					for (String s : ((Cooler) part).getSocketSupport()) str.append(s).append("\n");
+					for (String s : requireNonNull(((Cooler) part).getSocketSupport()))
+						str.append(s).append("\n");
 					str.substring(str.length() - 2);
 					tvs[5][1].setText(str.toString());
 					if (!((Cooler) part).isFanless()) {
@@ -296,7 +249,8 @@ public class PartsFragment extends Fragment {
 //					TODO format this properly
 					tvs[4][0].setText("M.2 slots:"); // m2slots
 					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getM2slots()) str.append(s).append("\n");
+					for (String s : requireNonNull(((Motherboard) part).getM2slots()))
+						str.append(s).append("\n");
 					str.substring(str.length() - 2);
 					tvs[4][1].setText(str.toString());
 					tvs[5][0].setText("Max Supported Memory:");
@@ -305,7 +259,7 @@ public class PartsFragment extends Fragment {
 					tvs[6][1].setText(valueOf(((Motherboard) part).getMemSlots()));
 					tvs[7][0].setText("Compatible Memory Types: ");
 					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getCompatibleMem())
+					for (String s : requireNonNull(((Motherboard) part).getCompatibleMem()))
 						str.append(s).append("\n");
 					str.substring(str.length() - 2);
 					tvs[7][1].setText(str.toString());
@@ -313,7 +267,7 @@ public class PartsFragment extends Fragment {
 					tvs[8][1].setText(valueOf(((Motherboard) part).getmSATASlotCount()));
 					tvs[9][0].setText("Compatible Ethernet Types: ");
 					str = new StringBuilder();
-					for (String s : ((Motherboard) part).getIncEthernetSupp())
+					for (String s : requireNonNull(((Motherboard) part).getIncEthernetSupp()))
 						str.append(s).append("\n");
 					str.substring(str.length() - 2);
 					tvs[9][1].setText(str.toString());
@@ -321,7 +275,7 @@ public class PartsFragment extends Fragment {
 					tvs[10][1].setText(((Motherboard) part).getIncVideo());
 					tvs[11][0].setText("PCI Slot List: ");
 					str = new StringBuilder();
-					for (CountedString cstr : ((Motherboard) part).getPciSlotList())
+					for (CountedString cstr : requireNonNull(((Motherboard) part).getPciSlotList()))
 						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
 					str.substring(str.length() - 2);
 					tvs[11][1].setText(str.toString());
@@ -333,7 +287,7 @@ public class PartsFragment extends Fragment {
 					tvs[14][1].setText(valueOf(((Motherboard) part).getGen2USBCount()));
 					tvs[15][0].setText("Gen 3.2 USB Count: ");
 					str = new StringBuilder();
-					for (CountedString cstr : ((Motherboard) part).getGen32USBcount())
+					for (CountedString cstr : requireNonNull(((Motherboard) part).getGen32USBcount()))
 						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					str.substring(str.length() - 2);
 					tvs[15][1].setText(str.toString());
@@ -435,7 +389,7 @@ public class PartsFragment extends Fragment {
 					tvs[12][1].setText(((GPU) part).getTdpW() + " W");
 					tvs[13][0].setText("Compatible Video Ports:");
 					str = new StringBuilder();
-					for (CountedString cstr : ((GPU) part).getVideoPorts())
+					for (CountedString cstr : requireNonNull(((GPU) part).getVideoPorts()))
 						str.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					str.substring(str.length() - 2);
 					tvs[13][1].setText(str.toString());
@@ -453,34 +407,34 @@ public class PartsFragment extends Fragment {
 					tvs[1][1].setText(((Case) part).getType());
 					tvs[2][0].setText("Dimensions:");
 					ArrayList<String> caseListStr = ((Case) part).getDimensionsMm();
-					tvs[2][1].setText(caseListStr.get(0) + "\n" + caseListStr.get(1));
+					tvs[2][1].setText(requireNonNull(caseListStr).get(0) + "\n" + caseListStr.get(1));
 					tvs[3][0].setText("Expansion Slots:");
 					StringBuilder output = new StringBuilder();
-					for (CountedString cstr : ((Case) part).getExpansionSlots())
+					for (CountedString cstr : requireNonNull(((Case) part).getExpansionSlots()))
 						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[3][1].setText(output.toString());
 					tvs[4][0].setText("Supported Front USB Types:");
 					output = new StringBuilder();
-					for (String st : ((Case) part).getSupportedFrontUSBs())
+					for (String st : requireNonNull(((Case) part).getSupportedFrontUSBs()))
 						output.append(st).append(",\n");
 					output.substring(output.length() - 3);
 					tvs[4][1].setText(output.toString());
 					tvs[5][0].setText("Internal Drive Bays:");
 					output = new StringBuilder();
-					for (CountedString cstr : ((Case) part).getInternalDriveBays())
+					for (CountedString cstr : requireNonNull(((Case) part).getInternalDriveBays()))
 						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[5][1].setText(output.toString());
 					tvs[6][0].setText("Max GPU Lengths:");
 					output = new StringBuilder();
-					for (String st : ((Case) part).getMaxGPULength())
+					for (String st : requireNonNull(((Case) part).getMaxGPULength()))
 						output.append(st).append('\n');
 					output.substring(output.length() - 2);
 					tvs[6][1].setText(output.toString());
 					tvs[7][0].setText("Motherboard Form Factor:");
 					output = new StringBuilder();
-					for (String st : ((Case) part).getMbFormFactor())
+					for (String st : requireNonNull(((Case) part).getMbFormFactor()))
 						output.append(st).append(",\n");
 					output.substring(output.length() - 3);
 					tvs[7][1].setText(output.toString());
@@ -488,7 +442,8 @@ public class PartsFragment extends Fragment {
 					tvs[8][1].setText(((Case) part).getSidePanel());
 					tvs[9][0].setText("Volume:");
 					output = new StringBuilder();
-					for (String st : ((Case) part).getVolume()) output.append(st).append('\n');
+					for (String st : requireNonNull(((Case) part).getVolume()))
+						output.append(st).append('\n');
 					output.substring(output.length() - 2);
 					tvs[9][1].setText(output.toString());
 					tvs[10][0].setText("Has PSU Shroud?:");
@@ -505,7 +460,7 @@ public class PartsFragment extends Fragment {
 					tvs[0][1].setText(part.getManufacturer());
 					tvs[1][0].setText("Internal Drive Bays:");
 					output = new StringBuilder();
-					for (CountedString cstr : ((PSU) part).getConnectorList())
+					for (CountedString cstr : requireNonNull(((PSU) part).getConnectorList()))
 						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append('\n');
 					output.substring(output.length() - 2);
 					tvs[1][1].setText(output.toString());
@@ -557,7 +512,7 @@ public class PartsFragment extends Fragment {
 					tvs[3][1].setText(((Monitor) part).isCurved() ? "Yes" : "No");
 					tvs[4][0].setText("Frame Sync:");
 					output = new StringBuilder();
-					for (String st : ((Monitor) part).getFrameSync())
+					for (String st : requireNonNull(((Monitor) part).getFrameSync()))
 						output.append(st).append("\n");
 					output.substring(output.length() - 2);
 					tvs[4][1].setText(output.toString());
@@ -568,7 +523,7 @@ public class PartsFragment extends Fragment {
 					tvs[6][1].setText(((Monitor) part).isBuiltInSpeakers() ? "Yes" : "No");
 					tvs[7][0].setText("Compatible Monitor Interfaces:");
 					output = new StringBuilder();
-					for (CountedString cstr : ((Monitor) part).getMonitorInterfaces())
+					for (CountedString cstr : requireNonNull(((Monitor) part).getMonitorInterfaces()))
 						output.append(cstr.getName()).append(", ").append(cstr.getAmount()).append("\n");
 					output.substring(output.length() - 2);
 					tvs[1][1].setText(output.toString());
@@ -577,7 +532,7 @@ public class PartsFragment extends Fragment {
 					tvs[9][0].setText("Refresh Rate:");
 					tvs[9][1].setText(((Monitor) part).getRefreshRate() + " Hz");
 					tvs[10][0].setText("Resolution:");
-					tvs[10][1].setText(((Monitor) part).getResolution()[0] + " by" + ((Monitor) part).getResolution()[1]);
+					tvs[10][1].setText(requireNonNull(((Monitor) part).getResolution())[0] + " by" + requireNonNull(((Monitor) part).getResolution())[1]);
 					tvs[11][0].setText("PC Response Time:");
 					tvs[11][1].setText(((Monitor) part).getResponseTimeMs() + " ms");
 					tvs[12][0].setText("Screen Size:");
@@ -594,6 +549,18 @@ public class PartsFragment extends Fragment {
 			}
 //			Popup window declarations
 			dialogBuilder.setView(infoPopUp).create().show();
+		}
+
+		public class RecyclerViewHolder extends ViewHolder {
+			final TextView nameTextView;
+			final Button internalButton;
+
+			public RecyclerViewHolder(@NonNull View itemView) {
+				super(itemView);
+//				This is where the findViewById stuff goes for each element, and only the findViewById
+				nameTextView = itemView.findViewById(partsList_nameTextView);
+				internalButton = itemView.findViewById(partsList_addButton);
+			}
 		}
 	}
 }
