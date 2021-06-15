@@ -1,17 +1,22 @@
 package com.example.buildmypc.ui.currentBuild;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.buildmypc.MainActivity;
+import com.example.buildmypc.R;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.build.BuildFragment;
 import com.example.buildmypc.ui.build.PCBuild;
@@ -66,6 +71,7 @@ public class EditorFragment extends Fragment {
 	private ArrayList<Part> monitorList;
 	private ArrayList<Part> caseList;
 
+	private EditText nameEditText;
 
 	public EditorFragment(PCBuild currentBuild, boolean isEditing) {
 		this.currentBuild = currentBuild;
@@ -94,7 +100,32 @@ public class EditorFragment extends Fragment {
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null) ((AppCompatActivity) getActivity()).getSupportActionBar().set;
 		View root = inflater.inflate(fragment_editor, container, false);
 		goBackButton = root.findViewById(editorFragmentGoBackButton);
-		// TODO make it so that you can't edit pre builts
+
+		// EditText
+		nameEditText = root.findViewById(R.id.editorFrag_editText);
+		if(currentBuild != null && currentBuild.getName().length() > 0) {
+			nameEditText.setText(currentBuild.getName());
+		}
+		nameEditText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		}); // empty because it doesn't need to have a listener
+
+
+
+		// go back button code
 		goBackButton.setText(!currentBuild.getName().equals("ADD BUILD") ? "OVERWRITE" : "ADD");
 		goBackButton.setOnClickListener(v -> { // THIS WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			// create the bundle
@@ -128,7 +159,7 @@ public class EditorFragment extends Fragment {
 
 
 			}
-			updatedBuild.setName("");
+			updatedBuild.setName(nameEditText.getText().toString());
 			Bundle result = new Bundle();
 			result.putParcelable(BACK, updatedBuild);
 			// destroy the lists
@@ -238,34 +269,6 @@ public class EditorFragment extends Fragment {
 		getParentFragmentManager().setFragmentResult(BUILD, result);
 		// TODO: Use the ViewModel
 	}
-
-//	public void sendBack(PCBuild updatedBuild){
-//		if(mListener != null){
-//			mListener.onFragmentInteraction(updatedBuild);
-//		}
-//	}
-//
-//	@Override
-//	public void onAttach(Context context) {
-//		super.onAttach(context);
-//		if (context instanceof OnFragmentInteractionListener) {
-//			mListener = (OnFragmentInteractionListener) context;
-//		} else {
-//			throw new RuntimeException(context.toString()
-//					+ " must implement OnFragmentInteractionListener");
-//		}
-//	}
-
-//	@Override
-//	public void onDetach() {
-//		super.onDetach();
-//		mListener = null;
-//	}
-
-//	public interface OnFragmentInteractionListener {
-//		// TODO: Update argument type and name
-//		void onFragmentInteraction(PCBuild sendBackText);
-//	}
 
 	private void openBuildFragment(PCBuild build) {
 		BuildFragment fragment = BuildFragment.newInstance(currentBuild);

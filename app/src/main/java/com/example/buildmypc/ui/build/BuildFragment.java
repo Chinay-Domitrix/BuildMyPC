@@ -2,6 +2,7 @@ package com.example.buildmypc.ui.build;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
+// le comment'
+import com.example.buildmypc.MainActivity;
 import com.example.buildmypc.databinding.FragmentHomeBinding;
 import com.example.buildmypc.ui.currentBuild.EditorFragment;
 import com.example.buildmypc.ui.parts.parts.CPU;
@@ -81,6 +84,24 @@ public class BuildFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		BuildViewModel buildViewModel = new ViewModelProvider(this).get(BuildViewModel.class);
 
+		PCBuild basicAddBuild = new PCBuild(
+				"ADD BUILD", // TODO institute a check for this name
+				getDrawable(getResources(), plus_logo, getResources().newTheme()),
+				new Case(" ", " ", " "),
+				new Cooler(" ", " "),
+				new CPU(" ", " "),
+				new GPU(" ", " "),
+				new Memory(" ", " "),
+				new Monitor(" ", " "),
+				new Motherboard(" ", " "),
+				new OS(" ", " "),
+				new PSU(" ", " "),
+				new Storage(" ", " "),
+				new ArrayList<>(),
+				-11 // ID number for the specific entry
+		);
+
+
 //		if(((AppCompatActivity) getActivity()).getActionBar() != null)
 //			((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -91,12 +112,13 @@ public class BuildFragment extends Fragment {
 
 		// building myBuilds
 		displayedBuilds = new ArrayList<>();
-		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
+		displayedBuilds.addAll(MainActivity.personalBuildList.get());
+//		displayedBuilds.addAll(new Prebuilds().getPrebuiltList());
 		if (currentEditedBuild != null) {
 			int[] idList;
 			// checks if currentEditedBuild is an edited version of an existing build
 			// find the position of the build with this ID number and replace it
-			if (isIncluded(currentEditedBuild.getIdNumber(), idList(displayedBuilds)))
+			if (displayedBuilds.size() > 0 && isIncluded(currentEditedBuild.getIdNumber(), idList(displayedBuilds)))
 				for (int i = 0; i < displayedBuilds.size(); i++) {
 					if (displayedBuilds.get(i).getIdNumber() == currentEditedBuild.getIdNumber()) {
 						displayedBuilds.set(i, currentEditedBuild);
@@ -105,7 +127,20 @@ public class BuildFragment extends Fragment {
 					if (i == displayedBuilds.size() - 1)
 						d("TAG", "Error in isIncluded statement around line 91 -?> for loop didn't find any entries");
 				}
-			else displayedBuilds.add(currentEditedBuild);
+			else if(!currentEditedBuild.equals(basicAddBuild)) {
+				displayedBuilds.add(currentEditedBuild);
+			}
+
+			// check to remove all basicAddBuild objects from personalBuildList
+			for(int i = displayedBuilds.size() - 1; i >= 0; i--){
+				PCBuild test = displayedBuilds.get(i);
+				Log.d("NAME", String.valueOf(test.getName().equalsIgnoreCase("ADD BUILD")));
+				if(test.getName().equalsIgnoreCase("ADD BUILD")) {
+					displayedBuilds.remove(i);
+				}
+			}
+
+			MainActivity.personalBuildList.set(displayedBuilds);
 		}
 		// adding the (ADD BUILD) entry
 		displayedBuilds.add(new PCBuild(

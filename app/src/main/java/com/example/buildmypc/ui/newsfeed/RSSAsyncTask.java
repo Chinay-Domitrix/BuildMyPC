@@ -52,6 +52,8 @@ class RSSAsyncTask extends AsyncTask<String, Void, String> {
 		publisher = "";
 	}
 
+
+
 	@Override
 	protected String doInBackground(@NotNull String... strings) {
 		assert strings.length > 0;
@@ -323,7 +325,7 @@ class RSSAsyncTask extends AsyncTask<String, Void, String> {
 					int i = 27; // start of actual articles
 					Article tempArticle = new Article();
 					while(i < polishedRSS.size()) {
-						Log.d("ARTICLE_LOOP", "i: " + i + ", State: " +  searchStatus + "\nContent: " + polishedRSS.get(i));
+						Log.d( "ARTICLE_LOOP", "i: " + i + ", State: " +  searchStatus + "\nContent: " + polishedRSS.get(i));
 						currentLine = polishedRSS.get(i);
 						//tempArticle.setFormat(); // TODO this
 						if (!currentLine.equals(polishedRSS.get(0))) {
