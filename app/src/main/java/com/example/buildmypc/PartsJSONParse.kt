@@ -304,7 +304,6 @@ class PartsJSONParse : Thread() {
 					d("ACTUAL_PARSER", "cases completed somewhat")
 					MainActivity.pcCases.set(tempCases)
 				})
-				// psu parser
 				add(Thread {
 					val psus = getJSONArray("psu")
 					val tempPSUs = MainActivity.psus.get()
@@ -334,8 +333,6 @@ class PartsJSONParse : Thread() {
 					d("ACTUAL_PARSER", "power supply list completed somewhat")
 					MainActivity.psus.set(tempPSUs)
 				})
-
-				// os parser
 				add(Thread {
 					val oss = getJSONArray("os")
 					val tempOSs = MainActivity.oss.get()
@@ -355,8 +352,6 @@ class PartsJSONParse : Thread() {
 					d("ACTUAL_PARSER", "os list completed somewhat")
 					MainActivity.oss.set(tempOSs)
 				})
-
-				// monitor parser
 				add(Thread {
 					val monitors = getJSONArray("monitor")
 					val tempMonitors = MainActivity.monitors.get()
