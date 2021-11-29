@@ -1,4 +1,4 @@
-@file:Suppress("DEPRECATION")
+/*@file:Suppress("DEPRECATION")
 
 package com.example.buildmypc
 
@@ -39,4 +39,4 @@ class PartsAsync(private val mainActivity: MainActivity) {
 			0
 		)
 	}
-}
+}*/
