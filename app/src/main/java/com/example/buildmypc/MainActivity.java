@@ -14,8 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.example.buildmypc.databinding.ActivityMainBinding;
 import com.example.buildmypc.ui.build.PCBuild;
 import com.example.buildmypc.ui.parts.parts.Part;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+// import com.google.firebase.storage.FirebaseStorage;
+// import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
 	public static final AtomicReference<ArrayList<Part>> psus = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> oss = new AtomicReference<>(new ArrayList<>());
 	public static final AtomicReference<ArrayList<Part>> monitors = new AtomicReference<>(new ArrayList<>());
-	//	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
-	public static final AtomicReference<StorageReference> storageReference = new AtomicReference<>(FirebaseStorage.getInstance().getReference());
+// 	public static final AtomicReference<FirebaseDatabase> database = new AtomicReference<>(getInstance());
+// 	public static final AtomicReference<StorageReference> storageReference = new AtomicReference<>(FirebaseStorage.getInstance().getReference());
 	public static final AtomicReference<ArrayList<PCBuild>> personalBuildList = new AtomicReference<>(new ArrayList<>());
 	private AppBarConfiguration mAppBarConfiguration;
-	FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+// 	FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
