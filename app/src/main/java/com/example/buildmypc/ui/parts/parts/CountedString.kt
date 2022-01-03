@@ -47,6 +47,4 @@ class CountedString : Parcelable {
 			override fun newArray(size: Int): Array<CountedString?> = arrayOfNulls(size)
 		}
 	}
-
-
 }
