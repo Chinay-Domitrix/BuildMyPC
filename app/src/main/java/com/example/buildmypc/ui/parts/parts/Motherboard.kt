@@ -7,21 +7,17 @@ import org.jetbrains.annotations.Contract
 import java.util.*
 
 class Motherboard : Part, Parcelable {
-	var isEcc // has error correction coding (all chips should tbh)
-			= false
+	var isEcc = false // has error correction coding (all chips should tbh)
 	var chipset: String? = null
 	var formFactor: String? = null
-	var m2slots // no clue what this is
-			: ArrayList<String>? = null
+	var m2slots: ArrayList<String>? = null
 	var maxMemSupport = 0
 	var memSlots = 0
 	var compatibleMem: ArrayList<String>? = null
-	private var memType // pretty much always DDR4
-			: String? = null
-	private var mSATASlotCount // love SSDs
-			= 0
+	private var memType: String? = null // pretty much always DDR4
+	private var mSATASlotCount = 0 // love SSDs
 	var incEthernetSupp: ArrayList<String>? = null
-	var incVideo // no idea what this is
+	var incVideo
 			: String? = null
 	var pciSlotList // had to create a sub-object for this
 			: ArrayList<CountedString?>? = null
@@ -166,8 +162,7 @@ class Motherboard : Part, Parcelable {
 		dest.writeString(wireless)
 	}
 
-	override val paramCount: Int
-		get() = 19
+	override val paramCount = 19
 
 	companion object {
 		@JvmField

@@ -11,8 +11,7 @@ class PSU : Part, Parcelable {
 	var efficiencyRating: String? = null
 	var isHasFan = false
 	var formFactor: String? = null
-	var length // in millimeters
-			= 0
+	var length = 0 // in millimeters
 	var modular: String? = null
 	var wattage = 0
 
@@ -84,8 +83,7 @@ class PSU : Part, Parcelable {
 		dest.writeInt(wattage)
 	}
 
-	override val paramCount: Int
-		get() = 9
+	override val paramCount = 9
 
 	companion object {
 		// stands for "Power Supply Unit"

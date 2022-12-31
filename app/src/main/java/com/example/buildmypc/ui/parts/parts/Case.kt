@@ -3,8 +3,6 @@ package com.example.buildmypc.ui.parts.parts
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
-import org.jetbrains.annotations.Contract
-import java.util.*
 
 open class Case : Part, Parcelable {
 	//hello
@@ -23,7 +21,19 @@ open class Case : Part, Parcelable {
 			: ArrayList<String>? = null
 	var isPsuShroud = false
 
-	constructor(model: String?, manufacturer: String?) : super(model, manufacturer)
+	constructor(model: String?, manufacturer: String?) : super(model, manufacturer) {
+		this.color = null
+		this.dimensionsMm = null
+		this.expansionSlots = null
+		this.supportedFrontUSBs = null
+		this.internalDriveBays = null
+		this.maxGPULength = null
+		this.mbFormFactor = null
+		this.sidePanel = null
+		this.type = null
+		this.volume = null
+		this.isPsuShroud = false
+	}
 
 	@JvmOverloads
 	constructor(
@@ -51,7 +61,7 @@ open class Case : Part, Parcelable {
 		this.sidePanel = sidePanel
 		this.type = type
 		this.volume = volume
-		isPsuShroud = psuShroud
+		this.isPsuShroud = psuShroud
 	}
 
 	protected constructor(`in`: Parcel) : super(`in`.readString(), `in`.readString()) {
@@ -102,35 +112,19 @@ open class Case : Part, Parcelable {
 		return if (volume != null) volume == aCase.volume else aCase.volume == null
 	}
 
-	override fun hashCode(): Int {
-		var result = super.hashCode()
-		result = 31 * result + if (color != null) color.hashCode() else 0
-		result = 31 * result + if (dimensionsMm != null) dimensionsMm.hashCode() else 0
-		result = 31 * result + if (expansionSlots != null) expansionSlots.hashCode() else 0
-		result = 31 * result + if (supportedFrontUSBs != null) supportedFrontUSBs.hashCode() else 0
-		result = 31 * result + if (internalDriveBays != null) internalDriveBays.hashCode() else 0
-		result = 31 * result + if (maxGPULength != null) maxGPULength.hashCode() else 0
-		result = 31 * result + if (mbFormFactor != null) mbFormFactor.hashCode() else 0
-		result = 31 * result + if (sidePanel != null) sidePanel.hashCode() else 0
-		result = 31 * result + if (type != null) type.hashCode() else 0
-		result = 31 * result + if (volume != null) volume.hashCode() else 0
-		result = 31 * result + if (isPsuShroud) 1 else 0
-		return result
-	}
+	override fun hashCode() =
+		31 * (31 * (31 * (31 * (31 * (31 * (31 * (31 * (31 * (31 * (31 * super.hashCode() + if (color != null) color.hashCode() else 0) + if (dimensionsMm != null) dimensionsMm.hashCode() else 0) + if (expansionSlots != null) expansionSlots.hashCode() else 0) + if (supportedFrontUSBs != null) supportedFrontUSBs.hashCode() else 0) + if (internalDriveBays != null) internalDriveBays.hashCode() else 0) + if (maxGPULength != null) maxGPULength.hashCode() else 0) + if (mbFormFactor != null) mbFormFactor.hashCode() else 0) + if (sidePanel != null) sidePanel.hashCode() else 0) + if (type != null) type.hashCode() else 0) + if (volume != null) volume.hashCode() else 0) + if (isPsuShroud) 1 else 0
 
-	override fun toString() = color + " " + super.toString() + " " + type
+	override fun toString() = "$color ${super.toString()} $type"
 
-	override val paramCount: Int
-		get() = 13
+	override val paramCount = 13
 
 	companion object {
 		@JvmField
-		val CREATOR: Creator<Case> = object : Creator<Case> {
-			@Contract("_ -> new")
+		val CREATOR = object : Creator<Case> {
 			override fun createFromParcel(`in`: Parcel) = Case(`in`)
 
-			@Contract(value = "_ -> new", pure = true)
-			override fun newArray(size: Int): Array<Case?> = arrayOfNulls(size)
+			override fun newArray(size: Int) = arrayOfNulls<Case>(size)
 		}
 	}
 }

@@ -88,8 +88,7 @@ class Storage : Part, Parcelable {
 		dest.writeString(type)
 	}
 
-	override val paramCount: Int
-		get() = 9
+	override val paramCount = 9
 
 	companion object {
 		@JvmField

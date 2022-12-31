@@ -61,8 +61,7 @@ class OS : Accessory, Parcelable {
 		dest.writeString(oemRetail)
 	}
 
-	override val paramCount: Int
-		get() = 6
+	override val paramCount = 6
 
 	companion object {
 		@JvmField

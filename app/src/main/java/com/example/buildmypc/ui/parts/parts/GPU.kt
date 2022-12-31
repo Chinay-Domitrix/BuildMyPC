@@ -138,8 +138,7 @@ class GPU : Part, Parcelable {
 		dest.writeTypedList(videoPorts)
 	}
 
-	override val paramCount: Int
-		get() = 16
+	override val paramCount = 16
 
 	companion object {
 		// the only important part for 12 year old me buying a gaming PC

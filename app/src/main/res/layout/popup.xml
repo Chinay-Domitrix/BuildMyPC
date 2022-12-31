@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/popup_baseLinearLayout"
-	android:layout_width="350dp"
-	android:layout_height="400dp"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
 	<ScrollView
 		android:id="@+id/popup_scrollView"
-		android:layout_width="350dp"
-		android:layout_height="400dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<!--    each one of these bad boys is a different field for text to go inside of    -->
@@ -18,7 +16,7 @@
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/popup_constraintLayout"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
 			<!--    each one of these bad boys is a different field for text to go inside of    -->
@@ -46,7 +44,7 @@
 				android:text="AMD Processor"
 				android:textSize="20sp"
 				android:textStyle="bold"
-				app:layout_constraintTop_toBottomOf="@+id/popup_headerTextView"/>
+				app:layout_constraintTop_toBottomOf="@+id/popup_headerTextView" />
 
 			<LinearLayout
 				android:id="@+id/popup_layout1"
@@ -69,11 +67,11 @@
 					android:id="@+id/popup_message1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -98,11 +96,11 @@
 					android:id="@+id/popup_message2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -127,11 +125,11 @@
 					android:id="@+id/popup_message3"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -156,11 +154,11 @@
 					android:id="@+id/popup_message4"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -185,11 +183,11 @@
 					android:id="@+id/popup_message5"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -214,11 +212,11 @@
 					android:id="@+id/popup_message6"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -243,11 +241,11 @@
 					android:id="@+id/popup_message7"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -272,11 +270,11 @@
 					android:id="@+id/popup_message8"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -301,11 +299,11 @@
 					android:id="@+id/popup_message9"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -330,11 +328,11 @@
 					android:id="@+id/popup_message10"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -359,11 +357,11 @@
 					android:id="@+id/popup_message11"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -388,11 +386,11 @@
 					android:id="@+id/popup_message12"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -417,11 +415,11 @@
 					android:id="@+id/popup_message13"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -446,11 +444,11 @@
 					android:id="@+id/popup_message14"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -475,11 +473,11 @@
 					android:id="@+id/popup_message15"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -504,11 +502,11 @@
 					android:id="@+id/popup_message16"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -533,11 +531,11 @@
 					android:id="@+id/popup_message17"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -562,11 +560,11 @@
 					android:id="@+id/popup_message18"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -591,11 +589,11 @@
 					android:id="@+id/popup_message19"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
 
 			<LinearLayout
@@ -620,14 +618,12 @@
 					android:id="@+id/popup_message20"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
 					android:layout_weight="3"
 					android:gravity="right"
 					android:text=""
-					android:textSize="16sp"
-					android:layout_marginRight="8dp"/>
+					android:textSize="16sp" />
 			</LinearLayout>
-
-
 
 
 		</androidx.constraintlayout.widget.ConstraintLayout>

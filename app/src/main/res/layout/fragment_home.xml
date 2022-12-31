@@ -4,8 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".ui.build.BuildFragment"
-	android:background="@color/white">
+	android:background="@color/white"
+	tools:context=".ui.build.BuildFragment">
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/buildFragRecyclerView"

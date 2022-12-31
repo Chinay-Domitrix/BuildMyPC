@@ -118,8 +118,7 @@ class Memory : Part, Parcelable {
 		dest.writeDouble(voltage)
 	}
 
-	override val paramCount: Int
-		get() = 13
+	override val paramCount = 13
 
 	companion object {
 		@JvmField

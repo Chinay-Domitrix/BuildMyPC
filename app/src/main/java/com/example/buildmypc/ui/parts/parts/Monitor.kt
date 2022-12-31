@@ -6,7 +6,8 @@ import android.os.Parcelable.Creator
 import org.jetbrains.annotations.Contract
 import java.lang.Double.doubleToLongBits
 import java.util.*
-import java.util.Arrays.*
+import java.util.Arrays.equals
+import java.util.Arrays.hashCode
 
 class Monitor : Part, Parcelable {
 	var aspectRatio: String? = null
@@ -143,8 +144,7 @@ class Monitor : Part, Parcelable {
 		dest.writeBoolean(isWidescreen)
 	}
 
-	override val paramCount: Int
-		get() = 16
+	override val paramCount = 16
 
 	companion object {
 		@JvmField

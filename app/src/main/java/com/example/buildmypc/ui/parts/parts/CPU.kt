@@ -146,8 +146,7 @@ class CPU : Part, Parcelable {
 		dest.writeBoolean(isSmt)
 	}
 
-	override val paramCount: Int
-		get() = 15
+	override val paramCount = 15
 
 	companion object {
 		@JvmField

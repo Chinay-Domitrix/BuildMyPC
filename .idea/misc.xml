@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-	<component name="ProjectRootManager" default="true" languageLevel="JDK_11"
-		project-jdk-name="1.8" project-jdk-type="JavaSDK" version="2">
-		<output url="file://$PROJECT_DIR$/build/classes" />
-	</component>
-	<component name="ProjectType">
-		<option name="id" value="Android" />
-	</component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/ic_logo.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/ic_menu_camera.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/ic_menu_rss_feed.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/drawable/side_nav_bar.xml" value="0.322" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/font/cantarell.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/activity_main.xml" value="0.17958459979736577" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/app_bar_main.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/content_main.xml" value="0.17958459979736577" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/fragment_editor.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/fragment_home.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/fragment_newsfeed.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/fragment_parts.xml" value="0.21875" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/layout_newsfeed_list.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/nav_header_main.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/parts_list.xml" value="0.2046875" />
+        <entry key="..\:/Users/chira/OneDrive/Documents/Programming/AndroidStudioProjects/BuildMyPC/app/src/main/res/layout/popup.xml" value="0.182518115942029" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="16" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
 </project>

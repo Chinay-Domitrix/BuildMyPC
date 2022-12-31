@@ -15,12 +15,12 @@ class Cooler : Part, Parcelable {
 	val isFanless: Boolean
 
 	constructor(model: String?, manufacturer: String?) : super(model, manufacturer) {
-		rpm = null
-		noiseLevel = null
-		height = -1
-		socketSupport = null
-		isWaterCooled = false
-		isFanless = false
+		this.rpm = null
+		this.noiseLevel = null
+		this.height = -1
+		this.socketSupport = null
+		this.isWaterCooled = false
+		this.isFanless = false
 	}
 
 	constructor(
@@ -37,24 +37,24 @@ class Cooler : Part, Parcelable {
 		this.noiseLevel = noiseLevel
 		this.height = height
 		this.socketSupport = socketSupport
-		isWaterCooled = waterCooled
-		isFanless = fanless
+		this.isWaterCooled = waterCooled
+		this.isFanless = fanless
 	}
 
 	constructor(`in`: Parcel) : super(`in`.readString(), `in`.readString()) {
-		rpm = `in`.readString()
-		noiseLevel = `in`.readString()
-		height = `in`.readInt()
-		socketSupport = `in`.createStringArrayList()
-		isWaterCooled = `in`.readBoolean()
-		isFanless = `in`.readBoolean()
+		this.rpm = `in`.readString()
+		this.noiseLevel = `in`.readString()
+		this.height = `in`.readInt()
+		this.socketSupport = `in`.createStringArrayList()
+		this.isWaterCooled = `in`.readBoolean()
+		this.isFanless = `in`.readBoolean()
 	}
 
-	override fun equals(o: Any?): Boolean {
-		if (this === o) return true
-		if (o == null || javaClass != o.javaClass) return false
-		if (!super.equals(o)) return false
-		val cooler = o as Cooler
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other == null || javaClass != other.javaClass) return false
+		if (!super.equals(other)) return false
+		val cooler = other as Cooler
 		if (height != cooler.height) return false
 		if (isWaterCooled != cooler.isWaterCooled) return false
 		if (isFanless != cooler.isFanless) return false
@@ -84,8 +84,7 @@ class Cooler : Part, Parcelable {
 		dest.writeBoolean(isFanless)
 	}
 
-	override val paramCount: Int
-		get() = 8
+	override val paramCount = 8
 
 	companion object {
 		@JvmField

@@ -1,7 +1,8 @@
 package com.example.buildmypc
 
 import android.util.Log.d
-import com.example.buildmypc.MainActivity.parts
+import com.example.buildmypc.MainActivity.Companion.parts
+import com.example.buildmypc.MainActivity.Companion.pcCases
 import com.example.buildmypc.ui.parts.parts.*
 import org.json.JSONException
 
@@ -54,8 +55,7 @@ class PartsJSONParse : Thread() {
 						coolers.getJSONObject(it).apply {
 							val socketSupport = getJSONArray("socket-support")
 							val sockets = ArrayList<String>()
-							for (i in 0 until socketSupport.length())
-								sockets.add(socketSupport[i] as String)
+							(0 until socketSupport.length()).mapTo(sockets) { socketSupport[it] as String }
 							if (getBoolean("water-cooled")) tempCoolers += Cooler(
 								getString("model"),
 								getString("manufacturer"),
@@ -100,8 +100,10 @@ class PartsJSONParse : Thread() {
 								getString("form-factor"),
 								ArrayList<String>().apply {
 									getJSONArray("m2-slots").apply {
-										for (i in 0 until this.length()) {
-											add(getString(i))
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
 										}
 									}
 								},
@@ -109,14 +111,22 @@ class PartsJSONParse : Thread() {
 								getInt("memory-slots"),
 								ArrayList<String>().apply {
 									getJSONArray("memory-speeds").apply {
-										(0 until this.length()).forEach { i -> add(getString(i)) }
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
+										}
 									}
 								},
 								getString("memory-type"),
 								getInt("msata-slots"),
 								ArrayList<String>().apply {
 									getJSONArray("onboard-ethernet").apply {
-										(0 until this.length()).forEach { i -> add(getString(i)) }
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
+										}
 									}
 								},
 								getString("onboard-video"),
@@ -241,7 +251,7 @@ class PartsJSONParse : Thread() {
 				})
 				add(Thread {
 					val cases = getJSONArray("case")
-					val tempCases = MainActivity.pcCases.get()
+					val tempCases = pcCases.get()
 					d("ACTUAL_PARSER", "case list started")
 					(0 until cases.length()).forEach {
 						cases.getJSONObject(it).apply {
@@ -263,8 +273,10 @@ class PartsJSONParse : Thread() {
 								},
 								ArrayList<String>().apply {
 									getJSONArray("front-panel-usb").apply {
-										(0 until this.length()).forEach { i ->
-											add(getString(i))
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
 										}
 									}
 								},
@@ -276,15 +288,19 @@ class PartsJSONParse : Thread() {
 								},
 								ArrayList<String>().apply {
 									getJSONArray("max-gpu-length").apply {
-										(0 until this.length()).forEach { i ->
-											add(getString(i))
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
 										}
 									}
 								},
 								ArrayList<String>().apply {
 									getJSONArray("mb-form-factor").apply {
-										(0 until this.length()).forEach { i ->
-											add(getString(i))
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
 										}
 									}
 								},
@@ -292,8 +308,10 @@ class PartsJSONParse : Thread() {
 								getString("type"),
 								ArrayList<String>().apply {
 									getJSONArray("volume").apply {
-										(0 until this.length()).forEach { i ->
-											add(getString(i))
+										(0 until this.length()).forEach {
+											add(
+												getString(it)
+											)
 										}
 									}
 								},
@@ -302,7 +320,7 @@ class PartsJSONParse : Thread() {
 						}
 					}
 					d("ACTUAL_PARSER", "cases completed somewhat")
-					MainActivity.pcCases.set(tempCases)
+					pcCases.set(tempCases)
 				})
 				add(Thread {
 					val psus = getJSONArray("psu")
@@ -371,7 +389,9 @@ class PartsJSONParse : Thread() {
 								ArrayList<String>().apply {
 									getJSONArray("frame-sync").apply {
 										(0 until this.length()).forEach { i ->
-											add(getString(i))
+											add(
+												getString(i)
+											)
 										}
 									}
 								},
@@ -392,14 +412,8 @@ class PartsJSONParse : Thread() {
 								getString("panel-type"),
 								getDouble("refresh-rate-hz"),
 								ArrayList<Int>().apply {
-									add(
-										getString("resolution").split("x")[0].substring(0, 4)
-											.toInt()
-									) // jank solution assuming BOTH resolution entries are 4 digits in length
-									add(
-										getString("resolution").split("x")[0].substring(0, 4)
-											.toInt()
-									)
+									add(getString("resolution").split(" x ")[0].toInt())
+									add(getString("resolution").split(" x ")[1].toInt())
 								},
 								getInt("response-time-ms"),
 								getDouble("screen-size-in"),

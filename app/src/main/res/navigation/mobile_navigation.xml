@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/mobile_navigation"
-	app:startDestination="@+id/nav_home">
-	<fragment
-		android:id="@+id/nav_home"
-		android:name="com.example.buildmypc.ui.build.BuildFragment"
-		android:label="@string/menu_home"
-		tools:layout="@layout/fragment_home" />
-	<fragment
-		android:id="@+id/nav_gallery"
-		android:name="com.example.buildmypc.ui.parts.PartsFragment"
-		android:label="@string/menu_gallery"
-		tools:layout="@layout/fragment_parts" />
-	<fragment
-		android:id="@+id/nav_newsfeed"
-		android:name="com.example.buildmypc.ui.newsfeed.NewsfeedFragment"
-		android:label="@string/menu_newsfeed"
-		tools:layout="@layout/fragment_newsfeed" />
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation" app:startDestination="@+id/nav_home">
+	<fragment android:id="@+id/nav_home" android:name="com.example.buildmypc.ui.build.BuildFragment"
+	          android:label="@string/menu_home" tools:layout="@layout/fragment_home"/>
+	<fragment android:id="@+id/nav_parts" android:name="com.example.buildmypc.ui.parts.PartsFragment"
+	          android:label="@string/menu_gallery" tools:layout="@layout/fragment_parts"/>
+	<fragment android:id="@+id/nav_newsfeed" android:name="com.example.buildmypc.ui.newsfeed.NewsfeedFragment"
+	          android:label="@string/menu_newsfeed" tools:layout="@layout/fragment_newsfeed"/>
 </navigation>

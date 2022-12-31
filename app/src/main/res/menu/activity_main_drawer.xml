@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	tools:showIn="navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
 	<group android:checkableBehavior="single">
 		<!--"Home" is the root name of what is the Build fragment-->
-		<item
-			android:id="@+id/nav_home"
-			android:icon="@drawable/ic_menu_camera"
-			android:title="@string/menu_home" />
+		<item android:id="@+id/nav_home" android:icon="@drawable/ic_menu_camera" android:title="@string/menu_home"/>
 		<!--"Gallery" is the root name of what is the Parts fragment-->
-		<item
-			android:id="@+id/nav_gallery"
-			android:icon="@drawable/ic_menu_gallery"
-			android:title="@string/menu_gallery" />
-		<item
-			android:id="@+id/nav_newsfeed"
-			android:icon="@drawable/ic_menu_rss_feed"
-			android:title="@string/menu_newsfeed" />
+		<item android:id="@+id/nav_parts" android:icon="@drawable/ic_menu_gallery"
+		      android:title="@string/menu_gallery"/>
+		<item android:id="@+id/nav_newsfeed" android:icon="@drawable/ic_menu_rss_feed"
+		      android:title="@string/menu_newsfeed"/>
 	</group>
 </menu>

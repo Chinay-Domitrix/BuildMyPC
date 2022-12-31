@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/newslist_imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        tools:srcCompat="@tools:sample/avatars" />
+	<ImageView
+		android:id="@+id/newslist_imageView"
+		android:layout_width="128dp"
+		android:layout_height="128dp"
+		android:layout_weight="1"
+		tools:srcCompat="@tools:sample/avatars" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="8"
-        android:orientation="vertical">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_weight="8">
 
-        <TextView
-            android:id="@+id/newslist_titleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="5dp"
-            android:text="Facebook Says Trump’s Ban Will Last at\n Least 2 Years"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+		<TextView
+			android:id="@+id/newslist_titleTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="4dp"
+			android:text="Facebook Says Trump’s Ban Will Last at Least 2 Years"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/newslist_descTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="5dp"
-            android:text="The decision denies the former president a megaphone at least through the midterm elections. The suspension was put in place after the Capitol riots in January."
-            android:textSize="10sp" />
+		<TextView
+			android:id="@+id/newslist_descTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="4dp"
+			android:text="The decision denies the former president a megaphone at least through the midterm elections. The suspension was put in place after the Capitol riots in January."
+			android:textSize="10sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/newslist_titleTextView"
+			app:layout_constraintVertical_bias="0.1875" />
 
-        <TextView
-            android:id="@+id/newslist_publisherTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:text="via NYTimes, Jun. 4 2021"
-            android:textAlignment="viewEnd"
-            android:textSize="8sp" />
-    </LinearLayout>
+		<TextView
+			android:id="@+id/newslist_publisherTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="4dp"
+			android:text="via NYTimes, Jun. 4 2021"
+			android:textAlignment="viewEnd"
+			android:textSize="8sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="1" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

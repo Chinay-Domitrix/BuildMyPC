@@ -24,8 +24,7 @@ open class Part : Parcelable {
 		get() = "$manufacturer $model"
 
 	// returns the base number of params -- will be overridden for every subclass of Part
-	open val paramCount
-		get() = 2
+	open val paramCount = 2
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
