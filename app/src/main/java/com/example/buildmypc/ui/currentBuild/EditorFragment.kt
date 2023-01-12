@@ -14,15 +14,24 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.core.content.res.ResourcesCompat.getDrawable
 import androidx.fragment.app.Fragment
-import com.example.buildmypc.MainActivity.*
-import com.example.buildmypc.R.anim
+import com.example.buildmypc.MainActivity.Companion.coolers
+import com.example.buildmypc.MainActivity.Companion.cpus
+import com.example.buildmypc.MainActivity.Companion.gpus
+import com.example.buildmypc.MainActivity.Companion.memory
+import com.example.buildmypc.MainActivity.Companion.monitors
+import com.example.buildmypc.MainActivity.Companion.motherboards
+import com.example.buildmypc.MainActivity.Companion.oss
+import com.example.buildmypc.MainActivity.Companion.pcCases
+import com.example.buildmypc.MainActivity.Companion.psus
+import com.example.buildmypc.MainActivity.Companion.storage
+import com.example.buildmypc.R.anim.enter_from_right
+import com.example.buildmypc.R.anim.exit_to_right
 import com.example.buildmypc.R.drawable.*
 import com.example.buildmypc.R.id.*
 import com.example.buildmypc.R.layout.fragment_editor
 import com.example.buildmypc.ui.build.BuildFragment
 import com.example.buildmypc.ui.build.PCBuild
 import com.example.buildmypc.ui.parts.parts.*
-import java.util.*
 import java.util.Locale.getDefault
 
 class EditorFragment(private var currentBuild: PCBuild, private var isEditing: Boolean) :
@@ -55,55 +64,44 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		goBackButton = root.findViewById(editorFragmentGoBackButton)
 		// EditText
 		nameEditText = root.findViewById(editorFrag_editText)
-		if (currentBuild!!.name.isNotEmpty()) nameEditText!!.setText(currentBuild!!.name)
-		nameEditText!!.addTextChangedListener(object : TextWatcher {
+		if (currentBuild.name.isNotEmpty()) nameEditText.setText(currentBuild.name)
+		nameEditText.addTextChangedListener(object : TextWatcher {
 			override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 			override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 			override fun afterTextChanged(s: Editable) {}
 		}) // empty because it doesn't need to have a listener
 
-
 		// go back button code
-		goBackButton!!.setText(if (currentBuild!!.name != "ADD BUILD") "OVERWRITE" else "ADD")
-		goBackButton!!.setOnClickListener(View.OnClickListener {
+		goBackButton.text = if (currentBuild.name != "ADD BUILD") "OVERWRITE" else "ADD"
+		goBackButton.setOnClickListener {
 			// create the bundle
 			val updatedBuild = currentBuild
-			when (currentBuild!!.pcCase.toString()) {
-				"White NZXT H510 ATX Mid Tower" -> updatedBuild!!.logo =
-					getDrawable(
-						resources, h510_elite_white, requireActivity().theme
-					)
-				"Black NZXT H510 ATX Mid Tower" -> updatedBuild!!.logo =
-					getDrawable(
-						resources, h510_elite_black, requireActivity().theme
-					)
-				"Black Corsair 4000D Airflow ATX Mid Tower" -> updatedBuild!!.logo =
-					getDrawable(
-						resources, a_4000d_airflow_black, requireActivity().theme
-					)
-				"Black Corsair 275R Airflow AIX Mid Tower" -> updatedBuild!!.logo =
-					getDrawable(
-						resources, a_275r_black, requireActivity().theme
-					)
-				"Black Lian Li PC-O11DX ATX Full Tower" -> updatedBuild!!.logo =
-					getDrawable(
-						resources, pc011dx_black, requireActivity().theme
-					)
+			when (currentBuild.pcCase.toString()) {
+				"White NZXT H510 ATX Mid Tower" -> updatedBuild.logo =
+					getDrawable(resources, h510_elite_white, requireActivity().theme)!!
+				"Black NZXT H510 ATX Mid Tower" -> updatedBuild.logo =
+					getDrawable(resources, h510_elite_black, requireActivity().theme)!!
+				"Black Corsair 4000D Airflow ATX Mid Tower" -> updatedBuild.logo =
+					getDrawable(resources, a_4000d_airflow_black, requireActivity().theme)!!
+				"Black Corsair 275R Airflow AIX Mid Tower" -> updatedBuild.logo =
+					getDrawable(resources, a_275r_black, requireActivity().theme)!!
+				"Black Lian Li PC-O11DX ATX Full Tower" -> updatedBuild.logo =
+					getDrawable(resources, pc011dx_black, requireActivity().theme)!!
 			}
-			updatedBuild!!.name = nameEditText!!.getText().toString()
+			updatedBuild.name = nameEditText.text.toString()
 			val result = Bundle()
 			result.putParcelable(BACK, updatedBuild)
 			// destroy the lists
-			cpuList!!.removeAt(0)
-			gpuList!!.removeAt(0)
-			memoryList!!.removeAt(0)
-			motherboardList!!.removeAt(0)
+			cpuList.removeAt(0)
+			gpuList.removeAt(0)
+			memoryList.removeAt(0)
+			motherboardList.removeAt(0)
 			//			osList.remove(0);
 //			psuList.remove(0);
-			coolerList!!.removeAt(0)
-			storageList!!.removeAt(0)
+			coolerList.removeAt(0)
+			storageList.removeAt(0)
 			//			monitorList.remove(0);
-			caseList!!.removeAt(0)
+			caseList.removeAt(0)
 
 			// switch fragments
 			requireActivity()
@@ -116,7 +114,7 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				)
 				.addToBackStack(null)
 				.commit()
-		})
+		}
 		//		myTextView = (TextView) root.findViewById(R.id.editorFragment_textView);
 //		myTextView.setText(currentBuild.getName());
 
@@ -126,16 +124,14 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		// TODO gray out the add/overwrite button if only the "Part" elements are selected instead of the subclass elements
 		val caseSpinner = root.findViewById<Spinner>(editorFrag_caseSpinner)
 		caseList = pcCases.get()
-		caseList?.add(
+		caseList.add(
 			0,
 			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.pcCase
+			) else currentBuild.pcCase
 		)
-		caseSpinner.adapter = caseList?.let {
-			PartsSpinnerAdapter(context, it)
-		}
+		caseSpinner.adapter = PartsSpinnerAdapter(context, caseList)
 		caseSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 			override fun onItemSelected(
 				parent: AdapterView<*>?,
@@ -143,30 +139,22 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (caseList?.get(position) is Case) {
-					currentBuild!!.pcCase = caseList?.get(position) as Case
+				if (caseList[position] is Case) {
+					currentBuild.pcCase = caseList[position] as Case
 					var newLogo: Drawable? = null
-					when (caseList?.get(position)?.name?.uppercase(getDefault())) {
+					when (caseList[position].name.uppercase(getDefault())) {
 						"BLACK CORSAIR 275R AIRFLOW ATX MID TOWER" -> newLogo =
-							getDrawable(
-								resources, a_275r_black, resources.newTheme()
-							)
-						"WHITE NZXT H510 ATX MID TOWER" -> newLogo = getDrawable(
-							resources, h510_elite_white, resources.newTheme()
-						)
-						"BLACK NZXT H510 ATX MID TOWER" -> newLogo = getDrawable(
-							resources, h510_elite_black, resources.newTheme()
-						)
+							getDrawable(resources, a_275r_black, resources.newTheme())
+						"WHITE NZXT H510 ATX MID TOWER" -> newLogo =
+							getDrawable(resources, h510_elite_white, resources.newTheme())
+						"BLACK NZXT H510 ATX MID TOWER" -> newLogo =
+							getDrawable(resources, h510_elite_black, resources.newTheme())
 						"BLACK CORSAIR 4000D AIRFLOW ATX MID TOWER" -> newLogo =
-							getDrawable(
-								resources, a_4000d_airflow_black, resources.newTheme()
-							)
+							getDrawable(resources, a_4000d_airflow_black, resources.newTheme())
 						"BLACK LIAN LI PC-O11DX ATX FULL TOWER" -> newLogo =
-							getDrawable(
-								resources, pc011dx_black, resources.newTheme()
-							)
+							getDrawable(resources, pc011dx_black, resources.newTheme())
 					}
-					if (newLogo != null) currentBuild!!.logo = newLogo
+					if (newLogo != null) currentBuild.logo = newLogo
 				}
 			}
 
@@ -174,12 +162,12 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		}
 		val coolerSpinner = root.findViewById<Spinner>(editorFrag_coolerSpinner)
 		coolerList = coolers.get()
-		coolerList?.add(
+		coolerList.add(
 			0,
 			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.cooler
+			) else currentBuild.cooler
 		)
 		coolerSpinner.adapter =
 			(coolerList as ArrayList<Part>?)?.let { PartsSpinnerAdapter(context, it) }
@@ -190,8 +178,8 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (coolerList?.get(position) is Cooler) currentBuild!!.cooler =
-					coolerList?.get(position) as Cooler
+				if (coolerList[position] is Cooler) currentBuild.cooler =
+					coolerList[position] as Cooler
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -200,10 +188,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		cpuList = cpus.get()
 		cpuList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.cpu
+			) else currentBuild.cpu
 		)
 		cpuSpinner.adapter = PartsSpinnerAdapter(context, cpuList)
 		cpuSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -213,19 +201,20 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (cpuList.get(position) is CPU) currentBuild!!.cpu = cpuList.get(position) as CPU
+				if (cpuList[position] is CPU) currentBuild.cpu = cpuList[position] as CPU
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
 		}
 		val gpuSpinner = root.findViewById<Spinner>(editorFrag_gpuSpinner)
-		gpuList = gpus.get()
+		gpuList =
+			gpus.get()
 		gpuList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.gpu
+			) else currentBuild.gpu
 		)
 		gpuSpinner.adapter = PartsSpinnerAdapter(context, gpuList)
 		gpuSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -235,7 +224,7 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (gpuList.get(position) is GPU) currentBuild!!.gpu = gpuList.get(position) as GPU
+				if (gpuList[position] is GPU) currentBuild.gpu = gpuList[position] as GPU
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -244,10 +233,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		memoryList = memory.get()
 		memoryList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.memory
+			) else currentBuild.memory
 		)
 		memorySpinner.adapter = PartsSpinnerAdapter(context, memoryList)
 		memorySpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -257,8 +246,8 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (memoryList.get(position) is Memory) currentBuild!!.memory =
-					memoryList.get(position) as Memory
+				if (memoryList[position] is Memory) currentBuild.memory =
+					memoryList[position] as Memory
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -267,10 +256,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		monitorList = monitors.get()
 		monitorList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.monitor
+			) else currentBuild.monitor
 		)
 		monitorSpinner.adapter = PartsSpinnerAdapter(context, monitorList)
 		monitorSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -280,8 +269,8 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (monitorList.get(position) is Monitor) currentBuild!!.monitor =
-					monitorList.get(position) as Monitor
+				if (monitorList[position] is Monitor) currentBuild.monitor =
+					monitorList[position] as Monitor
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -290,10 +279,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		motherboardList = motherboards.get()
 		motherboardList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.motherboard
+			) else currentBuild.motherboard
 		)
 		motherboardSpinner.adapter = PartsSpinnerAdapter(context, motherboardList)
 		motherboardSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -303,8 +292,8 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (motherboardList.get(position) is Motherboard) currentBuild!!.motherboard =
-					motherboardList.get(position) as Motherboard
+				if (motherboardList[position] is Motherboard) currentBuild.motherboard =
+					motherboardList[position] as Motherboard
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -313,10 +302,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		osList = oss.get()
 		osList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.os
+			) else currentBuild.os
 		)
 		osSpinner.adapter = PartsSpinnerAdapter(context, osList)
 		osSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -326,7 +315,7 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (osList.get(position) is OS) currentBuild!!.os = osList.get(position) as OS
+				if (osList[position] is OS) currentBuild.os = osList[position] as OS
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -335,10 +324,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		psuList = psus.get()
 		psuList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.psu
+			) else currentBuild.psu
 		)
 		psuSpinner.adapter = PartsSpinnerAdapter(context, psuList)
 		psuSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -348,7 +337,7 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (psuList.get(position) is PSU) currentBuild!!.psu = psuList.get(position) as PSU
+				if (psuList[position] is PSU) currentBuild.psu = psuList[position] as PSU
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -357,10 +346,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 		storageList = storage.get()
 		storageList.add(
 			0,
-			if (currentBuild.toString().trim { it <= ' ' }.length == 0) Part(
+			if (currentBuild.toString().trim { it <= ' ' }.isEmpty()) Part(
 				"",
 				""
-			) else currentBuild!!.storage
+			) else currentBuild.storage
 		)
 		storageSpinner.adapter = PartsSpinnerAdapter(context, storageList)
 		storageSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -370,8 +359,8 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 				position: Int,
 				id: Long
 			) {
-				if (storageList.get(position) is Storage) currentBuild!!.storage =
-					storageList.get(position) as Storage
+				if (storageList[position] is Storage) currentBuild.storage =
+					storageList[position] as Storage
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -394,10 +383,10 @@ class EditorFragment(private var currentBuild: PCBuild, private var isEditing: B
 	private fun openBuildFragment(build: PCBuild) {
 		val fragment = BuildFragment.newInstance(currentBuild)
 		parentFragmentManager.beginTransaction().setCustomAnimations(
-			anim.enter_from_right,
-			anim.exit_to_right,
-			anim.enter_from_right,
-			anim.exit_to_right
+			enter_from_right,
+			exit_to_right,
+			enter_from_right,
+			exit_to_right
 		).addToBackStack(null).add(nav_host_fragment_content_main, fragment, BUILD).commit()
 	} //	@Override
 

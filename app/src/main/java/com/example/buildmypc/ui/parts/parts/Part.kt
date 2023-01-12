@@ -3,7 +3,6 @@ package com.example.buildmypc.ui.parts.parts
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
-import org.jetbrains.annotations.NotNull
 
 // the start of the part hierarchy
 open class Part : Parcelable {
@@ -39,7 +38,7 @@ open class Part : Parcelable {
 
 	override fun describeContents() = 0
 
-	override fun writeToParcel(@NotNull dest: Parcel, flags: Int) {
+	override fun writeToParcel(dest: Parcel, flags: Int) {
 		dest.writeString(model)
 		dest.writeString(manufacturer)
 	}

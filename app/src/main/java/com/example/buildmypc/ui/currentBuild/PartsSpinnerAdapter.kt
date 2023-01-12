@@ -7,14 +7,13 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.buildmypc.R.id.spinner_internalTextView
 import com.example.buildmypc.ui.parts.parts.Part
-import java.util.*
 import java.util.Objects.requireNonNull
 
 class PartsSpinnerAdapter(context: Context?, objects: List<Part>) :
 	ArrayAdapter<Part?>(context!!, 0, objects) {
 	var internalList: ArrayList<Part> = objects as ArrayList<Part>
-	override fun getDropDownView(position: Int, convertView: View, parent: ViewGroup) =
-		startView(position, convertView)
+	override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? =
+		convertView?.let { startView(position, it) }
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup) =
 		startView(position, convertView!!)

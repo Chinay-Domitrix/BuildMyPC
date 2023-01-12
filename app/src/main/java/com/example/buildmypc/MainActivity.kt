@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.AppBarConfiguration.Builder
-import androidx.navigation.ui.NavigationUI.*
+import androidx.navigation.ui.NavigationUI.navigateUp
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.buildmypc.R.id.*
 import com.example.buildmypc.R.menu.main
 import com.example.buildmypc.R.string.parts_list

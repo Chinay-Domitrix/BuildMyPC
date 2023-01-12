@@ -37,7 +37,6 @@ class NewsfeedFragment : Fragment(), OnDataSendToActivity {
 		savedInstanceState: Bundle?
 	): View {
 		// jank testing of finalArticleList actually being used in the RecyclerView
-		if (finalArticleList == null) finalArticleList.set(ArrayList())
 		binding = inflate(inflater, container, false)
 		val root: View = binding!!.root
 		(root.context as Activity).requestPermissions(arrayOf(INTERNET), 0)
@@ -62,6 +61,7 @@ class NewsfeedFragment : Fragment(), OnDataSendToActivity {
 		binding = null
 	}
 
+	@SuppressLint("NotifyDataSetChanged")
 	override fun refreshList() {
 		fragmentAdapter!!.notifyDataSetChanged()
 	}

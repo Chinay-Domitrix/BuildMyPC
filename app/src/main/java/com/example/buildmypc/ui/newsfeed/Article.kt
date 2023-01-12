@@ -12,7 +12,6 @@ class Article(
 	var dateStr: String?
 ) {
 	override fun toString() = "$heading, written by $author on $dateStr"
-
 	interface OnDataSendToActivity {
 		fun refreshList()
 	}

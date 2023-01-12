@@ -10,8 +10,8 @@ class PartsJSONParse : Thread() {
 	override fun run() {
 		parts.get().apply {
 			d("ACTUAL_PARSER", "parts received as: " + parts.get().toString())
-			ArrayList<Thread>().apply {
-				add(Thread {
+			arrayListOf(
+				Thread {
 					val cpus = getJSONArray("cpu")
 					val tempCPUs = MainActivity.cpus.get()
 					d("ACTUAL_PARSER", "CPU list started")
@@ -46,8 +46,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "cpus completed somewhat")
 					MainActivity.cpus.set(tempCPUs)
-				})
-				add(Thread {
+				},
+				Thread {
 					val coolers = getJSONArray("cooler")
 					val tempCoolers = MainActivity.coolers.get()
 					d("ACTUAL_PARSER", "cooler list started")
@@ -55,7 +55,7 @@ class PartsJSONParse : Thread() {
 						coolers.getJSONObject(it).apply {
 							val socketSupport = getJSONArray("socket-support")
 							val sockets = ArrayList<String>()
-							(0 until socketSupport.length()).mapTo(sockets) { socketSupport[it] as String }
+							(0 until socketSupport.length()).mapTo(sockets) { i -> socketSupport[i] as String }
 							if (getBoolean("water-cooled")) tempCoolers += Cooler(
 								getString("model"),
 								getString("manufacturer"),
@@ -79,8 +79,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "coolers completed somewhat")
 					MainActivity.coolers.set(tempCoolers)
-				})
-				add(Thread {
+				},
+				Thread {
 					val motherboards = getJSONArray("motherboard")
 					val tempMotherboards = MainActivity.motherboards.get()
 					d("ACTUAL_PARSER", "motherboard list started")
@@ -100,33 +100,21 @@ class PartsJSONParse : Thread() {
 								getString("form-factor"),
 								ArrayList<String>().apply {
 									getJSONArray("m2-slots").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getInt("max-memory-gb"),
 								getInt("memory-slots"),
 								ArrayList<String>().apply {
 									getJSONArray("memory-speeds").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getString("memory-type"),
 								getInt("msata-slots"),
 								ArrayList<String>().apply {
 									getJSONArray("onboard-ethernet").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getString("onboard-video"),
@@ -155,8 +143,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "motherboards completed somewhat")
 					MainActivity.motherboards.set(tempMotherboards)
-				})
-				add(Thread {
+				},
+				Thread {
 					val memory = getJSONArray("memory")
 					val tempMemory = MainActivity.memory.get()
 					d("ACTUAL_PARSER", "memory list started")
@@ -181,8 +169,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "memory completed somewhat")
 					MainActivity.memory.set(tempMemory)
-				})
-				add(Thread {
+				},
+				Thread {
 					val storage = getJSONArray("storage")
 					val tempStorage = MainActivity.storage.get()
 					d("ACTUAL_PARSER", "storage list started")
@@ -212,8 +200,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "storage completed somewhat")
 					MainActivity.storage.set(tempStorage)
-				})
-				add(Thread {
+				},
+				Thread {
 					val gpus = getJSONArray("gpu")
 					val tempGPUs = MainActivity.gpus.get()
 					d("ACTUAL_PARSER", "gpu list started")
@@ -248,8 +236,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "gpus completed somewhat")
 					MainActivity.gpus.set(tempGPUs)
-				})
-				add(Thread {
+				},
+				Thread {
 					val cases = getJSONArray("case")
 					val tempCases = pcCases.get()
 					d("ACTUAL_PARSER", "case list started")
@@ -273,11 +261,7 @@ class PartsJSONParse : Thread() {
 								},
 								ArrayList<String>().apply {
 									getJSONArray("front-panel-usb").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								ArrayList<CountedString?>().apply {
@@ -288,31 +272,19 @@ class PartsJSONParse : Thread() {
 								},
 								ArrayList<String>().apply {
 									getJSONArray("max-gpu-length").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								ArrayList<String>().apply {
 									getJSONArray("mb-form-factor").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getString("side-panel"),
 								getString("type"),
 								ArrayList<String>().apply {
 									getJSONArray("volume").apply {
-										(0 until this.length()).forEach {
-											add(
-												getString(it)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getBoolean("psu-shroud")
@@ -321,8 +293,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "cases completed somewhat")
 					pcCases.set(tempCases)
-				})
-				add(Thread {
+				},
+				Thread {
 					val psus = getJSONArray("psu")
 					val tempPSUs = MainActivity.psus.get()
 					d("ACTUAL_PARSER", "power supply list started")
@@ -350,8 +322,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "power supply list completed somewhat")
 					MainActivity.psus.set(tempPSUs)
-				})
-				add(Thread {
+				},
+				Thread {
 					val oss = getJSONArray("os")
 					val tempOSs = MainActivity.oss.get()
 					d("ACTUAL_PARSER", "os list started")
@@ -369,8 +341,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "os list completed somewhat")
 					MainActivity.oss.set(tempOSs)
-				})
-				add(Thread {
+				},
+				Thread {
 					val monitors = getJSONArray("monitor")
 					val tempMonitors = MainActivity.monitors.get()
 					d("ACTUAL_PARSER", "monitor list started")
@@ -388,11 +360,7 @@ class PartsJSONParse : Thread() {
 								getBoolean("curved-screen"),
 								ArrayList<String>().apply {
 									getJSONArray("frame-sync").apply {
-										(0 until this.length()).forEach { i ->
-											add(
-												getString(i)
-											)
-										}
+										(0 until this.length()).forEach { i -> add(getString(i)) }
 									}
 								},
 								getString("hdr-tier"),
@@ -424,8 +392,8 @@ class PartsJSONParse : Thread() {
 					}
 					d("ACTUAL_PARSER", "monitor list completed somewhat")
 					MainActivity.monitors.set(tempMonitors)
-				})
-			}.forEach(Thread::start)
+				}
+			).forEach(Thread::start)
 		}
 	}
 }

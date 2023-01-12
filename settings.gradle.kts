@@ -1,2 +1,2 @@
 rootProject.name = "BuildMyPC"
-include ':app'
+include(":app")

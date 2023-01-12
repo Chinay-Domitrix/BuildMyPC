@@ -1,7 +1,7 @@
-/*@file:Suppress("DEPRECATION")
+@file:Suppress("DEPRECATION")
 
 package com.example.buildmypc
-
+/*
 import android.Manifest.permission.INTERNET
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.util.Log
