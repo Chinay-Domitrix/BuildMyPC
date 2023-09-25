@@ -48,7 +48,7 @@ dependencies {
 	implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 	implementation("androidx.legacy:legacy-support-v4:1.0.0")
 	implementation("androidx.recyclerview:recyclerview:1.2.1")
-	implementation("androidx.browser:browser:1.4.0")
+	implementation("androidx.browser:browser:1.6.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 	implementation("androidx.annotation:annotation:1.5.0")
 	testImplementation("junit:junit:4.13.2")
