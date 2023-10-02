@@ -39,7 +39,7 @@ dependencies {
 	implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
 	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
 	implementation("androidx.appcompat:appcompat:1.6.1")
-	implementation("com.google.android.material:material:1.7.0")
+	implementation("com.google.android.material:material:1.9.0")
 	implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 	implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
