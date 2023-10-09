@@ -46,7 +46,7 @@ dependencies {
 	implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
 	implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
 	implementation("androidx.legacy:legacy-support-v4:1.0.0")
-	implementation("androidx.recyclerview:recyclerview:1.2.1")
+	implementation("androidx.recyclerview:recyclerview:1.3.1")
 	implementation("androidx.browser:browser:1.6.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 	implementation("androidx.annotation:annotation:1.5.0")
