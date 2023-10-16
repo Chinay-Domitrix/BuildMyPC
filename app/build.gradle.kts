@@ -49,7 +49,7 @@ dependencies {
 	implementation("androidx.recyclerview:recyclerview:1.3.1")
 	implementation("androidx.browser:browser:1.6.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
-	implementation("androidx.annotation:annotation:1.5.0")
+	implementation("androidx.annotation:annotation:1.7.0")
 	testImplementation("junit:junit:4.13.2")
 	androidTestImplementation("androidx.test.ext:junit:1.1.5")
 	androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
